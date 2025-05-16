@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="pt_BR">
+<head>
+    <!--Informações gerais da página-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Padaria Aliança</title>
+
+    <!--Biblioteca Swiper-->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    
+    
+    <!--CSS-->
+    <link rel="stylesheet" href="/estilo.css">
+
+
+    <!--Ícones-->
+    <link rel="stylesheet" href="assets/fonts/style.css">
+
+    <!--Fontes-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,700;1,500&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/images/sistema/image.jpeg">
+
+    <script>
+  // Desativa botão direito
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // Desativa algumas teclas comuns do DevTools
+  document.onkeydown = function (e) {
+    if (
+      e.key === "F12" ||                           // F12
+      (e.ctrlKey && e.shiftKey && e.key === "I") || // Ctrl+Shift+I
+      (e.ctrlKey && e.shiftKey && e.key === "J") || // Ctrl+Shift+J
+      (e.ctrlKey && e.key === "U") ||               // Ctrl+U (view source)
+      (e.ctrlKey && e.key === "S") ||               // Ctrl+S (save page)
+      (e.ctrlKey && e.shiftKey && e.key === "C")    // Ctrl+Shift+C (inspecionar)
+    ) {
+      e.preventDefault();
+      return false;
+    }
+  };
+</script>
+
+    
+</head>
+<body>
+    <header id="header"> <!--Cabeçalho-->
+        <nav class="container">
+            <a href="#" class="logo">Padaria <span>Aliança</span></a>
+            <div class="menu"> <!--Menu-->
+                <ul class="grid">
+                    <li><a href="#home" class="title">Início</a></li>
+                    <li><a href="#about" class="title">Categorias</a></li>
+                    <li><a href="#contact" class="title">Contato</a></li>
+                </ul>
+            </div>
+            <div class="toggle icon-menu"></div>
+            <div class="toggle icon-close"></div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="section" id="home"> <!--Home-->
+            <div class="container grid">
+                <div class="image">
+                    <img src="assets/images/sistema/art.png" alt="Entrada da Padaria Aliança">
+                </div>
+                <div class="text">
+                    <h2 class="title">Tudo o que você precisa, com a qualidade que você merece!</h2>
+                    <p><span>Entregamos para toda Poço Branco</span></p>
+                    <p><span>Faça seu pedido↓↓↓</span></p>
+                    <a href="#about" class="button">Fazer encomenda</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-1"></div> <!--Divisor de sessões tipo 1-->
+
+        <section class="section" id="about"> <!--categorias-->
+            
+
+
+
+<center>
+      <h2 class="title">Delivery na área! Só pedir e esperar no conforto de casa.</h2>
+      <p class="pp">Entregas apartir de R$ 20,00.</p>
+</center>
+
+<br>
+<br><br>
+<br>
+
+<div id="alerta" class="alerta">Produto adicionado ao carrinho!</div>
+
+
+
+
+<div class="container">
+  <div class="produtos">
+    <h2>Escolha a categoria:</h2>
+  <br>
+ <br>
+    <center>
+    <div class="mb-3">
+  <button id="btcategoria" class="btn btn-secondary btn-sm me-2 filtro-btn active" onclick="filtrarCategoria('alimentos')">Alimentos</button>
+  <button id="btcategoria" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('padaria')">Padaria</button>
+  <button id="btcategoria" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('cestas')">Sacolões</button>
+  <button id="btcategoria" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('bebidas')">Bebidas, sorvetes</button>
+  <button id="btcategoria" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('frios')">Frios, Hortifrúti</button>
+  <button id="btcategoria" class="btn btn-secondary btn-sm filtro-btn" onclick="filtrarCategoria('limpeza')">Higiene, Limpeza</button>
+</div>
+
+  </center>
+   <br>
+   <br>
+    <!-------------------------------------------------------------------- ALIMENTOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- ALIMENTOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- ALIMENTOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- ALIMENTOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- ALIMENTOS ----------------------------------------------------------------------------->
+
+    <div class="produto" data-nome="Açucar" data-preco="3.80" data-categoria="alimentos">
+      <img src="assets/images/alimentos/acucar dumel.jpg" alt="Açucar">
+      <div class="produto-info">
+        <h3>Açucar Dumel</h3>
+        <p>R$ 3,80</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="Adoçante marata" data-preco="4.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/adocante marata.webp" alt="Adoçante marata">
+      <div class="produto-info">
+        <h3>Adoçante Maratá</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="Arroizina" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/arroizina.jpg" alt="arroizina">
+      <div class="produto-info">
+        <h3>Arroizina</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="arroz fazenda" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/arroz fazenda.jpg" alt="arroz fazenda">
+      <div class="produto-info">
+        <h3>Arroz Fazenda</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="arroz pop" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/arroz pop.jpg" alt="arroz pop">
+      <div class="produto-info">
+        <h3>Arroz Fazenda</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="arroz são joaquim" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/arroz são joaquim.webp" alt="arroz são joaquim">
+      <div class="produto-info">
+        <h3>Arroz São Joaquim</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="assugrin" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/assugrin.webp" alt="assugrin">
+      <div class="produto-info">
+        <h3>Assugrin</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="aveia" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/aveia.jpg" alt="aveia">
+      <div class="produto-info">
+        <h3>Aveia</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="cafe santa clara g" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/cafe santa clara g.jpg" alt="cafe santa clara g">
+      <div class="produto-info">
+        <h3>Café Santa Clara G</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="cafe santa clara p" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/cafe santa clara p.jpg" alt="cafe santa clara p">
+      <div class="produto-info">
+        <h3>Café Santa Clara P</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="Catchup Picante" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/catchup picante.webp" alt="Catchup Picante">
+      <div class="produto-info">
+        <h3>Catchup Picante</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="Achocolatado Italac" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/chocky italac.jpg" alt="Achocolatado Italac">
+      <div class="produto-info">
+        <h3>Achocolatado Italac</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="chocolatto" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/chocolatto.jpg" alt="chocolatto">
+      <div class="produto-info">
+        <h3>Chocolatto</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="coco ralado" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/coco ralado.webp" alt="coco ralado">
+      <div class="produto-info">
+        <h3>Coco Ralado</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="coloral g" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/coloral g.jpg" alt="coloral g">
+      <div class="produto-info">
+        <h3>Coloral G</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="coloral p" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/coloral p.jpg" alt="coloral p">
+      <div class="produto-info">
+        <h3>Coloral P</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="creme de leite embere" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/creme de leite embere.jpg" alt="creme de leite embere">
+      <div class="produto-info">
+        <h3>Creme de Leite Emberé</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="creme de leite italac" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/creme de leite italac.jpg" alt="creme de leite italac">
+      <div class="produto-info">
+        <h3>Creme de Leite Italac</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="cremogema" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/cremogema.jpg" alt="cremogema">
+      <div class="produto-info">
+        <h3>Cremogema</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="dueto" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/dueto.jpg" alt="dueto">
+      <div class="produto-info">
+        <h3>Dueto</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="farinha com fermento finna" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/farinha com fermento finna.jpg" alt="farinha com fermento finna.">
+      <div class="produto-info">
+        <h3>Farinha com Fermento Finna.</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="Feifarinha lactea nestlejão" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/farinha lactea nestle.jpg" alt="farinha lactea nestle">
+      <div class="produto-info">
+        <h3>Farinha Lactea Nestle</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="farinha lactea nutri" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/farinha lactea nutri.jpg" alt="farinha lactea nutri">
+      <div class="produto-info">
+        <h3>Farinha Lactea Nutri</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="feijao_carioca" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/feijao_carioca.webp" alt="feijao_carioca">
+      <div class="produto-info">
+        <h3>Feijao Carioca</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="feijão branco" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/feijão branco.webp" alt="feijão branco">
+      <div class="produto-info">
+        <h3>Feijão Branco</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="feijão preto" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/feijão preto.png" alt="feijão preto">
+      <div class="produto-info">
+        <h3>Feijão Preto</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="fermento" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/fermento.jpg" alt="fermento">
+      <div class="produto-info">
+        <h3>Fermento</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="flocao fortemilho" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/flocao fortemilho.png" alt="flocao fortemilho">
+      <div class="produto-info">
+        <h3>Flocão Fortemilho</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="flocao sao braz" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/flocao sao braz.jpg" alt="flocao sao braz">
+      <div class="produto-info">
+        <h3>Flocão São Braz</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="goiabada dantas" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/goiabada dantas.jpg" alt="goiabada dantas">
+      <div class="produto-info">
+        <h3>Goiabada Dantas</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="ketchup quero" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/ketchup quero.jpg" alt="ketchup quero">
+      <div class="produto-info">
+        <h3>Ketchup Quero</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="kitut" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/kitut.jpg" alt="kitut">
+      <div class="produto-info">
+        <h3>Kitut</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="leite condensado betania" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/leite condensado betania.jpg" alt="leite condensado betania">
+      <div class="produto-info">
+        <h3>Leite Condensado Betania</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="leite condensado" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/leite condensado.jpg" alt="leite condensado">
+      <div class="produto-info">
+        <h3>Leite Condensado</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="leite de coco indiano" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/leite de coco indiano.jpg" alt="leite de coco indiano">
+      <div class="produto-info">
+        <h3>Leite de Coco</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="leite italac" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/leite italac.webp" alt="leite italac">
+      <div class="produto-info">
+        <h3>Leite italac</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="leite itambe" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/leite itambe.jpg" alt="leite itambe">
+      <div class="produto-info">
+        <h3>Leite Itambé</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="macarrao vitarella" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/macarrao vitarella.jpg" alt="macarrao vitarella">
+      <div class="produto-info">
+        <h3>Macarrão Vitarella</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="macarrão bonsabor" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/macarrão bonsabor.jpg" alt="macarrão bonsabor">
+      <div class="produto-info">
+        <h3>Macarrão Bonsabor</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="macarrão vitaflor" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/macarrão vitaflor.jpg" alt="macarrão vitaflor">
+      <div class="produto-info">
+        <h3>Macarrão Vitaflor</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="maionese julieta" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/maionese julieta.jpg" alt="maionese julieta">
+      <div class="produto-info">
+        <h3>Maionese Julieta</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="maizena" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/maizena.jpg" alt="maizena">
+      <div class="produto-info">
+        <h3>Maizena</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="margarina primor g" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/margarina primor g.jpg" alt="margarina primor g">
+      <div class="produto-info">
+        <h3>Margarina Primor G</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="margarina primor p" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/margarina primor p.jpg" alt="margarina primor p">
+      <div class="produto-info">
+        <h3>Margarina Primor P</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="milho de pipoca pula pula" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/milho de pipoca pula pula.webp" alt="milho de pipoca pula pula">
+      <div class="produto-info">
+        <h3>Milho de Pipoca</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="milho para manguza" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/milho para manguza.jpg" alt="milho para manguza">
+      <div class="produto-info">
+        <h3>Milho para Mangunzá</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="miojo nissin" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/miojo nissin.png" alt="miojo nissin">
+      <div class="produto-info">
+        <h3>Miojo Nissin</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="miojo vitarella" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/miojo vitarella.jpg" alt="miojo vitarella">
+      <div class="produto-info">
+        <h3>Miojo Vitarella</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="molho pronto sadio" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/molho pronto sadio.jpg" alt="molho pronto sadio">
+      <div class="produto-info">
+        <h3>Molho Pronto Sadio</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="molho quero" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/molho quero.jpg" alt="molho quero">
+      <div class="produto-info">
+        <h3>Molho de Tomate Quero</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="musilon" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/musilon.webp" alt="musilon">
+      <div class="produto-info">
+        <h3>Musilon</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="oleo siol" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/oleo siol.jpg" alt="oleo siol">
+      <div class="produto-info">
+        <h3>Óleo Siol P</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="oleo vitaliv" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/oleo vitaliv.webp" alt="oleo vitaliv">
+      <div class="produto-info">
+        <h3>Óleo Vitaliv</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="pimenta regina" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/pimenta regina.jpg" alt="pimenta regina">
+      <div class="produto-info">
+        <h3>Pimenta Regina</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="proteina de soja" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/proteina de soja.jpg" alt="proteina de soja">
+      <div class="produto-info">
+        <h3>Proteina de Soja</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="sal nevado" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/sal nevado.jpg" alt="sal nevado">
+      <div class="produto-info">
+        <h3>Sal Nevado</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sardinha gomes" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/sardinha gomes.jpg" alt="sardinha gomes">
+      <div class="produto-info">
+        <h3>Sardinha Gomes</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="sazon" data-preco="6.50" data-categoria="alimentos">
+      <img src="assets/images/alimentos/sazon.jpg" alt="sazon">
+      <div class="produto-info">
+        <h3>Pacote Sazon</h3>
+        <p>R$ 6,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="sopao kitano" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/sopao kitano.jpg" alt="sopao kitano">
+      <div class="produto-info">
+        <h3>Sopão Kitano</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="tempero completo" data-preco="3.75" data-categoria="alimentos">
+      <img src="assets/images/alimentos/tempero completo.jpg" alt="tempero completo">
+      <div class="produto-info">
+        <h3>Tempero Completo</h3>
+        <p>R$ 3,75</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="vinagre sadio" data-preco="5.00" data-categoria="alimentos">
+      <img src="assets/images/alimentos/vinagre sadio.webp" alt="vinagre sadio">
+      <div class="produto-info">
+        <h3>Vinagre Sadio</h3>
+        <p>R$ 5,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+
+    
+  
+    <!-------------------------------------------------------------------- Produtos de Limpeza ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- Produtos de Limpeza ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- Produtos de Limpeza ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- Produtos de Limpeza ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- Produtos de Limpeza ----------------------------------------------------------------------------->
+
+
+
+
+    <div class="produto" data-nome="agua sanitaria clorito 1l" data-preco="8.00" data-categoria="limpeza">
+      <img src="assets/images/limpeza/agua sanitaria clorito 1l.webp" alt="agua sanitaria clorito 1l">
+      <div class="produto-info">
+        <h3>Água Sanitária Clorito 1L</h3>
+        <p>R$ 8,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="agua sanitaria dragao 1l" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/agua sanitaria dragao 1l.webp" alt="agua sanitaria dragao 1l">
+      <div class="produto-info">
+        <h3>Água Sanitária Dragão 1L</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="agua sanitaria dragao 2l" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/agua sanitaria dragao 2l.jpeg" alt="agua sanitaria dragao 2l">
+      <div class="produto-info">
+        <h3>Água Sanitaria Dragão 2L</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="agua sanitaria lava bem" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/agua sanitaria lava bem.jpg" alt="agua sanitaria lava bem">
+      <div class="produto-info">
+        <h3>Água Sanitária Lava Bem</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="amaciante 2l lava bem" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/amaciante 2l lava bem.jpg" alt="amaciante 2l lava bem">
+      <div class="produto-info">
+        <h3>Amaciante 2L Lava Bem</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="amaciante confort" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/amaciante confort.jpg" alt="amaciante confort">
+      <div class="produto-info">
+        <h3>Amaciante Confort</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="amaciante downy" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/amaciante downy.webp" alt="amaciante downy">
+      <div class="produto-info">
+        <h3>Amaciante Downy</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="amaciante sonho 500ml" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/amaciante sonho 500ml.webp" alt="amaciante sonho 500ml">
+      <div class="produto-info">
+        <h3>Amaciante Sonho 500ml</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="ar agradavel sprey" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/ar agradavel sprey.webp" alt="ar agradavel sprey">
+      <div class="produto-info">
+        <h3>Ar Agradável Sprey</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="assolan" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/assolan.webp" alt="assolan">
+      <div class="produto-info">
+        <h3>Assolan</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="baygon repelente" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/baygon repelente.webp" alt="baygon repelente">
+      <div class="produto-info">
+        <h3>Baygon Repelente</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="bombril" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/bombril.webp" alt="bombril">
+      <div class="produto-info">
+        <h3>Bombril</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+    
+    <div class="produto" data-nome="bucha de lavar louca" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/bucha de lavar louca.webp" alt="bucha de lavar louca">
+      <div class="produto-info">
+        <h3>Bucha de Lavar LouÇa</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="contonete cotton" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/contonete cotton.jpg" alt="contonete cotton">
+      <div class="produto-info">
+        <h3>Contonete Cotton</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="desinfetante guarani" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/desinfetante guarani.webp" alt="desinfetante guarani">
+      <div class="produto-info">
+        <h3>Desinfetante Guaraní</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="desinfetante lava bem" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/desinfetante lava bem.jpg" alt="desinfetante lava bem">
+      <div class="produto-info">
+        <h3>Desinfetante Lava Bem</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="desinfetante ype" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/desinfetante ype.webp" alt="desinfetante ype">
+      <div class="produto-info">
+        <h3>Desinfetante Ypê</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="detergente lava bem" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/detergente lava bem.png" alt="detergente lava bem">
+      <div class="produto-info">
+        <h3>Detergente Lava Bem</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="detergente limpol" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/detergente limpol.webp" alt="detergente limpol">
+      <div class="produto-info">
+        <h3>Detergente Limpol</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="fosforo olho" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/fosforo olho.webp" alt="fosforo olho">
+      <div class="produto-info">
+        <h3>Fósforo Olho</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="lava roupas ekonomico 3l" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/lava roupas ekonomico 3l.jpeg" alt="lava roupas ekonomico 3l">
+      <div class="produto-info">
+        <h3>Lava Roupas Ekonômico 3L</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="lava roupas mon bijou" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/lava roupas mon bijou.webp" alt="lava roupas mon bijou">
+      <div class="produto-info">
+        <h3>Lava Roupas Mon Bijou Refil</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+    
+    <div class="produto" data-nome="leite de rosas" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/leite de rosas.jpg" alt="leite de rosas">
+      <div class="produto-info">
+        <h3>Leite de Rosas</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="limpa aluminio brilhotex" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/limpa aluminio brilhotex.jpg" alt="limpa aluminio brilhotex">
+      <div class="produto-info">
+        <h3>Limpa Alumínio Brilhotex</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="limpador perfumado uau" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/limpador perfumado uau.jpg" alt="limpador perfumado uau">
+      <div class="produto-info">
+        <h3>Limpador Perfumado UAU</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="mascara skala" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/mascara skala.jpg" alt="mascara skala">
+      <div class="produto-info">
+        <h3>Mascara Skala</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="palitos de dente" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/palitos de dente.png" alt="palitos de dente">
+      <div class="produto-info">
+        <h3>Palitos de Dente</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="papel higienico floral" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/papel higienico floral.webp" alt="papel higienico floral">
+      <div class="produto-info">
+        <h3>Papel Higienico Floral</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="papel higienico pimpo" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/papel higienico pimpo.webp" alt="papel higienico pimpo">
+      <div class="produto-info">
+        <h3>Papel Higienico Pimpo</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="papel higienico velud" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/papel higienico velud.webp" alt="papel higienico velud">
+      <div class="produto-info">
+        <h3>Papel Higienico Velud</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="papel-higienico atualle" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/papel-higienico atualle.webp" alt="papel-higienico atualle">
+      <div class="produto-info">
+        <h3>Papel Higienico Atualle</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="papel-higienico nobre" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/papel-higienico nobre.jpg" alt="papel-higienico nobre">
+      <div class="produto-info">
+        <h3>Papel Higienico Nobre</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+    
+    <div class="produto" data-nome="pasta de dente kids" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/pasta de dente kids.avif" alt="pasta de dente kids">
+      <div class="produto-info">
+        <h3>Pasta de Dente Kids</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="pasta even" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/pasta even.jpg" alt="pasta even">
+      <div class="produto-info">
+        <h3>Pasta de Dente Even</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="pasta" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/pasta.jpg" alt="pasta">
+      <div class="produto-info">
+        <h3>Pasta de Dente Colgate</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="pastilhas sanitarias lava bem" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/pastilhas sanitarias lava bem.jpg" alt="pastilhas sanitarias lava bem">
+      <div class="produto-info">
+        <h3>Pastilha Sanitaria Lava Bem</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="rexona roll-on" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/rexona roll-on.jpg" alt="rexona roll-on">
+      <div class="produto-info">
+        <h3>Rexona Roll-On</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabao em barra lava bem" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabao em barra lava bem.jpg" alt="sabao em barra lava bem">
+      <div class="produto-info">
+        <h3>Sabão em Barra Lava Bem</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabao em barra ype" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabao em barra ype.jpg" alt="sabao em barra ype">
+      <div class="produto-info">
+        <h3>Sabão em Barra Ypê/h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabao em po bem-te-vi" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabao em po bem-te-vi.jpg" alt="sabao em po bem-te-vi">
+      <div class="produto-info">
+        <h3>Sabão em Pó Bem-te-vi</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabao em po omo" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabao em po omo.webp" alt="sabao em po omo">
+      <div class="produto-info">
+        <h3>Sabão em Pó Omo</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabao liquido omo 1l lavanda lavanda" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabao liquido omo 1l lavanda lavanda.webp" alt="sabao liquido omo 1l lavanda lavanda">
+      <div class="produto-info">
+        <h3>Sabão Liquido Omo 1L Lavanda</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+    
+    <div class="produto" data-nome="sabao liquido omo 1l refil" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabao liquido omo 1l refil.webp" alt="sabao liquido omo 1l refil">
+      <div class="produto-info">
+        <h3>Sabão Liquido Omo 1L</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabao liquido tixan" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabao liquido tixan.webp" alt="sabao liquido tixan">
+      <div class="produto-info">
+        <h3>Sabão Liquido Tixan</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabonete dove" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabonete dove.jpg" alt="sabonete dove">
+      <div class="produto-info">
+        <h3>Sabonete Dove</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabonete francis" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabonete francis.jpg" alt="sabonete francis">
+      <div class="produto-info">
+        <h3>Sabonete Francis</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabonete gessy" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabonete gessy.webp" alt="sabonete gessy">
+      <div class="produto-info">
+        <h3>Sabonete Gessy</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabonete infantil pompom" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabonete infantil pompom.webp" alt="sabonete infantil pompom">
+      <div class="produto-info">
+        <h3>Sabonete Infantil Pompom</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="sabonete senador" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/sabonete senador.webp" alt="sabonete senador">
+      <div class="produto-info">
+        <h3>Sabonete Senador</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="shampoo alyne 1l" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/shampoo alyne 1l.webp" alt="shampoo alyne 1l">
+      <div class="produto-info">
+        <h3>Shampoo Alyne 1L</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="shampoo frizon 1l" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/shampoo frizon 1l.jpg" alt="shampoo frizon 1l">
+      <div class="produto-info">
+        <h3>Shampoo Frizon 1L</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="shampoo seda" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/shampoo seda.jpeg" alt="shampoo seda">
+      <div class="produto-info">
+        <h3>Shampoo Seda</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="spray desodorante" data-preco="4.50" data-categoria="limpeza">
+      <img src="assets/images/limpeza/spray desodorante.jpg" alt="spray desodorante">
+      <div class="produto-info">
+        <h3>Spray Desodorante</h3>
+        <p>R$ 4,50</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <!-- Setor de Padaria -->
+    <div class="produto" data-nome="Pão Francês" data-preco="0.60" data-categoria="padaria">
+      <img src="assets/images/padaria/paozin.jpg" alt="Pão Francês">
+      <div class="produto-info">
+        <h3>Pão Francês</h3>
+        <p>R$ 0,60 (unidade)</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    <div class="produto" data-nome="Bolo de Milho" data-preco="12.00" data-categoria="padaria">
+      <img src="assets/images/padaria/bolo.jpg" alt="Bolo de Milho">
+      <div class="produto-info">
+        <h3>Bolo de Milho</h3>
+        <p>R$ 12,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+  
+    
+  </div>
+
+  
+
+  <div class="carrinho">
+    <h2>Carrinho</h2>
+    <div id="itens-carrinho"></div>
+    <div class="total">Total: R$ <span id="total">0.00</span></div>
+    <button id="whatsapp" onclick="enviarWhatsApp()">Enviar para WhatsApp</button>
+  </div>
+</div>
+
+
+        </section>
+
+        <div class="divider-2"></div> <!--Divisor de sessões tipo 2-->
+
+<section id="carro">
+        <center>
+          <br>
+          <br>
+      <h2 class="title">Eletrodomesticos</h2>
+      <p class="pp">Dê um upgrade na sua casa</p>
+</center>
+
+        <div class="carousel-container">
+    <button class="nav-button" id="prevBtn">&#10094;</button>
+    <div class="carousel-slide" id="carouselSlide">
+      <div class="carousel-item">
+        <img src="assets/images/eletros/liquidificador.webp" alt="Produto 1">
+        <div class="caption">
+          <span>Liquididicador</span>
+          <strong>R$ 100,00</strong>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/eletros/espremedor.jpg" alt="Produto 2">
+        <div class="caption">
+          <span>Espremedor de Laranja</span>
+          <strong>R$ 60,00</strong>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/eletros/ventilador.webp" alt="Produto 3">
+        <div class="caption">
+          <span>Ventilador</span>
+          <strong>R$ 150,00</strong>
+        </div>
+        
+      </div>
+    </div>
+    <button class="nav-button" id="nextBtn">&#10095;</button>
+  </div>
+</section>
+   <br>
+          
+
+  <div class="divider-2"></div> <!--Divisor de sessões tipo 2-->
+
+
+        <section class="section" id="contact">
+            <div class="container grid">
+                <div class="text">
+                    <h2 class="title">Entre em contato conosco!</h2>
+                    <p>Entre em contato com a Padaria e Mercadinho  Aliança, queremos tirar suas dúvidas e ouvir suas sugestões.</p>
+                    <a href="https://api.whatsapp.com/send?phone=5583988942287" class="button" target="_blank"><i class="icon-whatsapp"></i> Entrar em contato</a>
+                </div>
+                <div class="links">
+                    <ul class="grid">
+                        <li><i class="icon-phone"></i> 84 98869-2337</li>
+                        <li><i class="icon-map-pin"></i> Av. Manuel Rodrigues, 1248, centro, CEP: 59560-000, Poço Branco/RN</li>
+                        <li><i class="icon-mail"></i> tramalho250@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <div class="divider-1"></div> <!--Divisor de sessões tipo 1-->
+
+    </main>
+    
+    <footer class="section">
+        <div class="container grid">
+            <div class="brand">
+                <a href="#home" class="logo logo-alt">Padaria<span>Aliança</span></a>
+                <p>©2020 Padaria Aliança</p>
+                <p>Todos os direitos reservados</p>
+                <p>Web developer - Thyago Ramalho</p>
+            </div>
+
+            <div class="social grid">
+                <a href="https://www.instagram.com/padariaemerc_alianca" target="_blank"><i class="icon-instagram"></i></a>
+                <a href="#" target="_blank"><i class="icon-facebook"></i></a>
+                <a href="#" target="_blank"><i class="icon-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#home" class="back-to-top"><i class="icon-chevron-up"></i></a>
+    
+    <!--Script da biblioteca Swiper-->
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+    
+
+    <!--Scroll reveal-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!--Main JS-->
+    <script src="/script.js"></script>
+
+</body>
+</html>
