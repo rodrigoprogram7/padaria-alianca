@@ -894,6 +894,43 @@ footer .social a:hover {
       right: 10px;
     }
 
+     @media (max-width: 767px) {
+  .produto {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px; /* aumenta espaço entre imagem e conteúdo */
+  }
+
+  .produto-img-wrapper {
+    flex-shrink: 0;
+    width: 90px;
+    height: 90px;
+    position: relative;
+  }
+
+  .produto-info {
+    flex: 1;
+    padding-top: 4px;
+  }
+
+  .produto h3 {
+    font-size: 1.05rem;
+    margin-bottom: 4px;
+  }
+
+  .produto p {
+    margin-bottom: 6px;
+  }
+
+  .quantidade-box {
+    margin: 8px 0;
+  }
+
+  #bt {
+    margin-top: 6px;
+  }
+}
+
     
     
 

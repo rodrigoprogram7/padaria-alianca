@@ -950,6 +950,36 @@
       </div>
     </div>
 
+
+
+<div class="produto carrossel"
+     data-preco="3.75"
+     data-categoria="alimentos"
+     data-variacoes='[
+       {"nome": "Treloso Chocolate", "img": "assets/images/alimentos/treloso chocolate.webp"},
+       {"nome": "Treloso Bem-Casado", "img": "assets/images/alimentos/treloso bem-casado.jpg"}
+     ]'>
+  
+  <div class="produto-img-wrapper">
+    <img src="assets/images/alimentos/treloso chocolate.webp" alt="Café Santa Clara">
+    <button class="carousel-btn carousel-prev">❮</button>
+    <button class="carousel-btn carousel-next">❯</button>
+  </div>
+
+  <div class="produto-info">
+    <h3>Treloso Chocolate</h3>
+    <p>R$ 3,75</p>
+    <div class="quantidade-box">
+      <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+      <input type="number" min="1" value="1" class="quantidade" />
+      <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+    </div>
+    <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+  </div>
+</div>
+
+
+
     <div class="produto" data-nome="tempero completo" data-preco="3.75" data-categoria="alimentos">
       <img src="assets/images/alimentos/tempero completo.jpg" alt="tempero completo">
       <div class="produto-info">
