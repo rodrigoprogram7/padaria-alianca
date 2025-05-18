@@ -142,21 +142,21 @@ window.onload = () => {
   }
 
   function adicionarAoCarrinho(botao) {
-    const produtoEl = botao.closest('.produto');
-    const nome = produtoEl.getAttribute('data-nome');
-    const preco = parseFloat(produtoEl.getAttribute('data-preco'));
-    const quantidade = parseInt(produtoEl.querySelector('.quantidade').value);
+  const produtoEl = botao.closest('.produto');
+  const nome = produtoEl.querySelector('h3').textContent; // <-- Nome confiável
+  const preco = parseFloat(produtoEl.getAttribute('data-preco'));
+  const quantidade = parseInt(produtoEl.querySelector('.quantidade').value);
 
-    if (carrinho[nome]) {
-      carrinho[nome].quantidade += quantidade;
-    } else {
-      carrinho[nome] = { preco, quantidade };
-    }
-
-    salvarCarrinho();
-    atualizarCarrinho();
-    mostrarAlerta();
+  if (carrinho[nome]) {
+    carrinho[nome].quantidade += quantidade;
+  } else {
+    carrinho[nome] = { preco, quantidade };
   }
+
+  salvarCarrinho();
+  atualizarCarrinho();
+  mostrarAlerta(nome);
+}
 
   function removerDoCarrinho(nome) {
     delete carrinho[nome];
@@ -245,14 +245,15 @@ window.onload = () => {
 
 
 
-  function mostrarAlerta() {
+  function mostrarAlerta(nomeProduto) {
   const alerta = document.getElementById("alerta");
+  alerta.textContent = `${nomeProduto} adicionado ao carrinho!`; // 👈 nome dinâmico
   alerta.style.opacity = 1;
   alerta.style.transform = "translateY(0)";
   setTimeout(() => {
     alerta.style.opacity = 0;
     alerta.style.transform = "translateY(-20px)";
-  }, 2000); // desaparece após 2 segundos
+  }, 2000);
 }
 
 
@@ -304,5 +305,33 @@ window.onload = () => {
 
     // Inicia o autoplay ao carregar a página
     startAutoplay();
+
+
+
+    document.querySelectorAll('.produto.carrossel').forEach(produto => {
+  const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
+  const img = produto.querySelector('img');
+  const nomeEl = produto.querySelector('h3');
+  let current = 0;
+
+  const updateProduto = () => {
+    img.src = variacoes[current].img;
+    nomeEl.textContent = variacoes[current].nome;
+    produto.setAttribute('data-nome', variacoes[current].nome); // 🔥 ESSENCIAL
+  };
+
+  produto.querySelector('.carousel-prev').addEventListener('click', () => {
+    current = (current - 1 + variacoes.length) % variacoes.length;
+    updateProduto();
+  });
+
+  produto.querySelector('.carousel-next').addEventListener('click', () => {
+    current = (current + 1) % variacoes.length;
+    updateProduto();
+  });
+
+  // Executa a primeira atualização para garantir que o nome esteja sincronizado
+  updateProduto();
+});
 
     
