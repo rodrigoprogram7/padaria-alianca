@@ -946,29 +946,36 @@ footer .social a:hover {
 
 .carousel-btn {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.8);
+  top: 100%;
+  transform: translateY(10px);
+  background-color: var(--base-color);
   border: none;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   font-size: 16px;
+  font-weight: bold;
+  color: white;
   cursor: pointer;
-  color: #333;
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: background-color 0.3s, transform 0.3s;
+  transition: background-color 0.3s, transform 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+}
+
+.carousel-btn:hover {
+  background-color: var(--base-color-alt);
+  transform: translateY(10px) scale(1.1);
 }
 
 .carousel-prev {
-  left: -20px;
+  left: 5px;
 }
 
 .carousel-next {
-  right: -20px;
+  right: 5px;
 }
 
     
