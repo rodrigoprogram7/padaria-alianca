@@ -944,39 +944,34 @@ footer .social a:hover {
 }
 
 .carousel-btn {
+
+  color: rgb(255, 255, 255); /* Cor da seta */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* 👈 Sombra preta suave */
   position: absolute;
-  top: 100%;
-  transform: translateY(10px);
-  background-color: var(--base-color);
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
   border: none;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
+  font-size: 2.3rem;
+  font-weight: 20;
   cursor: pointer;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  transition: background-color 0.3s, transform 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 2;
+  opacity: 0.8;
+  transition: opacity 0.3s, transform 0.3s;
 }
 
 .carousel-btn:hover {
-  background-color: var(--base-color-alt);
-  transform: translateY(10px) scale(1.1);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.2);
 }
 
 .carousel-prev {
-  left: 5px;
+  left: -22px; /* ou -40px para mais distância */
 }
 
 .carousel-next {
-  right: 5px;
+  right: -22px;
 }
-
     
     
 

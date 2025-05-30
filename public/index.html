@@ -768,20 +768,40 @@
       </div>
     </div>
 
-    <div class="produto" data-nome="miojo nissin" data-preco="5.00" data-categoria="alimentos">
-      <img src="assets/images/alimentos/miojo nissin.png" alt="miojo nissin">
-      <div class="produto-info">
-        <h3>Miojo Nissin</h3>
-        <p>R$ 5,00</p>
-        <div class="quantidade-box">
-          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
-          <input type="number" min="1" value="1" class="quantidade" />
-          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
-        </div>
-        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
-      </div>
-    </div>
+
+
+
+
+
+
+
+<div class="produto carrossel"
+     data-preco="3.75"
+     data-categoria="alimentos"
+     data-variacoes='[
+       {"nome": "Miojo Nissin Galinha", "img": "assets/images/alimentos/miojo nissin.png"},
+       {"nome": "Miojo Nissin Carne", "img": "assets/images/alimentos/miojo nissin carne.jpg"}
+     ]'>
   
+  <div class="produto-img-wrapper">
+    <img src="assets/images/alimentos/miojo nissin.png" alt="Miojo Nissin">
+    <button class="carousel-btn carousel-prev">❮</button>
+    <button class="carousel-btn carousel-next">❯</button>
+  </div>
+
+  <div class="produto-info">
+    <h3>Miojo Nissin Galinha</h3>
+    <p>R$ 3,75</p>
+    <div class="quantidade-box">
+      <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+      <input type="number" min="1" value="1" class="quantidade" />
+      <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+    </div>
+    <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+  </div>
+</div>
+
+
     <div class="produto" data-nome="miojo vitarella" data-preco="6.50" data-categoria="alimentos">
       <img src="assets/images/alimentos/miojo vitarella.jpg" alt="miojo vitarella">
       <div class="produto-info">
