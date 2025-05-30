@@ -84,17 +84,21 @@ function ActivateMenuAtCurrentSection() {
 
 /*========== Botão que quando pressionado, voltar para o topo ========== */
 
-const backToTopButton = document.querySelector('.back-to-top')
+const backToTopButton = document.querySelector('.back-to-top');
 
-window.addEventListener('scroll', function() {
-    if(window.scrollY >= 560) {
-        backToTopButton.classList.add('show')
-    }
-    else {
-        backToTopButton.classList.remove('show')
-    }
-    ActivateMenuAtCurrentSection()
-})
+backToTopButton.addEventListener('click', function (e) {
+  e.preventDefault();
+  document.querySelector('#carrinho').scrollIntoView({ behavior: 'smooth' });
+});
+
+window.addEventListener('scroll', function () {
+  if (window.scrollY >= 560) {
+    backToTopButton.classList.add('show');
+  } else {
+    backToTopButton.classList.remove('show');
+  }
+  ActivateMenuAtCurrentSection();
+});
 
 
 

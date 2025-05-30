@@ -451,24 +451,23 @@ footer .social a:hover {
 /*======================================== Botão de voltar ao início ========================================*/
 
 .back-to-top {
-    background: var(--base-color);
-    color: var(--text-color-light);
-
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-
-    padding: 0.5rem;
-    clip-path: circle();
-
-    font-size: 1.9rem;
-    line-height: 0;
-
-    visibility: hidden;
-    opacity: 0;
-
-    transition: 0.3s;
-    transform: translateY(100%);
+  background: var(--base-color);
+  color: var(--text-color-light);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  border-radius: 50%;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  transform: translateY(100%);
+  z-index: 999;
 }
 
 .back-to-top.show {
