@@ -1078,11 +1078,5 @@ footer .social a:hover {
 }
 
 
-@media (max-width: 768px) {
-  .produto.carrossel {
-    flex-direction: column; /* ❌ remova ou comente isso */
-  }
-}
-
 
 
