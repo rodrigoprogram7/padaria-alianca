@@ -984,48 +984,55 @@ footer .social a:hover {
   align-items: flex-start;
   gap: 20px;
   flex-wrap: wrap;
-  padding-bottom: 16px; /* Adiciona espaço interno */
+  padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
-  overflow: hidden; /* Previne vazamento visual */
 }
 
+/* Coluna da imagem */
 .produto.carrossel .produto-img-wrapper {
+  width: 130px;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150px;
-  position: relative;
 }
 
+/* Imagem principal */
 .produto.carrossel .produto-img-wrapper img {
   width: 100%;
-  height: 100px; /* ou 120px para manter proporcional */
+  height: 100px;
   object-fit: cover;
   border-radius: 6px;
 }
 
+/* Botões ❮ ❯ */
 .carousel-btn {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 40px; /* meio da imagem */
   background: none;
   border: none;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   cursor: pointer;
   color: var(--base-color);
+  z-index: 1;
 }
-.carousel-prev { left: -20px; }
-.carousel-next { right: -20px; }
 
+.carousel-prev {
+  left: -15px;
+}
+
+.carousel-next {
+  right: -15px;
+}
+
+/* Miniaturas */
 .carousel-thumbs {
   display: grid;
   grid-template-columns: repeat(3, 40px);
   gap: 6px;
   margin-top: 8px;
-  max-width: 100%;     /* 🔒 Impede de invadir outras colunas */
-  overflow: hidden;    /* 🔒 Esconde overflow lateral */
+  justify-content: center;
 }
-
 
 .carousel-thumbs img {
   width: 40px;
@@ -1041,6 +1048,10 @@ footer .social a:hover {
   border-color: var(--base-color);
 }
 
+/* Parte direita do produto (já existia) */
+.produto-info {
+  flex: 1;
+}
 
 
 
