@@ -317,14 +317,33 @@ window.onload = () => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
   const img = produto.querySelector('img');
   const nomeEl = produto.querySelector('h3');
+  const thumbsContainer = produto.querySelector('.carousel-thumbs');
   let current = 0;
 
   const updateProduto = () => {
     img.src = variacoes[current].img;
     nomeEl.textContent = variacoes[current].nome;
-    produto.setAttribute('data-nome', variacoes[current].nome); // 🔥 ESSENCIAL
+    produto.setAttribute('data-nome', variacoes[current].nome);
+
+    // atualiza thumbs
+    thumbsContainer.querySelectorAll('img').forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === current);
+    });
   };
 
+  // Gera thumbnails
+  variacoes.forEach((v, index) => {
+    const thumb = document.createElement('img');
+    thumb.src = v.img;
+    if (index === current) thumb.classList.add('active');
+    thumb.addEventListener('click', () => {
+      current = index;
+      updateProduto();
+    });
+    thumbsContainer.appendChild(thumb);
+  });
+
+  // Navegação
   produto.querySelector('.carousel-prev').addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
     updateProduto();
@@ -335,7 +354,6 @@ window.onload = () => {
     updateProduto();
   });
 
-  // Executa a primeira atualização para garantir que o nome esteja sincronizado
   updateProduto();
 });
 
