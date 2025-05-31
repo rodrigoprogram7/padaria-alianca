@@ -342,50 +342,55 @@ window.onload = () => {
 
 
 
-document.querySelectorAll('.produto.carrossel').forEach(produto => {
-  const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
-  const img = produto.querySelector('img');
-  const nomeEl = produto.querySelector('h3');
-  const thumbnailsContainer = produto.querySelector('.carousel-thumbnails');
+window.onload = () => {
+  atualizarCarrinho();
+  filtrarCategoria('alimentos'); // Mostra apenas os produtos de alimentos
 
-  let current = 0;
+  // Carrossel com thumbnails
+  document.querySelectorAll('.produto.carrossel').forEach(produto => {
+    const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
+    const img = produto.querySelector('img');
+    const nomeEl = produto.querySelector('h3');
+    const thumbnailsContainer = produto.querySelector('.carousel-thumbnails');
 
-  function updateProduto() {
-    const variacao = variacoes[current];
-    img.src = variacao.img;
-    nomeEl.textContent = variacao.nome;
-    produto.setAttribute('data-nome', variacao.nome);
+    let current = 0;
 
-    // Atualizar destaque na thumbnail
-    thumbnailsContainer.querySelectorAll('img').forEach((thumb, i) => {
-      thumb.classList.toggle('active', i === current);
+    function updateProduto() {
+      const variacao = variacoes[current];
+      img.src = variacao.img;
+      nomeEl.textContent = variacao.nome;
+      produto.setAttribute('data-nome', variacao.nome);
+
+      thumbnailsContainer.querySelectorAll('img').forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === current);
+      });
+    }
+
+    variacoes.forEach((v, i) => {
+      const thumb = document.createElement('img');
+      thumb.src = v.img;
+      if (i === current) thumb.classList.add('active');
+      thumb.addEventListener('click', () => {
+        current = i;
+        updateProduto();
+      });
+      thumbnailsContainer.appendChild(thumb);
     });
-  }
 
-  // Criar miniaturas
-  variacoes.forEach((v, i) => {
-    const thumb = document.createElement('img');
-    thumb.src = v.img;
-    if (i === current) thumb.classList.add('active');
-    thumb.addEventListener('click', () => {
-      current = i;
+    produto.querySelector('.carousel-prev').addEventListener('click', () => {
+      current = (current - 1 + variacoes.length) % variacoes.length;
       updateProduto();
     });
-    thumbnailsContainer.appendChild(thumb);
-  });
 
-  produto.querySelector('.carousel-prev').addEventListener('click', () => {
-    current = (current - 1 + variacoes.length) % variacoes.length;
+    produto.querySelector('.carousel-next').addEventListener('click', () => {
+      current = (current + 1) % variacoes.length;
+      updateProduto();
+    });
+
     updateProduto();
   });
+};
 
-  produto.querySelector('.carousel-next').addEventListener('click', () => {
-    current = (current + 1) % variacoes.length;
-    updateProduto();
-  });
-
-  updateProduto();
-});
 
 
     
