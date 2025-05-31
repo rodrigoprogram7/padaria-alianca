@@ -981,11 +981,11 @@ footer .social a:hover {
 .produto.carrossel {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 20px;
-  flex-wrap: wrap;
-  padding-bottom: 20px;
+  align-items: center;
+  gap: 32px; /* 🔥 Espaço entre imagem e texto */
+  padding: 16px 0;
   border-bottom: 1px solid #ddd;
+  flex-wrap: nowrap;
   overflow: visible;      /* <- importante */
   position: relative;     /* <- importante */
   min-height: 220px;      /* <- garante espaço vertical suficiente */
