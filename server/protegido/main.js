@@ -69,14 +69,10 @@ function ActivateMenuAtCurrentSection() {
         const checkpointStart = checkpoint >= sectionTop
         const checkpointEnd = checkpoint <= sectionTop + sectionHeight
 
-        if (checkpointStart && checkpointEnd) {
-            document.querySelector('nav ul li a[href*=' + sectionId + ']' ).classList.add('active')
-        }
-        else {
-            document.querySelector('nav ul li a[href*=' + sectionId + ']' ).classList.remove('active')
+        const link = document.querySelector('nav ul li a[href*="' + sectionId + '"]');
+if (link) link.classList.add('active');
 
-        }
-
+        else if (link) link.classList.remove('active');
 
     }
     
@@ -344,6 +340,8 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const img = produto.querySelector('img');
   const nomeEl = produto.querySelector('h3');
   const thumbsContainer = produto.querySelector('.carousel-thumbs');
+  if (!thumbsContainer) return; // pula se não existir
+
   let current = 0;
 
   const updateProduto = () => {
