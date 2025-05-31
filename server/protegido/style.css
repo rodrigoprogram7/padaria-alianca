@@ -982,7 +982,7 @@ footer .social a:hover {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  gap: 90px;
+  gap: 75px;
   flex-wrap: wrap;
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
