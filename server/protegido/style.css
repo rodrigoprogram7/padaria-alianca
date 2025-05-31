@@ -986,7 +986,12 @@ footer .social a:hover {
   flex-wrap: wrap;
   padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
+  overflow: visible;      /* <- importante */
+  position: relative;     /* <- importante */
+  min-height: 220px;      /* <- garante espaço vertical suficiente */
+  margin-bottom: 40px;    /* <- empurra o próximo produto */
 }
+
 
 /* Coluna da imagem */
 .produto.carrossel .produto-img-wrapper {
@@ -1030,7 +1035,7 @@ footer .social a:hover {
   display: grid;
   grid-template-columns: repeat(3, 40px);
   gap: 6px;
-  margin-top: 8px;
+  margin-top: 10px;
   justify-content: center;
 }
 
