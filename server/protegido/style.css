@@ -1030,9 +1030,13 @@ footer .social a:hover {
   display: grid;
   grid-template-columns: repeat(3, 40px);
   gap: 6px;
-  margin-top: 8px;
+  margin-top: 10px;
   justify-content: center;
+  align-items: center;
+  padding-bottom: 5px;
+  box-sizing: border-box;
 }
+
 
 .carousel-thumbs img {
   width: 40px;
@@ -1042,7 +1046,9 @@ footer .social a:hover {
   border: 2px solid transparent;
   cursor: pointer;
   transition: 0.3s;
+  display: block;
 }
+
 
 .carousel-thumbs img.active {
   border-color: var(--base-color);
