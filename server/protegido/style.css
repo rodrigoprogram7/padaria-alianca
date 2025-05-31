@@ -975,12 +975,14 @@ footer .social a:hover {
 
 
 .carousel-thumbs {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 40px); /* 3 colunas de 40px */
+  gap: 8px;
   justify-content: center;
-  gap: 6px;
-  margin: 8px 0;
-  flex-wrap: wrap;
+  margin-top: 10px;
 }
+
+
 
 .carousel-thumbs img {
   width: 40px;
