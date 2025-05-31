@@ -981,62 +981,63 @@ footer .social a:hover {
 .produto.carrossel {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
   gap: 20px;
-  flex-wrap: wrap;
-  padding-bottom: 20px;
+  align-items: flex-start;
+  padding: 20px 0;
   border-bottom: 1px solid #ddd;
+  flex-wrap: wrap;
 }
 
-/* Coluna da imagem */
+/* COLUNA ESQUERDA: imagem e thumbs */
 .produto.carrossel .produto-img-wrapper {
-  width: 130px;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 140px;
 }
 
-/* Imagem principal */
-.produto.carrossel .produto-img-wrapper img {
+/* WRAPPER que contém imagem + botões */
+.imagem-grande-wrapper {
+  position: relative;
   width: 100%;
   height: 100px;
+}
+
+.imagem-grande-wrapper img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 6px;
 }
 
-/* Botões ❮ ❯ */
+/* Botões de navegação */
 .carousel-btn {
   position: absolute;
-  top: 40px; /* meio da imagem */
+  top: 50%;
+  transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   cursor: pointer;
   color: var(--base-color);
-  z-index: 1;
+  z-index: 2;
 }
 
 .carousel-prev {
-  left: -15px;
+  left: -18px;
 }
 
 .carousel-next {
-  right: -15px;
+  right: -18px;
 }
 
-/* Miniaturas */
+/* MINIATURAS */
 .carousel-thumbs {
   display: grid;
   grid-template-columns: repeat(3, 40px);
   gap: 6px;
   margin-top: 10px;
-  justify-content: center;
-  align-items: center;
-  padding-bottom: 5px;
-  box-sizing: border-box;
 }
-
 
 .carousel-thumbs img {
   width: 40px;
@@ -1049,15 +1050,15 @@ footer .social a:hover {
   display: block;
 }
 
-
 .carousel-thumbs img.active {
   border-color: var(--base-color);
 }
 
-/* Parte direita do produto (já existia) */
+/* COLUNA DIREITA */
 .produto-info {
   flex: 1;
 }
+
 
 
 
