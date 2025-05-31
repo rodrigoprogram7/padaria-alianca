@@ -159,7 +159,7 @@ window.onload = () => {
 
   salvarCarrinho();
   atualizarCarrinho();
-  mostrarAlerta(nome);
+  mostrarAlerta(nome, quantidade);
 }
 
   function removerDoCarrinho(nome) {
@@ -249,9 +249,9 @@ window.onload = () => {
 
 
 
-  function mostrarAlerta(nomeProduto) {
+   function mostrarAlerta(nomeProduto, quantidade) {
   const alerta = document.getElementById("alerta");
-  alerta.textContent = `${nomeProduto} adicionado ao carrinho!`; // 👈 nome dinâmico
+  alerta.innerHTML = `<strong style="display:inline-block; border-bottom: 1px solid currentColor;">${quantidade}x ${nomeProduto}</strong> adicionado ao carrinho!`;
   alerta.style.opacity = 1;
   alerta.style.transform = "translateY(0)";
   setTimeout(() => {
@@ -259,6 +259,7 @@ window.onload = () => {
     alerta.style.transform = "translateY(-20px)";
   }, 2000);
 }
+
 
 
   atualizarCarrinho();
