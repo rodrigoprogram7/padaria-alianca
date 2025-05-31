@@ -156,7 +156,7 @@ window.onload = () => {
   salvarCarrinho();
   atualizarCarrinho();
   mostrarAlerta(nome, quantidade);
-  produto.querySelector('.quantidade').value = 1;
+  produtoEl.querySelector('.quantidade').value = 1;
 }
 
   function removerDoCarrinho(nome) {
