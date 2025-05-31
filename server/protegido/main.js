@@ -72,11 +72,10 @@ function ActivateMenuAtCurrentSection() {
         if (checkpointStart && checkpointEnd) {
             document.querySelector('nav ul li a[href*=' + sectionId + ']' ).classList.add('active')
         }
-        const link = document.querySelector('nav ul li a[href*=' + sectionId + ']');
-if (link) {
-  link.classList.remove('active'); // só remove se o link existir
-}
+        else {
+            document.querySelector('nav ul li a[href*=' + sectionId + ']' ).classList.remove('active')
 
+        }
 
 
     }
@@ -343,18 +342,11 @@ window.onload = () => {
 
 
 
-window.onload = () => {
-  atualizarCarrinho();
-  filtrarCategoria('alimentos'); // Mostra apenas os produtos de alimentos
-
-  document.querySelectorAll('.produto.carrossel').forEach(produto => {
-  const variacoes = JSON.parse(produto.getAttribute('data-variacoes') || '[]');
+document.querySelectorAll('.produto.carrossel').forEach(produto => {
+  const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
   const img = produto.querySelector('img');
   const nomeEl = produto.querySelector('h3');
   const thumbnailsContainer = produto.querySelector('.carousel-thumbnails');
-
-  // 🛑 Se não existir a div de thumbnails, não faz nada
-  if (!thumbnailsContainer) return;
 
   let current = 0;
 
@@ -364,13 +356,13 @@ window.onload = () => {
     nomeEl.textContent = variacao.nome;
     produto.setAttribute('data-nome', variacao.nome);
 
-    // Destaca a thumbnail atual
+    // Atualizar destaque na thumbnail
     thumbnailsContainer.querySelectorAll('img').forEach((thumb, i) => {
       thumb.classList.toggle('active', i === current);
     });
   }
 
-  // Cria thumbnails
+  // Criar miniaturas
   variacoes.forEach((v, i) => {
     const thumb = document.createElement('img');
     thumb.src = v.img;
@@ -379,31 +371,20 @@ window.onload = () => {
       current = i;
       updateProduto();
     });
-    thumbnailsContainer.appendChild(thumb); // ✅ Só executa se thumbnailsContainer existir
+    thumbnailsContainer.appendChild(thumb);
   });
 
-  // Botões de navegação
-  const prevBtn = produto.querySelector('.carousel-prev');
-  const nextBtn = produto.querySelector('.carousel-next');
+  produto.querySelector('.carousel-prev').addEventListener('click', () => {
+    current = (current - 1 + variacoes.length) % variacoes.length;
+    updateProduto();
+  });
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => {
-      current = (current - 1 + variacoes.length) % variacoes.length;
-      updateProduto();
-    });
-  }
+  produto.querySelector('.carousel-next').addEventListener('click', () => {
+    current = (current + 1) % variacoes.length;
+    updateProduto();
+  });
 
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => {
-      current = (current + 1) % variacoes.length;
-      updateProduto();
-    });
-  }
-
-  // Inicializa a exibição
   updateProduto();
 });
-
-}
 
     

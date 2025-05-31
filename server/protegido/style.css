@@ -976,11 +976,13 @@ footer .social a:hover {
 
 
 
+
+
 .carousel-thumbnails {
   display: flex;
   justify-content: center;
-  margin-top: 10px;
   gap: 6px;
+  margin-top: 8px;
   flex-wrap: wrap;
 }
 
@@ -988,15 +990,17 @@ footer .social a:hover {
   width: 40px;
   height: 40px;
   object-fit: cover;
-  border: 2px solid transparent;
+  border-radius: 4px;
   cursor: pointer;
-  border-radius: 5px;
+  opacity: 0.5;
+  transition: 0.3s ease;
+  border: 2px solid transparent;
 }
 
 .carousel-thumbnails img.active {
-  border-color: #f00; /* ou sua cor de destaque */
+  opacity: 1;
+  border-color: var(--base-color); /* realce da miniatura ativa */
 }
-
 
 @media (max-width: 480px) {
   .carousel-thumbnails img {
@@ -1004,7 +1008,6 @@ footer .social a:hover {
     height: 32px;
   }
 }
-    
     
 
 
