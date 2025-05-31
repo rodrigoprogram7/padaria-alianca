@@ -974,37 +974,33 @@ footer .social a:hover {
 }
 
 
-/* Estilo padrão para produtos com carrossel */
+
+
+
+
 .produto.carrossel {
   display: flex;
   flex-direction: row;
-  align-items: center;
-  gap: 16px;
-  padding: 16px 0;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
   border-bottom: 1px solid #ddd;
-  flex-wrap: nowrap;
+  overflow: visible;      /* <- importante */
+  position: relative;     /* <- importante */
+  min-height: 220px;      /* <- garante espaço vertical suficiente */
+  margin-bottom: 40px;    /* <- empurra o próximo produto */
 }
 
-/* Coluna da esquerda: imagem + miniaturas */
+
+
+/* COLUNA ESQUERDA: imagem e thumbs */
 .produto.carrossel .produto-img-wrapper {
-  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 0; /* evita quebra inesperada */
+  width: 140px;
 }
-
-/* Coluna da direita: nome, preço, botão */
-.produto.carrossel .produto-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; /* 🔥 centraliza horizontalmente */
-  gap: 10px;
-  text-align: center;
-}
-
 
 /* WRAPPER que contém imagem + botões */
 .imagem-grande-wrapper {
@@ -1047,15 +1043,10 @@ footer .social a:hover {
   grid-template-columns: repeat(3, 40px);
   gap: 6px;
   margin-top: 10px;
+  justify-content: center;
 }
 
-.produto.carrossel .produto-img-wrapper img {
-  width: 100%;
-  max-width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 6px;
-}
+
 
 .carousel-thumbs img {
   width: 40px;
