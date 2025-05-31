@@ -981,13 +981,17 @@ footer .social a:hover {
 .produto.carrossel {
   display: flex;
   flex-direction: row;
-  gap: 20px;
   align-items: flex-start;
-  padding: 20px 0;
-  margin-bottom: 30px; /* ✅ espaço entre produtos */
-  border-bottom: 1px solid #ddd;
+  gap: 20px;
   flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  overflow: visible;      /* <- importante */
+  position: relative;     /* <- importante */
+  min-height: 220px;      /* <- garante espaço vertical suficiente */
+  margin-bottom: 40px;    /* <- empurra o próximo produto */
 }
+
 
 
 /* COLUNA ESQUERDA: imagem e thumbs */
@@ -1040,8 +1044,8 @@ footer .social a:hover {
   gap: 6px;
   margin-top: 10px;
   justify-content: center;
-  max-width: 100%;
 }
+
 
 
 .carousel-thumbs img {
