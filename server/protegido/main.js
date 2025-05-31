@@ -317,6 +317,32 @@ window.onload = () => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
   const img = produto.querySelector('img');
   const nomeEl = produto.querySelector('h3');
+  let current = 0;
+
+  const updateProduto = () => {
+    img.src = variacoes[current].img;
+    nomeEl.textContent = variacoes[current].nome;
+    produto.setAttribute('data-nome', variacoes[current].nome); // 🔥 ESSENCIAL
+  };
+
+  produto.querySelector('.carousel-prev').addEventListener('click', () => {
+    current = (current - 1 + variacoes.length) % variacoes.length;
+    updateProduto();
+  });
+
+  produto.querySelector('.carousel-next').addEventListener('click', () => {
+    current = (current + 1) % variacoes.length;
+    updateProduto();
+  });
+
+  // Executa a primeira atualização para garantir que o nome esteja sincronizado
+  updateProduto();
+});
+
+document.querySelectorAll('.produto.carrossel').forEach(produto => {
+  const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
+  const img = produto.querySelector('img');
+  const nomeEl = produto.querySelector('h3');
   const thumbsContainer = produto.querySelector('.carousel-thumbs');
   let current = 0;
 
@@ -356,5 +382,4 @@ window.onload = () => {
 
   updateProduto();
 });
-
 
