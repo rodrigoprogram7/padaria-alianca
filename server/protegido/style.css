@@ -974,15 +974,62 @@ footer .social a:hover {
 }
 
 
-.carousel-thumbs {
-  display: grid;
-  grid-template-columns: repeat(3, 40px); /* 3 colunas de 40px */
-  gap: 8px;
-  justify-content: center;
-  margin-top: 10px;
+
+
+
+
+/* 🔹 O produto carrossel agora terá duas colunas */
+.produto.carrossel {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
+/* 🔹 Imagem + thumbnails à esquerda */
+.produto.carrossel .produto-img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 150px;
+  position: relative;
+}
 
+/* 🔹 Imagem principal */
+.produto.carrossel .produto-img-wrapper img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* 🔹 Botões de navegação */
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--base-color);
+}
+
+.carousel-prev {
+  left: -20px;
+}
+
+.carousel-next {
+  right: -20px;
+}
+
+/* 🔹 Miniaturas em 3 por linha, abaixo da imagem */
+.carousel-thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, 40px);
+  gap: 6px;
+  margin-top: 10px;
+  justify-content: center;
+}
 
 .carousel-thumbs img {
   width: 40px;
@@ -998,5 +1045,9 @@ footer .social a:hover {
   border-color: var(--base-color);
 }
 
+/* 🔹 Mantém a parte direita normal (nada muda) */
+.produto-info {
+  flex: 1;
+}
 
 
