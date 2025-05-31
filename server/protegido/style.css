@@ -984,9 +984,11 @@ footer .social a:hover {
   gap: 20px;
   align-items: flex-start;
   padding: 20px 0;
+  margin-bottom: 30px; /* ✅ espaço entre produtos */
   border-bottom: 1px solid #ddd;
   flex-wrap: wrap;
 }
+
 
 /* COLUNA ESQUERDA: imagem e thumbs */
 .produto.carrossel .produto-img-wrapper {
@@ -1037,7 +1039,10 @@ footer .social a:hover {
   grid-template-columns: repeat(3, 40px);
   gap: 6px;
   margin-top: 10px;
+  justify-content: center;
+  max-width: 100%;
 }
+
 
 .carousel-thumbs img {
   width: 40px;
