@@ -978,16 +978,14 @@ footer .social a:hover {
 
 
 
-/* 🔸 Layout principal em linha: imagem + info lado a lado */
 .produto.carrossel {
   display: flex;
-  flex-direction: row; /* 👈 FORÇA lado a lado */
+  flex-direction: row;
   align-items: flex-start;
   gap: 20px;
-  flex-wrap: wrap; /* Permite responsivo em telas pequenas */
+  flex-wrap: wrap;
 }
 
-/* 🔸 Coluna da esquerda (imagem + thumbs) */
 .produto.carrossel .produto-img-wrapper {
   display: flex;
   flex-direction: column;
@@ -996,14 +994,12 @@ footer .social a:hover {
   position: relative;
 }
 
-/* 🔸 Imagem principal */
 .produto.carrossel .produto-img-wrapper img {
   width: 100%;
   height: auto;
   border-radius: 6px;
 }
 
-/* 🔸 Botões de seta */
 .carousel-btn {
   position: absolute;
   top: 50%;
@@ -1017,10 +1013,9 @@ footer .social a:hover {
 .carousel-prev { left: -20px; }
 .carousel-next { right: -20px; }
 
-/* 🔸 Miniaturas organizadas em grade abaixo da imagem */
 .carousel-thumbs {
   display: grid;
-  grid-template-columns: repeat(3, 40px); /* 3 por linha */
+  grid-template-columns: repeat(3, 40px);
   gap: 6px;
   margin-top: 8px;
 }
@@ -1039,10 +1034,6 @@ footer .social a:hover {
   border-color: var(--base-color);
 }
 
-/* 🔸 Coluna da direita: manter tudo normal */
-.produto-info {
-  flex: 1;
-}
 
 
 
