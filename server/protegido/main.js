@@ -423,10 +423,16 @@ menuLinks.forEach(link => {
 
 
 
+
+
+
+
+
+
+
 const campoPesquisa = document.getElementById('pesquisa');
 const listaResultados = document.getElementById('resultados-pesquisa');
 
-// 🔍 Atualiza os resultados ao digitar
 campoPesquisa.addEventListener('input', () => {
   const termo = campoPesquisa.value.trim().toLowerCase();
   listaResultados.innerHTML = '';
@@ -437,17 +443,16 @@ campoPesquisa.addEventListener('input', () => {
 
   produtos.forEach(produto => {
     const nome = produto.querySelector('h3')?.textContent.toLowerCase();
+
     if (nome && nome.includes(termo)) {
       const li = document.createElement('li');
       li.textContent = nome;
 
-      // Ao clicar, rola até o produto
+      // Quando clica no resultado, rola até o produto
       li.addEventListener('click', () => {
         produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-        // Fecha os resultados e limpa campo
-        listaResultados.innerHTML = '';
         campoPesquisa.value = '';
+        listaResultados.innerHTML = '';
       });
 
       listaResultados.appendChild(li);
@@ -455,12 +460,6 @@ campoPesquisa.addEventListener('input', () => {
   });
 });
 
-
-document.addEventListener('click', (e) => {
-  if (!document.querySelector('.barra-pesquisa').contains(e.target)) {
-    listaResultados.innerHTML = '';
-  }
-});
 
 
 
