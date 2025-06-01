@@ -1142,7 +1142,26 @@ footer .social a:hover {
   position: relative;
   margin-left: auto;
   margin-right: 1rem;
+  max-width: 250px; /* ✅ limita largura padrão */
+  width: 100%;
 }
+
+@media (max-width: 768px) {
+  .barra-pesquisa {
+    max-width: 140px; /* 🔽 mais estreita no mobile */
+    margin-right: 0.5rem;
+  }
+
+  .barra-pesquisa input {
+    font-size: 0.8rem;
+    padding: 5px 8px;
+  }
+
+  #resultados-pesquisa {
+    font-size: 0.85rem;
+  }
+}
+
 
 .barra-pesquisa input {
   padding: 6px 10px;
