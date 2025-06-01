@@ -1138,6 +1138,47 @@ footer .social a:hover {
 }
 
 
+.barra-pesquisa {
+  position: relative;
+  margin-left: auto;
+  margin-right: 1rem;
+}
+
+.barra-pesquisa input {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+#resultados-pesquisa {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 4px 0 0 0;
+  z-index: 1000;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#resultados-pesquisa li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+#resultados-pesquisa li:hover {
+  background-color: #f2f2f2;
+}
+
+
+
 
 
 
