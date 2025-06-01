@@ -1097,12 +1097,14 @@ footer .social a:hover {
   }
 
   nav.show .icon-close {
-  display: block;
-}
+    visibility: visible;
+    opacity: 1;
+    top: 1.5rem;
+  }
 
- nav.show .icon-menu {
-  display: none;
-}
+  nav.show .icon-menu {
+    display: none;
+  }
 
   .menu ul {
     display: none;
@@ -1187,7 +1189,7 @@ nav.container {
   font-size: 0.9rem;
 }
 .toggle icon-menu{
-  margin-top: -5px;
+  margin-top: -2px;
 }
 
 #resultados-pesquisa {
