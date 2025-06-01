@@ -399,19 +399,20 @@ const closeBtn = document.querySelector('.icon-close');
 const menuLinks = document.querySelectorAll('.menu a');
 
 openBtn.addEventListener('click', () => {
-  navElement.classList.add('menu-open');
+  nav.classList.add('show'); // usa sua lógica existente
 });
 
 closeBtn.addEventListener('click', () => {
-  navElement.classList.remove('menu-open');
+  nav.classList.remove('show');
 });
 
-// 🔥 Fechar o menu ao clicar em qualquer link
+// Fecha o menu ao clicar em qualquer link
 menuLinks.forEach(link => {
   link.addEventListener('click', () => {
-    navElement.classList.remove('menu-open');
+    nav.classList.remove('show');
   });
 });
+
 
 
 
