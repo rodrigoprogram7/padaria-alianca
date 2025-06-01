@@ -156,7 +156,13 @@ window.onload = () => {
   salvarCarrinho();
   atualizarCarrinho();
   mostrarAlerta(nome, quantidade);
-  produtoEl.querySelector('.quantidade').value = 1;
+
+  const input = produtoEl.querySelector('.quantidade');
+if (input) {
+  input.value = 1;
+  input.dispatchEvent(new Event('input')); // força atualização visual
+}
+
 }
 
   function removerDoCarrinho(nome) {
