@@ -1177,6 +1177,7 @@ nav.container {
   position: relative;
   flex: 1;
   max-width: 250px;
+  padding-top: 4px;  /* 🔼 sobe um pouco */
 }
 
 .barra-pesquisa input {
@@ -1193,7 +1194,7 @@ nav.container {
   left: 0;
   right: 0;
   background: #fff;
-  border: 1px solid #ddd;
+  border: none;
   border-radius: 4px;
   list-style: none;
   padding: 0;
