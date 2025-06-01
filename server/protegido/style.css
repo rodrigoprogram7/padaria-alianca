@@ -1188,6 +1188,9 @@ nav.container {
   border-radius: 4px;
   font-size: 0.9rem;
 }
+.toggle icon-menu{
+  margin-top: -2px;
+}
 
 #resultados-pesquisa {
   position: absolute;
