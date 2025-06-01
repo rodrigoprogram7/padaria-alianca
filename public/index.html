@@ -771,29 +771,29 @@
     </div>
 
 
-
-
-
-
-
-
-<div class="produto carrossel"
-     data-preco="3.75"
+<div class="produto carrossel" id="produto carrossel"
+     data-preco="2.00"
      data-categoria="alimentos"
      data-variacoes='[
        {"nome": "Miojo Nissin Galinha", "img": "assets/images/alimentos/miojo nissin.png"},
        {"nome": "Miojo Nissin Carne", "img": "assets/images/alimentos/miojo nissin carne.jpg"}
      ]'>
-  
+
+  <!-- COLUNA ESQUERDA -->
   <div class="produto-img-wrapper">
-    <img src="assets/images/alimentos/miojo nissin.png" alt="Miojo Nissin">
-    <button class="carousel-btn carousel-prev">❮</button>
-    <button class="carousel-btn carousel-next">❯</button>
+    <div class="imagem-grande-wrapper">
+      <img src="assets/images/alimentos/miojo nissin.png" alt="Miojo">
+      <button class="carousel-btn carousel-prev">❮</button>
+      <button class="carousel-btn carousel-next">❯</button>
+    </div>
+
+    <div class="carousel-thumbs"></div> <!-- Miniaturas DENTRO da coluna esquerda -->
   </div>
 
+  <!-- COLUNA DIREITA -->
   <div class="produto-info">
     <h3>Miojo Nissin Galinha</h3>
-    <p>R$ 3,75</p>
+    <p>R$ 2,00</p>
     <div class="quantidade-box">
       <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
       <input type="number" min="1" value="1" class="quantidade" />
@@ -801,7 +801,12 @@
     </div>
     <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
   </div>
+
 </div>
+
+
+
+
 
 
     <div class="produto" data-nome="miojo vitarella" data-preco="6.50" data-categoria="alimentos">
