@@ -194,7 +194,7 @@ body {
 .logo {
     font: 700 1.31rem var(--title-font);
     color: var(--title-color);
-    padding-top: 10px;
+    margin-top: -2px;
 }
 
 .logo span {
@@ -1178,7 +1178,7 @@ nav.container {
   position: relative;
   flex: 1;
   max-width: 250px;
-  padding-top: 10px;  /* 🔼 sobe um pouco */
+  margin-top: -2px;  /* 🔼 sobe um pouco */
 }
 
 .barra-pesquisa input {
