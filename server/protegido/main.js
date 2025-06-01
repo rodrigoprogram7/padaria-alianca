@@ -58,25 +58,28 @@ scrollReveal.reveal(
 const sections = document.querySelectorAll('main section[id]')
 
 function ActivateMenuAtCurrentSection() {
+  const sections = document.querySelectorAll('section[id]');
+  const scrollY = window.scrollY;
 
-    const checkpoint = window.pageYOffset + (window.innerHeight / 8) * 4
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop - 100;
+    const sectionHeight = section.offsetHeight;
+    const sectionId = section.getAttribute('id');
+    const link = document.querySelector(`nav a[href="#${sectionId}"]`);
 
-    for( const section of sections) {
-        const sectionTop = section.offsetTop
-        const sectionHeight = section.offsetHeight
-        const sectionId = section.getAttribute('id')
-
-        const checkpointStart = checkpoint >= sectionTop
-        const checkpointEnd = checkpoint <= sectionTop + sectionHeight
-
-        const link = document.querySelector('nav ul li a[href*="' + sectionId + '"]');
-if (link) link.classList.add('active');
-
-        else if (link) link.classList.remove('active');
-
+    if (link) {
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
     }
-    
+  });
 }
+
+window.addEventListener('scroll', ActivateMenuAtCurrentSection);
+
+
 
 /*========== Botão que quando pressionado, voltar para o topo ========== */
 
@@ -387,4 +390,20 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 
   updateProduto();
 });
+
+
+
+const navElement = document.querySelector('nav');
+const openBtn = document.querySelector('.icon-menu');
+const closeBtn = document.querySelector('.icon-close');
+
+openBtn.addEventListener('click', () => {
+  navElement.classList.add('menu-open');
+});
+
+closeBtn.addEventListener('click', () => {
+  navElement.classList.remove('menu-open');
+});
+
+
 
