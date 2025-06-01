@@ -1063,7 +1063,14 @@ footer .social a:hover {
 /* COLUNA DIREITA */
 .produto-info {
   flex: 1;
-  margin-top: 200px;
+}
+.produto.carrossel .produto-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* começa do topo */
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px; /* 🔥 empurra tudo para baixo */
 }
 
 
