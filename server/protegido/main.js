@@ -149,12 +149,15 @@ window.onload = () => {
   const nome = produtoEl.querySelector('h3').textContent; // <-- Nome confiável
   const preco = parseFloat(produtoEl.getAttribute('data-preco'));
   const quantidade = parseInt(produtoEl.querySelector('.quantidade').value);
+  const imagem = produtoEl.querySelector('img')?.src;
+
 
   if (carrinho[nome]) {
-    carrinho[nome].quantidade += quantidade;
-  } else {
-    carrinho[nome] = { preco, quantidade };
-  }
+  carrinho[nome].quantidade += quantidade;
+} else {
+  carrinho[nome] = { preco, quantidade, imagem }; // 🔥 inclui imagem
+}
+
 
   salvarCarrinho();
   atualizarCarrinho();
@@ -208,23 +211,28 @@ if (input) {
     div.classList.add('carrinho-item');
 
     div.innerHTML = `
-      <div class="carrinho-nome">${nome}</div>
+  <div class="carrinho-nome">
+    <img src="${item.imagem}" alt="${nome}" class="carrinho-miniatura">
+    <span>${nome}</span>
+  </div>
 
-      <div class="carrinho-quantidade">
-        <button class="btt" onclick="diminuirQuantidade('${nome}')">−</button>
-        <span>${item.quantidade}</span>
-        <button class="btt" onclick="aumentarQuantidade('${nome}')">+</button>
-      </div>
-<center>
-      <div class="carrinho-subtotal">R$ ${subtotal.toFixed(2)}</div>
-</center>
-      <div class="carrinho-acoes">
-        <button onclick="removerDoCarrinho('${nome}')">
+  <div class="carrinho-quantidade">
+    <button class="btt" onclick="diminuirQuantidade('${nome}')">−</button>
+    <span>${item.quantidade}</span>
+    <button class="btt" onclick="aumentarQuantidade('${nome}')">+</button>
+  </div>
 
-          <img id="imgg"; src="assets/images/sistema/excluir.png" alt="">
-        </button>
-      </div>
-    `;
+  <center>
+    <div class="carrinho-subtotal">R$ ${subtotal.toFixed(2)}</div>
+  </center>
+
+  <div class="carrinho-acoes">
+    <button onclick="removerDoCarrinho('${nome}')">
+      <img id="imgg" src="assets/images/sistema/excluir.png" alt="">
+    </button>
+  </div>
+`;
+
 
     container.appendChild(div);
   }
