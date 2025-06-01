@@ -1000,9 +1000,6 @@ footer .social a:hover {
   align-items: center;
   width: 140px;
 }
-.produto.carrossel .produto-img-wrapper img {
-  height: 80px; /* 🔽 menor ainda */
-}
 
 
 /* WRAPPER que contém imagem + botões */
@@ -1069,7 +1066,7 @@ footer .social a:hover {
   flex: 1;
 }
 .produto.carrossel .produto-info {
-  margin-top: 15px;
+  margin-top: 35px;
 }
 
 
