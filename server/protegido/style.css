@@ -49,9 +49,6 @@ img {
   position: relative;
 }
 
-  #home .image::before {
-    animation: slideInRight 1s ease-out forwards;
-  }
 
   /* Responsividade melhorada */
   @media (min-width: 1024px) {
