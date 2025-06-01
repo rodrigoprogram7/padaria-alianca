@@ -1138,32 +1138,33 @@ footer .social a:hover {
 }
 
 
+
+
+
+
+
+
+
+
+
+/* === NAV CONTAINER FLEX === */
+nav.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* === PESQUISA PADRÃO === */
 .barra-pesquisa {
   position: relative;
-  margin-left: auto;
-  margin-right: 1rem;
-  max-width: 250px; /* ✅ limita largura padrão */
-  width: 100%;
+  flex: 1;
+  max-width: 250px;
 }
-
-@media (max-width: 768px) {
-  .barra-pesquisa {
-    max-width: 140px; /* 🔽 mais estreita no mobile */
-    margin-right: 0.5rem;
-  }
-
-  .barra-pesquisa input {
-    font-size: 0.8rem;
-    padding: 5px 8px;
-  }
-
-  #resultados-pesquisa {
-    font-size: 0.85rem;
-  }
-}
-
 
 .barra-pesquisa input {
+  width: 100%;
   padding: 6px 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -1192,9 +1193,28 @@ footer .social a:hover {
   cursor: pointer;
 }
 
-#resultados-pesquisa li:hover {
-  background-color: #f2f2f2;
+/* === AJUSTE MOBILE === */
+@media (max-width: 768px) {
+  nav.container {
+    flex-wrap: wrap;
+  }
+
+  .barra-pesquisa {
+    order: 3;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 8px;
+  }
+
+  .toggle {
+    order: 2;
+  }
+
+  .logo {
+    order: 1;
+  }
 }
+
 
 
 
