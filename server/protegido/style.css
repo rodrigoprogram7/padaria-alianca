@@ -1000,6 +1000,13 @@ footer .social a:hover {
   align-items: center;
   width: 140px;
 }
+.produto.carrossel .produto-img-wrapper img {
+  width: 100px;       /* ou 90px */
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
 
 
 /* WRAPPER que contém imagem + botões */
