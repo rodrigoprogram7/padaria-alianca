@@ -1069,15 +1069,12 @@ footer .social a:hover {
 /* === MENU MOBILE === */
 .toggle {
   display: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  user-select: none;
 }
 
-/* Mobile behavior */
 @media (max-width: 768px) {
   .toggle {
     display: block;
+    cursor: pointer;
   }
 
   .icon-menu {
@@ -1095,23 +1092,8 @@ footer .social a:hover {
   nav.menu-open .icon-close {
     display: block;
   }
-
-  .menu ul {
-    display: none;
-    flex-direction: column;
-    gap: 16px;
-    margin-top: 10px;
-  }
-
-  nav.menu-open .menu ul {
-    display: flex;
-  }
-
-  nav .menu ul li a.active {
-    font-weight: bold;
-    color: var(--base-color);
-  }
 }
+
 
 
 

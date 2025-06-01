@@ -396,6 +396,7 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 const navElement = document.querySelector('nav');
 const openBtn = document.querySelector('.icon-menu');
 const closeBtn = document.querySelector('.icon-close');
+const menuLinks = document.querySelectorAll('.menu a');
 
 openBtn.addEventListener('click', () => {
   navElement.classList.add('menu-open');
@@ -404,6 +405,16 @@ openBtn.addEventListener('click', () => {
 closeBtn.addEventListener('click', () => {
   navElement.classList.remove('menu-open');
 });
+
+// 🔥 Fechar o menu ao clicar em qualquer link
+menuLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    navElement.classList.remove('menu-open');
+  });
+});
+
+
+
 
 
 
