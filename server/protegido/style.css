@@ -1153,10 +1153,26 @@ nav.container {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 10px;
+  padding: 10px 16px;
 }
 
-/* === PESQUISA PADRÃO === */
+/* Agrupamento logo + pesquisa */
+.navbar-esquerda {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* Logo */
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+  white-space: nowrap;
+}
+
+/* Barra de pesquisa */
 .barra-pesquisa {
   position: relative;
   flex: 1;
@@ -1193,27 +1209,49 @@ nav.container {
   cursor: pointer;
 }
 
-/* === AJUSTE MOBILE === */
+/* Ícones do menu */
+.toggle {
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+}
+
+/* MOBILE */
 @media (max-width: 768px) {
   nav.container {
     flex-wrap: wrap;
   }
 
-  .barra-pesquisa {
-    order: 3;
+  .navbar-esquerda {
     width: 100%;
-    max-width: 100%;
-    margin-top: 8px;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .barra-pesquisa {
+    max-width: 60%;
   }
 
   .toggle {
-    order: 2;
+    position: absolute;
+    right: 16px;
+    top: 16px;
   }
 
-  .logo {
-    order: 1;
+  .icon-close {
+    display: none;
+  }
+
+  nav.show .icon-menu {
+    display: none;
+  }
+
+  nav.show .icon-close {
+    display: block;
   }
 }
+
 
 
 
