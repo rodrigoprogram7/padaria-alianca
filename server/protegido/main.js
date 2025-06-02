@@ -462,9 +462,17 @@ campoPesquisa.addEventListener('input', () => {
           }
         });
 
-        // Rola até o produto após trocar a categoria
-        setTimeout(() => {
+                setTimeout(() => {
+          // Rola até o produto
           produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Aplica classe com efeito visual
+          produto.classList.add('encontrado');
+
+          // Remove o efeito após 2 segundos
+          setTimeout(() => {
+            produto.classList.remove('encontrado');
+          }, 2000);
         }, 200);
 
         campoPesquisa.value = '';
