@@ -54,7 +54,7 @@
     <a href="#" class="logo">Padaria <span>Aliança</span></a>
 
     <div class="barra-pesquisa">
-      <input type="text" id="pesquisa" placeholder="🔎Buscar produto..." />
+      <input type="text" id="pesquisa" placeholder="Buscar produto..." />
       <ul id="resultados-pesquisa"></ul>
     </div>
   </div>
@@ -1826,6 +1826,140 @@
         <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
       </div>
     </div>
+
+
+
+
+
+
+
+    <!-------------------------------------------------------------------- FRIOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- FRIOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- FRIOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- FRIOS ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- FRIOS ----------------------------------------------------------------------------->
+
+
+
+    <div class="produto carrossel" id="produto carrossel"
+     data-preco="20.00"
+     data-categoria="frios"
+     data-variacoes='[
+       {"nome": "bandeja de ovos brancos com 30", "img": "assets/images/frios/bandeja de ovos brancos.jpg"},
+       {"nome": "bandeja de ovos brancos com 15", "img": "assets/images/frios/meia bandeja de ovos brancos.png"}
+     ]'>
+  <!-- COLUNA ESQUERDA -->
+  <div class="produto-img-wrapper">
+    <div class="imagem-grande-wrapper">
+      <img src="assets/images/frios/bandeja de ovos brancos.jpg" alt="bandeja de ovos brancos">
+      <button class="carousel-btn carousel-prev">❮</button>
+      <button class="carousel-btn carousel-next">❯</button>
+    </div>
+
+    <div class="carousel-thumbs"></div> <!-- Miniaturas DENTRO da coluna esquerda -->
+  </div>
+  <!-- COLUNA DIREITA -->
+  <div class="produto-info">
+    <h3>Bandeja de Ovos Brancos com 30</h3>
+    <p>R$ 20,00</p>
+    <div class="quantidade-box">
+      <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+      <input type="number" min="1" value="1" class="quantidade" />
+      <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+    </div>
+    <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+  </div>
+</div>
+
+
+
+
+    <div class="produto carrossel" id="produto carrossel"
+     data-preco="20.00"
+     data-categoria="frios"
+     data-variacoes='[
+       {"nome": "bandeja de ovos vermelhos com 30", "img": "assets/images/frios/bandeja de ovos vermelhos.jpg"},
+       {"nome": "bandeja de ovos vermelhos com 15", "img": "assets/images/frios/meia bandeja de ovos vermelhos.jpg"}
+     ]'>
+
+  <!-- COLUNA ESQUERDA -->
+  <div class="produto-img-wrapper">
+    <div class="imagem-grande-wrapper">
+      <img src="assets/images/frios/bandeja de ovos vermelhos.jpg" alt="bandeja de ovos vermelhos">
+      <button class="carousel-btn carousel-prev">❮</button>
+      <button class="carousel-btn carousel-next">❯</button>
+    </div>
+
+    <div class="carousel-thumbs"></div> <!-- Miniaturas DENTRO da coluna esquerda -->
+  </div>
+
+  <!-- COLUNA DIREITA -->
+  <div class="produto-info">
+    <h3>Bandeja de Ovos Vermelhos com 30</h3>
+    <p>R$ 20,00</p>
+    <div class="quantidade-box">
+      <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+      <input type="number" min="1" value="1" class="quantidade" />
+      <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+    </div>
+    <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+  </div>
+
+</div>
+
+    <div class="produto" data-nome="queijo de manteiga" data-preco="0.04" data-tipo="peso" data-categoria="frios">
+      <img src="assets/images/frios/queijo de manteiga.jpg" alt="queijo de manteiga">
+      <div class="produto-info">
+        <h3>Quejo de Manteiga</h3>
+          <p>R$ 40,00</p>
+        <div class="quantidade-box peso">
+          <button onclick="alterarPeso(this, -100)">−</button>
+          <input type="number" min="100" step="100" value="100" class="quantidade" /> g
+          <button onclick="alterarPeso(this, 100)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="queijo mussarela" data-preco="0.04" data-tipo="peso" data-categoria="frios">
+      <img src="assets/images/frios/queijo mussarela.jpeg" alt="queijo mussarela">
+      <div class="produto-info">
+        <h3>Queijo Mussarela</h3>
+        <p>R$ 40,00</p>
+        <div class="quantidade-box peso">
+          <button onclick="alterarPeso(this, -100)">−</button>
+          <input type="number" min="100" step="100" value="100" class="quantidade" /> g
+          <button onclick="alterarPeso(this, 100)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="queijo coalho" data-preco="0.04" data-tipo="peso" data-categoria="frios">
+      <img src="assets/images/frios/queijo qualho.jpg" alt="queijo coalho">
+      <div class="produto-info">
+        <h3>Queijo Coalho</h3>
+        <p>R$ 40,00</p>
+        <div class="quantidade-box peso">
+          <button onclick="alterarPeso(this, -100)">−</button>
+          <input type="number" min="100" step="100" value="100" class="quantidade" /> g
+          <button onclick="alterarPeso(this, 100)">+</button>
+        </div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+  
+
+
+
+
+
+
+
+
+
+
   
     <!-- Setor de Padaria -->
     <div class="produto" data-nome="Pão Francês" data-preco="0.60" data-categoria="padaria">

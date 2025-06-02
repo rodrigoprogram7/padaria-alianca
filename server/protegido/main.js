@@ -146,30 +146,49 @@ window.onload = () => {
 
   function adicionarAoCarrinho(botao) {
   const produtoEl = botao.closest('.produto');
-  const nome = produtoEl.querySelector('h3').textContent; // <-- Nome confiável
+  const nome = produtoEl.querySelector('h3').textContent;
   const preco = parseFloat(produtoEl.getAttribute('data-preco'));
-  const quantidade = parseInt(produtoEl.querySelector('.quantidade').value);
+  const tipo = produtoEl.getAttribute('data-tipo') || 'unidade'; // padrão: unidade
+
+  const quantidadeInput = produtoEl.querySelector('.quantidade');
+  let quantidade = parseInt(quantidadeInput.value);
   const imagem = produtoEl.querySelector('img')?.src;
 
-
+  // Inicializa o carrinho com imagem e tipo
   if (carrinho[nome]) {
-  carrinho[nome].quantidade += quantidade;
-} else {
-  carrinho[nome] = { preco, quantidade, imagem }; // 🔥 inclui imagem
-}
+    carrinho[nome].quantidade += quantidade;
+  } else {
+    carrinho[nome] = {
+      preco,
+      quantidade,
+      imagem,
+      tipo
+    };
+  }
 
-
+  // Atualiza carrinho
   salvarCarrinho();
   atualizarCarrinho();
   mostrarAlerta(nome, quantidade);
 
-  const input = produtoEl.querySelector('.quantidade');
-if (input) {
-  input.value = 1;
-  input.dispatchEvent(new Event('input')); // força atualização visual
+  // Resetar campo para 1 (unidade) ou 100 (peso)
+  if (tipo === 'peso') {
+    quantidadeInput.value = 100;
+  } else {
+    quantidadeInput.value = 1;
+  }
+
+      const input = produtoEl.querySelector('.quantidade');
+    if (input) {
+      input.value = 1;
+      input.dispatchEvent(new Event('input')); // força atualização visual
+    }
 }
 
-}
+
+
+
+
 
   function removerDoCarrinho(nome) {
     delete carrinho[nome];
@@ -491,6 +510,20 @@ function normalizar(texto) {
     .replace(/[\u0300-\u036f]/g, '') // remove acentos
     .toLowerCase();               // converte para minúsculas
 }
+
+
+
+
+function alterarPeso(botao, delta) {
+  const input = botao.parentElement.querySelector('input');
+  let valor = parseInt(input.value) || 0;
+
+  valor += delta;
+
+  if (valor < 100) valor = 100; // mínimo: 100g
+  input.value = valor;
+}
+
 
 
 
