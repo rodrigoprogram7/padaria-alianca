@@ -1075,11 +1075,20 @@ footer .social a:hover {
 /* === MENU MOBILE === */
 /* Estilo base para ícones */
 .toggle {
-  color: var(--base-color);
   font-size: 1.5rem;
   cursor: pointer;
-  display: none; /* só aparece no mobile */
+  display: block;
+  line-height: 1;
+  padding: 4px;
+  margin: 0;
+  align-self: center; /* ✅ força o ícone a se alinhar com o centro do nav */
 }
+
+nav.container {
+  height: auto; /* ou sem height fixa */
+  align-items: center;
+}
+
 
 /* Ícones no mobile */
 @media (max-width: 768px) {
