@@ -1080,13 +1080,6 @@ footer .social a:hover {
   cursor: pointer;
   display: none; /* só aparece no mobile */
 }
-@media (max-width: 768px) {
-  .toggle {
-    position: absolute;
-    right: 16px;
-    top: 40px; /* Ajuste esse valor para subir/alinhar */
-  }
-}
 
 /* Ícones no mobile */
 @media (max-width: 768px) {
