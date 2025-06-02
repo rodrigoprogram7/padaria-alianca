@@ -448,9 +448,24 @@ campoPesquisa.addEventListener('input', () => {
       const li = document.createElement('li');
       li.textContent = nome;
 
-      // Quando clica no resultado, rola até o produto
       li.addEventListener('click', () => {
-        produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Mostra a categoria do produto
+        const categoria = produto.getAttribute('data-categoria');
+
+        // Ativa a categoria (simula clique no botão da categoria)
+        const botoes = document.querySelectorAll('[data-filtro]');
+        botoes.forEach(btn => {
+          if (btn.getAttribute('data-filtro') === categoria) {
+            btn.click(); // simula clique no botão da categoria correta
+          }
+        });
+
+        // Espera a categoria ser exibida e rola até o produto
+        setTimeout(() => {
+          produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200); // pequeno delay para garantir que produto esteja visível
+
+        // Limpa busca
         campoPesquisa.value = '';
         listaResultados.innerHTML = '';
       });
@@ -459,6 +474,7 @@ campoPesquisa.addEventListener('input', () => {
     }
   });
 });
+
 
 
 
