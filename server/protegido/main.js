@@ -434,7 +434,8 @@ const campoPesquisa = document.getElementById('pesquisa');
 const listaResultados = document.getElementById('resultados-pesquisa');
 
 campoPesquisa.addEventListener('input', () => {
-  const termo = campoPesquisa.value.trim().toLowerCase();
+  const termo = normalizar(campoPesquisa.value.trim());
+
   listaResultados.innerHTML = '';
 
   if (termo.length < 1) return;
@@ -442,30 +443,30 @@ campoPesquisa.addEventListener('input', () => {
   const produtos = document.querySelectorAll('.produto');
 
   produtos.forEach(produto => {
-    const nome = produto.querySelector('h3')?.textContent.toLowerCase();
+    const nomeOriginal = produto.querySelector('h3')?.textContent || '';
+    const nome = normalizar(nomeOriginal);
 
-    if (nome && nome.includes(termo)) {
+    // 🔍 Mostrar apenas produtos que COMEÇAM com o termo digitado
+    if (nome.startsWith(termo)) {
       const li = document.createElement('li');
-      li.textContent = nome;
+      li.textContent = nomeOriginal;
 
       li.addEventListener('click', () => {
-        // Mostra a categoria do produto
         const categoria = produto.getAttribute('data-categoria');
 
-        // Ativa a categoria (simula clique no botão da categoria)
+        // Simula clique no botão da categoria correspondente
         const botoes = document.querySelectorAll('[data-filtro]');
         botoes.forEach(btn => {
           if (btn.getAttribute('data-filtro') === categoria) {
-            btn.click(); // simula clique no botão da categoria correta
+            btn.click();
           }
         });
 
-        // Espera a categoria ser exibida e rola até o produto
+        // Rola até o produto após trocar a categoria
         setTimeout(() => {
           produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 200); // pequeno delay para garantir que produto esteja visível
+        }, 200);
 
-        // Limpa busca
         campoPesquisa.value = '';
         listaResultados.innerHTML = '';
       });
@@ -474,6 +475,15 @@ campoPesquisa.addEventListener('input', () => {
     }
   });
 });
+
+// 🔠 Função que normaliza strings (remove acentos e converte para minúsculas)
+function normalizar(texto) {
+  return texto
+    .normalize('NFD')              // separa acentos de letras
+    .replace(/[\u0300-\u036f]/g, '') // remove acentos
+    .toLowerCase();               // converte para minúsculas
+}
+
 
 
 
