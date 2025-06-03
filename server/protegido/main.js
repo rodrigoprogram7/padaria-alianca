@@ -319,7 +319,11 @@ function diminuirQuantidade(nome) {
 
   for (const nome in carrinho) {
     const item = carrinho[nome];
-    total += item.preco * item.quantidade;
+    if (item.tipo === 'peso') {
+      total += item.preco * (item.quantidade / 100); // ✅ ajusta para preço por 100g
+    } else {
+      total += item.preco * item.quantidade;
+    }
   }
 
   if (total < 20) {
