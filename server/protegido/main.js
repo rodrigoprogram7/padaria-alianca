@@ -322,7 +322,7 @@ function diminuirQuantidade(nome) {
   function enviarWhatsApp() {
   const erroEl = document.getElementById('erro-pedido');
   let total = 0;
-  let mensagem = "Olá! Esse é o meu pedido para entrega:\n\n";
+  let mensagem = "*Olá! Esse é o meu pedido para entrega:*\n\n";
 
   for (const nome in carrinho) {
     const item = carrinho[nome];
@@ -333,7 +333,7 @@ function diminuirQuantidade(nome) {
       mensagem += `• ${item.quantidade}g de ${nome} - R$ ${subtotal.toFixed(2)}\n`;
     } else {
       subtotal = item.preco * item.quantidade;
-      mensagem += `• ${item.quantidade}x ${nome} - R$ ${subtotal.toFixed(2)}\n`;
+      mensagem += `${item.quantidade}x ${nome} - R$ ${subtotal.toFixed(2)}\n`;
     }
 
     total += subtotal;
@@ -351,7 +351,7 @@ function diminuirQuantidade(nome) {
   erroEl.classList.remove("show");
   erroEl.textContent = "";
 
-  mensagem += `\nTotal: R$ ${total.toFixed(2)}`;
+  mensagem += `\n*Total: R$ ${total.toFixed(2)}*`;
 
   const link = `https://wa.me/558488692337?text=${encodeURIComponent(mensagem)}`;
   window.open(link, '_blank');
