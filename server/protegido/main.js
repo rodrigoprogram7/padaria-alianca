@@ -366,11 +366,16 @@ function diminuirQuantidade(nome) {
   const nomeEl = produto.querySelector('h3');
   let current = 0;
 
-  const updateProduto = () => {
-    img.src = variacoes[current].img;
-    nomeEl.textContent = variacoes[current].nome;
-    produto.setAttribute('data-nome', variacoes[current].nome); // 🔥 ESSENCIAL
-  };
+      const precoEl = produto.querySelector('p');
+    const updateProduto = () => {
+      const variacao = variacoes[current];
+      img.src = variacao.img;
+      nomeEl.textContent = variacao.nome;
+      precoEl.textContent = `R$ ${variacao.preco.toFixed(2)}`;
+      produto.setAttribute('data-nome', variacao.nome);
+      produto.setAttribute('data-preco', variacao.preco);
+    };
+
 
   produto.querySelector('.carousel-prev').addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
