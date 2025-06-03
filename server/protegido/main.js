@@ -196,24 +196,38 @@ window.onload = () => {
     atualizarCarrinho();
   }
 
-  function diminuirQuantidade(nome) {
-    if (carrinho[nome]) {
-      carrinho[nome].quantidade -= 1;
-      if (carrinho[nome].quantidade <= 0) {
-        removerDoCarrinho(nome);
-      } else {
-        salvarCarrinho();
-        atualizarCarrinho();
-      }
+  function aumentarQuantidade(nome) {
+  const item = carrinho[nome];
+  const tipo = item.tipo || 'unidade';
+
+  if (tipo === 'peso') {
+    item.quantidade += 100; // aumenta 100g
+  } else {
+    item.quantidade += 1; // aumenta 1 unidade
+  }
+
+  salvarCarrinho();
+  atualizarCarrinho();
+}
+
+function diminuirQuantidade(nome) {
+  const item = carrinho[nome];
+  const tipo = item.tipo || 'unidade';
+
+  if (tipo === 'peso') {
+    if (item.quantidade > 100) {
+      item.quantidade -= 100;
+    }
+  } else {
+    if (item.quantidade > 1) {
+      item.quantidade -= 1;
     }
   }
-  function aumentarQuantidade(nome) {
-  if (carrinho[nome]) {
-    carrinho[nome].quantidade += 1;
-    salvarCarrinho();
-    atualizarCarrinho();
-  }
+
+  salvarCarrinho();
+  atualizarCarrinho();
 }
+
 
 
   function atualizarCarrinho() {
