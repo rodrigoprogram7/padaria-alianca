@@ -139,16 +139,38 @@ window.onload = () => {
   }
 
   function alterarQuantidade(botao, delta) {
-    const input = botao.parentElement.querySelector('.quantidade');
-    let valor = parseInt(input.value) + delta;
-    input.value = Math.max(1, valor);
+  const produtoEl = botao.closest('.produto');
+  const input = produtoEl.querySelector('.quantidade');
+  let valor = parseInt(input.value) + delta;
+  valor = Math.max(1, valor);
+  input.value = valor;
+
+  // Calcular subtotal e exibir
+  const preco = parseFloat(produtoEl.getAttribute('data-preco'));
+  const tipo = produtoEl.getAttribute('data-tipo') || 'unidade';
+  const subtotalEl = produtoEl.querySelector('.subtotal-preview');
+
+  let subtotalTexto = `Subtotal: R$ ${(preco * valor).toFixed(2)}`;
+  if (tipo === 'peso') {
+    subtotalTexto += ` (${valor.toLocaleString('pt-BR')}g)`;
   }
+
+  subtotalEl.textContent = subtotalTexto;
+  subtotalEl.style.color = 'green';
+  subtotalEl.style.fontWeight = 'bold';
+  subtotalEl.style.marginTop = '5px';
+}
+
 
   function adicionarAoCarrinho(botao) {
   const produtoEl = botao.closest('.produto');
   const nome = produtoEl.querySelector('h3').textContent;
   const preco = parseFloat(produtoEl.getAttribute('data-preco'));
   const tipo = produtoEl.getAttribute('data-tipo') || 'unidade'; // padrão: unidade
+  // Esconde o subtotal após adicionar
+    const subtotalEl = produtoEl.querySelector('.subtotal-preview');
+    if (subtotalEl) subtotalEl.textContent = '';
+
 
   const quantidadeInput = produtoEl.querySelector('.quantidade');
   let quantidade = parseInt(quantidadeInput.value);
