@@ -55,6 +55,7 @@ scrollReveal.reveal(
 )
 
 /*========== Menu ativo de acordo com a seção visível ========== */
+
 const sections = document.querySelectorAll('main section[id]')
 
 function ActivateMenuAtCurrentSection() {
@@ -79,8 +80,6 @@ function ActivateMenuAtCurrentSection() {
 
 window.addEventListener('scroll', ActivateMenuAtCurrentSection);
 
-
-
 /*========== Botão que quando pressionado, voltar para o topo ========== */
 
 const backToTopButton = document.querySelector('.back-to-top');
@@ -98,8 +97,6 @@ window.addEventListener('scroll', function () {
   }
   ActivateMenuAtCurrentSection();
 });
-
-
 
 function filtrarCategoria(categoriaSelecionada) {
   // Atualiza a aparência dos botões
@@ -129,8 +126,6 @@ window.onload = () => {
   atualizarCarrinho();
   filtrarCategoria('alimentos'); // Mostra apenas os produtos de alimentos
 }
-
-
 
   let carrinho = JSON.parse(localStorage.getItem('carrinho')) || {};
 
@@ -172,9 +167,6 @@ window.onload = () => {
     subtotalEl.style.marginTop = '5px';
   }
 }
-
-
-
 
   function adicionarAoCarrinho(botao) {
   const produtoEl = botao.closest('.produto');
@@ -221,11 +213,6 @@ if (input) {
 }
 }
 
-
-
-
-
-
   function removerDoCarrinho(nome) {
     delete carrinho[nome];
     salvarCarrinho();
@@ -263,8 +250,6 @@ function diminuirQuantidade(nome) {
   salvarCarrinho();
   atualizarCarrinho();
 }
-
-
 
   function atualizarCarrinho() {
   const container = document.getElementById('itens-carrinho');
@@ -358,9 +343,6 @@ function diminuirQuantidade(nome) {
 }
 
 
-
-
-
    function mostrarAlerta(nomeProduto, quantidade) {
   const alerta = document.getElementById("alerta");
   alerta.innerHTML = `<strong style="display:inline-block; border-bottom: 1px solid currentColor;">${quantidade}x ${nomeProduto}</strong> adicionado ao carrinho!`;
@@ -372,12 +354,7 @@ function diminuirQuantidade(nome) {
   }, 2000);
 }
 
-
-
   atualizarCarrinho();
-
-
-
 
   const slide = document.getElementById('carouselSlide');
     const items = document.querySelectorAll('.carousel-item');
@@ -488,8 +465,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
   });
 };
 
-
-
   // Gera thumbnails
   variacoes.forEach((v, index) => {
     const thumb = document.createElement('img');
@@ -517,7 +492,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 });
 
 
-
 const navElement = document.querySelector('nav');
 const openBtn = document.querySelector('.icon-menu');
 const closeBtn = document.querySelector('.icon-close');
@@ -537,14 +511,6 @@ menuLinks.forEach(link => {
     nav.classList.remove('show');
   });
 });
-
-
-
-
-
-
-
-
 
 
 const campoPesquisa = document.getElementById('pesquisa');
@@ -609,9 +575,6 @@ function normalizar(texto) {
     .toLowerCase();               // converte para minúsculas
 }
 
-
-
-
 function alterarPeso(botao, delta) {
   const produtoEl = botao.closest('.produto');
   const input = produtoEl.querySelector('input.quantidade');
@@ -630,16 +593,5 @@ function alterarPeso(botao, delta) {
     subtotalEl.style.marginTop = '5px';
   }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 

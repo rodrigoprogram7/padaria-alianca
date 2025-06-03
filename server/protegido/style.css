@@ -974,11 +974,6 @@ footer .social a:hover {
   right: -22px;
 }
 
-
-
-
-
-
 .produto.carrossel {
   display: flex;
   flex-direction: row;
@@ -1138,16 +1133,6 @@ footer .social a:hover {
   border-radius: 4px;
 }
 
-
-
-
-
-
-
-
-
-
-
 /* === NAV CONTAINER FLEX === */
 nav.container {
   display: flex;
@@ -1257,14 +1242,6 @@ nav.container {
   }
 }
 
-
-
-
-
-
-
-
-
 /* Efeito destaque no produto encontrado */
 .produto.encontrado {
   animation: destaqueProduto 1s ease;
@@ -1287,14 +1264,6 @@ nav.container {
     box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.4);
   }
 }
-
-
-
-
-
-
-
-
 
 .erro-pedido {
   color: red;
