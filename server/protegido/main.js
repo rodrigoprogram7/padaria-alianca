@@ -142,29 +142,37 @@ window.onload = () => {
   const produtoEl = botao.closest('.produto');
   const input = produtoEl.querySelector('.quantidade');
   let valor = parseInt(input.value) + delta;
-  valor = Math.max(1, valor);
-  input.value = valor;
 
-  // Calcular subtotal e exibir
-  const preco = parseFloat(produtoEl.getAttribute('data-preco'));
   const tipo = produtoEl.getAttribute('data-tipo') || 'unidade';
-  const subtotalEl = produtoEl.querySelector('.subtotal-preview');
 
-  let subtotal = 0;
-
+  // Define mínimo (100g para peso, 1 para unidade)
   if (tipo === 'peso') {
-    // Preço considerado por 100g
-    subtotal = preco * (valor / 100);
-    subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)} (${valor.toLocaleString('pt-BR')}g)`;
+    valor = Math.max(100, valor); // mínimo 100g
   } else {
-    subtotal = preco * valor;
-    subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)}`;
+    valor = Math.max(1, valor);
   }
 
-  subtotalEl.style.color = 'green';
-  subtotalEl.style.fontWeight = 'bold';
-  subtotalEl.style.marginTop = '5px';
+  input.value = valor;
+
+  // Subtotal
+  const preco = parseFloat(produtoEl.getAttribute('data-preco'));
+  const subtotalEl = produtoEl.querySelector('.subtotal-preview');
+  if (subtotalEl) {
+    let subtotal = 0;
+    if (tipo === 'peso') {
+      subtotal = preco * (valor / 100); // preço é por 100g
+      subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)} (${valor.toLocaleString('pt-BR')}g)`;
+    } else {
+      subtotal = preco * valor;
+      subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)}`;
+    }
+
+    subtotalEl.style.color = 'green';
+    subtotalEl.style.fontWeight = 'bold';
+    subtotalEl.style.marginTop = '5px';
+  }
 }
+
 
 
 
