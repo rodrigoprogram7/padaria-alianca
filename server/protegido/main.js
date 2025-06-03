@@ -251,7 +251,11 @@ function diminuirQuantidade(nome) {
 
   <div class="carrinho-quantidade">
     <button class="btt" onclick="diminuirQuantidade('${nome}')">−</button>
-    <span>${item.quantidade}</span>
+    <span>${
+      item.tipo === 'peso'
+        ? item.quantidade.toLocaleString('pt-BR') + 'g'
+        : item.quantidade
+    }</span>
     <button class="btt" onclick="aumentarQuantidade('${nome}')">+</button>
   </div>
 
