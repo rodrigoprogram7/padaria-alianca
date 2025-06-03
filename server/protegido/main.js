@@ -314,6 +314,30 @@ function diminuirQuantidade(nome) {
 }
 
   function enviarWhatsApp() {
+  const erroEl = document.getElementById('erro-pedido');
+  let total = 0;
+
+  for (const nome in carrinho) {
+    const item = carrinho[nome];
+    total += item.preco * item.quantidade;
+  }
+
+  if (total < 20) {
+    erroEl.textContent = "O valor mínimo para pedido é R$ 20,00.";
+    erroEl.classList.add("show");
+
+    // ativa o tremor
+    erroEl.classList.remove("tremer"); // reinicia a animação
+    void erroEl.offsetWidth; // forçar reflow
+    erroEl.classList.add("tremer");
+
+    return;
+  }
+
+  // Se passou, remove mensagem de erro e envia
+  erroEl.classList.remove("show");
+  erroEl.textContent = '';
+
   fetch('/pedido', {
     method: 'POST',
     headers: {
@@ -329,10 +353,11 @@ function diminuirQuantidade(nome) {
     window.open(data.url, '_blank');
   })
   .catch(err => {
-    alert("Erro ao enviar pedido. Verifique o valor ou tente novamente.");
-    console.error(err);
+    erroEl.textContent = "Erro ao enviar pedido. Tente novamente.";
+    erroEl.classList.add("show");
   });
 }
+
 
 
 

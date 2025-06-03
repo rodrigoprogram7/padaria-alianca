@@ -1296,6 +1296,30 @@ nav.container {
 
 
 
+.erro-pedido {
+  color: red;
+  font-weight: bold;
+  margin-top: 8px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.erro-pedido.show {
+  opacity: 1;
+}
+
+@keyframes tremer {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.erro-pedido.tremer {
+  animation: tremer 0.4s;
+}
 
 
 
