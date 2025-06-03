@@ -353,7 +353,7 @@ function diminuirQuantidade(nome) {
 
   mensagem += `\nTotal: R$ ${total.toFixed(2)}`;
 
-  const link = `https://wa.me/SEUNUMEROAQUI?text=${encodeURIComponent(mensagem)}`;
+  const link = `https://wa.me/558488692337?text=${encodeURIComponent(mensagem)}`;
   window.open(link, '_blank');
 }
 
