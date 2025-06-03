@@ -178,11 +178,11 @@ window.onload = () => {
     quantidadeInput.value = 1;
   }
 
-      const input = produtoEl.querySelector('.quantidade');
-    if (input) {
-      input.value = 1;
-      input.dispatchEvent(new Event('input')); // força atualização visual
-    }
+  const input = produtoEl.querySelector('.quantidade');
+if (input) {
+  input.value = 1;
+  input.dispatchEvent(new Event('input')); // força atualização visual
+}
 }
 
 
@@ -196,38 +196,24 @@ window.onload = () => {
     atualizarCarrinho();
   }
 
+  function diminuirQuantidade(nome) {
+    if (carrinho[nome]) {
+      carrinho[nome].quantidade -= 1;
+      if (carrinho[nome].quantidade <= 0) {
+        removerDoCarrinho(nome);
+      } else {
+        salvarCarrinho();
+        atualizarCarrinho();
+      }
+    }
+  }
   function aumentarQuantidade(nome) {
-  const item = carrinho[nome];
-  const tipo = item.tipo || 'unidade';
-
-  if (tipo === 'peso') {
-    item.quantidade += 100; // aumenta 100g
-  } else {
-    item.quantidade += 1; // aumenta 1 unidade
+  if (carrinho[nome]) {
+    carrinho[nome].quantidade += 1;
+    salvarCarrinho();
+    atualizarCarrinho();
   }
-
-  salvarCarrinho();
-  atualizarCarrinho();
 }
-
-function diminuirQuantidade(nome) {
-  const item = carrinho[nome];
-  const tipo = item.tipo || 'unidade';
-
-  if (tipo === 'peso') {
-    if (item.quantidade > 100) {
-      item.quantidade -= 100;
-    }
-  } else {
-    if (item.quantidade > 1) {
-      item.quantidade -= 1;
-    }
-  }
-
-  salvarCarrinho();
-  atualizarCarrinho();
-}
-
 
 
   function atualizarCarrinho() {
@@ -366,16 +352,11 @@ function diminuirQuantidade(nome) {
   const nomeEl = produto.querySelector('h3');
   let current = 0;
 
-      const precoEl = produto.querySelector('p');
-    const updateProduto = () => {
-      const variacao = variacoes[current];
-      img.src = variacao.img;
-      nomeEl.textContent = variacao.nome;
-      precoEl.textContent = `R$ ${variacao.preco.toFixed(2)}`;
-      produto.setAttribute('data-nome', variacao.nome);
-      produto.setAttribute('data-preco', variacao.preco);
-    };
-
+  const updateProduto = () => {
+    img.src = variacoes[current].img;
+    nomeEl.textContent = variacoes[current].nome;
+    produto.setAttribute('data-nome', variacoes[current].nome); // 🔥 ESSENCIAL
+  };
 
   produto.querySelector('.carousel-prev').addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
