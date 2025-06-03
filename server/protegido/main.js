@@ -396,15 +396,23 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
   let current = 0;
 
   const updateProduto = () => {
-    img.src = variacoes[current].img;
-    nomeEl.textContent = variacoes[current].nome;
-    produto.setAttribute('data-nome', variacoes[current].nome);
+  img.src = variacoes[current].img;
+  nomeEl.textContent = variacoes[current].nome;
+  produto.setAttribute('data-nome', variacoes[current].nome);
+  produto.setAttribute('data-preco', variacoes[current].preco);
 
-    // atualiza thumbs
-    thumbsContainer.querySelectorAll('img').forEach((thumb, i) => {
-      thumb.classList.toggle('active', i === current);
-    });
-  };
+  // Atualiza o preço visível
+  const precoEl = produto.querySelector('p');
+  if (precoEl) {
+    precoEl.textContent = `R$ ${parseFloat(variacoes[current].preco).toFixed(2)}`;
+  }
+
+  // Atualiza as thumbnails
+  thumbsContainer.querySelectorAll('img').forEach((thumb, i) => {
+    thumb.classList.toggle('active', i === current);
+  });
+};
+
 
   // Gera thumbnails
   variacoes.forEach((v, index) => {
