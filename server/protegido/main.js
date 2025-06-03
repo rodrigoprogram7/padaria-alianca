@@ -433,11 +433,22 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     precoEl.textContent = `R$ ${parseFloat(variacoes[current].preco).toFixed(2)}`;
   }
 
+  // 🔁 Resetar quantidade para 1
+  const input = produto.querySelector('.quantidade');
+  if (input) {
+    input.value = 1;
+
+    // Limpar subtotal abaixo do incrementador (se houver)
+    const subtotalEl = produto.querySelector('.subtotal-preview');
+    if (subtotalEl) subtotalEl.textContent = '';
+  }
+
   // Atualiza as thumbnails
   thumbsContainer.querySelectorAll('img').forEach((thumb, i) => {
     thumb.classList.toggle('active', i === current);
   });
 };
+
 
 
   // Gera thumbnails
