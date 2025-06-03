@@ -588,14 +588,24 @@ function normalizar(texto) {
 
 
 function alterarPeso(botao, delta) {
-  const input = botao.parentElement.querySelector('input');
-  let valor = parseInt(input.value) || 0;
-
-  valor += delta;
-
-  if (valor < 100) valor = 100; // mínimo: 100g
+  const produtoEl = botao.closest('.produto');
+  const input = produtoEl.querySelector('input.quantidade');
+  let valor = parseInt(input.value) || 100;
+  valor = Math.max(100, valor + delta);
   input.value = valor;
+
+  const preco = parseFloat(produtoEl.getAttribute('data-preco'));
+  const subtotalEl = produtoEl.querySelector('.subtotal-preview');
+
+  if (subtotalEl) {
+    const subtotal = preco * (valor / 100);
+    subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)} (${valor.toLocaleString('pt-BR')}g)`;
+    subtotalEl.style.color = 'green';
+    subtotalEl.style.fontWeight = 'bold';
+    subtotalEl.style.marginTop = '5px';
+  }
 }
+
 
 
 
