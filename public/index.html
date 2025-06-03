@@ -2069,11 +2069,39 @@
 
   
     <!-- Setor de Padaria -->
-    <div class="produto" data-nome="Pão Francês" data-preco="0.60" data-categoria="padaria">
+    <div class="produto" data-nome="Pão Francês" data-preco="0.40" data-categoria="padaria">
       <img src="assets/images/padaria/paozin.jpg" alt="Pão Francês">
       <div class="produto-info">
         <h3>Pão Francês</h3>
-        <p>R$ 0,60 (unidade)</p>
+        <p>R$ 0,40 (unidade)</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div><div class="subtotal-preview"></div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="Pão Carteira" data-preco="0.40" data-categoria="padaria">
+      <img src="assets/images/padaria/pão carteira.jpg" alt="Pão Carteira">
+      <div class="produto-info">
+        <h3>Pão Carteira</h3>
+        <p>R$ 0,40 (unidade)</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div><div class="subtotal-preview"></div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="Pão Doce" data-preco="0.40" data-categoria="padaria">
+      <img src="assets/images/padaria/pão doce.jpg" alt="Pão Doce">
+      <div class="produto-info">
+        <h3>Pão Doce</h3>
+        <p>R$ 0,40 (unidade)</p>
         <div class="quantidade-box">
           <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
           <input type="number" min="1" value="1" class="quantidade" />
