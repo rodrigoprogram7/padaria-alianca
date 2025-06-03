@@ -273,7 +273,13 @@ function diminuirQuantidade(nome) {
 
   for (const nome in carrinho) {
     const item = carrinho[nome];
-    const subtotal = item.preco * item.quantidade;
+        let subtotal = 0;
+    if (item.tipo === 'peso') {
+      subtotal = item.preco * (item.quantidade / 100);
+    } else {
+      subtotal = item.preco * item.quantidade;
+    }
+
     total += subtotal;
 
     const div = document.createElement('div');
@@ -320,10 +326,11 @@ function diminuirQuantidade(nome) {
   for (const nome in carrinho) {
     const item = carrinho[nome];
     if (item.tipo === 'peso') {
-      total += item.preco * (item.quantidade / 100); // ✅ ajusta para preço por 100g
+      total += item.preco * (item.quantidade / 100);
     } else {
       total += item.preco * item.quantidade;
     }
+
   }
 
   if (total < 20) {
