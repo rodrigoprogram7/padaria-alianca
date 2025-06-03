@@ -783,20 +783,20 @@ footer .social a:hover {
     }
     .alerta {
       position: fixed;
-      top: 0;
+      top: 10px;
       left: 50%;
-      right: 20px;
-       z-index: 1000;
-      background-color: #4caf50;
+      transform: translateX(-50%) translateY(-20px);
+      background-color: #28a745;
       color: white;
-      padding: 15px 20px;
-      border-radius: 5px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
       opacity: 0;
-      transform: translateX(-50%);
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: all 0.3s ease;
+      z-index: 9999; /* ainda sobre o conteúdo, mas abaixo da barra de pesquisa se necessário */
+      pointer-events: none; /* 🔥 isso permite clicar no que estiver atrás */
+    }
 
-}
 
 .filtro-btn {
   background-color: #e0e0e0;
