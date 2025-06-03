@@ -322,52 +322,41 @@ function diminuirQuantidade(nome) {
   function enviarWhatsApp() {
   const erroEl = document.getElementById('erro-pedido');
   let total = 0;
+  let mensagem = "Olá! Esse é o meu pedido para entrega:\n\n";
 
   for (const nome in carrinho) {
     const item = carrinho[nome];
+
+    let subtotal = 0;
     if (item.tipo === 'peso') {
-      total += item.preco * (item.quantidade / 100);
+      subtotal = item.preco * (item.quantidade / 100); // ✅ corrige valor
+      mensagem += `• ${item.quantidade}g de ${nome} - R$ ${subtotal.toFixed(2)}\n`;
     } else {
-      total += item.preco * item.quantidade;
+      subtotal = item.preco * item.quantidade;
+      mensagem += `• ${item.quantidade}x ${nome} - R$ ${subtotal.toFixed(2)}\n`;
     }
 
+    total += subtotal;
   }
 
   if (total < 20) {
     erroEl.textContent = "O valor mínimo para pedido é R$ 20,00.";
     erroEl.classList.add("show");
-
-    // ativa o tremor
-    erroEl.classList.remove("tremer"); // reinicia a animação
-    void erroEl.offsetWidth; // forçar reflow
+    erroEl.classList.remove("tremer");
+    void erroEl.offsetWidth; // força reflow
     erroEl.classList.add("tremer");
-
     return;
   }
 
-  // Se passou, remove mensagem de erro e envia
   erroEl.classList.remove("show");
-  erroEl.textContent = '';
+  erroEl.textContent = "";
 
-  fetch('/pedido', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(carrinho)
-  })
-  .then(res => {
-    if (!res.ok) throw new Error("Erro ao enviar pedido.");
-    return res.json();
-  })
-  .then(data => {
-    window.open(data.url, '_blank');
-  })
-  .catch(err => {
-    erroEl.textContent = "Erro ao enviar pedido. Tente novamente.";
-    erroEl.classList.add("show");
-  });
+  mensagem += `\nTotal: R$ ${total.toFixed(2)}`;
+
+  const link = `https://wa.me/SEUNUMEROAQUI?text=${encodeURIComponent(mensagem)}`;
+  window.open(link, '_blank');
 }
+
 
 
 
