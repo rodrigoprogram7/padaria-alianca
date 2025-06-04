@@ -1162,8 +1162,8 @@ nav.container {
 .barra-pesquisa {
   position: relative;
   flex: 1;
-  max-width: 250px;
-  margin-top: -3px;  /* 🔼 sobe um pouco */
+  width: 250px;
+  margin-top: -1px;  /* 🔼 sobe um pouco */
 
       align-items: center;
       background-color: #fff;
