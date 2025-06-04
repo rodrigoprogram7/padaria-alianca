@@ -152,20 +152,24 @@ window.onload = () => {
   // Subtotal
   const preco = parseFloat(produtoEl.getAttribute('data-preco'));
   const subtotalEl = produtoEl.querySelector('.subtotal-preview');
-  if (subtotalEl) {
-    let subtotal = 0;
-    if (tipo === 'peso') {
-      subtotal = preco * (valor / 100); // preço é por 100g
-      subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)} (${valor.toLocaleString('pt-BR')}g)`;
+    if (subtotalEl) {
+    if ((tipo === 'peso' && valor > 100) || (tipo === 'unidade' && valor > 1)) {
+      let subtotal = 0;
+      if (tipo === 'peso') {
+        subtotal = preco * (valor / 100);
+        subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)} (${valor.toLocaleString('pt-BR')}g)`;
+      } else {
+        subtotal = preco * valor;
+        subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)}`;
+      }
+      subtotalEl.style.color = 'green';
+      subtotalEl.style.fontWeight = 'bold';
+      subtotalEl.style.marginTop = '5px';
     } else {
-      subtotal = preco * valor;
-      subtotalEl.textContent = `Subtotal: R$ ${subtotal.toFixed(2)}`;
+      subtotalEl.textContent = '';
     }
-
-    subtotalEl.style.color = 'green';
-    subtotalEl.style.fontWeight = 'bold';
-    subtotalEl.style.marginTop = '5px';
   }
+
 }
 
   function adicionarAoCarrinho(botao) {
