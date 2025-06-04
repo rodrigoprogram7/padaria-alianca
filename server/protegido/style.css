@@ -1174,11 +1174,13 @@ nav.container {
 }
 
 .barra-pesquisa input {
-  width: 100%;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
+
+   border: none;
+      outline: none;
+      flex: 1;
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 24px;
 }
 .toggle icon-menu{
   margin-top: -2px;
