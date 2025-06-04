@@ -1164,14 +1164,17 @@ nav.container {
   flex: 1;
   max-width: 250px;
   margin-top: -2px;  /* 🔼 sobe um pouco */
+ 
 }
 
 .barra-pesquisa input {
   width: 100%;
   padding: 6px 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 0.9rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
 }
 .toggle icon-menu{
   margin-top: -2px;
