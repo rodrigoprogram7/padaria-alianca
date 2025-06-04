@@ -1163,7 +1163,14 @@ nav.container {
   position: relative;
   flex: 1;
   max-width: 250px;
-  margin-top: -2px;  /* 🔼 sobe um pouco */
+  margin-top: -3px;  /* 🔼 sobe um pouco */
+
+      align-items: center;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 24px;
+      padding: 5px 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .barra-pesquisa input {
