@@ -94,6 +94,7 @@ window.addEventListener('scroll', function () {
     backToTopButton.classList.add('show');
   } else {
     backToTopButton.classList.remove('show');
+
   }
   ActivateMenuAtCurrentSection();
 });
