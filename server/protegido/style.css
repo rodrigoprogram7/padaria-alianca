@@ -1410,24 +1410,38 @@ nav.container {
 
 
 
-/* 🔥 Container das miniaturas */
 .carousel-thumbs {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   gap: 8px;
   margin-top: 10px;
-  padding: 5px;
-  overflow: visible;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 5px;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--base-color) transparent;
 }
 
-/* 🔥 Miniaturas individuais */
+/* Scrollbar para Chrome, Edge e Safari */
+.carousel-thumbs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.carousel-thumbs::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.carousel-thumbs::-webkit-scrollbar-thumb {
+  background-color: var(--base-color);
+  border-radius: 10px;
+}
+
 .carousel-thumbs img {
+  flex: 0 0 auto;
   width: 50px;
   height: 50px;
   object-fit: cover;
   border: 2px solid transparent;
-  border-radius: 8px;
+  border-radius: 6px;
   cursor: pointer;
   transition: border-color 0.3s, transform 0.2s;
 }
@@ -1441,7 +1455,7 @@ nav.container {
   border-color: var(--base-color-alt);
 }
 
-/* 🔥 Garante que o wrapper da imagem principal não corte nada */
+/* Wrapper da imagem grande permanece igual */
 .produto-img-wrapper {
   display: flex;
   flex-direction: column;
@@ -1449,7 +1463,6 @@ nav.container {
   width: 100%;
 }
 
-/* 🔥 Wrapper da imagem grande */
 .imagem-grande-wrapper {
   position: relative;
   width: 150px;
@@ -1462,13 +1475,12 @@ nav.container {
   object-fit: contain;
 }
 
-/* 🔥 Botões de navegação do carrossel */
+/* Botões do carrossel */
 .carousel-btn {
   background: var(--base-color);
   color: white;
   border: none;
   padding: 5px 10px;
-  margin: 0 5px;
   border-radius: 50%;
   cursor: pointer;
   font-size: 18px;
@@ -1489,3 +1501,4 @@ nav.container {
 .carousel-btn:hover {
   background: var(--base-color-alt);
 }
+
