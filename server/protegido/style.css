@@ -1410,20 +1410,66 @@ nav.container {
 
 
 
-/* 🔥 Container das miniaturas COM SCROLL lateral e LIMITE no tamanho */
+/* 🔥 Container da imagem + miniaturas */
+.produto-img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* 🔥 Imagem principal */
+.imagem-grande-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.imagem-grande-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 🔥 Botões de navegação do carrossel */
+.carousel-btn {
+  background: var(--base-color);
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.3s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+}
+
+.carousel-prev {
+  left: -15px;
+}
+
+.carousel-next {
+  right: -15px;
+}
+
+/* 🔥 Miniaturas com scroll lateral */
 .carousel-thumbs {
   display: flex;
   gap: 8px;
-  margin-top: 10px;
-  max-width: 160px; /* 🔥 Controla a largura do container das thumbs */
+  margin-top: 8px;
+  max-width: 160px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 5px;
-  scrollbar-width: thin; /* Firefox */
+  padding-bottom: 4px;
+  scrollbar-width: thin;
   scrollbar-color: var(--base-color) transparent;
 }
 
-/* 🔥 Scrollbar estilizado (Chrome, Edge, Safari) */
 .carousel-thumbs::-webkit-scrollbar {
   height: 6px;
 }
@@ -1437,7 +1483,6 @@ nav.container {
   border-radius: 10px;
 }
 
-/* 🔥 Miniaturas */
 .carousel-thumbs img {
   flex: 0 0 auto;
   width: 50px;
@@ -1458,63 +1503,13 @@ nav.container {
   border-color: var(--base-color-alt);
 }
 
-/* 🔥 Garante que as thumbs NÃO sobrepõem os botões */
-.produto-img-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  position: relative; /* 🔥 Evita sobreposição */
-  z-index: 1;
-}
-
-/* 🔥 Wrapper da imagem principal */
-.imagem-grande-wrapper {
-  position: relative;
-  width: 150px;
-  height: 150px;
-}
-
-.imagem-grande-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-/* 🔥 Botões do carrossel */
-.carousel-btn {
-  background: var(--base-color);
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-  transition: background 0.3s;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-.carousel-prev {
-  left: -15px;
-}
-
-.carousel-next {
-  right: -15px;
-}
-
-.carousel-btn:hover {
-  background: var(--base-color-alt);
-}
-
-/* 🔥 Ajusta a área dos controles de quantidade para não sobrepor */
+/* 🔥 Parte dos botões de quantidade */
 .quantidade-box {
   display: flex;
   align-items: center;
   gap: 5px;
   margin: 5px 0;
-  z-index: 5;
   position: relative;
+  z-index: 1;
 }
+
