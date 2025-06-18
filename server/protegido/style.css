@@ -1327,7 +1327,7 @@ nav.container {
   width: 100px;
   height: 100px;
   border-radius: 8px;
-  margin-bottom: 2px;
+  margin-bottom: -2px;
 }
 
 .produto-info {
