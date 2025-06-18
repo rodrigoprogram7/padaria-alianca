@@ -460,45 +460,30 @@ function diminuirQuantidade(nome) {
 
 document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
-  const img = produto.querySelector('img');
-  const nomeEl = produto.querySelector('h3');
+  const imgGrande = produto.querySelector('.imagem-grande-wrapper img');
+  const nomeProduto = produto.querySelector('h3');
+  const precoProduto = produto.querySelector('p');
   const thumbsContainer = produto.querySelector('.carousel-thumbs');
-  if (!thumbsContainer) return; // pula se não existir
 
   let current = 0;
 
   const updateProduto = () => {
-  img.src = variacoes[current].img;
-  nomeEl.textContent = variacoes[current].nome;
-  produto.setAttribute('data-nome', variacoes[current].nome);
-  produto.setAttribute('data-preco', variacoes[current].preco);
+    imgGrande.src = variacoes[current].img;
+    nomeProduto.textContent = variacoes[current].nome;
+    precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`;
+    produto.setAttribute('data-nome', variacoes[current].nome);
+    produto.setAttribute('data-preco', variacoes[current].preco);
 
-  // Atualiza o preço visível
-  const precoEl = produto.querySelector('p');
-  if (precoEl) {
-    precoEl.textContent = `R$ ${parseFloat(variacoes[current].preco).toFixed(2)}`;
-  }
+    thumbsContainer.querySelectorAll('img').forEach((thumb, idx) => {
+      thumb.classList.toggle('active', idx === current);
+    });
+  };
 
-  // 🔁 Resetar quantidade para 1
-  const input = produto.querySelector('.quantidade');
-  if (input) {
-    input.value = 1;
-
-    // Limpar subtotal abaixo do incrementador (se houver)
-    const subtotalEl = produto.querySelector('.subtotal-preview');
-    if (subtotalEl) subtotalEl.textContent = '';
-  }
-
-  // Atualiza as thumbnails
-  thumbsContainer.querySelectorAll('img').forEach((thumb, i) => {
-    thumb.classList.toggle('active', i === current);
-  });
-};
-
-  // Gera thumbnails
-  variacoes.forEach((v, index) => {
+  // Cria miniaturas
+  thumbsContainer.innerHTML = '';
+  variacoes.forEach((item, index) => {
     const thumb = document.createElement('img');
-    thumb.src = v.img;
+    thumb.src = item.img;
     if (index === current) thumb.classList.add('active');
     thumb.addEventListener('click', () => {
       current = index;
@@ -507,19 +492,20 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     thumbsContainer.appendChild(thumb);
   });
 
-  // Navegação
-  produto.querySelector('.carousel-prev').addEventListener('click', () => {
+  // Navegação pelas setas
+  produto.querySelector('.prev-btn').addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
     updateProduto();
   });
 
-  produto.querySelector('.carousel-next').addEventListener('click', () => {
+  produto.querySelector('.next-btn').addEventListener('click', () => {
     current = (current + 1) % variacoes.length;
     updateProduto();
   });
 
   updateProduto();
 });
+
 
 
 const navElement = document.querySelector('nav');

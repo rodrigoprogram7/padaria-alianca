@@ -1508,3 +1508,47 @@ nav.container {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Miniaturas do carrossel */
+.carousel-thumbs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.carousel-thumbs img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.2s;
+}
+
+.carousel-thumbs img.active {
+  border-color: var(--base-color);
+  transform: scale(1.05);
+}
+
+.carousel-thumbs img:hover {
+  border-color: var(--base-color-alt);
+}
+
+
+
