@@ -457,6 +457,7 @@ function diminuirQuantidade(nome) {
 
 
 
+
 document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
   const img = produto.querySelector('img');
