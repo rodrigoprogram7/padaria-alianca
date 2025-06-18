@@ -484,6 +484,7 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
   variacoes.forEach((item, index) => {
     const thumb = document.createElement('img');
     thumb.src = item.img;
+    thumb.alt = item.nome;
     if (index === current) thumb.classList.add('active');
     thumb.addEventListener('click', () => {
       current = index;
@@ -493,18 +494,22 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
   });
 
   // Navegação pelas setas
-  produto.querySelector('.prev-btn').addEventListener('click', () => {
+  const prevBtn = produto.querySelector('.carousel-prev');
+  const nextBtn = produto.querySelector('.carousel-next');
+
+  prevBtn.addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
     updateProduto();
   });
 
-  produto.querySelector('.next-btn').addEventListener('click', () => {
+  nextBtn.addEventListener('click', () => {
     current = (current + 1) % variacoes.length;
     updateProduto();
   });
 
   updateProduto();
 });
+
 
 
 
