@@ -407,7 +407,7 @@ function diminuirQuantidade(nome) {
 
 
 
-    document.querySelectorAll('.produto.carrossel').forEach(produto => {
+  document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
   const imgGrande = produto.querySelector('.imagem-grande-wrapper img');
   const nomeProduto = produto.querySelector('h3');
@@ -428,7 +428,7 @@ function diminuirQuantidade(nome) {
     });
   };
 
-  // Cria as miniaturas
+  // 🔥 Cria as miniaturas dinamicamente
   thumbsContainer.innerHTML = '';
   variacoes.forEach((item, index) => {
     const thumb = document.createElement('img');
@@ -441,7 +441,7 @@ function diminuirQuantidade(nome) {
     thumbsContainer.appendChild(thumb);
   });
 
-  // Botões de navegação
+  // 🔄 Botões de navegação
   produto.querySelector('.carousel-prev').addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
     updateProduto();
@@ -454,6 +454,7 @@ function diminuirQuantidade(nome) {
 
   updateProduto();
 });
+
 
 
 document.querySelectorAll('.produto.carrossel').forEach(produto => {
