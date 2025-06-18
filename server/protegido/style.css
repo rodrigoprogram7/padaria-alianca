@@ -1316,6 +1316,7 @@ nav.container {
   flex-direction: column;
   background: white;
   border-radius: 10px;
+  align-items: center;
   padding: 10px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
   padding: 10px;
@@ -1327,8 +1328,6 @@ nav.container {
   height: 100px;
   border-radius: 8px;
   margin-bottom: 8px;
-  display: flex;
-  justify-content: center;
 }
 
 .produto-info {
