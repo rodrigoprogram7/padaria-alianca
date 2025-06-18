@@ -600,57 +600,6 @@ function alterarPeso(botao, delta) {
 }
 
 
-document.querySelectorAll('.produto.carrossel').forEach(produto => {
-  const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
-  const imgPrincipal = produto.querySelector('.imagem-grande-wrapper img');
-  const nomeProduto = produto.querySelector('h3');
-  const precoProduto = produto.querySelector('p');
-  const thumbsContainer = produto.querySelector('.carousel-thumbs');
-  const prevBtn = produto.querySelector('.carousel-prev');
-  const nextBtn = produto.querySelector('.carousel-next');
-
-  let current = 0;
-
-  function atualizarProduto() {
-    imgPrincipal.src = variacoes[current].img;
-    nomeProduto.textContent = variacoes[current].nome;
-    precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`;
-    produto.setAttribute('data-nome', variacoes[current].nome);
-    produto.setAttribute('data-preco', variacoes[current].preco);
-
-    // Atualiza miniaturas ativas
-    const miniaturas = thumbsContainer.querySelectorAll('img');
-    miniaturas.forEach((img, index) => {
-      img.classList.toggle('active', index === current);
-    });
-  }
-
-  // Gera as miniaturas
-  variacoes.forEach((item, index) => {
-    const thumb = document.createElement('img');
-    thumb.src = item.img;
-    thumb.alt = item.nome;
-    thumb.addEventListener('click', () => {
-      current = index;
-      atualizarProduto();
-    });
-    thumbsContainer.appendChild(thumb);
-  });
-
-  // Botões ❮ e ❯
-  nextBtn.addEventListener('click', () => {
-    current = (current + 1) % variacoes.length;
-    atualizarProduto();
-  });
-
-  prevBtn.addEventListener('click', () => {
-    current = (current - 1 + variacoes.length) % variacoes.length;
-    atualizarProduto();
-  });
-
-  atualizarProduto();
-});
-
 
 
 
