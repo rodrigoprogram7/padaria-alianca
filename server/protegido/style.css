@@ -1293,37 +1293,90 @@ nav.container {
 
 
 
-/* Layout dos produtos em 2 colunas */
+/* Grade dos produtos em 2 colunas */
 .produtos {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 15px;
+  justify-items: center;
 }
 
-/* Estilo de cada item */
+/* Card do produto */
 .produto {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background: white;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  max-width: 200px;
+  margin: auto;
 }
 
-/* Imagem dos produtos */
+/* Imagem do produto */
 .produto img {
   width: 100%;
+  max-width: 120px;
   height: auto;
+  object-fit: cover;
   border-radius: 8px;
 }
 
-/* Informações do produto */
+/* Texto do produto */
 .produto-info {
-  margin-top: 10px;
+  margin-top: 8px;
+  text-align: center;
 }
 
 .produto h3 {
+  font-size: 0.95rem;
   margin-bottom: 5px;
+}
+
+.produto p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Caixa de quantidade */
+.quantidade-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 5px 0;
+}
+
+.quantidade-box input {
+  width: 35px;
+  text-align: center;
+  font-size: 14px;
+  margin: 0;
+}
+
+.btt2 {
+  width: 25px;
+  height: 25px;
+  font-size: 16px;
+}
+
+/* Botão adicionar */
+#bt {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  margin-top: 5px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: background 0.3s ease;
+}
+
+#bt:hover {
+  background-color: #0056b3;
 }
 
 
