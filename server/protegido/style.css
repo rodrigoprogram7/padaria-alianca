@@ -1382,3 +1382,106 @@ nav.container {
     background-color: #0056b3;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Wrapper das miniaturas */
+.carousel-thumbs {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 10px;
+  max-height: 160px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 5px;
+}
+
+.carousel-thumbs::-webkit-scrollbar {
+  height: 6px;
+}
+
+.carousel-thumbs::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+}
+
+/* Estilo das imagens em miniatura */
+.carousel-thumbs img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.carousel-thumbs img.active {
+  border-color: var(--base-color);
+}
+
+/* Layout da coluna esquerda */
+.produto-img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.imagem-grande-wrapper {
+  position: relative;
+}
+
+.imagem-grande-wrapper img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* Botões do carrossel */
+.carousel-btn {
+  position: absolute;
+  background-color: #fff;
+  border: none;
+  border-radius: 50%;
+  padding: 5px;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.carousel-prev {
+  left: -20px;
+}
+
+.carousel-next {
+  right: -20px;
+}
+
+/* Responsivo - no mobile deixa as miniaturas na horizontal */
+@media (max-width: 600px) {
+  .carousel-thumbs {
+    flex-direction: row;
+    max-height: none;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
+
+

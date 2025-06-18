@@ -409,16 +409,39 @@ function diminuirQuantidade(nome) {
 
     document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
-  const img = produto.querySelector('img');
-  const nomeEl = produto.querySelector('h3');
+  const imgGrande = produto.querySelector('.imagem-grande-wrapper img');
+  const nomeProduto = produto.querySelector('h3');
+  const precoProduto = produto.querySelector('p');
+  const thumbsContainer = produto.querySelector('.carousel-thumbs');
+
   let current = 0;
 
   const updateProduto = () => {
-    img.src = variacoes[current].img;
-    nomeEl.textContent = variacoes[current].nome;
-    produto.setAttribute('data-nome', variacoes[current].nome); // 🔥 ESSENCIAL
+    imgGrande.src = variacoes[current].img;
+    nomeProduto.textContent = variacoes[current].nome;
+    precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`;
+    produto.setAttribute('data-nome', variacoes[current].nome);
+    produto.setAttribute('data-preco', variacoes[current].preco);
+
+    thumbsContainer.querySelectorAll('img').forEach((thumb, idx) => {
+      thumb.classList.toggle('active', idx === current);
+    });
   };
 
+  // Cria as miniaturas
+  thumbsContainer.innerHTML = '';
+  variacoes.forEach((item, index) => {
+    const thumb = document.createElement('img');
+    thumb.src = item.img;
+    if (index === current) thumb.classList.add('active');
+    thumb.addEventListener('click', () => {
+      current = index;
+      updateProduto();
+    });
+    thumbsContainer.appendChild(thumb);
+  });
+
+  // Botões de navegação
   produto.querySelector('.carousel-prev').addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
     updateProduto();
@@ -429,9 +452,9 @@ function diminuirQuantidade(nome) {
     updateProduto();
   });
 
-  // Executa a primeira atualização para garantir que o nome esteja sincronizado
   updateProduto();
 });
+
 
 document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'));
