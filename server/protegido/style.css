@@ -1410,10 +1410,12 @@ nav.container {
 
 
 
+/* 🔥 Container das miniaturas COM SCROLL lateral e LIMITE no tamanho */
 .carousel-thumbs {
   display: flex;
   gap: 8px;
   margin-top: 10px;
+  max-width: 160px; /* 🔥 Controla a largura do container das thumbs */
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 5px;
@@ -1421,7 +1423,7 @@ nav.container {
   scrollbar-color: var(--base-color) transparent;
 }
 
-/* Scrollbar para Chrome, Edge e Safari */
+/* 🔥 Scrollbar estilizado (Chrome, Edge, Safari) */
 .carousel-thumbs::-webkit-scrollbar {
   height: 6px;
 }
@@ -1435,6 +1437,7 @@ nav.container {
   border-radius: 10px;
 }
 
+/* 🔥 Miniaturas */
 .carousel-thumbs img {
   flex: 0 0 auto;
   width: 50px;
@@ -1455,14 +1458,17 @@ nav.container {
   border-color: var(--base-color-alt);
 }
 
-/* Wrapper da imagem grande permanece igual */
+/* 🔥 Garante que as thumbs NÃO sobrepõem os botões */
 .produto-img-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  position: relative; /* 🔥 Evita sobreposição */
+  z-index: 1;
 }
 
+/* 🔥 Wrapper da imagem principal */
 .imagem-grande-wrapper {
   position: relative;
   width: 150px;
@@ -1475,7 +1481,7 @@ nav.container {
   object-fit: contain;
 }
 
-/* Botões do carrossel */
+/* 🔥 Botões do carrossel */
 .carousel-btn {
   background: var(--base-color);
   color: white;
@@ -1488,6 +1494,7 @@ nav.container {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 2;
 }
 
 .carousel-prev {
@@ -1502,3 +1509,12 @@ nav.container {
   background: var(--base-color-alt);
 }
 
+/* 🔥 Ajusta a área dos controles de quantidade para não sobrepor */
+.quantidade-box {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: 5px 0;
+  z-index: 5;
+  position: relative;
+}
