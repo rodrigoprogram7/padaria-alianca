@@ -1323,11 +1323,10 @@ nav.container {
 }
 
 .produto img {
-    width: 80%;
-    max-width: 130px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 8px;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: 8px;
 }
 
 .produto-info {
