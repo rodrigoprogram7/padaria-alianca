@@ -600,3 +600,6 @@ function alterarPeso(botao, delta) {
 }
 
 
+
+
+
