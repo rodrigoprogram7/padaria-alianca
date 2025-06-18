@@ -1303,115 +1303,36 @@ nav.container {
 
 
 
-/* Container dos produtos com grid de 2 colunas fixas */
-.container-produtos {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+/* Layout dos produtos em 2 colunas */
+.produtos {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
-/* Estilo dos cards dos produtos */
+/* Estilo de cada item */
 .produto {
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-    transition: transform 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
 }
 
-.produto:hover {
-    transform: translateY(-2px);
-}
-
+/* Imagem dos produtos */
 .produto img {
-    width: 80%;
-    max-width: 130px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 6px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
 
+/* Informações do produto */
 .produto-info {
-    width: 100%;
-    text-align: center;
+  margin-top: 10px;
 }
 
-.produto-info h3 {
-    margin: 4px 0;
-    font-size: 1rem;
+.produto h3 {
+  margin-bottom: 5px;
 }
-
-.produto-info p {
-    margin: 4px 0;
-    color: #555;
-    font-weight: 500;
-}
-
-.quantidade-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 6px 0;
-}
-
-.quantidade-box button {
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
-}
-
-.quantidade-box input {
-    width: 40px;
-    height: 28px;
-    text-align: center;
-    font-size: 14px;
-}
-
-#bt {
-    width: 100%;
-    max-width: 120px;
-    height: 32px;
-    display: block;
-    margin: 8px auto 0 auto;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-#bt:hover {
-    background-color: #0056b3;
-}
-
-/* === Responsividade === */
-@media (max-width: 480px) {
-    .container-produtos {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .produto img {
-        max-width: 100px;
-    }
-
-    .quantidade-box button {
-        width: 24px;
-        height: 24px;
-    }
-
-    .quantidade-box input {
-        width: 32px;
-        height: 24px;
-    }
-
-    #bt {
-        height: 30px;
-        font-size: 0.9rem;
-    }
-}
-
-
 
