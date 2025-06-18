@@ -1410,21 +1410,24 @@ nav.container {
 
 
 
-/* Estilo para miniaturas do carrossel */
+/* 🔥 Container das miniaturas */
 .carousel-thumbs {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
   margin-top: 10px;
-  flex-wrap: wrap;
+  padding: 5px;
+  overflow: visible;
 }
 
+/* 🔥 Miniaturas individuais */
 .carousel-thumbs img {
   width: 50px;
   height: 50px;
   object-fit: cover;
   border: 2px solid transparent;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
   transition: border-color 0.3s, transform 0.2s;
 }
@@ -1438,7 +1441,28 @@ nav.container {
   border-color: var(--base-color-alt);
 }
 
-/* Estilo dos botões de navegação */
+/* 🔥 Garante que o wrapper da imagem principal não corte nada */
+.produto-img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* 🔥 Wrapper da imagem grande */
+.imagem-grande-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.imagem-grande-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 🔥 Botões de navegação do carrossel */
 .carousel-btn {
   background: var(--base-color);
   color: white;
@@ -1465,6 +1489,3 @@ nav.container {
 .carousel-btn:hover {
   background: var(--base-color-alt);
 }
-
-
-
