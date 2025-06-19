@@ -1279,8 +1279,10 @@ nav.container {
     }
 
     .produto-info {
+        width: 100%; /* Garante que o info block ocupe a largura total */
         padding-top: 50px; /* Compensação para a imagem */
         text-align: center; /* Centraliza o texto dentro de cada card */
+        /* Removido o flex-grow/shrink para não esticar */
     }
 
     .produto-info h3 {
@@ -1308,26 +1310,28 @@ nav.container {
     /* === Carrossel de produto no mobile (DENTRO DO PRODUTO) === */
     .produto.carrossel {
         flex-direction: column; /* Força empilhamento vertical */
-        align-items: center;
+        align-items: center; /* Centraliza o conteúdo verticalmente */
+        justify-content: flex-start; /* Alinha o conteúdo ao topo */
         gap: 10px;
-        padding-bottom: 0; 
+        padding: 10px; /* Reduz padding extra para o card carrossel */
         margin-bottom: 20px; 
         min-height: auto; 
-        overflow: hidden; /* Garante que o conteúdo não vaze VERTICALMENTE */
-        max-width: 100%; /* Ocupa 100% da coluna, mas não mais que isso */
+        overflow: hidden; 
+        max-width: 100%; 
+        width: 100%; /* Ocupa a largura total da coluna */
     }
 
     .produto.carrossel .produto-img-wrapper {
         width: 100%; /* Ocupa 100% do espaço disponível para a imagem */
         max-width: 160px; /* Limita a largura máxima da imagem principal do carrossel */
-        height: auto; 
-        margin-bottom: 10px;
+        margin-bottom: 0; /* Removendo margem extra que pode separar */
+        flex-shrink: 0; /* Impede que o wrapper encolha */
     }
 
     .imagem-grande-wrapper {
         width: 160px; /* Largura fixa para a área da imagem grande */
         height: 160px; /* Altura fixa para a área da imagem grande */
-        overflow: hidden; /* Oculta qualquer parte da imagem que exceda o container */
+        overflow: hidden; 
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
@@ -1335,38 +1339,37 @@ nav.container {
     .imagem-grande-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* Ajusta a imagem para caber inteira no espaço, mantendo proporção */
+        object-fit: contain; 
         margin-bottom: 0; 
     }
 
     .carousel-thumbs {
         display: flex;
-        flex-direction: row; /* Miniaturas em linha */
-        flex-wrap: nowrap; /* <<-- MUITO IMPORTANTE: Impede a quebra de linha */
-        max-width: 100%; /* Ajusta para se adaptar ao container pai */
-        overflow-x: auto; /* <<-- MUITO IMPORTANTE: Ativa o scroll horizontal */
+        flex-direction: row; 
+        flex-wrap: nowrap; 
+        max-width: 100%; 
+        overflow-x: auto; 
         overflow-y: hidden;
         padding: 4px;
-        gap: 6px; /* Espaçamento entre as miniaturas */
-        -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
-        /* Ajuste a altura mínima para garantir que a miniatura apareça por completo */
-        min-height: 55px; /* Aumentado para garantir espaço completo para 50px de imagem + borda/padding */
-        justify-content: flex-start; /* Alinha as miniaturas ao início para o scroll */
+        gap: 6px; 
+        -webkit-overflow-scrolling: touch; 
+        min-height: 55px; 
+        justify-content: center; /* Centraliza as miniaturas para melhor visualização do scroll */
     }
 
     /* Esconder a barra de rolagem para alguns navegadores */
     .carousel-thumbs::-webkit-scrollbar {
-        height: 0px; /* Esconde a barra de rolagem no WebKit (Chrome, Safari) */
-        background: transparent; /* Torna o fundo transparente */
+        height: 0px; 
+        background: transparent; 
     }
 
     .carousel-thumbs::-webkit-scrollbar-thumb {
-        background: transparent; /* Torna a "barra" transparente */
+        background: transparent; 
     }
 
     .carousel-thumbs img {
-        flex: 0 0 auto; /* <<-- MUITO IMPORTANTE: Impede que as miniaturas encolham */
-        width: 40px; /* Tamanho ligeiramente menor para miniaturas no mobile */
+        flex: 0 0 auto; 
+        width: 40px; 
         height: 40px;
         border: 2px solid transparent;
         border-radius: 6px;
@@ -1375,12 +1378,15 @@ nav.container {
         transition: border-color 0.3s, transform 0.2s;
     }
 
-    .carousel-btn { /* Esconde botões de navegação do carrossel de produto no mobile */
+    .carousel-btn { 
         display: none; 
     }
 
     .produto.carrossel .produto-info {
-        text-align: center; /* Centraliza o texto no modo carrossel mobile */
-        margin-top: 0;
+        text-align: center; 
+        margin-top: 10px; /* Adicionado um pouco de margem para separar da imagem */
+        padding-top: 0; /* Resetado para não ter padding duplo */
+        flex-grow: 0; /* Impede que o produto-info se estique excessivamente */
+        flex-shrink: 0; /* Impede que o produto-info encolha demais */
     }
 }
