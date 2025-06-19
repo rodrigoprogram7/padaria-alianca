@@ -1035,6 +1035,8 @@ footer .social a:hover {
 .carousel-thumbs {
   display: flex;
   gap: 6px;
+  height: 10px;
+  right: 10px;
   margin-top: 8px;
   max-width: 150px;
   overflow-x: auto;
