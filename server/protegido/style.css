@@ -987,7 +987,6 @@ footer .social a:hover {
     flex-wrap: wrap;
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
-    /* overflow: visible; */ /* Removido para conter o overflow do produto-img-wrapper */
     position: relative; 
     min-height: 220px; 
     margin-bottom: 40px; 
@@ -1001,7 +1000,7 @@ footer .social a:hover {
     width: 160px; /* Aumentado um pouco */
     position: relative; /* Para posicionar botões de navegação */
     z-index: 5; /* Garante que os botões do carrossel fiquem visíveis */
-    overflow: visible; /* IMPORTANTE: Permite que as setas "saiam" do wrapper */
+    overflow: hidden; /* Mantido no desktop para sobreposição interna das setas */
 }
 
 /* Wrapper da imagem grande (no carrossel de produto) */
@@ -1049,13 +1048,12 @@ footer .social a:hover {
     opacity: 1;
 }
 
-/* Ajuste para as setas ficarem do lado de fora */
 .carousel-prev {
-    left: -20px; /* Move para fora 20px (metade do botão + um pouco de espaço) */
+    left: 5px; 
 }
 
 .carousel-next {
-    right: -20px; /* Move para fora 20px (metade do botão + um pouco de espaço) */
+    right: 5px;
 }
 
 /* Miniaturas */
@@ -1371,7 +1369,7 @@ nav.container {
         padding: 10px; 
         margin-bottom: 0;
         min-height: auto; 
-        overflow: hidden; 
+        /* overflow: hidden; */ /* Removido para não cortar as setas */
         max-width: 100%; 
         width: 100%; 
         height: fit-content;
@@ -1381,13 +1379,13 @@ nav.container {
         width: 100%; 
         max-width: 100px; /* Tamanho da imagem grande (aproximado dos outros cards) */
         margin-bottom: 0; 
-        position: relative; /* FUNDAMENTAL para posicionar as setas */
+        position: relative; /* FUNDAMENTAL: Este é o pai para o posicionamento absolute das setas */
         flex-shrink: 0; 
-        /* REMOVIDO: overflow: hidden; */ /* Isso estava escondendo as setas */
+        overflow: hidden; /* Adicionado para esconder o conteúdo que ultrapassar */
     }
 
     .imagem-grande-wrapper {
-        position: relative; /* Adicionado para que as setas possam ser posicionadas em relação a ele */
+        position: relative; /* Mantido por segurança, mas não é estritamente necessário para as setas */
         width: 100px; /* Alinhado com o max-width do produto-img-wrapper */
         height: 100px; /* Mantém proporção 1:1 */
         overflow: hidden; /* Mantido para garantir que a imagem não saia dos limites */
@@ -1418,8 +1416,8 @@ nav.container {
         opacity: 0.9;
         transition: background-color 0.3s, opacity 0.3s;
         z-index: 5; /* Garante que fiquem acima da imagem */
-        width: 30px;
-        height: 30px;
+        width: 30px; /* Tamanho do botão */
+        height: 30px; /* Tamanho do botão */
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1430,13 +1428,13 @@ nav.container {
         opacity: 1;
     }
 
-    /* NOVO: Ajuste para as setas ficarem COMPLETAMENTE FORA do quadrado da imagem */
+    /* NOVO: Ajuste para as setas ficarem sobrepostas e visíveis na imagem grande */
     .carousel-btn.carousel-prev {
-        left: -40px; /* Move para fora. Valor = largura do botão + espaçamento */
+        left: 5px; /* Posição da seta esquerda */
     }
     
     .carousel-btn.carousel-next {
-        right: -40px; /* Move para fora. Valor = largura do botão + espaçamento */
+        right: 5px; /* Posição da seta direita */
     }
 
     /* Miniaturas (Mobile) */
