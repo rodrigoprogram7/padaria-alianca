@@ -1261,14 +1261,17 @@ nav.container {
     }
 
     .produto {
+        display: flex; /* Garante flexbox para alinhamento interno */
         flex-direction: column; /* Imagem e info empilhadas verticalmente */
         align-items: center;
         padding: 10px;
-        /* Remover ou ajustar margens e paddings que podem causar estouro */
         margin-bottom: 0; 
+        width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
+        /* height: auto; */ /* Deixa a altura ser definida pelo conteúdo */
     }
 
-    .produto img {
+    /* As imagens de produtos padrão devem ser menores no layout de card */
+    .produto:not(.carrossel) img { /* Seleciona apenas imagens de produtos NÃO carrossel */
         width: 100px; /* Tamanho fixo para imagem no layout de card */
         height: 100px;
         margin-bottom: -50px; /* Mantém a imagem "entrando" no texto, se desejado */
@@ -1307,48 +1310,69 @@ nav.container {
         flex-direction: column; /* Força empilhamento vertical */
         align-items: center;
         gap: 10px;
-        padding-bottom: 0; /* Reduz padding extra */
-        margin-bottom: 20px; /* Ajusta margem inferior para não empurrar demais */
-        min-height: auto; /* IMPORTANTE: Deixa a altura ser definida pelo conteúdo */
-        overflow: hidden; /* Garante que o conteúdo não vaze */
+        padding-bottom: 0; 
+        margin-bottom: 20px; 
+        min-height: auto; 
+        overflow: hidden; /* Garante que o conteúdo não vaze VERTICALMENTE */
+        max-width: 100%; /* Ocupa 100% da coluna, mas não mais que isso */
     }
 
     .produto.carrossel .produto-img-wrapper {
-        width: 100%;
-        max-width: 200px; /* Limita o tamanho da imagem grande do carrossel */
-        height: auto; /* Deixa a altura se ajustar à imagem */
+        width: 100%; /* Ocupa 100% do espaço disponível para a imagem */
+        max-width: 160px; /* Limita a largura máxima da imagem principal do carrossel */
+        height: auto; 
         margin-bottom: 10px;
     }
 
     .imagem-grande-wrapper {
-        width: 100%; /* Ajusta para preencher o max-width do wrapper pai */
-        height: 200px; /* ALTURA FIXA para evitar que a imagem estoure */
-        overflow: hidden; /* Esconde qualquer parte da imagem que exceda a altura */
+        width: 160px; /* Largura fixa para a área da imagem grande */
+        height: 160px; /* Altura fixa para a área da imagem grande */
+        overflow: hidden; /* Oculta qualquer parte da imagem que exceda o container */
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     .imagem-grande-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* Ou 'cover' dependendo do efeito desejado. 'contain' mostra a imagem inteira. */
-        margin-bottom: 0; /* Garante que não haja margem negativa aqui */
+        object-fit: contain; /* Ajusta a imagem para caber inteira no espaço, mantendo proporção */
+        margin-bottom: 0; 
     }
 
     .carousel-thumbs {
+        display: flex;
         flex-direction: row; /* Miniaturas em linha */
-        max-width: 100%;
-        justify-content: center;
-        /* Garante que as miniaturas não se espalhem demais */
-        flex-wrap: wrap; 
-        min-height: auto; /* Deixa a altura se ajustar ao conteúdo */
-        overflow-x: auto; /* Mantém o scroll horizontal se houver muitas miniaturas */
+        flex-wrap: nowrap; /* <<-- MUITO IMPORTANTE: Impede a quebra de linha */
+        max-width: 100%; /* Ajusta para se adaptar ao container pai */
+        overflow-x: auto; /* <<-- MUITO IMPORTANTE: Ativa o scroll horizontal */
+        overflow-y: hidden;
         padding: 4px;
-        box-sizing: border-box; /* Garante que padding não adicione largura */
+        gap: 6px; /* Espaçamento entre as miniaturas */
+        -webkit-overflow-scrolling: touch; /* Melhora a rolagem em iOS */
+        /* Ajuste a altura mínima para garantir que a miniatura apareça por completo */
+        min-height: 55px; /* Aumentado para garantir espaço completo para 50px de imagem + borda/padding */
+        justify-content: flex-start; /* Alinha as miniaturas ao início para o scroll */
+    }
+
+    /* Esconder a barra de rolagem para alguns navegadores */
+    .carousel-thumbs::-webkit-scrollbar {
+        height: 0px; /* Esconde a barra de rolagem no WebKit (Chrome, Safari) */
+        background: transparent; /* Torna o fundo transparente */
+    }
+
+    .carousel-thumbs::-webkit-scrollbar-thumb {
+        background: transparent; /* Torna a "barra" transparente */
     }
 
     .carousel-thumbs img {
+        flex: 0 0 auto; /* <<-- MUITO IMPORTANTE: Impede que as miniaturas encolham */
         width: 40px; /* Tamanho ligeiramente menor para miniaturas no mobile */
         height: 40px;
-        flex-shrink: 0; /* Impede que as miniaturas encolham */
+        border: 2px solid transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        object-fit: cover;
+        transition: border-color 0.3s, transform 0.2s;
     }
 
     .carousel-btn { /* Esconde botões de navegação do carrossel de produto no mobile */
