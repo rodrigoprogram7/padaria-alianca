@@ -1224,6 +1224,9 @@ nav.container {
 /*======================================== Media Queries (Responsividade) ========================================*/
 
 /* Mobile Específico (max-width: 768px) */
+/*======================================== Responsividade ========================================*/
+
+/* Mobile Específico (max-width: 768px) */
 @media (max-width: 768px) {
     .container {
         flex-direction: column; /* Produtos e Carrinho em coluna */
@@ -1254,40 +1257,52 @@ nav.container {
         display: block;
     }
 
-    /* Produtos no Mobile: 1 coluna */
+    /* Produtos no Mobile: 2 colunas */
     .produtos {
-        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+        grid-template-columns: repeat(2, 1fr); /* <-- ALTERADO AQUI PARA DUAS COLUNAS */
+        gap: 15px; /* Adicionado um gap para espaçamento entre os produtos */
     }
 
     .produto {
-        flex-direction: row; /* Imagem ao lado do texto */
+        /* Mantemos flex-direction: column e centralizamos para um layout de card */
+        flex-direction: column; 
         align-items: center;
-        gap: 15px; /* Espaço entre imagem e info */
-        padding: 15px;
+        gap: 0; /* Remover gap que pode atrapalhar o layout de coluna */
+        padding: 10px; /* Ajuste o padding se necessário */
     }
 
     .produto img {
-        width: 90px;
-        height: 90px;
-        margin-bottom: 0; /* Remove o margin-bottom negativo */
+        width: 100px; /* Tamanho fixo para imagem no layout de card */
+        height: 100px;
+        margin-bottom: -50px; /* Mantém a imagem "entrando" no texto, se desejado */
+        object-fit: cover;
     }
 
     .produto-info {
-        padding-top: 0;
-        text-align: left;
+        padding-top: 50px; /* Compensação para a imagem */
+        text-align: center; /* Centraliza o texto dentro de cada card */
     }
 
     .produto-info h3 {
-        font-size: 1.05rem;
+        font-size: 0.95rem; /* Ajuste para caber melhor */
+        margin: 4px 0;
+    }
+
+    .produto-info p {
+        font-size: 0.85rem; /* Ajuste para caber melhor */
+        margin: 2px 0;
     }
 
     .quantidade-box {
-        justify-content: flex-start; /* Alinha à esquerda */
+        justify-content: center; /* Centraliza botões de quantidade */
+        margin: 6px 0;
     }
 
     .produto button.adicionar {
-        margin: 8px 0 0 0; /* Ajusta a margem para mobile */
-        max-width: none; /* Ocupa a largura disponível */
+        margin: 8px auto 0 auto; /* Centraliza o botão Adicionar */
+        max-width: 100px; /* Ajuste o max-width para o botão */
+        font-size: 0.8rem;
+        height: 28px;
     }
 
     /* Carrossel de produto no mobile */
@@ -1318,3 +1333,6 @@ nav.container {
         display: none; 
     }
 }
+
+/* Dispositivos Largos: 992px > */
+/* (O restante do seu código permanece o mesmo) */
