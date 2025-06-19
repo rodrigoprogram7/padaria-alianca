@@ -1419,7 +1419,7 @@ nav.container {
 /* 🔥 Corrige a área das miniaturas */
 .carousel-thumbs {
   display: flex;
-  gap: 6px;
+  gap: 30px;
   margin-top: 8px;
   max-width: 150px;
   overflow-x: auto;
