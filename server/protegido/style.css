@@ -945,25 +945,23 @@ footer .social a:hover {
 }
 
 .carousel-btn {
-
-  color: rgb(255, 255, 255); /* Cor da seta */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* 👈 Sombra preta suave */
+  background: var(--base-color);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background 0.3s;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 2.3rem;
-  font-weight: 20;
-  cursor: pointer;
-  z-index: 2;
-  opacity: 0.8;
-  transition: opacity 0.3s, transform 0.3s;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-btn:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.2);
+  background: var(--base-color-alt);
 }
 
 .carousel-prev {
@@ -1036,13 +1034,13 @@ footer .social a:hover {
 /* MINIATURAS ATUALIZADAS */
 .carousel-thumbs {
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 10px;
-  max-height: 160px;
+  gap: 6px;
+  margin-top: 8px;
+  max-width: 150px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 5px;
+  padding: 4px 2px;
+  min-height: 50px;
 }
 
 .carousel-thumbs::-webkit-scrollbar {
@@ -1055,17 +1053,23 @@ footer .social a:hover {
 }
 
 .carousel-thumbs img {
-  width: 60px;
-  height: 60px;
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
   object-fit: cover;
-  cursor: pointer;
-  border-radius: 6px;
   border: 2px solid transparent;
-  transition: border-color 0.3s;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.2s;
 }
 
 .carousel-thumbs img.active {
   border-color: var(--base-color);
+  transform: scale(1.05);
+}
+
+.carousel-thumbs img:hover {
+  border-color: var(--base-color-alt);
 }
 
 /* No mobile as miniaturas ficam em linha */

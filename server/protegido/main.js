@@ -425,10 +425,17 @@ function diminuirQuantidade(nome) {
 
     thumbsContainer.querySelectorAll('img').forEach((thumb, idx) => {
       thumb.classList.toggle('active', idx === current);
+      if (idx === current) {
+        thumb.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest'
+        });
+      }
     });
   };
 
-  // Cria miniaturas
+  // 🔥 Cria miniaturas
   thumbsContainer.innerHTML = '';
   variacoes.forEach((item, index) => {
     const thumb = document.createElement('img');
@@ -442,19 +449,24 @@ function diminuirQuantidade(nome) {
     thumbsContainer.appendChild(thumb);
   });
 
-  // Navegação setas
-  produto.querySelector('.carousel-prev').addEventListener('click', () => {
+  // 🔄 Navegação pelas setas
+  const prevBtn = produto.querySelector('.carousel-prev');
+  const nextBtn = produto.querySelector('.carousel-next');
+
+  prevBtn.addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
     updateProduto();
   });
 
-  produto.querySelector('.carousel-next').addEventListener('click', () => {
+  nextBtn.addEventListener('click', () => {
     current = (current + 1) % variacoes.length;
     updateProduto();
   });
 
+  // 🔥 Inicializa
   updateProduto();
 });
+
 
 
 
