@@ -1410,14 +1410,26 @@ nav.container {
 
 
 
-/* 🔥 Container da imagem + miniaturas */
+/* 🔥 Container do produto geral */
+.produto {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: flex-start;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: white;
+  flex-wrap: wrap;
+}
+
+/* 🔥 Coluna da imagem + miniaturas */
 .produto-img-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  position: relative;
-  z-index: 1;
+  width: 150px;
+  flex-shrink: 0; /* 🔥 Impede de encolher */
 }
 
 /* 🔥 Imagem principal */
@@ -1433,15 +1445,15 @@ nav.container {
   object-fit: contain;
 }
 
-/* 🔥 Botões de navegação do carrossel */
+/* 🔥 Botões do carrossel */
 .carousel-btn {
   background: var(--base-color);
   color: white;
   border: none;
-  padding: 5px 10px;
+  padding: 5px;
   border-radius: 50%;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 16px;
   transition: background 0.3s;
   position: absolute;
   top: 50%;
@@ -1457,25 +1469,25 @@ nav.container {
   right: -15px;
 }
 
-/* 🔥 Miniaturas com scroll lateral */
+.carousel-btn:hover {
+  background: var(--base-color-alt);
+}
+
+/* 🔥 Miniaturas com scroll horizontal */
 .carousel-thumbs {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   margin-top: 8px;
-  max-width: 160px;
+  max-width: 150px;
   overflow-x: auto;
   overflow-y: hidden;
-  padding-bottom: 4px;
+  padding-bottom: 3px;
   scrollbar-width: thin;
   scrollbar-color: var(--base-color) transparent;
 }
 
 .carousel-thumbs::-webkit-scrollbar {
-  height: 6px;
-}
-
-.carousel-thumbs::-webkit-scrollbar-track {
-  background: transparent;
+  height: 5px;
 }
 
 .carousel-thumbs::-webkit-scrollbar-thumb {
@@ -1483,10 +1495,11 @@ nav.container {
   border-radius: 10px;
 }
 
+/* 🔥 Miniaturas */
 .carousel-thumbs img {
   flex: 0 0 auto;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   object-fit: cover;
   border: 2px solid transparent;
   border-radius: 6px;
@@ -1503,13 +1516,38 @@ nav.container {
   border-color: var(--base-color-alt);
 }
 
-/* 🔥 Parte dos botões de quantidade */
+/* 🔥 Coluna da info e botões */
+.produto-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+/* 🔥 Quantidade e botões */
 .quantidade-box {
   display: flex;
   align-items: center;
   gap: 5px;
   margin: 5px 0;
-  position: relative;
-  z-index: 1;
 }
+
+.quantidade-box input {
+  width: 40px;
+  text-align: center;
+}
+
+.btt2 {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 
