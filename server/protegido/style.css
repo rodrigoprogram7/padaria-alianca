@@ -1450,6 +1450,18 @@ nav.container {
         z-index: 100; /* Garante que fiquem acima das miniaturas */
     }
 
+    .carousel-btn.carousel-prev {
+        left: 0px; /* Mais perto da borda */
+    }
+    
+    .carousel-btn.carousel-next {
+        right: 0px; /* Mais perto da borda */
+    }
+
+    .carousel-btn:hover {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
     .produto.carrossel .produto-info {
         text-align: center; 
         margin-top: 10px; 
