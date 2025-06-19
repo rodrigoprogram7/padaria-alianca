@@ -317,21 +317,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     })
   }
 
-  // Navegação com setas
-const prevBtn = produto.querySelector('.prev')
-const nextBtn = produto.querySelector('.next')
-
-if (prevBtn && nextBtn) {
-  prevBtn.addEventListener('click', () => {
-    current = (current - 1 + variacoes.length) % variacoes.length
-    updateProduto()
-  })
-
-  nextBtn.addEventListener('click', () => {
-    current = (current + 1) % variacoes.length
-    updateProduto()
-  })
-}
 
 
   variacoes.forEach((variacao, index) => {
