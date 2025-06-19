@@ -965,11 +965,11 @@ footer .social a:hover {
 }
 
 .carousel-prev {
-  left: -22px; /* ou -40px para mais distância */
+  left: -2px; /* ou -40px para mais distância */
 }
 
 .carousel-next {
-  right: -22px;
+  right: -2px;
 }
 
 .produto.carrossel {
