@@ -1258,22 +1258,34 @@ nav.container {
     .produtos {
         grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
         gap: 15px; /* Espaçamento entre os produtos */
+        /* Adicionado para alinhar os itens no topo e evitar esticamento */
+        align-items: start; 
     }
 
     .produto {
         display: flex; /* Garante flexbox para alinhamento interno */
         flex-direction: column; /* Imagem e info empilhadas verticalmente */
+        background: white;
+        border-radius: 10px;
         align-items: center;
         padding: 10px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
         margin-bottom: 0; 
         width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
-        /* height: auto; */ /* Deixa a altura ser definida pelo conteúdo */
+        height: fit-content; /* CHAVE: A altura do card se ajusta ao conteúdo */
+    }
+
+    .produto:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
     }
 
     /* As imagens de produtos padrão devem ser menores no layout de card */
     .produto:not(.carrossel) img { /* Seleciona apenas imagens de produtos NÃO carrossel */
         width: 100px; /* Tamanho fixo para imagem no layout de card */
         height: 100px;
+        border-radius: 8px;
         margin-bottom: -50px; /* Mantém a imagem "entrando" no texto, se desejado */
         object-fit: cover;
     }
@@ -1282,29 +1294,71 @@ nav.container {
         width: 100%; /* Garante que o info block ocupe a largura total */
         padding-top: 50px; /* Compensação para a imagem */
         text-align: center; /* Centraliza o texto dentro de cada card */
-        /* Removido o flex-grow/shrink para não esticar */
     }
 
     .produto-info h3 {
-        font-size: 0.95rem; /* Ajuste para caber melhor */
         margin: 4px 0;
+        font-size: 0.95rem; /* Ajuste para caber melhor */
     }
 
     .produto-info p {
-        font-size: 0.85rem; /* Ajuste para caber melhor */
         margin: 2px 0;
+        color: #555;
+        font-size: 0.85rem; /* Ajuste para caber melhor */
     }
 
     .quantidade-box {
-        justify-content: center; /* Centraliza botões de quantidade */
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin: 6px 0;
+        gap: 5px; /* Espaço entre os botões e input */
+    }
+
+    .quantidade-box button {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--base-color-second);
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .quantidade-box button:hover {
+        background-color: var(--base-color);
+        color: white;
+    }
+
+    .quantidade-box input {
+        width: 40px;
+        height: 28px;
+        text-align: center;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
     }
 
     .produto button.adicionar {
-        margin: 8px auto 0 auto; /* Centraliza o botão Adicionar */
+        margin-top: 8px;
+        width: 100%;
         max-width: 100px; /* Ajuste o max-width para o botão */
-        font-size: 0.8rem;
         height: 28px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        font-size: 0.8rem;
+    }
+
+    .produto button.adicionar:hover {
+        background-color: #0056b3;
     }
 
     /* === Carrossel de produto no mobile (DENTRO DO PRODUTO) === */
@@ -1314,23 +1368,24 @@ nav.container {
         justify-content: flex-start; /* Alinha o conteúdo ao topo */
         gap: 0; /* Reduzindo o gap geral do card de carrossel */
         padding: 10px; 
-        margin-bottom: 20px; 
+        margin-bottom: 0; /* Removido para garantir que a altura seja fit-content */
         min-height: auto; 
         overflow: hidden; 
         max-width: 100%; 
         width: 100%; 
+        height: fit-content; /* CHAVE: A altura do card se ajusta ao conteúdo */
     }
 
     .produto.carrossel .produto-img-wrapper {
-        width: 100%; /* Ocupa 100% do espaço disponível */
-        max-width: 100px; /* Limitando o wrapper para a imagem principal */
+        width: 100%; 
+        max-width: 100px; 
         margin-bottom: 0; 
         flex-shrink: 0; 
     }
 
     .imagem-grande-wrapper {
-        width: 100px; /* NOVA LARGURA: Igual aos outros cards */
-        height: 100px; /* NOVA ALTURA: Igual aos outros cards */
+        width: 100px; 
+        height: 100px; 
         overflow: hidden; 
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -1339,7 +1394,7 @@ nav.container {
     .imagem-grande-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* Ou 'cover' se preferir cortar */
+        object-fit: contain; 
         margin-bottom: 0; 
     }
 
@@ -1351,11 +1406,11 @@ nav.container {
         overflow-x: auto; 
         overflow-y: hidden;
         padding: 4px;
-        gap: 4px; /* Espaçamento ligeiramente menor entre as miniaturas */
+        gap: 4px; 
         -webkit-overflow-scrolling: touch; 
-        min-height: 40px; /* Ajustado para 30px da miniatura + bordas/padding */
-        justify-content: center; /* Centraliza as miniaturas para melhor visualização do scroll */
-        margin-top: 8px; /* Mantém um pequeno espaço da imagem grande */
+        min-height: 40px; 
+        justify-content: center; 
+        margin-top: 8px; 
     }
 
     /* Esconder a barra de rolagem para alguns navegadores */
@@ -1370,8 +1425,8 @@ nav.container {
 
     .carousel-thumbs img {
         flex: 0 0 auto; 
-        width: 30px; /* NOVA LARGURA: Acompanha o tamanho da imagem grande */
-        height: 30px; /* NOVA ALTURA: Acompanha o tamanho da imagem grande */
+        width: 30px; 
+        height: 30px;
         border: 2px solid transparent;
         border-radius: 6px;
         cursor: pointer;
@@ -1385,13 +1440,13 @@ nav.container {
 
     .produto.carrossel .produto-info {
         text-align: center; 
-        margin-top: 10px; /* Reduzido para aproximar do nome do produto das miniaturas */
+        margin-top: 10px; 
         padding-top: 0; 
         flex-grow: 0; 
         flex-shrink: 0; 
     }
     
     .produto.carrossel .produto-info h3 {
-        margin-top: 0; /* Remove qualquer margem superior extra do H3 */
+        margin-top: 0; 
     }
 }
