@@ -721,6 +721,8 @@ footer .social a:hover {
     background-color: var(--base-color-second);
     cursor: pointer;
     transition: background-color 0.2s;
+    outline: none; /* Remove o outline ao clicar */
+    -webkit-tap-highlight-color: transparent; /* Remove o highlight no mobile */
 }
 
 .quantidade-box button:hover {
@@ -835,6 +837,8 @@ footer .social a:hover {
     transition: all 0.2s ease-in-out;
     font-weight: bold; /* Para os ícones de + e - */
     color: #555;
+    outline: none; /* Remove o outline ao clicar */
+    -webkit-tap-highlight-color: transparent; /* Remove o highlight no mobile */
 }
 
 .btt {
@@ -1325,6 +1329,8 @@ nav.container {
         background-color: var(--base-color-second);
         cursor: pointer;
         transition: background-color 0.2s;
+        outline: none; /* Remove o outline ao clicar */
+        -webkit-tap-highlight-color: transparent; /* Remove o highlight no mobile */
     }
 
     .quantidade-box button:hover {
@@ -1368,12 +1374,12 @@ nav.container {
         justify-content: flex-start; /* Alinha o conteúdo ao topo */
         gap: 0; /* Reduzindo o gap geral do card de carrossel */
         padding: 10px; 
-        margin-bottom: 0; /* Removido para garantir que a altura seja fit-content */
+        margin-bottom: 0; 
         min-height: auto; 
         overflow: hidden; 
         max-width: 100%; 
         width: 100%; 
-        height: fit-content; /* CHAVE: A altura do card se ajusta ao conteúdo */
+        height: fit-content; 
     }
 
     .produto.carrossel .produto-img-wrapper {
@@ -1411,6 +1417,7 @@ nav.container {
         min-height: 40px; 
         justify-content: center; 
         margin-top: 8px; 
+        position: relative; /* Para posicionar as setas sobre as miniaturas */
     }
 
     /* Esconder a barra de rolagem para alguns navegadores */
@@ -1435,8 +1442,33 @@ nav.container {
     }
 
     .carousel-btn { 
-        display: none; 
+        display: flex; /* ATIVADO: Mostra as setas no mobile */
+        position: absolute; /* Posiciona as setas absolutamente */
+        top: 50%; /* Centraliza verticalmente em relação ao .carousel-thumbs */
+        transform: translateY(-50%);
+        width: 20px; /* Tamanho menor para as setas */
+        height: 20px;
+        font-size: 1.2rem; /* Tamanho do ícone */
+        background: rgba(0, 0, 0, 0.3); /* Um pouco mais visível */
+        color: white;
+        border-radius: 50%;
+        opacity: 0.9;
+        transition: background 0.2s, opacity 0.2s;
+        z-index: 100; /* Garante que fiquem acima das miniaturas */
     }
+
+    .carousel-btn.carousel-prev {
+        left: 0px; /* Mais perto da borda */
+    }
+    
+    .carousel-btn.carousel-next {
+        right: 0px; /* Mais perto da borda */
+    }
+
+    .carousel-btn:hover {
+        background: rgba(0, 0, 0, 0.5);
+    }
+
 
     .produto.carrossel .produto-info {
         text-align: center; 
