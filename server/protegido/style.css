@@ -1396,7 +1396,7 @@ nav.container {
     .carousel-thumbs {
         display: flex;
         flex-direction: row; 
-        flex-wrap: wrap; 
+        flex-wrap: nowrap; 
         max-width: 100%; 
         overflow-x: auto; 
         overflow-y: hidden;
