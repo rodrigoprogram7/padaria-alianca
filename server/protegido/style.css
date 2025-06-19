@@ -1439,9 +1439,9 @@ nav.container {
         position: absolute; /* Posiciona as setas absolutamente */
         top: 50%; /* Centraliza verticalmente em relação ao .carousel-thumbs */
         transform: translateY(-50%);
-        width: 20px; /* Tamanho menor para as setas */
-        height: 20px;
-        font-size: 1.2rem; /* Tamanho do ícone */
+        width: 25px; /* Tamanho menor para as setas */
+        height: 25px;
+        font-size: 1.0rem; /* Tamanho do ícone */
         background-color: var(--base-color); /* Um pouco mais visível */
         color: white;
         border-radius: 50%;
@@ -1451,15 +1451,11 @@ nav.container {
     }
 
     .carousel-btn.carousel-prev {
-        left: 0px; /* Mais perto da borda */
+        left: -20px; /* Mais perto da borda */
     }
     
     .carousel-btn.carousel-next {
-        right: 0px; /* Mais perto da borda */
-    }
-
-    .carousel-btn:hover {
-        background: rgba(0, 0, 0, 0.5);
+        right: -20px; /* Mais perto da borda */
     }
 
     .produto.carrossel .produto-info {
