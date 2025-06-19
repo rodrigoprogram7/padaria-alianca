@@ -1421,7 +1421,7 @@ nav.container {
     /* Setas de navegação do carrossel de produto (Mobile) */
     .carousel-btn {
         position: absolute;
-        top: 20%;
+        top: 25%;
         transform: translateY(-50%);
         background: var(--base-color); /* Fundo mais escuro para mobile */
         border: none;
