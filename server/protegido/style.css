@@ -1043,11 +1043,6 @@ footer .social a:hover {
     align-items: center;
 }
 
-.carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.4);
-    opacity: 1;
-}
-
 .carousel-prev {
     left: 5px; 
 }
@@ -1446,7 +1441,7 @@ nav.container {
         color: white;
         border-radius: 50%;
         opacity: 0.9;
-        z-index: 100; /* Garante que fiquem acima das miniaturas */
+        z-index: 200; /* Garante que fiquem acima das miniaturas */
     }
 
     .carousel-btn.carousel-prev {
