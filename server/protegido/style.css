@@ -1406,7 +1406,7 @@ nav.container {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.4);
+        background: var(--base-color);
         border: none;
         color: white;
         font-size: 1.2rem;
@@ -1430,11 +1430,11 @@ nav.container {
 
     /* NOVO: Ajuste para as setas ficarem sobrepostas e visíveis na imagem grande */
     .carousel-btn.carousel-prev {
-        left: 5px; /* Posição da seta esquerda */
+        left: -25px; /* Posição da seta esquerda */
     }
     
     .carousel-btn.carousel-next {
-        right: 5px; /* Posição da seta direita */
+        right: -25px; /* Posição da seta direita */
     }
 
     /* Miniaturas (Mobile) */
