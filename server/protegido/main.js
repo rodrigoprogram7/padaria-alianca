@@ -16,7 +16,7 @@ const DOMElements = {
     alertaAdicionado: document.getElementById("alerta"),
     campoPesquisa: document.getElementById('pesquisa'),
     listaResultadosPesquisa: document.getElementById('resultados-pesquisa'),
-    // Para o carrossel principal
+    // Para o carrossel principal (se houver)
     carouselSlide: document.getElementById('carouselSlide'),
     carouselPrevBtn: document.getElementById('prevBtn'),
     carouselNextBtn: document.getElementById('nextBtn'),
