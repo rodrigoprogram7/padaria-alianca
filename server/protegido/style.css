@@ -1435,7 +1435,19 @@ nav.container {
     }
 
     .carousel-btn { 
-        display: none; 
+        display: flex; /* ATIVADO: Mostra as setas no mobile */
+        position: absolute; /* Posiciona as setas absolutamente */
+        top: 50%; /* Centraliza verticalmente em relação ao .carousel-thumbs */
+        transform: translateY(-50%);
+        width: 20px; /* Tamanho menor para as setas */
+        height: 20px;
+        font-size: 1.2rem; /* Tamanho do ícone */
+        background-color: var(--base-color); /* Um pouco mais visível */
+        color: white;
+        border-radius: 50%;
+        opacity: 0.9;
+        transition: background 0.2s, opacity 0.2s;
+        z-index: 100; /* Garante que fiquem acima das miniaturas */
     }
 
     .produto.carrossel .produto-info {
