@@ -987,7 +987,7 @@ footer .social a:hover {
     flex-wrap: wrap;
     padding-bottom: 20px;
     border-bottom: 1px solid #ddd;
-    overflow: visible; 
+    /* overflow: visible; */ /* Removido para conter o overflow do produto-img-wrapper */
     position: relative; 
     min-height: 220px; 
     margin-bottom: 40px; 
@@ -1001,6 +1001,7 @@ footer .social a:hover {
     width: 160px; /* Aumentado um pouco */
     position: relative; /* Para posicionar botões de navegação */
     z-index: 5; /* Garante que os botões do carrossel fiquem visíveis */
+    overflow: visible; /* IMPORTANTE: Permite que as setas "saiam" do wrapper */
 }
 
 /* Wrapper da imagem grande (no carrossel de produto) */
@@ -1048,12 +1049,13 @@ footer .social a:hover {
     opacity: 1;
 }
 
+/* Ajuste para as setas ficarem do lado de fora */
 .carousel-prev {
-    left: 5px; 
+    left: -20px; /* Move para fora 20px (metade do botão + um pouco de espaço) */
 }
 
 .carousel-next {
-    right: 5px;
+    right: -20px; /* Move para fora 20px (metade do botão + um pouco de espaço) */
 }
 
 /* Miniaturas */
@@ -1379,15 +1381,16 @@ nav.container {
         width: 100%; 
         max-width: 100px; /* Tamanho da imagem grande (aproximado dos outros cards) */
         margin-bottom: 0; 
-        position: relative; 
+        position: relative; /* FUNDAMENTAL para posicionar as setas */
         flex-shrink: 0; 
-        overflow: hidden; /* Importante para as setas posicionadas fora */
+        /* REMOVIDO: overflow: hidden; */ /* Isso estava escondendo as setas */
     }
 
     .imagem-grande-wrapper {
+        position: relative; /* Adicionado para que as setas possam ser posicionadas em relação a ele */
         width: 100px; /* Alinhado com o max-width do produto-img-wrapper */
         height: 100px; /* Mantém proporção 1:1 */
-        overflow: hidden; 
+        overflow: hidden; /* Mantido para garantir que a imagem não saia dos limites */
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         margin: 0 auto; /* Centraliza a imagem grande dentro do seu wrapper */
@@ -1405,7 +1408,7 @@ nav.container {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: var(--base-color);
+        background-color: rgba(0, 0, 0, 0.4);
         border: none;
         color: white;
         font-size: 1.2rem;
@@ -1414,7 +1417,7 @@ nav.container {
         cursor: pointer;
         opacity: 0.9;
         transition: background-color 0.3s, opacity 0.3s;
-        z-index: 5;
+        z-index: 5; /* Garante que fiquem acima da imagem */
         width: 30px;
         height: 30px;
         display: flex;
@@ -1422,15 +1425,18 @@ nav.container {
         align-items: center;
     }
 
+    .carousel-btn:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+        opacity: 1;
+    }
 
+    /* NOVO: Ajuste para as setas ficarem COMPLETAMENTE FORA do quadrado da imagem */
     .carousel-btn.carousel-prev {
-        left: 0; /* Alinha com a borda esquerda do .produto-img-wrapper */
-        margin-left: -15px; /* Metade da largura da seta para fora, centralizando-a */
+        left: -40px; /* Move para fora. Valor = largura do botão + espaçamento */
     }
     
     .carousel-btn.carousel-next {
-        right: 0; /* Alinha com a borda direita do .produto-img-wrapper */
-        margin-right: -15px; /* Metade da largura da seta para fora, centralizando-a */
+        right: -40px; /* Move para fora. Valor = largura do botão + espaçamento */
     }
 
     /* Miniaturas (Mobile) */
@@ -1494,5 +1500,3 @@ nav.container {
         margin-top: 0; 
     }
 }
-
-
