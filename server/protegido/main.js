@@ -428,7 +428,7 @@ function diminuirQuantidade(nome) {
     });
   };
 
-  // 🔥 Cria miniaturas
+  // Cria miniaturas
   thumbsContainer.innerHTML = '';
   variacoes.forEach((item, index) => {
     const thumb = document.createElement('img');
@@ -442,23 +442,20 @@ function diminuirQuantidade(nome) {
     thumbsContainer.appendChild(thumb);
   });
 
-  // 🔄 Navegação pelas setas
-  const prevBtn = produto.querySelector('.carousel-prev');
-  const nextBtn = produto.querySelector('.carousel-next');
-
-  prevBtn.addEventListener('click', () => {
+  // Navegação setas
+  produto.querySelector('.carousel-prev').addEventListener('click', () => {
     current = (current - 1 + variacoes.length) % variacoes.length;
     updateProduto();
   });
 
-  nextBtn.addEventListener('click', () => {
+  produto.querySelector('.carousel-next').addEventListener('click', () => {
     current = (current + 1) % variacoes.length;
     updateProduto();
   });
 
-  // 🔥 Inicializa
   updateProduto();
 });
+
 
 
 
