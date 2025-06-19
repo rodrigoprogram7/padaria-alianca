@@ -1312,25 +1312,25 @@ nav.container {
         flex-direction: column; /* Força empilhamento vertical */
         align-items: center; /* Centraliza o conteúdo verticalmente */
         justify-content: flex-start; /* Alinha o conteúdo ao topo */
-        gap: 10px;
-        padding: 10px; /* Reduz padding extra para o card carrossel */
+        gap: 0; /* Reduzindo o gap geral do card de carrossel */
+        padding: 10px; 
         margin-bottom: 20px; 
         min-height: auto; 
         overflow: hidden; 
         max-width: 100%; 
-        width: 100%; /* Ocupa a largura total da coluna */
+        width: 100%; 
     }
 
     .produto.carrossel .produto-img-wrapper {
-        width: 100%; /* Ocupa 100% do espaço disponível para a imagem */
-        max-width: 160px; /* Limita a largura máxima da imagem principal do carrossel */
-        margin-bottom: 0; /* Removendo margem extra que pode separar */
-        flex-shrink: 0; /* Impede que o wrapper encolha */
+        width: 100%; /* Ocupa 100% do espaço disponível */
+        max-width: 100px; /* Limitando o wrapper para a imagem principal */
+        margin-bottom: 0; 
+        flex-shrink: 0; 
     }
 
     .imagem-grande-wrapper {
-        width: 160px; /* Largura fixa para a área da imagem grande */
-        height: 160px; /* Altura fixa para a área da imagem grande */
+        width: 100px; /* NOVA LARGURA: Igual aos outros cards */
+        height: 100px; /* NOVA ALTURA: Igual aos outros cards */
         overflow: hidden; 
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -1339,7 +1339,7 @@ nav.container {
     .imagem-grande-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain; 
+        object-fit: contain; /* Ou 'cover' se preferir cortar */
         margin-bottom: 0; 
     }
 
@@ -1351,10 +1351,11 @@ nav.container {
         overflow-x: auto; 
         overflow-y: hidden;
         padding: 4px;
-        gap: 6px; 
+        gap: 4px; /* Espaçamento ligeiramente menor entre as miniaturas */
         -webkit-overflow-scrolling: touch; 
-        min-height: 55px; 
+        min-height: 40px; /* Ajustado para 30px da miniatura + bordas/padding */
         justify-content: center; /* Centraliza as miniaturas para melhor visualização do scroll */
+        margin-top: 8px; /* Mantém um pequeno espaço da imagem grande */
     }
 
     /* Esconder a barra de rolagem para alguns navegadores */
@@ -1369,8 +1370,8 @@ nav.container {
 
     .carousel-thumbs img {
         flex: 0 0 auto; 
-        width: 40px; 
-        height: 40px;
+        width: 30px; /* NOVA LARGURA: Acompanha o tamanho da imagem grande */
+        height: 30px; /* NOVA ALTURA: Acompanha o tamanho da imagem grande */
         border: 2px solid transparent;
         border-radius: 6px;
         cursor: pointer;
@@ -1384,9 +1385,13 @@ nav.container {
 
     .produto.carrossel .produto-info {
         text-align: center; 
-        margin-top: 10px; /* Adicionado um pouco de margem para separar da imagem */
-        padding-top: 0; /* Resetado para não ter padding duplo */
-        flex-grow: 0; /* Impede que o produto-info se estique excessivamente */
-        flex-shrink: 0; /* Impede que o produto-info encolha demais */
+        margin-top: 10px; /* Reduzido para aproximar do nome do produto das miniaturas */
+        padding-top: 0; 
+        flex-grow: 0; 
+        flex-shrink: 0; 
+    }
+    
+    .produto.carrossel .produto-info h3 {
+        margin-top: 0; /* Remove qualquer margem superior extra do H3 */
     }
 }
