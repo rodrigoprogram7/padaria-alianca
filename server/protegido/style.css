@@ -643,6 +643,8 @@ footer .social a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
+    /* Adicionei para garantir que o container do shop NÃO corte as setas */
+    overflow: visible; 
 }
 
 .produtos, 
@@ -653,6 +655,8 @@ footer .social a:hover {
     background: white;
     border-radius: 10px;
     box-shadow: 0 0 10px #ccc;
+    /* Certifique-se de que estes NÃO tenham overflow: hidden; se forem pais */
+    overflow: visible; 
 }
 
 /* Layout dos produtos em 2 colunas */
@@ -918,7 +922,7 @@ footer .social a:hover {
     width: 90%;
     max-width: 800px;
     margin: 40px auto;
-    overflow: hidden;
+    overflow: hidden; /* Este é o carrossel geral, pode manter hidden */
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     position: relative;
@@ -990,6 +994,8 @@ footer .social a:hover {
     position: relative; 
     min-height: 220px; 
     margin-bottom: 40px; 
+    /* SUPER IMPORTANTE: Este deve estar visível para as setas saírem */
+    overflow: visible; 
 }
 
 /* Coluna Esquerda: imagem e thumbs */
@@ -1000,7 +1006,8 @@ footer .social a:hover {
     width: 160px; /* Aumentado um pouco */
     position: relative; /* Para posicionar botões de navegação */
     z-index: 5; /* Garante que os botões do carrossel fiquem visíveis */
-    overflow: hidden; /* Mantido no desktop para sobreposição interna das setas */
+    /* Mantido Hidden no desktop, para que a imagem grande tenha suas setas INTERNAS */
+    overflow: hidden; 
 }
 
 /* Wrapper da imagem grande (no carrossel de produto) */
@@ -1020,7 +1027,7 @@ footer .social a:hover {
     margin-bottom: 0; /* Remove margin-bottom que estava causando problemas */
 }
 
-/* Botões de navegação do carrossel de produto */
+/* Botões de navegação do carrossel de produto (Desktop) */
 .carousel-btn {
     color: rgb(255, 255, 255); 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); 
@@ -1048,6 +1055,7 @@ footer .social a:hover {
     opacity: 1;
 }
 
+/* Posicionamento para desktop - Setas dentro do imagem-grande-wrapper */
 .carousel-prev {
     left: 5px; 
 }
@@ -1227,6 +1235,8 @@ nav.container {
 @media (max-width: 768px) {
     .container {
         flex-direction: column; /* Produtos e Carrinho em coluna */
+        /* Garante que o container geral não corte nada */
+        overflow: visible;
     }
 
     nav.container {
@@ -1259,6 +1269,8 @@ nav.container {
         grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
         gap: 15px; /* Espaçamento entre os produtos */
         align-items: start; /* Adicionado para alinhar os itens no topo e evitar esticamento */
+        /* Garante que a grade de produtos não corte */
+        overflow: visible;
     }
 
     .produto {
@@ -1273,6 +1285,8 @@ nav.container {
         margin-bottom: 0; 
         width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
         height: fit-content; /* CHAVE: A altura do card se ajusta ao conteúdo */
+        /* O produto individual NÃO deve ter overflow: hidden; */
+        overflow: visible; 
     }
 
     .produto:hover {
@@ -1369,7 +1383,8 @@ nav.container {
         padding: 10px; 
         margin-bottom: 0;
         min-height: auto; 
-        /* overflow: hidden; */ /* Removido para não cortar as setas */
+        /* MUITO IMPORTANTE: Este deve estar VISIBLE para as setas saírem completamente */
+        overflow: visible; 
         max-width: 100%; 
         width: 100%; 
         height: fit-content;
@@ -1377,27 +1392,28 @@ nav.container {
 
     .produto.carrossel .produto-img-wrapper {
         width: 100%; 
-        max-width: 100px; /* Tamanho da imagem grande (aproximado dos outros cards) */
+        max-width: 100px; 
         margin-bottom: 0; 
         position: relative; /* FUNDAMENTAL: Este é o pai para o posicionamento absolute das setas */
         flex-shrink: 0; 
-        overflow: hidden; /* Adicionado para esconder o conteúdo que ultrapassar */
+        /* IMPORTANTE: Este também deve ser VISIBLE para as setas saírem da imagem grande */
+        overflow: visible; 
     }
 
     .imagem-grande-wrapper {
-        position: relative; /* Mantido por segurança, mas não é estritamente necessário para as setas */
-        width: 100px; /* Alinhado com o max-width do produto-img-wrapper */
-        height: 100px; /* Mantém proporção 1:1 */
+        position: relative; 
+        width: 100px; 
+        height: 100px; 
         overflow: hidden; /* Mantido para garantir que a imagem não saia dos limites */
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        margin: 0 auto; /* Centraliza a imagem grande dentro do seu wrapper */
+        margin: 0 auto; 
     }
 
     .imagem-grande-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain; /* Mantido contain para melhor visualização */
+        object-fit: contain; 
         margin-bottom: 0; 
     }
 
@@ -1406,7 +1422,7 @@ nav.container {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background: var(--base-color);
+        background-color: rgba(0, 0, 0, 0.4);
         border: none;
         color: white;
         font-size: 1.2rem;
@@ -1415,9 +1431,9 @@ nav.container {
         cursor: pointer;
         opacity: 0.9;
         transition: background-color 0.3s, opacity 0.3s;
-        z-index: 5; /* Garante que fiquem acima da imagem */
-        width: 30px; /* Tamanho do botão */
-        height: 30px; /* Tamanho do botão */
+        z-index: 10; /* Aumentado o z-index para garantir visibilidade */
+        width: 30px; 
+        height: 30px; 
         display: flex;
         justify-content: center;
         align-items: center;
@@ -1428,13 +1444,14 @@ nav.container {
         opacity: 1;
     }
 
-    /* NOVO: Ajuste para as setas ficarem sobrepostas e visíveis na imagem grande */
+    /* AGORA OS VALORES PARA AS SETAS FICAREM COMPLETAMENTE FORA NO MOBILE */
+    /* -35px: Considerando que a seta tem 30px de largura. -15px seria para metade dela. -35px a move completamente para fora + 5px de margem. */
     .carousel-btn.carousel-prev {
-        left: -25px; /* Posição da seta esquerda */
+        left: -35px; 
     }
     
     .carousel-btn.carousel-next {
-        right: -25px; /* Posição da seta direita */
+        right: -35px; 
     }
 
     /* Miniaturas (Mobile) */
