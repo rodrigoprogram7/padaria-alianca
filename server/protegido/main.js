@@ -298,6 +298,22 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 
   let current = 0
 
+  // 🔥 Criar miniaturas primeiro
+  const thumbs = []
+  if (thumbsContainer) {
+    variacoes.forEach((variacao, index) => {
+      const thumb = document.createElement('img')
+      thumb.src = variacao.img
+      thumb.alt = variacao.nome
+      thumb.addEventListener('click', () => {
+        current = index
+        updateProduto()
+      })
+      thumbsContainer.appendChild(thumb)
+      thumbs.push(thumb) // <-- Salvar referência
+    })
+  }
+
   const updateProduto = () => {
     imgGrande.src = variacoes[current].img
     nomeProduto.textContent = variacoes[current].nome
@@ -315,28 +331,15 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     const subtotalEl = produto.querySelector('.subtotal-preview')
     if (subtotalEl) subtotalEl.textContent = ''
 
-    if (thumbsContainer) {
-      thumbsContainer.querySelectorAll('img').forEach((img, index) => {
+    // ✅ Atualizar miniatura ativa de forma confiável
+    if (thumbs.length > 0) {
+      thumbs.forEach((img, index) => {
         img.classList.toggle('ativo', index === current)
       })
     }
   }
 
-  // Criação das miniaturas
-  if (thumbsContainer) {
-    variacoes.forEach((variacao, index) => {
-      const thumb = document.createElement('img')
-      thumb.src = variacao.img
-      thumb.alt = variacao.nome
-      thumb.addEventListener('click', () => {
-        current = index
-        updateProduto()
-      })
-      thumbsContainer.appendChild(thumb)
-    })
-  }
-
-  // Função das setas
+  // 🔥 Função das setas
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
       current = (current - 1 + variacoes.length) % variacoes.length
@@ -354,5 +357,4 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
   updateProduto()
 })
 
-atualizarCarrinho()
 

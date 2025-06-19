@@ -1445,11 +1445,11 @@ nav.container {
     }
 
     .carousel-btn.carousel-prev {
-        left: -20px; /* Mais perto da borda */
+        left: -25px; /* Mais perto da borda */
     }
     
     .carousel-btn.carousel-next {
-        right: -20px; /* Mais perto da borda */
+        right: -25px; /* Mais perto da borda */
     }
 
     .produto.carrossel .produto-info {
