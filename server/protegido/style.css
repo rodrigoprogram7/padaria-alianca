@@ -1008,6 +1008,7 @@ footer .social a:hover {
   height: 100px;
   object-fit: cover;
   border-radius: 6px;
+  margin-bottom: -50px;
 }
 
 /* Botões de navegação */
