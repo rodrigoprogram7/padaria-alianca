@@ -1424,11 +1424,13 @@ nav.container {
 
 
     .carousel-btn.carousel-prev {
-        margin-left: -25px; /* Metade da largura da seta para fora, centralizando-a */
+        left: 0; /* Alinha com a borda esquerda do .produto-img-wrapper */
+        margin-left: -15px; /* Metade da largura da seta para fora, centralizando-a */
     }
     
     .carousel-btn.carousel-next {
-        margin-right: -25px; /* Metade da largura da seta para fora, centralizando-a */
+        right: 0; /* Alinha com a borda direita do .produto-img-wrapper */
+        margin-right: -15px; /* Metade da largura da seta para fora, centralizando-a */
     }
 
     /* Miniaturas (Mobile) */
