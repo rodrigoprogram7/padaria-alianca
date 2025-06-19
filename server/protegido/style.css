@@ -1418,30 +1418,44 @@ nav.container {
         background: transparent; 
     }
 
-    .carousel-thumbs img {
-        flex: 0 0 auto; 
-        width: 30px; 
-        height: 30px;
-        border: 2px solid transparent;
-        border-radius: 6px;
-        cursor: pointer;
-        object-fit: cover;
-        transition: border-color 0.3s, transform 0.2s;
-    }
+  .carousel-thumbs img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  opacity: 0.6;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 2px solid transparent;
+  transition: opacity 0.3s, border-color 0.3s;
+}
 
-    .carousel-btn { 
-        display: flex; /* ATIVADO: Mostra as setas no mobile */
-        position: absolute; /* Posiciona as setas absolutamente */
-        top: 50%; /* Centraliza verticalmente em relação ao .carousel-thumbs */
-        transform: translateY(-50%);
-        width: 25px; /* Tamanho menor para as setas */
-        height: 25px;
-        font-size: 1.0rem; /* Tamanho do ícone */
-        background-color: var(--base-color); /* Um pouco mais visível */
-        color: white;
-        border-radius: 50%;
-        opacity: 0.9;
-        z-index: 200; /* Garante que fiquem acima das miniaturas */
+.carousel-thumbs img:hover {
+  opacity: 1;
+}
+
+.carousel-thumbs img.ativo {
+  border-color: var(--base-color);
+  opacity: 1;
+}
+
+   .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: var(--base-color);
+      border: none;
+      color: white;
+      font-size: 16px;
+      padding: 4px 8px;
+      border-radius: 50%;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: background-color 0.3s, opacity 0.3s;
+      z-index: 5;
+    }
+    .carousel-btn:hover {
+      background-color: var(--base-color-alt);
+      opacity: 1;
     }
 
     .carousel-btn.carousel-prev {

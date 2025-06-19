@@ -286,6 +286,7 @@ function mostrarAlerta(nomeProduto, quantidade) {
 }
 
 /*========== Carrossel de Miniaturas ==========*/
+/*========== Carrossel de Miniaturas ==========*/
 document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const variacoes = JSON.parse(produto.getAttribute('data-variacoes'))
   const imgGrande = produto.querySelector('.imagem-grande-wrapper img')
@@ -298,8 +299,9 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 
   let current = 0
 
-  // 🔥 Criar miniaturas primeiro
   const thumbs = []
+
+  // Criação das miniaturas
   if (thumbsContainer) {
     variacoes.forEach((variacao, index) => {
       const thumb = document.createElement('img')
@@ -310,7 +312,7 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
         updateProduto()
       })
       thumbsContainer.appendChild(thumb)
-      thumbs.push(thumb) // <-- Salvar referência
+      thumbs.push(thumb)
     })
   }
 
@@ -331,7 +333,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     const subtotalEl = produto.querySelector('.subtotal-preview')
     if (subtotalEl) subtotalEl.textContent = ''
 
-    // ✅ Atualizar miniatura ativa de forma confiável
     if (thumbs.length > 0) {
       thumbs.forEach((img, index) => {
         img.classList.toggle('ativo', index === current)
@@ -339,7 +340,7 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     }
   }
 
-  // 🔥 Função das setas
+  // Função das setas
   if (prevBtn) {
     prevBtn.addEventListener('click', () => {
       current = (current - 1 + variacoes.length) % variacoes.length
@@ -356,5 +357,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 
   updateProduto()
 })
+
 
 
