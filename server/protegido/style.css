@@ -998,18 +998,22 @@ footer .social a:hover {
 
 
 /* WRAPPER que contém imagem + botões */
+/* 🔥 Imagem grande responsiva */
 .imagem-grande-wrapper {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 60vw;
+  max-width: 200px;
+  height: 60vw;
+  max-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imagem-grande-wrapper img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: -50px;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 /* Botões de navegação */
@@ -1333,14 +1337,16 @@ nav.container {
 /* Estilo de cada item */
 .produto {
   display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: 10px;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  background-color: white;
+  border: 1px solid #ddd;
   padding: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  padding: 10px;
-  transition: transform 0.2s ease;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 500px; /* 🔥 ou o tamanho que desejar */
+  margin: 0 auto;
 }
 
 .produto img {
@@ -1478,3 +1484,20 @@ nav.container {
 }
 
 
+/* 🔥 Telas menores que 450px */
+@media (max-width: 450px) {
+  .imagem-grande-wrapper {
+    width: 70vw;
+    height: 70vw;
+  }
+
+  .carousel-thumbs img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .carousel-btn {
+    padding: 6px;
+    font-size: 18px;
+  }
+}
