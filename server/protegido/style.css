@@ -1410,27 +1410,20 @@ nav.container {
 
 
 
-/* 🔥 Container das miniaturas — fica abaixo da imagem */
+/* 🔥 Corrige a área das miniaturas */
 .carousel-thumbs {
   display: flex;
-  flex-direction: row;
-  gap: 8px;
+  gap: 6px;
   margin-top: 8px;
   max-width: 150px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 4px 2px;
+  background-color: white; /* 🔥 se estiver ficando branco pode ser transparência */
+  z-index: 10;
 }
 
-.carousel-thumbs::-webkit-scrollbar {
-  height: 5px;
-}
-
-.carousel-thumbs::-webkit-scrollbar-thumb {
-  background-color: var(--base-color);
-  border-radius: 10px;
-}
-
+/* 🔥 Garante que as imagens sejam visíveis */
 .carousel-thumbs img {
   flex: 0 0 auto;
   width: 50px;
@@ -1449,6 +1442,31 @@ nav.container {
 
 .carousel-thumbs img:hover {
   border-color: var(--base-color-alt);
+}
+
+/* 🔥 Garante que o container da imagem e thumbs não esmague */
+.produto-img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+/* 🔥 Se estiver aparecendo só um pedaço, força a altura mínima */
+.carousel-thumbs {
+  min-height: 55px;
+}
+
+/* 🔥 Se algum container pai tiver overflow errado, neutraliza */
+.produto,
+.produto-info,
+.produto-img-wrapper,
+.imagem-grande-wrapper {
+  overflow: visible !important;
 }
 
 
