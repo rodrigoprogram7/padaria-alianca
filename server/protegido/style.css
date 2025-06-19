@@ -965,11 +965,11 @@ footer .social a:hover {
 }
 
 .carousel-prev {
-  left: -2px; /* ou -40px para mais distância */
+  left: 20px; /* ou -40px para mais distância */
 }
 
 .carousel-next {
-  right: -2px;
+  right: 20px;
 }
 
 .produto.carrossel {
@@ -1024,11 +1024,11 @@ footer .social a:hover {
 }
 
 .carousel-prev {
-  left: -18px;
+  left: 18px;
 }
 
 .carousel-next {
-  right: -18px;
+  right: 18px;
 }
 
 /* MINIATURAS ATUALIZADAS */
