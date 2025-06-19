@@ -1054,11 +1054,6 @@ footer .social a:hover {
     align-items: center;
 }
 
-.carousel-btn:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Mais escuro no hover */
-    opacity: 1;
-}
-
 /* Posicionamento para desktop - Setas DENTRO do imagem-grande-wrapper */
 .carousel-btn.carousel-prev {
     left: 5px; /* Posição dentro do wrapper */
