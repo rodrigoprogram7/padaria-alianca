@@ -1422,19 +1422,13 @@ nav.container {
         align-items: center;
     }
 
-    .carousel-btn:hover {
-        background-color: rgba(0, 0, 0, 0.6);
-        opacity: 1;
-    }
 
     .carousel-btn.carousel-prev {
-        left: 0; /* Alinha com a borda esquerda do .produto-img-wrapper */
-        margin-left: -15px; /* Metade da largura da seta para fora, centralizando-a */
+        margin-left: -25px; /* Metade da largura da seta para fora, centralizando-a */
     }
     
     .carousel-btn.carousel-next {
-        right: 0; /* Alinha com a borda direita do .produto-img-wrapper */
-        margin-right: -15px; /* Metade da largura da seta para fora, centralizando-a */
+        margin-right: -25px; /* Metade da largura da seta para fora, centralizando-a */
     }
 
     /* Miniaturas (Mobile) */
