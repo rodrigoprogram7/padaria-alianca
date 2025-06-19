@@ -945,19 +945,19 @@ footer .social a:hover {
 }
 
 .carousel-btn {
- color: rgb(255, 255, 255); /* Cor da seta */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* 👈 Sombra preta suave */
+  background: var(--base-color);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 20px;
+  transition: background 0.3s;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 2.3rem;
-  font-weight: 20;
-  cursor: pointer;
-  z-index: 2;
-  opacity: 0.8;
-  transition: opacity 0.3s, transform 0.3s;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
 .carousel-btn:hover {
@@ -965,11 +965,11 @@ footer .social a:hover {
 }
 
 .carousel-prev {
-  left: -22px; /* ou -40px para mais distância */
+  left: -20px; /* 🔥 Dentro da imagem, ajusta como quiser */
 }
 
 .carousel-next {
-  right: -22px;
+  right: -20px;
 }
 
 .produto.carrossel {
@@ -996,18 +996,21 @@ footer .social a:hover {
 }
 
 
-/* WRAPPER que contém imagem + botões */
+/* 🔥 Imagem grande — AGORA MAIOR E CENTRALIZADA */
 .imagem-grande-wrapper {
   position: relative;
-  width: 100%;
-  height: 100px;
+  width: 180px; /* 🔥 Aumenta aqui */
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .imagem-grande-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  border-radius: 6px;
+  object-fit: contain;
+  display: block;
 }
 
 /* Botões de navegação */
@@ -1420,20 +1423,19 @@ nav.container {
 .carousel-thumbs {
   display: flex;
   gap: 6px;
-  margin-top: 8px;
-  max-width: 150px;
+  margin-top: 6px;
+  max-width: 180px;
   overflow-x: auto;
   overflow-y: hidden;
   padding: 4px 2px;
-  background-color: white; /* 🔥 se estiver ficando branco pode ser transparência */
-  z-index: 10;
+  min-height: 42px;
 }
 
 /* 🔥 Garante que as imagens sejam visíveis */
 .carousel-thumbs img {
   flex: 0 0 auto;
-  width: 50px;
-  height: 50px;
+  width: 38px;
+  height: 38px;
   object-fit: cover;
   border: 2px solid transparent;
   border-radius: 6px;
@@ -1456,10 +1458,9 @@ nav.container {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 5px;
+  gap: 8px;
   width: 100%;
   position: relative;
-  z-index: 5;
 }
 
 /* 🔥 Se estiver aparecendo só um pedaço, força a altura mínima */
