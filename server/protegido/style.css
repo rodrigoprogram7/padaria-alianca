@@ -396,7 +396,7 @@ footer {
 
 footer.section {
     padding: 4rem 0; 
-}   
+}    
 
 footer .logo {
     display: inline-block;
@@ -989,7 +989,7 @@ footer .social a:hover {
     border-bottom: 1px solid #ddd;
     overflow: visible; 
     position: relative; 
-    min-height: 220px; /* REMOVIDO OU AJUSTADO NA MEDIA QUERY ABAIXO */
+    min-height: 220px; 
     margin-bottom: 40px; 
 }
 
@@ -1086,7 +1086,7 @@ footer .social a:hover {
     transition: border-color 0.3s, transform 0.2s;
 }
 
-.carousel-thumbs img.active {
+.carousel-thumbs img.active { /* Mantido active para desktop */
     border-color: var(--base-color);
     transform: scale(1.05);
 }
@@ -1253,8 +1253,7 @@ nav.container {
     .produtos {
         grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
         gap: 15px; /* Espaçamento entre os produtos */
-        /* Adicionado para alinhar os itens no topo e evitar esticamento */
-        align-items: start; 
+        align-items: start; /* Adicionado para alinhar os itens no topo e evitar esticamento */
     }
 
     .produto {
@@ -1373,14 +1372,15 @@ nav.container {
 
     .produto.carrossel .produto-img-wrapper {
         width: 100%; 
-        max-width: 100px; 
+        max-width: 150px; /* Ajuste o tamanho máximo para a imagem principal */
         margin-bottom: 0; 
+        position: relative; /* FUNDAMENTAL para posicionar as setas */
         flex-shrink: 0; 
     }
 
     .imagem-grande-wrapper {
-        width: 100px; 
-        height: 100px; 
+        width: 150px; /* Alinhar com o max-width do produto-img-wrapper */
+        height: 150px; /* Mantém proporção 1:1 */
         overflow: hidden; 
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -1389,10 +1389,46 @@ nav.container {
     .imagem-grande-wrapper img {
         width: 100%;
         height: 100%;
-        object-fit: contain; 
+        object-fit: contain; /* Ou cover, dependendo de como você quer a imagem dentro do container */
         margin-bottom: 0; 
     }
 
+    /* Botões de navegação do carrossel de produto (Mobile) */
+    .carousel-btn {
+        position: absolute;
+        top: 50%; /* Centraliza verticalmente */
+        transform: translateY(-50%); /* Ajuste fino para o centro */
+        background-color: rgba(0, 0, 0, 0.4); /* Fundo um pouco mais visível */
+        border: none;
+        color: white;
+        font-size: 1.2rem; /* Diminuído para 1.2rem */
+        padding: 0; /* Remover padding para controlar tamanho com width/height */
+        border-radius: 50%;
+        cursor: pointer;
+        opacity: 0.9; /* Um pouco mais visível */
+        transition: background-color 0.3s, opacity 0.3s;
+        z-index: 5;
+        width: 30px; /* Diminuído o tamanho do botão */
+        height: 30px; /* Diminuído o tamanho do botão */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-btn:hover {
+        background-color: rgba(0, 0, 0, 0.6);
+        opacity: 1;
+    }
+
+    .carousel-btn.carousel-prev {
+        left: 5px; /* Ajuste para ficar mais próximo da imagem */
+    }
+    
+    .carousel-btn.carousel-next {
+        right: 5px; /* Ajuste para ficar mais próximo da imagem */
+    }
+
+    /* Miniaturas (Mobile) */
     .carousel-thumbs {
         display: flex;
         flex-direction: row; 
@@ -1418,54 +1454,26 @@ nav.container {
         background: transparent; 
     }
 
-  .carousel-thumbs img {
-  width: 42px;
-  height: 42px;
-  object-fit: cover;
-  opacity: 0.6;
-  cursor: pointer;
-  border-radius: 5px;
-  border: 2px solid transparent;
-  transition: opacity 0.3s, border-color 0.3s;
-}
-
-.carousel-thumbs img:hover {
-  opacity: 1;
-}
-
-.carousel-thumbs img.ativo {
-  border-color: var(--base-color);
-  opacity: 1;
-}
-
-   .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: var(--base-color);
-      border: none;
-      color: white;
-      font-size: 16px;
-      padding: 4px 8px;
-      border-radius: 50%;
-      cursor: pointer;
-      opacity: 0.8;
-      transition: background-color 0.3s, opacity 0.3s;
-      z-index: 5;
-    }
-    .carousel-btn:hover {
-      background-color: var(--base-color-alt);
-      opacity: 1;
+    .carousel-thumbs img {
+        width: 48px; /* Ligeiramente maior para melhor toque */
+        height: 48px; /* Ligeiramente maior para melhor toque */
+        object-fit: cover;
+        opacity: 0.7; /* Opacidade sutil */
+        cursor: pointer;
+        border-radius: 5px;
+        border: 2px solid transparent;
+        transition: opacity 0.3s, border-color 0.3s;
     }
 
-    .carousel-btn.carousel-prev {
-        left: -25px; /* Mais perto da borda */
+    .carousel-thumbs img:hover {
+        opacity: 1;
+    }
+
+    .carousel-thumbs img.ativo { /* Mantido 'ativo' para consistência no mobile */
+        border-color: var(--base-color);
+        opacity: 1;
     }
     
-    .carousel-btn.carousel-next {
-        right: -25px; /* Mais perto da borda */
-    }
-
     .produto.carrossel .produto-info {
         text-align: center; 
         margin-top: 10px; 
