@@ -16,69 +16,14 @@ ul {
 img {
     width: 100%;
     height: auto;
+    display: block; /* Garante que a imagem não tenha espaços extras abaixo dela */
 }
-
-  /* Animações imagem inicial */
-  @keyframes slideInLeft {
-    0% {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideInRight {
-    0% {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    100% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
- #home .image {
-  animation: slideInLeft 1s ease-out forwards;
-  width: 100%;
-  max-width: 300px;
-  margin: auto;
-  position: relative;
-}
-
-  #home .image::before {
-    animation: slideInRight 1s ease-out forwards;
-  }
-
-  /* Responsividade melhorada */
-  @media (min-width: 1024px) {
-    #home .container {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      align-items: center;
-    }
-
-    #home .image {
-      order: 1;
-      max-width: 300px;
-      margin: auto;
-    }
-
-    #home .text {
-      order: 0;
-      max-width: 600px;
-    }
-  }
 
 /*======================================== Variáveis ========================================*/
 :root {
     --header-height: 4.5rem;
 
     /* Cores */
-
     --hue: 46;
     --base-color: hsl(var(--hue) 100% 57%);
     --base-color-second: hsl(var(--hue) 65% 88%);
@@ -89,7 +34,7 @@ img {
     --body-color: hsl(0 0% 98%);
     
     /* Tamanho das fontes*/
-    --title-font-size: 1.875rem;
+    --title-font-size-base: 1.875rem; /* Renomeado para base */
     --subtitle-font-size: 1rem;
     
     /* Tipo das fontes*/
@@ -107,11 +52,10 @@ body {
     color: var(--text-color);
     background-color: var(--body-color);
     -webkit-font-smoothing: antialiased;
-    
 }
 
 .title {
-    font: 700 1.875rem var(--title-font);
+    font: 700 var(--title-font-size-base) var(--title-font); /* Usando a variável base */
     color: var(--title-color);
     -webkit-font-smoothing: auto;
 }
@@ -128,23 +72,26 @@ body {
     transition: background 0.3s;
 }
 
-.button:hover{
+.button:hover {
     background-color: var(--base-color-alt);
 }
 
-.divider-1 {
-    height: 1px;
-    background: linear-gradient(270deg, 
-    hsla(var(--hue), 36%, 57%, 1), 
-    hsla(var(--hue), 65%, 88%, 0.34));
-}
-
+.divider-1,
 .divider-2 {
     height: 1px;
     background: linear-gradient(270deg, 
-    hsla(var(--hue), 65%, 88%, 0.34),
-    hsla(var(--hue), 36%, 57%, 1));
+        hsla(var(--hue), 36%, 57%, 1), 
+        hsla(var(--hue), 65%, 88%, 0.34)
+    );
 }
+
+.divider-2 {
+    background: linear-gradient(270deg, 
+        hsla(var(--hue), 65%, 88%, 0.34),
+        hsla(var(--hue), 36%, 57%, 1)
+    );
+}
+
 /*======================================== Layout ========================================*/
 .container {
     margin-left: 1.5rem;
@@ -209,7 +156,7 @@ body {
 /*======================================== Navegação ========================================*/
 nav {
     width: 100%;
-    height: 50px;
+    height: 50px; /* Consolidado com #header para consistência */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -226,7 +173,7 @@ nav ul li a {
 
 nav ul li a:hover,
 nav ul li a.active {
-  color: var(--base-color);
+    color: var(--base-color);
 }
 
 nav ul li a::after {
@@ -234,11 +181,9 @@ nav ul li a::after {
     width: 0%;
     height: 2px;
     background: var(--base-color);
-
     position: absolute;
     left: 0;
     bottom: -1.5rem;
-
     transition: width 0.2s;
 }
 
@@ -253,27 +198,24 @@ nav .menu {
     visibility: hidden;
     top: -20rem;
     transition: 0.2s;
-  }
+}
 
 nav .menu ul {
-    display: none;
+    display: none; /* Escondido por padrão no mobile */
 }
 
 nav.show .menu {
     opacity: 1;
     visibility: visible;
-
     background: var(--body-color);
-
     height: 100vh;
     width: 100vw;
-
     position: fixed;
     top: 0;
     left: 0;
-
     display: grid;
     place-content: center;
+    z-index: 90; /* Abaixo do header se ele for fixo */
 }
 
 nav.show .menu ul {
@@ -288,23 +230,31 @@ nav.show ul.grid {
     color: var(--base-color);
     font-size: 1.5rem;
     cursor: pointer;
+    display: block; /* Visível por padrão para mobile, ajustado no desktop */
 }
 
 nav .icon-close {
     visibility: hidden;
     opacity: 0;
-
     position: absolute;
     top: -1.5rem;
     right: 1.5rem;
-
     transition: 0.2s;
 }
 
-nav.show div.icon-close {
+nav.show .icon-close {
     visibility: visible;
     opacity: 1;
     top: 1.5rem;
+}
+
+nav.show .icon-menu {
+    display: none;
+}
+
+.icon-menu::before {
+    content: none !important; /* Removendo o pseudo-elemento se não for usado para ícone */
+    display: none !important;
 }
 
 /*======================================== Home ========================================*/
@@ -318,6 +268,10 @@ nav.show div.icon-close {
 
 #home .image {
     position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    animation: slideInLeft 1s ease-out forwards;
 }
 
 #home .image::before {
@@ -328,17 +282,16 @@ nav.show div.icon-close {
     position: absolute;
     top: -16.8%;
     left: 16.7%;
-    z-index: 0  ;
+    z-index: 0;
+    border-radius: 0.25px;
+    animation: slideInRight 1s ease-out forwards;
 }
 
 #home .image img {
     position: relative;
     right: 2.93rem;
-}
-
-#home .image img, 
-#home .image::before {
     border-radius: 0.25px;
+    z-index: 1; /* Garante que a imagem fique acima do pseudo-elemento */
 }
 
 #home .text {
@@ -358,17 +311,40 @@ nav.show div.icon-close {
 #home .text p span {
     font-style: italic;
 }
-/*======================================== Categorias ========================================*/
+
+/* Animações imagem inicial */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*======================================== Categorias (About) ========================================*/
 #about {
     background-color: var(--body-color);
 }
 
 #about .container {
-    margin: 0;
+    margin: 0; /* Ajuste para centralizar no desktop */
 }
 
 /*======================================== Contato ========================================*/
-
 #contact .grid {
     gap: 4rem;
 }
@@ -397,29 +373,30 @@ nav.show div.icon-close {
 }
 
 /*======================================== Rodapé ========================================*/
-#imgg{
+#imgg {
     width: 30px;
     height: 30px;
+}
 
-}
-#bt{
+#bt { /* Botão genérico, talvez seja melhor renomear para algo mais específico se for só para o footer */
     background-color: #007bff;
-  color: white;
-  border: none;
-  width: 110px; /* 80% da largura da viewport */
-  height: 30px; /* 50% da altura da viewport */
-  padding: 8px 12px;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    color: white;
+    border: none;
+    width: 110px; 
+    height: 30px; 
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
+
 footer {
     background: var(--base-color);
 }
 
 footer.section {
-    padding: 4rem 0;
-}   
+    padding: 4rem 0; 
+}   
 
 footer .logo {
     display: inline-block;
@@ -441,7 +418,7 @@ footer .social {
     width: fit-content;
 }
 
-footer .social a{
+footer .social a {
     transition: 0.3s;
     display: inline-block;
 }
@@ -451,25 +428,24 @@ footer .social a:hover {
 }
 
 /*======================================== Botão de voltar ao início ========================================*/
-
 .back-to-top {
-  background: var(--base-color);
-  color: var(--text-color-light);
-  font-size: 1.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 3.5rem;
-  height: 3.5rem;
-  position: fixed;
-  right: 2rem;
-  bottom: 2rem;
-  border-radius: 50%;
-  visibility: hidden;
-  opacity: 0;
-  transition: 0.3s;
-  transform: translateY(100%);
-  z-index: 999;
+    background: var(--base-color);
+    color: var(--text-color-light);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    transform: translateY(100%);
+    z-index: 999;
 }
 
 .back-to-top.show {
@@ -478,8 +454,34 @@ footer .social a:hover {
     transform: translateY(0);
 }
 
-/*======================================== Responsivo *PRESTAR ATENÇÃO PORRA* ========================================*/
-/* Dispositivos Extra Largos: 1200 > */
+/*======================================== Responsividade ========================================*/
+
+/* Dispositivos Largos: 992px > */
+@media (min-width: 992px) {
+    :root {
+        --title-font-size-base: 2.25rem; /* Ajuste para títulos maiores */
+        --subtitle-font-size: 1.125rem;
+    }
+
+    #home .container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+    }
+
+    #home .image {
+        order: 1;
+        max-width: 300px;
+        margin: auto;
+    }
+
+    #home .text {
+        order: 0;
+        max-width: 600px; /* Ajuste para o texto não ficar muito largo */
+    }
+}
+
+/* Dispositivos Extra Largos: 1200px > */
 @media (min-width: 1200px) {
     /* reusable classes */
     .container {
@@ -492,7 +494,8 @@ footer .social a:hover {
         padding: 10rem 0;
     }
     
-    .section header, #testimonials header {
+    .section header, 
+    #testimonials header { /* Adicionei #testimonials header que estava separado */
         max-width: 32rem;
         text-align: center;
         margin-left: auto;
@@ -508,6 +511,10 @@ footer .social a:hover {
         opacity: 1;
         visibility: visible;
         top: 0;
+        position: static; /* Volta para o fluxo normal */
+        height: auto;
+        width: auto;
+        background: transparent;
     }
 
     nav .menu ul {
@@ -525,18 +532,17 @@ footer .social a:hover {
         -webkit-font-smoothing: auto;
     }
 
-    nav .icon-menu {
+    nav .icon-menu,
+    nav .icon-close { /* Esconde os ícones de toggle no desktop */
         display: none;
     }
 
     /* Layout */
-
     main {
         margin-top: var(--header-height);
     }
     
     /* Home */
-
     #home .container {
         grid-auto-flow: column;
         width: fit-content;
@@ -555,14 +561,12 @@ footer .social a:hover {
     }
 
     /* About */
-
     #about .container {
         margin: 0 auto;
         grid-auto-flow: column;
     }
     
     /* Services */
-
     .cards {
         grid-template-columns: 1fr 1fr 1fr;
     }
@@ -573,7 +577,6 @@ footer .social a:hover {
     }
 
     /* Testimonials*/
-
     #testimonials .container {
         margin-left: auto;
         margin-right: auto;
@@ -590,7 +593,6 @@ footer .social a:hover {
     }
 
     /* Footer */
-
     footer.section {
         padding: 3.75rem 0;
     }
@@ -605,754 +607,90 @@ footer .social a:hover {
         font-size: 2.25rem;
     }
 }
-/* Dispositivos Largos: 1023 > */
 
-/* Dispositivos Largos: 992 > */
-@media (min-width: 992px) {
-    :root {
-        --title-font-size: 2.25rem;
-        --subtitle-font-size: 1.125rem;
-    }
-}
-/* Dispositivos Médios: 767 > */
+/*======================================== Componentes de Produtos e Carrinho ========================================*/
 
-#btcategoria{
+/* Filtro de Categoria */
+#btcategoria {
     margin-top: 5px;
     width: 100px;
     height: 50px;
 }
-    .container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-    }
-    .produtos, .carrinho {
-      flex: 1;
-      min-width: 320px;
-      padding: 20px;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #ccc;
-    }
-    .produto {
-      display: flex;
-      border-bottom: 1px solid #ddd;
-      padding: 15px 0;
-      gap: 10px;
-    }
-    .produto img {
-      width: 90px;
-      height: 90px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .produto-info {
-      flex: 1;
-    }
-    .produto h3 {
-      margin: 0 0 5px;
-    }
-    .quantidade-box {
-      display: flex;
-      align-items: center;
-      margin: 5px 0;
-    }
-    .quantidade-box input {
-      width: 40px;
-      text-align: center;
-      font-size: 16px;
-      margin: 0 5px;
-    }
-    .quantidade-box button {
-      width: 30px;
-      height: 30px;
-      font-weight: bold;
-      border-radius: 5px;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .produto button.adicionar {
-      margin-top: 8px;
-      padding: 5px 10px;
-      cursor: pointer;
-    }
-    .carrinho h2 {
-      border-bottom: 2px solid #eee;
-      padding-bottom: 10px;
-    }
-    .carrinho-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 10px;
-  border-bottom: 1px solid #ddd;
-  padding: 10px 0;
-}
-
-.carrinho-nome {
-  flex: 2;
-}
-
-.carrinho-quantidade {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.btt{
-      width: 20px;
-      height: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #e6e6e6, #ffffff);
-      box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-}
-.btt2{
-    width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #e6e6e6, #ffffff);
-      box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
-      cursor: pointer;
-      transition: all 0.2s ease-in-out;
-}
-
-.carrinho-subtotal {
-  flex: 1;
-
-}
-
-.carrinho-acoes {
-  display: flex;
-  gap: 5px;
-}
-
-.carrinho-acoes button {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 18px;
-  color: #ff5252;
-}
-
-.carrinho-acoes button:hover {
-  color: #e04848;
-}
-
-    .acoes {
-      display: flex;
-      gap: 5px;
-    }
-    .acoes button {
-  background-color: #ff5252;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 14px;
-  transition: background-color 0.3s;
-}
-
-.acoes button:hover {
-  background-color: #e04848;
-}
-#total{
-    font-size: 18px;
-}
-    .total {
-      margin-top: 20px;
-      font-weight: bold;
-      font-size: 18px;
-    }
-    #whatsapp {
-      margin-top: 20px;
-      padding: 10px;
-      background-color: #25D366;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      width: 100%;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    .alerta {
-      position: fixed;
-      top: 10px;
-      left: 50%;
-      transform: translateX(-50%) translateY(-20px);
-      background-color: #28a745;
-      color: white;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: bold;
-      opacity: 0;
-      transition: all 0.3s ease;
-      z-index: 9999; /* ainda sobre o conteúdo, mas abaixo da barra de pesquisa se necessário */
-      pointer-events: none; /* 🔥 isso permite clicar no que estiver atrás */
-    }
-
 
 .filtro-btn {
-  background-color: #e0e0e0;
-  color: #333;
-  border: none;
-  width: 80px; /* 80% da largura da viewport */
-  height: 60px; /* 50% da altura da viewport */
-  padding: 8px 12px;
-  border-radius: 10px;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #e0e0e0;
+    color: #333;
+    border: none;
+    width: 80px; 
+    height: 60px; 
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .filtro-btn:hover {
-  background-color: #d5d5d5;
+    background-color: #d5d5d5;
 }
 
 .filtro-btn.active {
-  background-color: #007bff;
-  color: white;
+    background-color: #007bff;
+    color: white;
 }
 
-
-    @keyframes fadeOut {
-      0% { opacity: 1; }
-      80% { opacity: 1; }
-      100% { opacity: 0; display: none; }
-    }
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column;
-      }
-    }
-
-    .carousel-container {
-      width: 90%;
-      max-width: 800px;
-      margin: 40px auto;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      position: relative;
-    }
-
-    .carousel-slide {
-      display: flex;
-      transition: transform 0.5s ease-in-out;
-    }
-
-    .carousel-item {
-      min-width: 100%;
-      position: relative;
-    }
-
-    .carousel-item img {
-      width: 100%;
-      display: block;
-    }
-
-    .caption {
-  background: #ffffff;
-  color: #333333be;
-  width: 100%;
-  padding: 12px 20px;
-  font-size: 1.1rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid #ddd;
-}
-
-
-    .nav-button {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0, 0, 0, 0.161);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 20px;
-      z-index: 1;
-    }
-
-    .nav-button:hover {
-      background: rgba(0, 0, 0, 0.361);
-    }
-
-    #prevBtn {
-      left: 10px;
-    }
-
-    #nextBtn {
-      right: 10px;
-    }
-
-     @media (max-width: 767px) {
-  .produto {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 60px; /* aumenta espaço entre imagem e conteúdo */
-  }
-
-  .produto-img-wrapper {
-    flex-shrink: 0;
-    width: 90px;
-    height: 90px;
-    position: relative;
-  }
-
-  .produto-info {
-    flex: 1;
-    padding-top: 4px;
-  }
-
-  .produto h3 {
-    font-size: 1.05rem;
-    margin-bottom: 4px;
-  }
-
-  .produto p {
-    margin-bottom: 6px;
-  }
-
-  .quantidade-box {
-    margin: 8px 0;
-  }
-
-  #bt {
-    margin-top: 6px;
-  }
-}
-
-.produto-img-wrapper {
-  position: relative;
-  width: 90px;
-  height: 90px;
-}
-
-.produto-img-wrapper img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 8px;
-}
-
-.carousel-btn {
- color: rgb(255, 255, 255); /* Cor da seta */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); /* 👈 Sombra preta suave */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  font-size: 2.3rem;
-  font-weight: 20;
-  cursor: pointer;
-  z-index: 2;
-  opacity: 0.8;
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.carousel-btn:hover {
-  background: var(--base-color-alt);
-}
-
-.carousel-prev {
-  left: 5px; /* ou -40px para mais distância */
-}
-
-.carousel-next {
-  right: 5px;
-}
-
-.produto.carrossel {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: 40px;
-  flex-wrap: wrap;
-  padding-bottom: 20px;
-  border-bottom: 1px solid #ddd;
-  overflow: visible;      /* <- importante */
-  position: relative;     /* <- importante */
-  min-height: 220px;      /* <- garante espaço vertical suficiente */
-  margin-bottom: 40px;    /* <- empurra o próximo produto */
-}
-
-
-/* COLUNA ESQUERDA: imagem e thumbs */
-.produto.carrossel .produto-img-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 160px; /* antes era 140px */
-}
-
-
-/* WRAPPER que contém imagem + botões */
-.imagem-grande-wrapper {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-.imagem-grande-wrapper img {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: -50px;
-}
-
-/* Botões de navegação */
-.carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: var(--base-color);
-  z-index: 2;
-}
-
-.carousel-prev {
-  left: -25px;
-}
-
-.carousel-next {
-  right: -25px;
-}
-
-/* MINIATURAS ATUALIZADAS */
-.carousel-thumbs {
-  display: flex;
-  gap: 6px;
-  height: 10px;
-  right: 10px;
-  margin-top: 8px;
-  max-width: 150px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 4px 2px;
-  min-height: 50px;
-}
-
-.carousel-thumbs::-webkit-scrollbar {
-  height: 6px;
-}
-
-.carousel-thumbs::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 3px;
-}
-
-.carousel-thumbs img {
-  flex: 0 0 auto;
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: border-color 0.3s, transform 0.2s;
-}
-
-.carousel-thumbs img.active {
-  border-color: var(--base-color);
-  transform: scale(1.05);
-}
-
-.carousel-thumbs img:hover {
-  border-color: var(--base-color-alt);
-}
-
-/* No mobile as miniaturas ficam em linha */
-@media (max-width: 600px) {
-  .carousel-thumbs {
-    flex-direction: row;
-    max-height: none;
-    max-width: 100%;
-    overflow-x: auto;
-    overflow-y: hidden;
-  }
-}
-
-
-/* COLUNA DIREITA */
-.produto-info {
-  flex: 1;
-}
-.produto.carrossel .produto-info {
-  margin-top: 25px;
-}
-
-
-
-/* === MENU MOBILE === */
-/* Estilo base para ícones */
-.toggle {
-  color: var(--base-color);
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: none; /* só aparece no mobile */
-}
-
-/* Ícones no mobile */
-@media (max-width: 768px) {
-  .toggle {
-    display: block;
-  }
-
-  nav .icon-close {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    top: -1.5rem;
-    right: 1.5rem;
-    transition: 0.2s;
-  }
-
-  nav.show .icon-close {
-    visibility: visible;
-    opacity: 1;
-    top: 1.5rem;
-  }
-
-  nav.show .icon-menu {
-    display: none;
-  }
-
-  .menu ul {
-    display: none;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  nav.show .menu ul {
+/* Layout Geral */
+.container.shop { /* Adicionei uma classe para diferenciar do container global */
     display: flex;
-  }
-}
-
-
-
-.icon-menu::before {
-    content: none !important;
-    display: none !important;
-}
-
-
-.carrinho-nome {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.carrinho-miniatura {
-  width: 24px;
-  height: 24px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-/* === NAV CONTAINER FLEX === */
-nav.container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  padding: 10px 16px;
-}
-
-/* Agrupamento logo + pesquisa */
-.navbar-esquerda {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex: 1;
-  min-width: 0;
-}
-
-/* Logo */
-.logo {
-  font-weight: bold;
-  font-size: 1.2rem;
-  white-space: nowrap;
-}
-
-/* Barra de pesquisa */
-.barra-pesquisa {
-  position: relative;
-  flex: 1;
-  max-width: 250px;
-  margin-top: -2px;  /* 🔼 sobe um pouco */
-  
-}
-
-.barra-pesquisa input {
-  width: 100%;
-  padding: 6px 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 0.9rem;
-}
-.toggle icon-menu{
-  margin-top: -2px;
-}
-
-#resultados-pesquisa {
-  position: absolute;
-  top: 110%;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border: none;
-  border-radius: 4px;
-  list-style: none;
-  padding: 0;
-  margin: 4px 0 0 0;
-  z-index: 1000;
-  max-height: 200px;
-  overflow-y: auto;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#resultados-pesquisa li {
-  padding: 8px 12px;
-  cursor: pointer;
-}
-
-/* Ícones do menu */
-.toggle {
-  font-size: 1.5rem;
-  cursor: pointer;
-  display: block;
-  margin-left: auto;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  nav.container {
     flex-wrap: wrap;
-  }
-
-  .navbar-esquerda {
-    width: 100%;
-    justify-content: space-between;
-    margin-bottom: 8px;
-  }
-
-  .barra-pesquisa {
-    max-width: 60%;
-  }
-
-  .toggle {
-    position: absolute;
-    right: 16px;
-    top: 16px;
-  }
-
-  .icon-close {
-    display: none;
-  }
-
-  nav.show .icon-menu {
-    display: none;
-  }
-
-  nav.show .icon-close {
-    display: block;
-  }
+    gap: 20px;
 }
 
-/* Efeito destaque no produto encontrado */
-.produto.encontrado {
-  animation: destaqueProduto 1s ease;
-  box-shadow: 0 0 0 3px var(--base-color, #ffa500);
-  border-radius: 8px;
-  transition: box-shadow 0.3s ease;
+.produtos, 
+.carrinho {
+    flex: 1;
+    min-width: 320px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
 }
-
-@keyframes destaqueProduto {
-  0% {
-    transform: scale(1);
-    box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.6);
-  }
-  50% {
-    transform: scale(1.02);
-    box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.6);
-  }
-  100% {
-    transform: scale(1);
-    box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.4);
-  }
-}
-
-.erro-pedido {
-  color: red;
-  font-weight: bold;
-  margin-top: 8px;
-  text-align: center;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.erro-pedido.show {
-  opacity: 1;
-}
-
-@keyframes tremer {
-  0% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  50% { transform: translateX(5px); }
-  75% { transform: translateX(-5px); }
-  100% { transform: translateX(0); }
-}
-
-.erro-pedido.tremer {
-  animation: tremer 0.4s;
-}
-
 
 /* Layout dos produtos em 2 colunas */
 .produtos {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Mais flexível */
+    gap: 20px;
 }
 
-/* Estilo de cada item */
+/* Estilo de cada item de produto */
 .produto {
-  display: flex;
-  flex-direction: column;
-  background: white;
-  border-radius: 10px;
-  align-items: center;
-  padding: 10px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-  padding: 10px;
-  transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 10px;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
 .produto img {
-  width: 100px;
-  height: 100px;
-  border-radius: 8px;
-  margin-bottom: -50px;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    margin-bottom: -50px; /* Ajuste para o texto sobrepor um pouco */
+    object-fit: cover;
 }
 
 .produto-info {
     width: 100%;
     text-align: center;
+    padding-top: 50px; /* Espaço para a imagem sobreposta */
 }
 
 .produto-info h3 {
@@ -1370,12 +708,24 @@ nav.container {
     justify-content: center;
     align-items: center;
     margin: 6px 0;
+    gap: 5px; /* Espaço entre os botões e input */
 }
 
 .quantidade-box button {
     width: 28px;
     height: 28px;
     font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--base-color-second);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.quantidade-box button:hover {
+    background-color: var(--base-color);
+    color: white;
 }
 
 .quantidade-box input {
@@ -1383,14 +733,18 @@ nav.container {
     height: 28px;
     text-align: center;
     font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
 }
 
-#bt {
+.produto button.adicionar { /* Mantido para ser específico para o botão de adicionar */
+    margin-top: 8px;
     width: 100%;
     max-width: 120px;
     height: 32px;
     display: block;
-    margin: 8px auto 0 auto;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #007bff;
     color: white;
     border: none;
@@ -1398,83 +752,569 @@ nav.container {
     transition: background-color 0.3s ease;
 }
 
-#bt:hover {
+.produto button.adicionar:hover {
     background-color: #0056b3;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* 🔥 Corrige a área das miniaturas */
-.carousel-thumbs {
-  display: flex;
-  gap: 6px;
-  margin-top: 8px;
-  max-width: 150px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 4px 2px;
-  background-color: white; /* 🔥 se estiver ficando branco pode ser transparência */
-  z-index: 10;
+/* Itens do Carrinho */
+.carrinho h2 {
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-/* 🔥 Garante que as imagens sejam visíveis */
+.carrinho-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.carrinho-item:last-child {
+    border-bottom: none; /* Remove a borda do último item */
+}
+
+.carrinho-nome {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.carrinho-miniatura {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.carrinho-quantidade {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.carrinho-subtotal {
+    flex: 1;
+    text-align: right; /* Alinha o subtotal à direita */
+    font-weight: bold;
+}
+
+.carrinho-acoes {
+    display: flex;
+    gap: 5px;
+}
+
+.carrinho-acoes button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #ff5252;
+    padding: 5px; /* Adicionado padding para facilitar o clique */
+}
+
+.carrinho-acoes button:hover {
+    color: #e04848;
+}
+
+/* Botões com estilo Neumorphism */
+.btt,
+.btt2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #e6e6e6, #ffffff);
+    box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold; /* Para os ícones de + e - */
+    color: #555;
+}
+
+.btt {
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+}
+
+.btt2 { /* Usado para o botão de "remover" no carrinho */
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+}
+
+.btt:active,
+.btt2:active {
+    box-shadow: inset 2px 2px 5px #b0b0b0, inset -2px -2px 5px #f0f0f0;
+}
+
+/* Total do Carrinho */
+.total {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: right; /* Alinha o total à direita */
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+#whatsapp {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #25D366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#whatsapp:hover {
+    background-color: #1DA851;
+}
+
+/* Alerta */
+.alerta {
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    80% { opacity: 1; transform: translateX(-50%) translateY(0); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+}
+
+.alerta.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.alerta.hide {
+    animation: fadeOut 2s forwards;
+}
+
+/*======================================== Carrossel ========================================*/
+.carousel-container {
+    width: 90%;
+    max-width: 800px;
+    margin: 40px auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.carousel-slide {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.carousel-item {
+    min-width: 100%;
+    position: relative;
+}
+
+.carousel-item img {
+    width: 100%;
+    display: block;
+}
+
+.caption {
+    background: #ffffff;
+    color: #333333be;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #ddd;
+}
+
+.nav-button { /* Botões de navegação do carrossel principal */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.161);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1;
+    border-radius: 50%; /* Deixa os botões redondos */
+    transition: background 0.3s;
+}
+
+.nav-button:hover {
+    background: rgba(0, 0, 0, 0.361);
+}
+
+#prevBtn {
+    left: 10px;
+}
+
+#nextBtn {
+    right: 10px;
+}
+
+/* Carrossel de Imagens do Produto (para detalhes) */
+.produto.carrossel {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+    overflow: visible; 
+    position: relative; 
+    min-height: 220px; 
+    margin-bottom: 40px; 
+}
+
+/* Coluna Esquerda: imagem e thumbs */
+.produto.carrossel .produto-img-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px; /* Aumentado um pouco */
+    position: relative; /* Para posicionar botões de navegação */
+    z-index: 5; /* Garante que os botões do carrossel fiquem visíveis */
+}
+
+/* Wrapper da imagem grande (no carrossel de produto) */
+.imagem-grande-wrapper {
+    position: relative;
+    width: 160px; /* Deve ser igual ao width do pai para alinhar */
+    height: 160px; /* Mantém proporção 1:1 */
+    overflow: hidden; /* Garante que a imagem se ajuste */
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.imagem-grande-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    margin-bottom: 0; /* Remove margin-bottom que estava causando problemas */
+}
+
+/* Botões de navegação do carrossel de produto */
+.carousel-btn {
+    color: rgb(255, 255, 255); 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); 
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.2); /* Fundo sutil */
+    border: none;
+    font-size: 2.3rem;
+    font-weight: 20;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0.8;
+    transition: opacity 0.3s, background 0.3s;
+    border-radius: 50%; /* Botões redondos */
+    width: 40px; /* Tamanho fixo */
+    height: 40px; /* Tamanho fixo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 1;
+}
+
+.carousel-prev {
+    left: 5px; 
+}
+
+.carousel-next {
+    right: 5px;
+}
+
+/* Miniaturas */
+.carousel-thumbs {
+    display: flex;
+    gap: 6px;
+    margin-top: 8px;
+    max-width: 100%; /* Ajustado para se adaptar ao container pai */
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 4px 2px;
+    background-color: transparent; /* Não precisa de fundo se estiver dentro de um wrapper */
+    z-index: 10;
+    min-height: 55px; /* Garante espaço */
+    justify-content: center; /* Centraliza miniaturas */
+}
+
+.carousel-thumbs::-webkit-scrollbar {
+    height: 6px;
+}
+
+.carousel-thumbs::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 3px;
+}
+
 .carousel-thumbs img {
-  flex: 0 0 auto;
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  border: 2px solid transparent;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: border-color 0.3s, transform 0.2s;
+    flex: 0 0 auto;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.3s, transform 0.2s;
 }
 
 .carousel-thumbs img.active {
-  border-color: var(--base-color);
-  transform: scale(1.05);
+    border-color: var(--base-color);
+    transform: scale(1.05);
 }
 
 .carousel-thumbs img:hover {
-  border-color: var(--base-color-alt);
+    border-color: var(--base-color-alt);
 }
 
-/* 🔥 Garante que o container da imagem e thumbs não esmague */
-.produto-img-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  width: 100%;
-  position: relative;
-  z-index: 5;
+/* Coluna Direita (informações do produto no carrossel) */
+.produto.carrossel .produto-info {
+    flex: 1;
+    margin-top: 0; /* Removido o margin-top excessivo */
+    text-align: left; /* Garante que o texto fique alinhado à esquerda */
 }
 
-/* 🔥 Se estiver aparecendo só um pedaço, força a altura mínima */
-.carousel-thumbs {
-  min-height: 55px;
+/*======================================== Barra de Pesquisa e Menu Mobile ========================================*/
+
+/* Nav Container */
+nav.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px 16px;
+    height: var(--header-height); /* Usa a variável para altura */
 }
 
-/* 🔥 Se algum container pai tiver overflow errado, neutraliza */
-.produto,
-.produto-info,
-.produto-img-wrapper,
-.imagem-grande-wrapper {
-  overflow: visible !important;
+/* Agrupamento logo + pesquisa */
+.navbar-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Barra de pesquisa */
+.barra-pesquisa {
+    position: relative;
+    flex: 1;
+    max-width: 250px;
+    margin-top: -2px; 
+}
+
+.barra-pesquisa input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+#resultados-pesquisa {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #eee; /* Adicionado borda */
+    border-radius: 4px;
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0 0;
+    z-index: 1000;
+    max-height: 200px;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#resultados-pesquisa li {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+#resultados-pesquisa li:hover {
+    background-color: #f0f0f0;
+}
+
+/* Efeito destaque no produto encontrado */
+.produto.encontrado {
+    animation: destaqueProduto 1s ease;
+    box-shadow: 0 0 0 3px var(--base-color);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+@keyframes destaqueProduto {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.6);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.6);
+    }
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.4);
+    }
+}
+
+/* Mensagem de Erro */
+.erro-pedido {
+    color: red;
+    font-weight: bold;
+    margin-top: 8px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.erro-pedido.show {
+    opacity: 1;
+}
+
+@keyframes tremer {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.erro-pedido.tremer {
+    animation: tremer 0.4s;
 }
 
 
+/*======================================== Media Queries (Responsividade) ========================================*/
+
+/* Mobile Específico (max-width: 768px) */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Produtos e Carrinho em coluna */
+    }
+
+    nav.container {
+        flex-wrap: wrap;
+        align-items: flex-start; /* Alinha no topo */
+    }
+
+    .navbar-esquerda {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+
+    .barra-pesquisa {
+        flex-grow: 1;
+        max-width: calc(100% - 70px); /* Ajusta para deixar espaço para o toggle */
+    }
+
+    .toggle {
+        position: static; /* Volta para o fluxo normal */
+        margin-left: 10px; /* Espaçamento à direita da barra de pesquisa */
+    }
+
+    nav.show .icon-close {
+        display: block;
+    }
+
+    /* Produtos no Mobile: 1 coluna */
+    .produtos {
+        grid-template-columns: 1fr; /* Uma coluna em telas menores */
+    }
+
+    .produto {
+        flex-direction: row; /* Imagem ao lado do texto */
+        align-items: center;
+        gap: 15px; /* Espaço entre imagem e info */
+        padding: 15px;
+    }
+
+    .produto img {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 0; /* Remove o margin-bottom negativo */
+    }
+
+    .produto-info {
+        padding-top: 0;
+        text-align: left;
+    }
+
+    .produto-info h3 {
+        font-size: 1.05rem;
+    }
+
+    .quantidade-box {
+        justify-content: flex-start; /* Alinha à esquerda */
+    }
+
+    .produto button.adicionar {
+        margin: 8px 0 0 0; /* Ajusta a margem para mobile */
+        max-width: none; /* Ocupa a largura disponível */
+    }
+
+    /* Carrossel de produto no mobile */
+    .produto.carrossel {
+        flex-direction: column; /* Imagem e info uma abaixo da outra */
+        align-items: center;
+        gap: 10px;
+    }
+
+    .produto.carrossel .produto-img-wrapper {
+        width: 100%;
+        max-width: 250px; /* Limita o tamanho da imagem grande */
+        margin-bottom: 10px;
+    }
+
+    .imagem-grande-wrapper {
+        width: 100%;
+        height: 250px; /* Ajusta altura para mobile */
+    }
+
+    .carousel-thumbs {
+        flex-direction: row; /* Miniaturas em linha */
+        max-width: 100%;
+        justify-content: center;
+    }
+
+    .carousel-btn { /* Esconde botões do carrossel de produto no mobile */
+        display: none; 
+    }
+}
