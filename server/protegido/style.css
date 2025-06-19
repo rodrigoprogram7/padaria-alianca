@@ -643,7 +643,7 @@ footer .social a:hover {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    /* Adicionei para garantir que o container do shop NÃO corte as setas */
+    /* Adicionado para garantir que o container do shop NÃO corte as setas */
     overflow: visible; 
 }
 
@@ -676,6 +676,8 @@ footer .social a:hover {
     padding: 10px;
     box-shadow: 0 0 5px rgba(0,0,0,0.1);
     transition: transform 0.2s ease, box-shadow 0.3s ease;
+    /* O produto individual NÃO deve ter overflow: hidden; */
+    overflow: visible; 
 }
 
 .produto:hover {
@@ -994,7 +996,8 @@ footer .social a:hover {
     position: relative; 
     min-height: 220px; 
     margin-bottom: 40px; 
-    /* SUPER IMPORTANTE: Este deve estar visível para as setas saírem */
+    /* SUPER IMPORTANTE: Este deve estar visível para as setas saírem SE ELAS FOSSEM IRMÃS */
+    /* Mas no seu HTML, as setas estão dentro do .imagem-grande-wrapper */
     overflow: visible; 
 }
 
@@ -1006,16 +1009,17 @@ footer .social a:hover {
     width: 160px; /* Aumentado um pouco */
     position: relative; /* Para posicionar botões de navegação */
     z-index: 5; /* Garante que os botões do carrossel fiquem visíveis */
-    /* Mantido Hidden no desktop, para que a imagem grande tenha suas setas INTERNAS */
+    /* Mantido Hidden no desktop, para sobreposição interna das setas */
     overflow: hidden; 
 }
 
 /* Wrapper da imagem grande (no carrossel de produto) */
 .imagem-grande-wrapper {
-    position: relative;
+    position: relative; /* Essencial para o posicionamento das setas */
     width: 160px; /* Deve ser igual ao width do pai para alinhar */
     height: 160px; /* Mantém proporção 1:1 */
-    overflow: hidden; /* Garante que a imagem se ajuste */
+    /* IMPORTANTE: Mantenha HIDDEN aqui, pois as setas estão DENTRO dele no HTML */
+    overflow: hidden; 
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
@@ -1027,41 +1031,41 @@ footer .social a:hover {
     margin-bottom: 0; /* Remove margin-bottom que estava causando problemas */
 }
 
-/* Botões de navegação do carrossel de produto (Desktop) */
+/* Botões de navegação do carrossel de produto */
 .carousel-btn {
     color: rgb(255, 255, 255); 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); 
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9); /* Sombra mais forte para contraste */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.2); /* Fundo sutil */
+    background: rgba(0, 0, 0, 0.6); /* Fundo mais escuro para garantir visibilidade */
     border: none;
-    font-size: 2.3rem;
-    font-weight: 20;
+    font-size: 2.3rem; /* Tamanho da seta */
+    font-weight: bold; /* Garante que o '❮' e '❯' sejam visíveis */
     cursor: pointer;
-    z-index: 2;
-    opacity: 0.8;
+    z-index: 999; /* Z-index MUITO ALTO para garantir visibilidade máxima */
+    opacity: 1; /* Garante que estejam visíveis */
     transition: opacity 0.3s, background 0.3s;
     border-radius: 50%; /* Botões redondos */
     width: 40px; /* Tamanho fixo */
     height: 40px; /* Tamanho fixo */
-    display: flex;
+    display: flex; /* Para centralizar o texto/símbolo */
     justify-content: center;
     align-items: center;
 }
 
 .carousel-btn:hover {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.8); /* Mais escuro no hover */
     opacity: 1;
 }
 
-/* Posicionamento para desktop - Setas dentro do imagem-grande-wrapper */
-.carousel-prev {
-    left: 5px; 
+/* Posicionamento para desktop - Setas DENTRO do imagem-grande-wrapper */
+.carousel-btn.carousel-prev {
+    left: 5px; /* Posição dentro do wrapper */
 }
 
-.carousel-next {
-    right: 5px;
+.carousel-btn.carousel-next {
+    right: 5px; /* Posição dentro do wrapper */
 }
 
 /* Miniaturas */
@@ -1383,7 +1387,7 @@ nav.container {
         padding: 10px; 
         margin-bottom: 0;
         min-height: auto; 
-        /* MUITO IMPORTANTE: Este deve estar VISIBLE para as setas saírem completamente */
+        /* Mantido VISIBLE, mas o corte principal vem do .imagem-grande-wrapper no seu HTML */
         overflow: visible; 
         max-width: 100%; 
         width: 100%; 
@@ -1392,19 +1396,21 @@ nav.container {
 
     .produto.carrossel .produto-img-wrapper {
         width: 100%; 
-        max-width: 100px; 
+        max-width: 100px; /* Mantém a imagem grande (e seu wrapper) com 100px de largura */
         margin-bottom: 0; 
-        position: relative; /* FUNDAMENTAL: Este é o pai para o posicionamento absolute das setas */
+        position: relative; 
         flex-shrink: 0; 
-        /* IMPORTANTE: Este também deve ser VISIBLE para as setas saírem da imagem grande */
+        /* MUITO IMPORTANTE: Este deve ser VISIBLE, pois é o pai dos botões */
         overflow: visible; 
     }
 
     .imagem-grande-wrapper {
-        position: relative; 
-        width: 100px; 
+        position: relative; /* **ESSENCIAL** para as setas se posicionarem */
+        width: 100px; /* Continua sendo o tamanho da imagem */
         height: 100px; 
-        overflow: hidden; /* Mantido para garantir que a imagem não saia dos limites */
+        /* IMPORTANTE: Mantido HIDDEN aqui porque as setas estão DENTRO dele no HTML.
+           Isso fará com que as setas fiquem sobre a imagem, e não fora. */
+        overflow: hidden; 
         border-radius: 6px;
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         margin: 0 auto; 
@@ -1422,16 +1428,16 @@ nav.container {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.6); /* Fundo mais escuro para mobile */
         border: none;
         color: white;
-        font-size: 1.2rem;
+        font-size: 1.2rem; /* Tamanho da seta no mobile */
         padding: 0;
         border-radius: 50%;
         cursor: pointer;
-        opacity: 0.9;
+        opacity: 1; /* Garante visibilidade */
         transition: background-color 0.3s, opacity 0.3s;
-        z-index: 10; /* Aumentado o z-index para garantir visibilidade */
+        z-index: 999; /* Z-index MUITO ALTO para garantir visibilidade máxima */
         width: 30px; 
         height: 30px; 
         display: flex;
@@ -1440,18 +1446,18 @@ nav.container {
     }
 
     .carousel-btn:hover {
-        background-color: rgba(0, 0, 0, 0.6);
+        background-color: rgba(0, 0, 0, 0.8);
         opacity: 1;
     }
 
-    /* AGORA OS VALORES PARA AS SETAS FICAREM COMPLETAMENTE FORA NO MOBILE */
-    /* -35px: Considerando que a seta tem 30px de largura. -15px seria para metade dela. -35px a move completamente para fora + 5px de margem. */
+    /* POSICIONAMENTO DAS SETAS NO MOBILE (DENTRO DO .imagem-grande-wrapper) */
+    /* Como os botões estão DENTRO do .imagem-grande-wrapper no HTML, eles devem estar posicionados DENTRO dele */
     .carousel-btn.carousel-prev {
-        left: -35px; 
+        left: 5px; /* Deixa 5px da borda esquerda da IMAGEM */
     }
     
     .carousel-btn.carousel-next {
-        right: -35px; 
+        right: 5px; /* Deixa 5px da borda direita da IMAGEM */
     }
 
     /* Miniaturas (Mobile) */
