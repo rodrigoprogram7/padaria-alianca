@@ -1428,7 +1428,7 @@ nav.container {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        background-color: rgba(0, 0, 0, 0.6); /* Fundo mais escuro para mobile */
+        background: var(--base-color); /* Fundo mais escuro para mobile */
         border: none;
         color: white;
         font-size: 1.2rem; /* Tamanho da seta no mobile */
@@ -1453,11 +1453,11 @@ nav.container {
     /* POSICIONAMENTO DAS SETAS NO MOBILE (DENTRO DO .imagem-grande-wrapper) */
     /* Como os botões estão DENTRO do .imagem-grande-wrapper no HTML, eles devem estar posicionados DENTRO dele */
     .carousel-btn.carousel-prev {
-        left: 5px; /* Deixa 5px da borda esquerda da IMAGEM */
+        left: -25px; /* Deixa 5px da borda esquerda da IMAGEM */
     }
     
     .carousel-btn.carousel-next {
-        right: 5px; /* Deixa 5px da borda direita da IMAGEM */
+        right: -25px; /* Deixa 5px da borda direita da IMAGEM */
     }
 
     /* Miniaturas (Mobile) */
