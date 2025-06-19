@@ -1426,7 +1426,7 @@ nav.container {
     /* Setas de navegação do carrossel de produto (Mobile) */
     .carousel-btn {
         position: absolute;
-        top: 50%;
+        top: 35%;
         transform: translateY(-50%);
         background: var(--base-color); /* Fundo mais escuro para mobile */
         border: none;
@@ -1443,11 +1443,6 @@ nav.container {
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .carousel-btn:hover {
-        background-color: rgba(0, 0, 0, 0.8);
-        opacity: 1;
     }
 
     /* POSICIONAMENTO DAS SETAS NO MOBILE (DENTRO DO .imagem-grande-wrapper) */
