@@ -293,6 +293,9 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
   const precoProduto = produto.querySelector('p')
   const thumbsContainer = produto.querySelector('.carousel-thumbs')
 
+  const prevBtn = produto.querySelector('.carousel-prev')
+  const nextBtn = produto.querySelector('.carousel-next')
+
   let current = 0
 
   const updateProduto = () => {
@@ -312,25 +315,44 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     const subtotalEl = produto.querySelector('.subtotal-preview')
     if (subtotalEl) subtotalEl.textContent = ''
 
-    thumbsContainer.querySelectorAll('img').forEach((img, index) => {
-      img.classList.toggle('ativo', index === current)
+    if (thumbsContainer) {
+      thumbsContainer.querySelectorAll('img').forEach((img, index) => {
+        img.classList.toggle('ativo', index === current)
+      })
+    }
+  }
+
+  // Criação das miniaturas
+  if (thumbsContainer) {
+    variacoes.forEach((variacao, index) => {
+      const thumb = document.createElement('img')
+      thumb.src = variacao.img
+      thumb.alt = variacao.nome
+      thumb.addEventListener('click', () => {
+        current = index
+        updateProduto()
+      })
+      thumbsContainer.appendChild(thumb)
     })
   }
 
-
-
-  variacoes.forEach((variacao, index) => {
-    const thumb = document.createElement('img')
-    thumb.src = variacao.img
-    thumb.alt = variacao.nome
-    thumb.addEventListener('click', () => {
-      current = index
+  // Função das setas
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      current = (current - 1 + variacoes.length) % variacoes.length
       updateProduto()
     })
-    thumbsContainer.appendChild(thumb)
-  })
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      current = (current + 1) % variacoes.length
+      updateProduto()
+    })
+  }
 
   updateProduto()
 })
 
 atualizarCarrinho()
+
