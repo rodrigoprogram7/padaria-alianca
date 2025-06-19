@@ -1394,19 +1394,12 @@ nav.container {
     }
 
     .carousel-thumbs {
-        display: flex;
-        flex-direction: row; 
-        flex-wrap: nowrap; 
-        max-width: 100%; 
-        overflow-x: auto; 
-        overflow-y: hidden;
-        padding: 4px;
-        gap: 4px; 
-        -webkit-overflow-scrolling: touch; 
-        min-height: 40px; 
-        justify-content: center; 
-        margin-top: 8px; 
-    }
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
     /* Esconder a barra de rolagem para alguns navegadores */
     .carousel-thumbs::-webkit-scrollbar {
