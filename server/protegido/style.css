@@ -1025,11 +1025,11 @@ footer .social a:hover {
 }
 
 .carousel-prev {
-  left: 5px;
+  left: -10px;
 }
 
 .carousel-next {
-  right: 5px;
+  right: -10px;
 }
 
 /* MINIATURAS ATUALIZADAS */
