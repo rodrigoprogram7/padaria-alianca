@@ -109,7 +109,7 @@ function filtrarCategoria(categoriaSelecionada) {
     })
 
     // === Scroll suave até a área dos produtos ===
-    const areaProdutos = document.querySelector('.title');
+    const areaProdutos = document.querySelector('.container');
     if (areaProdutos) {
         areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
