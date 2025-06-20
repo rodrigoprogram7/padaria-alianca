@@ -258,7 +258,9 @@ nav.show .icon-menu {
 }
 
 
-/*================ Estilo para navbar no scroll ==================*/
+/*================ Estilo do navbar no scroll ==================*/
+
+/* Esconde elementos por padrão */
 .nav-central {
     display: none;
     flex-direction: column;
@@ -271,10 +273,12 @@ nav.show .icon-menu {
 }
 
 #header .nav-central .logo.centralizado {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     color: var(--title-color);
+    text-align: center;
 }
 
+/* Barra de pesquisa que só aparece no scroll */
 #header .barra-pesquisa.navbar {
     width: 90%;
     margin-top: 10px;
@@ -293,7 +297,7 @@ nav.show .icon-menu {
     font-size: 1rem;
 }
 
-/* Categorias Navbar */
+/* Categorias na navbar */
 .categorias-navbar {
     display: none;
     width: 100%;
@@ -325,12 +329,19 @@ nav.show .icon-menu {
     color: var(--title-color);
     cursor: pointer;
     transition: background-color 0.3s;
+    font-size: 0.9rem;
 }
 
 .cat-btn:hover {
     background-color: var(--base-color);
     color: white;
 }
+
+/* Oculta a barra de pesquisa antiga (opcional) */
+.barra-pesquisa {
+    display: none;
+}
+
 
 
 
