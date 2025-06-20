@@ -261,35 +261,31 @@ nav.show .icon-menu {
 /*================ Estilo do navbar no scroll ==================*/
 
 /* Esconde elementos por padrão */
+/* Estado inicial: escondido e acima */
 .nav-central {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100%;
+    gap: 10px;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* Quando rola, aparece com animação */
 #header.scroll .nav-central {
-    display: flex;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
 }
 
-#header .nav-central .logo.centralizado {
-    font-size: 1.4rem;
-    color: var(--title-color);
-    text-align: center;
-}
-
-/* Barra de pesquisa que só aparece no scroll */
-#header .barra-pesquisa.navbar {
+/* Barra de pesquisa dentro do navbar */
+.barra-pesquisa.navbar {
     width: 90%;
-    margin-top: 10px;
-    display: none;
 }
 
-#header.scroll .barra-pesquisa.navbar {
-    display: block;
-}
-
-#header .barra-pesquisa.navbar input {
+.barra-pesquisa.navbar input {
     width: 100%;
     padding: 8px 15px;
     border: 1px solid #ccc;
@@ -297,18 +293,12 @@ nav.show .icon-menu {
     font-size: 1rem;
 }
 
-/* Categorias na navbar */
+/* Categorias */
 .categorias-navbar {
-    display: none;
     width: 100%;
+    display: flex;
     overflow-x: auto;
     gap: 8px;
-    margin-top: 10px;
-    padding-bottom: 8px;
-}
-
-#header.scroll .categorias-navbar {
-    display: flex;
 }
 
 .categorias-navbar::-webkit-scrollbar {
@@ -337,10 +327,6 @@ nav.show .icon-menu {
     color: white;
 }
 
-/* Oculta a barra de pesquisa antiga (opcional) */
-.barra-pesquisa {
-    display: none;
-}
 
 
 /* =================== Navbar Inicial =================== */
