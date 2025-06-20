@@ -86,39 +86,33 @@ window.addEventListener('scroll', function() {
 
 /*========== Filtro de categorias ==========*/
 function filtrarCategoria(categoriaSelecionada) {
-    // Remove .active de todos os botões
+    // Remove .active de todos
     document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
 
-    const categoriaMap = {
-        alimentos: 0,
-        padaria: 1,
-        cestas: 2,
-        bebidas: 3,
-        frios: 4,
-        limpeza: 5
-    };
-
-    const filtroBtns = document.querySelectorAll('.filtro-btn');
-    const index = categoriaMap[categoriaSelecionada];
-
-    // Adiciona .active ao botão correto
-    if (index !== undefined && filtroBtns[index]) {
-        filtroBtns[index].classList.add('active');
+    // Adiciona .active ao botão da categoria atual
+    const botaoAtivo = document.querySelector(`.filtro-btn[data-categoria="${categoriaSelecionada}"]`);
+    if (botaoAtivo) {
+        botaoAtivo.classList.add('active');
     }
 
-    // Filtra os produtos
+    // Filtrar os produtos
     const produtos = document.querySelectorAll('.produto');
     produtos.forEach(produto => {
         const categoria = produto.getAttribute('data-categoria');
         produto.style.display = categoria === categoriaSelecionada ? 'flex' : 'none';
     });
 
-    // Scroll até a lista de produtos
+    // Scroll suave para a lista de produtos
     const areaProdutos = document.querySelector('.pp');
     if (areaProdutos) {
         areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
+
+window.onload = () => {
+    atualizarCarrinho();
+    filtrarCategoria('alimentos');  // Categoria inicial + botão ativo
+};
 
 
 
