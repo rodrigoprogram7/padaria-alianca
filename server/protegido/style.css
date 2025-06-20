@@ -920,7 +920,7 @@ footer .social a:hover {
     color: #333;
     border: none;
     width: 80px; 
-    height: 60px; 
+    height: 30px; 
     padding: 8px 12px;
     border-radius: 10px;
     transition: all 0.3s ease;
@@ -932,7 +932,7 @@ footer .social a:hover {
 }
 
 .filtro-btn.active {
-    background-color: #007bff;
+    background-color: var(--base-color);
     color: white;
 }
 
