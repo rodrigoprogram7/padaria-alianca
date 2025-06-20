@@ -359,29 +359,28 @@ body {
 .icon-menu::before {
     content: none;
 }
-nav .toggle.icon-menu::before {
-    content: "☰"; /* Ou o seu código de ícone */
+.toggle.icon-menu::before {
+    content: "☰"; /* Ícone do menu hamburger */
     font-size: 1.8rem;
     color: var(--base-color);
-    font-family: 'icomoon';
 }
 
-nav .toggle.icon-close::before {
-    content: "✖"; /* Ou "\e901" caso use IcoMoon */
+.toggle.icon-close::before {
+    content: "✖"; /* Ícone X */
     font-size: 1.8rem;
     color: var(--base-color);
-    font-family: 'icomoon'; /* Ou sua fonte de ícones */
+    display: none; /* Por padrão, o X fica invisível */
+}
+
+/* Quando o menu estiver aberto, esconde o hamburger e mostra o X */
+nav.show .toggle.icon-menu::before {
     display: none;
 }
 
-/* Quando o menu estiver aberto, mostrar o X e esconder o menu hamburger */
 nav.show .toggle.icon-close::before {
     display: block;
 }
 
-nav.show .toggle.icon-menu::before {
-    display: none;
-}
 
 
 
