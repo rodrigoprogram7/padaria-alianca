@@ -362,7 +362,6 @@ body {
 nav .toggle.icon-menu::before {
     content: "☰"; /* Ou o seu código de ícone */
     font-size: 1.8rem;
-    background: var(--base-color);
     color: var(--base-color);
     font-family: 'icomoon';
 }
@@ -370,7 +369,6 @@ nav .toggle.icon-menu::before {
 nav .toggle.icon-close::before {
     content: "✖"; /* Ou "\e901" caso use IcoMoon */
     font-size: 1.8rem;
-    background: var(--base-color);
     color: var(--base-color);
     font-family: 'icomoon'; /* Ou sua fonte de ícones */
     display: none;
