@@ -508,9 +508,8 @@ nav.show .menu ul.grid {
     justify-content: center;    /* Centraliza verticalmente os itens */
     text-align: center;
     width: auto;                /* ✅ Corrigido: Não forçar 100% */
-    margin: 0 auto;             /* ✅ Corrigido: Garante centralização horizontal */
+    margin-right: 600px;            /* ✅ Corrigido: Garante centralização horizontal */
     padding: 0;
-    right: 800px;
 }
 
 nav.show .menu ul.grid li {
