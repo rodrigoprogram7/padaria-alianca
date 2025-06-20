@@ -408,35 +408,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 
 
 
-
-document.addEventListener('DOMContentLoaded', function() {
-    const divider = document.querySelector('.divider-1')
-    const header = document.querySelector('#header')
-
-    window.addEventListener('scroll', function() {
-        const dividerTop = divider.offsetTop
-
-        if (window.scrollY >= dividerTop - 80) {
-            header.classList.add('scroll')
-        } else {
-            header.classList.remove('scroll')
-        }
-
-        const divider = document.querySelector('.divider-1')
-        const header = document.querySelector('#header')
-
-        window.addEventListener('scroll', function() {
-            const dividerTop = divider.offsetTop
-
-            if (window.scrollY >= dividerTop - 80) {
-                header.classList.add('scroll')
-            } else {
-                header.classList.remove('scroll')
-            }
-})
-    })
-})
-
 document.addEventListener('DOMContentLoaded', function () {
     const divider = document.querySelector('.divider-1');
     const header = document.querySelector('#header');
@@ -451,6 +422,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+
 
 
 

@@ -330,8 +330,10 @@ nav.show .icon-menu {
 
 
 /* =================== Navbar Inicial =================== */
+/* =================== Navbar =================== */
 #header {
     transition: all 0.4s ease;
+    padding: 0.8rem 0;
 }
 
 .nav-top {
@@ -343,16 +345,10 @@ nav.show .icon-menu {
 
 .nav-top .logo {
     transition: all 0.4s ease;
+    font-size: 1.2rem;
 }
 
-/* ================ Após Scroll ================= */
-#header.scroll {
-    padding-bottom: 1rem;
-    background-color: var(--body-color);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Move logo para centro */
+/* Logo centraliza no scroll */
 #header.scroll .nav-top {
     justify-content: center;
 }
@@ -361,32 +357,38 @@ nav.show .icon-menu {
     transform: translateY(0);
 }
 
-/* Animação do navbar crescendo */
+/* Animação navbar crescer */
 #header.scroll {
-    height: auto;
-    padding-top: 1rem;
+    padding: 1.5rem 0 2.5rem 0;
+    background-color: var(--body-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* =================== Animações para barra de pesquisa =================== */
+/* =================== Nav Central =================== */
 .nav-central {
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 10px;
     opacity: 0;
+    pointer-events: none;
     transform: translateY(-20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 #header.scroll .nav-central {
-    display: flex;
     opacity: 1;
+    pointer-events: all;
     transform: translateY(0);
 }
 
-/* =================== Barra de pesquisa =================== */
-.barra-pesquisa.navbar input {
+/* =================== Barra de Pesquisa =================== */
+.barra-pesquisa.navbar {
     width: 90%;
+}
+
+.barra-pesquisa.navbar input {
+    width: 100%;
     padding: 8px 15px;
     border: 1px solid #ccc;
     border-radius: 8px;
@@ -396,18 +398,9 @@ nav.show .icon-menu {
 /* =================== Categorias =================== */
 .categorias-navbar {
     width: 100%;
-    display: none;
+    display: flex;
     overflow-x: auto;
     gap: 8px;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-#header.scroll .categorias-navbar {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
 }
 
 .categorias-navbar::-webkit-scrollbar {
@@ -436,18 +429,13 @@ nav.show .icon-menu {
     color: white;
 }
 
-/* =================== Ícone =================== */
+/* =================== Ícones =================== */
 .toggle {
     font-size: 1.5rem;
     color: var(--base-color);
     cursor: pointer;
     transition: all 0.4s ease;
 }
-
-
-
-
-
 
 /*======================================== Home ========================================*/
 #home {
