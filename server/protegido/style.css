@@ -860,19 +860,6 @@ footer .social a:hover {
     box-shadow: inset 2px 2px 5px #b0b0b0, inset -2px -2px 5px #f0f0f0;
 }
 
-.produto.no-hover-focus {
-    /* Reseta os estilos de hover/active */
-    transform: none !important; /* Desativa qualquer transformação */
-    box-shadow: 0 0 5px rgba(0,0,0,0.1) !important; /* Volta para a sombra padrão do card */
-    /* Você pode adicionar outras propriedades que podem estar "presas" */
-    transition: none !important; /* Remove transições para que o reset seja imediato */
-}
-
-/* Garante que o hover não sobreponha a classe temporária */
-.produto.no-hover-focus:hover {
-    transform: none !important;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1) !important;
-}
 
 
 /* Total do Carrinho */
