@@ -1442,11 +1442,11 @@ nav.container {
     /* POSICIONAMENTO DAS SETAS NO MOBILE (DENTRO DO .imagem-grande-wrapper) */
     /* Como os botões estão DENTRO do .imagem-grande-wrapper no HTML, eles devem estar posicionados DENTRO dele */
     .carousel-btn.carousel-prev {
-        left: -25px; /* Deixa 5px da borda esquerda da IMAGEM */
+        left: -30px; /* Deixa 5px da borda esquerda da IMAGEM */
     }
     
     .carousel-btn.carousel-next {
-        right: -25px; /* Deixa 5px da borda direita da IMAGEM */
+        right: -30px; /* Deixa 5px da borda direita da IMAGEM */
     }
 
     /* Miniaturas (Mobile) */
