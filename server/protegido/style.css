@@ -357,9 +357,15 @@ body {
 }
 
 .icon-menu::before {
-    content: "☰";
-    font-size: 1.5rem;
+    content: none;
 }
+nav .toggle.icon-menu::before {
+    content: "☰"; /* Ou o seu código de ícone */
+    font-size: 1.8rem;
+    color: var(--base-color);
+    font-family: 'icomoon';
+}
+
 
 
 
