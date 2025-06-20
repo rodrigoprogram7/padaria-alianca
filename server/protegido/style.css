@@ -417,16 +417,15 @@ nav.show .toggle.icon-close::before {
     #header.scroll .nav-top {
         justify-content: center;
         height: auto;
+        position: relative;
     }
 
     #header.scroll .nav-top .logo {
-        margin: 0 auto;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         text-align: center;
-    }
-
-     #header.scroll .nav-top {
-        justify-content: center;
-        position: relative;
+        margin: 0;
     }
 
     #header.scroll .toggle {
@@ -436,16 +435,6 @@ nav.show .toggle.icon-close::before {
         transform: translateY(-50%);
         display: block;
     }
-
-    #header.scroll .toggle {
-        position: absolute;
-        right: 1rem;
-        top: 50%;
-        transform: translateY(-50%);
-        display: block; /* Garante que ele continue visível no scroll */
-
-
-}
         #header, nav.container, .nav-top, .nav-central {
             max-width: 100%;
             overflow-x: hidden;
