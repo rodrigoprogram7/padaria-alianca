@@ -582,10 +582,7 @@ nav.container {
     }
 
     /* Nav-central no desktop - se comporta no fluxo */
-    .nav-central {
-        /* As regras de visibilidade e animação são herdadas das regras globais */
-        /* Nenhuma override de position: absolute aqui */
-    }
+    
 
     /* #header.scroll no desktop */
     #header.scroll {
