@@ -441,9 +441,18 @@ nav.show .icon-menu {
     }
 
     .barra-pesquisa.navbar input {
-        padding: 6px 12px;
-        font-size: 0.9rem;
+    width: 100%;
+    padding: 10px 16px;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .barra-pesquisa.navbar {
+        width: 95%;
+        max-width: none;
     }
+}
+
 
     .categorias-navbar {
     display: flex;
@@ -613,6 +622,27 @@ nav.show .icon-menu {
 #resultados-pesquisa li:hover {
     background-color: var(--base-color-second);
 }
+
+@media (max-width: 768px) {
+  .nav-top {
+    justify-content: space-between;  /* Mantém logo esquerda e ícone direita */
+    padding: 0 1rem;
+  }
+
+  .toggle {
+    display: block; /* Ícone de hambúrguer visível */
+  }
+
+  #header.scroll .nav-top {
+    justify-content: center;  /* Após o scroll, centraliza ambos */
+  }
+
+  #header.scroll .toggle {
+    position: absolute;
+    right: 1rem;
+  }
+}
+
 
 
 
