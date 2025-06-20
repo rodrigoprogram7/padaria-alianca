@@ -416,7 +416,6 @@ nav.show .toggle.icon-close::before {
     /* Após o scroll - Centralizar logo e colocar o toggle no canto direito, mas sem sumir */
     #header.scroll .nav-top {
         justify-content: center;
-        height: auto;
         position: relative;
     }
 
