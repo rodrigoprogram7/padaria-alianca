@@ -72,7 +72,6 @@ window.addEventListener('scroll', ActivateMenuAtCurrentSection)
 const backToTopButton = document.querySelector('.back-to-top')
 backToTopButton.addEventListener('click', function(e) {
     e.preventDefault()
-    // Alterado para rolar para o topo da página, que é mais comum para um botão "voltar ao topo"
     window.scrollTo({ top: 0, behavior: 'smooth' }); 
 })
 window.addEventListener('scroll', function() {
@@ -95,7 +94,6 @@ function filtrarCategoria(categoriaSelecionada) {
         frios: 4,
         limpeza: 5
     }
-    // Verifica se a categoria existe no map antes de tentar adicionar a classe 'active'
     if (document.querySelectorAll('.filtro-btn')[categoriaMap[categoriaSelecionada]]) {
         document.querySelectorAll('.filtro-btn')[categoriaMap[categoriaSelecionada]].classList.add('active')
     }
@@ -109,7 +107,7 @@ function filtrarCategoria(categoriaSelecionada) {
 
 window.onload = () => {
     atualizarCarrinho()
-    filtrarCategoria('alimentos') // Define 'alimentos' como categoria inicial
+    filtrarCategoria('alimentos') 
 }
 
 /*========== Carrinho ==========*/
@@ -127,13 +125,11 @@ function alterarQuantidade(botao, delta) {
     const tipo = produtoEl.getAttribute('data-tipo') || 'unidade'
 
     if (tipo === 'peso') {
-        valor = Math.max(100, valor) // Minimo de 100g
-        // Garante que o incremento/decremento seja de 100g para tipo peso
-        // Ex: Se está em 120g e decrementa, vai para 100g, não 20g. Se está em 100g e incrementa, vai para 200g.
+        valor = Math.max(100, valor) 
         if (delta === 1 && valor % 100 !== 0) valor = Math.ceil(valor / 100) * 100;
         if (delta === -1 && valor % 100 !== 0) valor = Math.floor(valor / 100) * 100;
     } else {
-        valor = Math.max(1, valor) // Mínimo de 1 unidade
+        valor = Math.max(1, valor) 
     }
 
     input.value = valor
@@ -141,7 +137,7 @@ function alterarQuantidade(botao, delta) {
     const preco = parseFloat(produtoEl.getAttribute('data-preco'))
     const subtotalEl = produtoEl.querySelector('.subtotal-preview')
     if (subtotalEl) {
-        if ((tipo === 'peso' && valor >= 100) || (tipo === 'unidade' && valor >= 1)) { // Ajustado para incluir 100g/1unidade
+        if ((tipo === 'peso' && valor >= 100) || (tipo === 'unidade' && valor >= 1)) { 
             let subtotal = tipo === 'peso' ? preco * (valor / 100) : preco * valor
             subtotalEl.textContent = tipo === 'peso'
                 ? `Subtotal: R$ ${subtotal.toFixed(2)} (${valor}g)`
@@ -154,26 +150,27 @@ function alterarQuantidade(botao, delta) {
         }
     }
 
-    // NOVO: Remove o foco do botão ou input para desativar estilos de active/focus
-    // Isso é particularmente útil em dispositivos móveis.
-    botao.blur(); // Remove o foco do botão clicado
-    input.blur(); // Remove o foco do input de quantidade
+    // NOVO: Adiciona e remove classe para resetar estilos visuais do card
+    produtoEl.classList.add('no-hover-focus');
+    setTimeout(() => {
+        produtoEl.classList.remove('no-hover-focus');
+    }, 100); // Remove a classe após 100ms, tempo suficiente para desativar o estilo
+
+    botao.blur(); 
+    input.blur(); 
 }
 
 
 function adicionarAoCarrinho(botao) {
     const produtoEl = botao.closest('.produto')
-    // Verifica se é um produto carrossel com variações ou um produto simples
     const isCarrosselProduto = produtoEl.classList.contains('carrossel');
     let nome, preco, imagem;
 
     if (isCarrosselProduto) {
-        // Para produtos carrossel, pegamos os dados atualizados pelo carrossel
         nome = produtoEl.getAttribute('data-nome');
         preco = parseFloat(produtoEl.getAttribute('data-preco'));
-        imagem = produtoEl.querySelector('.imagem-grande-wrapper img')?.src; // Pega a imagem grande atual
+        imagem = produtoEl.querySelector('.imagem-grande-wrapper img')?.src; 
     } else {
-        // Para produtos normais, pegamos os dados diretos
         nome = produtoEl.querySelector('h3').textContent;
         preco = parseFloat(produtoEl.getAttribute('data-preco'));
         imagem = produtoEl.querySelector('img')?.src;
@@ -201,10 +198,14 @@ function adicionarAoCarrinho(botao) {
     atualizarCarrinho()
     mostrarAlerta(nome, quantidade)
 
-    // Reseta a quantidade para o valor inicial
     quantidadeInput.value = tipo === 'peso' ? 100 : 1
 
-    // NOVO: Garante que o botão "Adicionar" também perca o foco
+    // NOVO: Adiciona e remove classe para resetar estilos visuais do card
+    produtoEl.classList.add('no-hover-focus');
+    setTimeout(() => {
+        produtoEl.classList.remove('no-hover-focus');
+    }, 100); // Remove a classe após 100ms
+
     botao.blur();
 }
 
@@ -228,9 +229,8 @@ function diminuirQuantidade(nome) {
     if ((tipo === 'peso' && item.quantidade > 100) || (tipo === 'unidade' && item.quantidade > 1)) {
         item.quantidade -= tipo === 'peso' ? 100 : 1
     } else if ((tipo === 'peso' && item.quantidade === 100) || (tipo === 'unidade' && item.quantidade === 1)) {
-        // Se a quantidade mínima for atingida, remove o item
         removerDoCarrinho(nome);
-        return; // Sai da função para evitar o salvamento duplicado
+        return; 
     }
     salvarCarrinho()
     atualizarCarrinho()
@@ -238,7 +238,7 @@ function diminuirQuantidade(nome) {
 
 function atualizarCarrinho() {
     const container = document.getElementById('itens-carrinho')
-    if (!container) return; // Garante que o container existe
+    if (!container) return; 
 
     container.innerHTML = ''
     let total = 0
@@ -300,7 +300,7 @@ function enviarWhatsApp() {
         erroEl.textContent = "O valor mínimo para pedido é R$ 20,00."
         erroEl.classList.add("show")
         erroEl.classList.remove("tremer")
-        void erroEl.offsetWidth // Reinicia a animação
+        void erroEl.offsetWidth 
         erroEl.classList.add("tremer")
         return
     }
@@ -339,7 +339,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     let current = 0
     const thumbs = []
 
-    // Criação das miniaturas
     if (thumbsContainer) {
         variacoes.forEach((variacao, index) => {
             const thumb = document.createElement('img')
@@ -358,7 +357,6 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
         imgGrande.src = variacoes[current].img
         nomeProduto.textContent = variacoes[current].nome
         precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`
-        // Atualiza os atributos data-nome e data-preco do elemento principal do produto
         produto.setAttribute('data-nome', variacoes[current].nome);
         produto.setAttribute('data-preco', variacoes[current].preco);
 
@@ -376,18 +374,16 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
             thumbs.forEach((img, index) => {
                 img.classList.toggle('ativo', index === current)
             })
-            // NOVO: Faz a miniatura ativa rolar para a visualização
             if (thumbs[current]) {
                 thumbs[current].scrollIntoView({
-                    behavior: 'smooth', // Rolagem suave
-                    block: 'nearest',   // Garante que o elemento esteja visível no bloco (verticalmente)
-                    inline: 'center'    // Tenta centralizar o elemento horizontalmente
+                    behavior: 'smooth', 
+                    block: 'nearest',   
+                    inline: 'center'    
                 });
             }
         }
     }
 
-    // Função das setas
     if (prevBtn) {
         prevBtn.addEventListener('click', () => {
             current = (current - 1 + variacoes.length) % variacoes.length
@@ -402,6 +398,5 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
         })
     }
 
-    // Inicializa o produto com a primeira variação e rola a miniatura
     updateProduto()
 });
