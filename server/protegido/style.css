@@ -189,135 +189,89 @@ body {
     --header-scrolled-padding-bottom-mobile: 0.8rem;
 }
 
-/*======================================== Navegação ========================================*/
-nav { /* Este é o nav.container, que agora envolve apenas nav-top e menu */
+/*======================================== Header ========================================*/
+/* O header agora é mais simples, pois o nav.container gerencia o layout interno */
+#header {
     width: 100%;
-    height: auto;
-    display: flex;
-    flex-direction: column; /* Importante: Empilha nav-top e menu */
-    justify-content: space-between;
-    align-items: center;
-}
-
-/* Estilos de links de navegação */
-nav ul li {
-    text-align: center;
-}
-
-nav ul li a {
-    transition: color 0.2s;
-    position: relative;
-}
-
-nav ul li a:hover,
-nav ul li a.active {
-    color: var(--base-color);
-}
-
-nav ul li a::after {
-    content: "";
-    width: 0%;
-    height: 2px;
-    background: var(--base-color);
-    position: absolute;
-    left: 0;
-    bottom: -1.5rem;
-    transition: width 0.2s;
-}
-
-nav ul li a:hover::after,
-nav ul li a.active::after {
-    width: 100%;
-    font-weight: bold;
-}
-
-/* Menu hambúrguer (links de navegação) - Oculto por padrão no mobile */
-nav .menu {
-    opacity: 0;
-    visibility: hidden;
-    height: 0; /* Colapsa o menu */
-    overflow: hidden;
-    position: absolute; /* Para o overlay */
-    top: var(--header-initial-height); /* Posiciona abaixo do nav-top inicial */
-    left: 0;
-    width: 100%;
-    transition: all 0.3s ease-out;
-    background-color: var(--body-color);
-    z-index: 80;
-    display: block; /* Para permitir a transição */
-}
-
-/* Esconde os ULs do menu de navegação quando o menu está fechado */
-nav .menu ul.grid {
-    display: none;
-}
-
-nav.show .menu {
-    opacity: 1;
-    visibility: visible;
-    height: calc(100vh - var(--header-initial-height)); /* Ocupa o resto da tela */
+    transition: all 0.4s ease;
+    padding: 0.8rem 0; /* Padding inicial compacto */
     position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: var(--body-color);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Remove display:flex aqui, nav.container vai controlar */
+    /* Remove height e overflow aqui, nav.container vai controlar */
+}
+
+/* Quando o header rola */
+#header.scroll {
+    /* Paddings específicos para desktop são definidos abaixo */
+    padding-top: var(--header-scrolled-padding-top-desktop); /* Padrão Desktop */
+    padding-bottom: var(--header-scrolled-padding-bottom-desktop); /* Padrão Desktop */
+    /* Remove height e overflow aqui, nav.container vai controlar */
+}
+
+/*======================================== Navegação Principal (nav.container) ========================================*/
+/* ESTE É O NOVO CONTÊINER PRINCIPAL PARA EMPILHAR OS ITENS */
+nav.container {
+    width: 100%; /* Ocupa a largura total do header */
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: column; /* CRUCIAL: Empilha nav-top, nav-central e menu verticalmente */
+    justify-content: space-between;
+    align-items: center; /* Centraliza os itens horizontalmente (nav-central, menu) */
+    height: var(--header-initial-height); /* Altura inicial do container, para esconder nav-central */
+    overflow: hidden; /* IMPORTANTE: Esconde nav-central e menu inicialmente */
+    transition: all 0.4s ease; /* Transição para a altura do container */
+}
+
+/* Quando o header rola, o nav.container se expande */
+#header.scroll nav.container {
+    height: auto; /* Permite que o container se expanda */
+    overflow: visible; /* Permite que nav-central e menu apareçam */
+}
+
+/* Linha superior (logo + ícones) */
+.nav-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Logo à esquerda, ícones à direita */
     align-items: center;
+    padding: 0 1rem;
+    height: var(--header-initial-height); /* Altura do nav-top, corresponde à altura inicial do container */
 }
 
-nav.show .menu ul.grid {
-    display: flex; /* Exibe os links quando o menu está aberto */
-    flex-direction: column;
-    gap: 4rem;
+.nav-top .logo {
+    font: 700 1.3rem var(--title-font);
+    color: var(--title-color);
+    transition: all 0.4s ease;
 }
 
-/* Ícones de toggle do menu hambúrguer */
-.toggle {
+.logo span {
     color: var(--base-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: block; /* Visível por padrão para mobile */
 }
 
-nav .icon-close {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-    top: -1.5rem;
-    right: 1.5rem;
-    transition: 0.2s;
+/* Ajustes no nav-top quando o header rola (para desktop) */
+#header.scroll .nav-top {
+    justify-content: center; /* Centraliza o logo no desktop ao rolar */
+    height: auto;
 }
 
-nav.show .icon-close {
-    visibility: visible;
-    opacity: 1;
-    top: 1.5rem;
-    z-index: 100;
-}
-
-nav.show .icon-menu {
-    display: none;
-}
-
-.icon-menu::before {
-    content: none !important;
-    display: none !important;
-}
-
-/*================ Estilo do navbar no scroll ==================*/
-
-/* Elemento nav-central (barra de pesquisa + categorias) */
+/*======================================== nav-central (Barra de Pesquisa e Categorias) ========================================*/
 .nav-central {
     display: flex;
-    flex-direction: column; /* NOVO: Importante para empilhar barra e categorias */
-    align-items: center; /* Centraliza filhos (barra e categorias) */
+    flex-direction: column; /* Empilha barra e categorias */
+    align-items: center; /* Centraliza filhos */
     gap: 10px;
     opacity: 0; /* Oculto por padrão */
     pointer-events: none; /* Não clicável */
     transform: translateY(-20px); /* Fora da vista para animação */
-    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, padding 0.4s ease, max-height 0.4s ease;
+    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, max-height 0.4s ease;
     width: 100%;
-    margin-top: 0; /* Sem margem inicial */
-    padding-top: 0; /* Sem padding inicial */
-    padding-bottom: 0; /* Sem padding inicial */
+    margin-top: 0;
+    padding-top: 0;
+    padding-bottom: 0;
     max-height: 0; /* Começa escondido, não ocupa espaço */
     overflow: hidden; /* Esconde o conteúdo se exceder max-height */
 }
@@ -328,7 +282,7 @@ nav.show .icon-menu {
     pointer-events: all;
     transform: translateY(0);
     margin-top: 1rem; /* Espaçamento para aparecer abaixo do nav-top */
-    padding-bottom: 10px; /* Espaçamento abaixo do nav-central */
+    padding-bottom: 10px;
     max-height: 200px; /* Ajuste este valor se for necessário mais espaço */
 }
 
@@ -385,82 +339,91 @@ nav.show .icon-menu {
     color: white;
 }
 
-
-/* =================== Header Geral (base para ambos desktop e mobile) =================== */
-#header {
-    width: 100%;
-    transition: all 0.4s ease;
-    padding: 0.8rem 0; /* Padding inicial compacto */
-    position: fixed;
-    top: 0;
+/*======================================== Menu Principal (Links de Navegação) ========================================*/
+.menu { /* Este é o menu principal, que agora está dentro de nav.container */
+    opacity: 0;
+    visibility: hidden;
+    height: 0; /* Colapsa o menu */
+    overflow: hidden;
+    position: absolute; /* Para o overlay do menu hambúrguer */
+    top: var(--header-initial-height); /* Posiciona abaixo do nav-top inicial */
     left: 0;
-    z-index: 999;
+    width: 100%;
+    transition: all 0.3s ease-out;
     background-color: var(--body-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column; /* CRUCIAL: Empilha nav.container e nav-central verticalmente */
-    align-items: center; /* Centraliza o conteúdo horizontalmente */
-    height: var(--header-initial-height); /* Altura inicial */
-    overflow: hidden; /* IMPORTANTE: Esconde nav-central antes do scroll */
+    z-index: 80;
+    display: block; /* Para permitir a transição */
 }
 
-/* Quando o header rola */
-#header.scroll {
-    height: auto; /* Permite que o header se expanda */
-    overflow: visible; /* Permite que o nav-central apareça */
-    /* Paddings específicos para desktop são definidos abaixo */
-    padding-top: var(--header-scrolled-padding-top-desktop); /* Padrão Desktop */
-    padding-bottom: var(--header-scrolled-padding-bottom-desktop); /* Padrão Desktop */
+.menu ul.grid {
+    display: none; /* Esconde os ULs quando o menu está fechado */
 }
 
-/* Container principal da navegação (logo, toggle, menu) */
-nav.container { /* Este agora contém SOMENTE nav-top e menu */
-    width: 100%;
+nav.show .menu { /* Quando a classe show é adicionada ao nav.container */
+    opacity: 1;
+    visibility: visible;
+    height: calc(100vh - var(--header-initial-height)); /* Ocupa o resto da tela */
+    position: fixed; /* Mudar para fixed para tela cheia de overlay */
     display: flex;
-    flex-direction: column; /* Continua empilhando nav-top e menu */
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
-/* Linha superior (logo + ícones) */
-.nav-top {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* Logo à esquerda, ícones à direita */
-    align-items: center;
-    padding: 0 1rem;
-    height: var(--header-initial-height); /* Altura do nav-top, corresponde à altura inicial do header */
+nav.show .menu ul.grid {
+    display: flex; /* Exibe os links quando o menu está aberto */
+    flex-direction: column;
+    gap: 4rem;
 }
 
-.nav-top .logo {
-    font: 700 1.3rem var(--title-font);
-    color: var(--title-color);
-    transition: all 0.4s ease;
-}
-
-.logo span {
+/* Ícones de toggle do menu hambúrguer */
+.toggle {
     color: var(--base-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: block; /* Visível por padrão para mobile */
 }
 
-/* Ajustes no nav-top quando o header rola (para desktop) */
-#header.scroll .nav-top {
-    justify-content: center; /* Centraliza o logo no desktop ao rolar */
-    height: auto;
+nav .icon-close { /* Ícone de fechar dentro do menu, para desktop não aparecer */
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: -1.5rem;
+    right: 1.5rem;
+    transition: 0.2s;
+}
+
+nav.show .icon-close {
+    visibility: visible;
+    opacity: 1;
+    top: 1.5rem;
+    z-index: 100;
+}
+
+nav.show .icon-menu {
+    display: none;
+}
+
+.icon-menu::before {
+    content: none !important;
+    display: none !important;
 }
 
 
-/* =================== Mobile Ajuste (max-width: 768px) =================== */
+/* =================== Media Query Mobile (max-width: 768px) =================== */
 @media (max-width: 768px) {
-    /* Header inicial no mobile */
-    #header {
-        height: var(--header-initial-height);
-        padding: 0.8rem 0;
-        overflow: hidden;
+    /* nav.container no mobile */
+    nav.container {
+        flex-direction: column; /* Empilha nav-top, nav-central, menu */
+        align-items: stretch; /* Estica nav-top para a largura total */
+        height: var(--header-initial-height); /* Altura inicial compacta */
+        overflow: hidden; /* Esconde nav-central e menu */
     }
 
-    nav.container {
-        flex-direction: column; /* Empilha nav-top e menu */
-        align-items: stretch; /* Estica nav-top para a largura total */
+    /* nav.container quando o header rola no mobile */
+    #header.scroll nav.container {
+        height: auto; /* Permite expansão */
+        overflow: visible; /* Mostra nav-central */
     }
 
     /* nav-top no mobile */
@@ -471,40 +434,34 @@ nav.container { /* Este agora contém SOMENTE nav-top e menu */
         padding: 0 1rem;
     }
 
-    /* BARRA DE PESQUISA E CATEGORIAS NO MOBILE - AJUSTES DE TAMANHO E POSICIONAMENTO */
-    /* NOVO: Força o nav-central a ser um bloco de largura total */
-    .nav-central {
-        width: 100%; /* Garante que ocupe a largura total disponível */
-        flex-direction: column; /* Garante que a barra e as categorias se empilhem */
-    }
-
+    /* BARRA DE PESQUISA E CATEGORIAS NO MOBILE - AJUSTES DE TAMANHO */
     .barra-pesquisa.navbar {
-        width: 95%; /* NOVO: Um pouco mais de largura para se ajustar */
+        width: 95%;
         margin: 0 auto;
     }
 
     .barra-pesquisa.navbar input {
-        padding: 6px 12px; /* NOVO: Padding reduzido para compactar */
-        font-size: 0.9rem; /* NOVO: Fonte um pouco menor */
+        padding: 6px 12px;
+        font-size: 0.9rem;
     }
 
     .categorias-navbar {
-        width: 95%; /* NOVO: Um pouco mais de largura para se ajustar */
-        gap: 6px; /* NOVO: Espaçamento entre botões reduzido */
-        padding-bottom: 5px; /* NOVO: Padding reduzido */
+        width: 95%;
+        gap: 6px;
+        padding-bottom: 5px;
     }
 
     .cat-btn {
-        padding: 6px 12px; /* NOVO: Padding reduzido para botões */
-        font-size: 0.8rem; /* NOVO: Fonte um pouco menor */
+        padding: 6px 12px;
+        font-size: 0.8rem;
     }
 
     /* Menu de links (hambúrguer) no mobile */
-    nav .menu {
-        display: none;
+    .menu { /* Não está mais dentro de nav.show */
+        display: none; /* Esconde menu de links por padrão */
     }
 
-    nav.show .menu {
+    nav.show .menu { /* Menu aparece quando nav.container tem a classe 'show' */
         display: flex;
     }
 
@@ -512,17 +469,14 @@ nav.container { /* Este agora contém SOMENTE nav-top e menu */
     #header.scroll {
         padding-top: var(--header-scrolled-padding-top-mobile);
         padding-bottom: var(--header-scrolled-padding-bottom-mobile);
-        height: auto;
-        overflow: visible;
     }
 
     /* nav-central quando rolado no mobile - MARGEM MAIS COMPACTA */
     #header.scroll .nav-central {
-        margin-top: 0.5rem; /* NOVO: Margem superior reduzida */
-        padding-bottom: 5px; /* NOVO: Padding inferior reduzido */
-        max-height: 150px; /* NOVO: Pode ser necessário ajustar este max-height, teste! */
+        margin-top: 0.5rem;
+        padding-bottom: 5px;
+        max-height: 150px;
     }
-
 
     /* nav-top quando rolado no mobile */
     #header.scroll .nav-top {
@@ -533,25 +487,21 @@ nav.container { /* Este agora contém SOMENTE nav-top e menu */
 }
 
 
-/* =================== Desktop Ajuste (min-width: 769px) =================== */
+/* =================== Media Query Desktop (min-width: 769px) =================== */
 @media (min-width: 769px) {
-    /* Header inicial no desktop */
+    /* Header no desktop */
     #header {
-        height: var(--header-initial-height);
-        overflow: hidden;
         padding: 0.8rem 0;
     }
 
-    nav {
-        flex-direction: row; /* Navbar horizontal */
-        height: auto;
-    }
-
+    /* nav.container no desktop */
     nav.container {
-        flex-direction: row; /* NOVO: nav.container agora em row no desktop */
+        flex-direction: row; /* CRUCIAL: Muda para linha no desktop */
         justify-content: space-between;
-        padding: 0 1rem;
+        align-items: center;
         width: 100%;
+        height: auto; /* Permite a altura ser determinada pelo conteúdo */
+        overflow: visible; /* Garante que tudo seja visível */
     }
 
     /* Esconde os ícones de toggle no desktop */
@@ -560,21 +510,21 @@ nav.container { /* Este agora contém SOMENTE nav-top e menu */
     }
 
     /* Menu de links (desktop) - sempre visível e em linha */
-    nav .menu {
+    .menu {
         opacity: 1;
         visibility: visible;
-        position: static;
+        position: static; /* Volta para o fluxo normal */
         height: auto;
         width: auto;
         background: none;
         display: flex;
         align-items: center;
         flex-grow: 1;
-        justify-content: flex-end;
+        justify-content: flex-end; /* Alinha links à direita */
         gap: 20px;
     }
 
-    nav .menu ul.grid {
+    .menu ul.grid {
         display: flex;
         gap: 20px;
     }
@@ -584,15 +534,23 @@ nav.container { /* Este agora contém SOMENTE nav-top e menu */
         height: auto;
     }
 
-    /* Nav-central no desktop - se comporta no fluxo */
-    
+    /* nav-central no desktop - se comporta no fluxo */
+    .nav-central {
+        /* No desktop, este vai estar ao lado do nav-top (se nav.container estiver em row) ou embaixo (se nav.container for column) */
+        /* Como nav.container agora é row, precisamos forçar nav-central a ir para baixo. */
+        /* Para isso, usaremos position: absolute para ele no desktop, posicionando-o abaixo do header. */
+        position: absolute; /* Reintroduzido para desktop */
+        left: 50%;
+        transform: translateX(-50%) translateY(-20px); /* Ajuste inicial para animação */
+        width: 100%; /* Para que a barra de pesquisa possa centralizar */
+        max-width: 600px; /* Limita a largura para desktop */
+        margin-top: 0;
+    }
 
     /* #header.scroll no desktop */
     #header.scroll {
-        height: auto;
         padding-top: var(--header-scrolled-padding-top-desktop);
         padding-bottom: var(--header-scrolled-padding-bottom-desktop);
-        overflow: visible;
     }
 
     #header.scroll .nav-top {
@@ -603,8 +561,8 @@ nav.container { /* Este agora contém SOMENTE nav-top e menu */
     #header.scroll .nav-central {
         opacity: 1;
         pointer-events: all;
-        transform: translateY(0);
-        margin-top: 1rem;
+        transform: translateX(-50%) translateY(0); /* Posição final da animação */
+        margin-top: 1rem; /* Espaçamento abaixo do nav-top no desktop */
         max-height: 200px;
     }
 
