@@ -224,13 +224,20 @@ body {
 
 /* Quando o header rolar */
 #header.scroll .nav-top {
-    justify-content: center; /* Centraliza logo e ícone no scroll */
+    justify-content: center;
+    position: relative;
     height: auto;
+}
+#header.scroll .nav-top .logo {
+    margin: 0 auto;
+    text-align: center;
 }
 
 #header.scroll .toggle {
     position: absolute;
     right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 /*======================================== nav-central ========================================*/
