@@ -331,21 +331,27 @@ nav.show .icon-menu {
 
 /* =================== Navbar Inicial =================== */
 /* =================== Navbar topo =================== */
-/* ================= Navbar Geral ================= */
+/* =================== Navbar Geral =================== */
 #header {
     width: 100%;
     transition: all 0.4s ease;
     padding: 0.8rem 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: var(--body-color);
 }
 
 nav.container {
     width: 100%;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
-/* Linha topo: logo e ícones */
+/* =================== Linha topo (logo + ícones) =================== */
 .nav-top {
     width: 100%;
     display: flex;
@@ -354,11 +360,16 @@ nav.container {
 }
 
 .nav-top .logo {
+    font: 700 1.3rem var(--title-font);
+    color: var(--title-color);
     transition: all 0.4s ease;
-    font-size: 1.3rem;
 }
 
-/* Animação da logo e ícones no scroll */
+.logo span {
+    color: var(--base-color);
+}
+
+/* =================== Scroll ativa =================== */
 #header.scroll .nav-top {
     justify-content: center;
 }
@@ -369,7 +380,7 @@ nav.container {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* ================= Nav Central ================= */
+/* =================== Nav Central =================== */
 .nav-central {
     display: flex;
     flex-direction: column;
@@ -380,7 +391,6 @@ nav.container {
     transform: translateY(-20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
     width: 100%;
-    max-width: 100%;
 }
 
 #header.scroll .nav-central {
@@ -389,7 +399,7 @@ nav.container {
     transform: translateY(0);
 }
 
-/* ================= Barra de Pesquisa ================= */
+/* =================== Barra de Pesquisa =================== */
 .barra-pesquisa.navbar {
     width: 90%;
 }
@@ -402,7 +412,7 @@ nav.container {
     font-size: 1rem;
 }
 
-/* ================= Categorias ================= */
+/* =================== Categorias =================== */
 .categorias-navbar {
     width: 100%;
     display: flex;
@@ -437,7 +447,7 @@ nav.container {
     color: white;
 }
 
-/* ================= Ícones ================= */
+/* =================== Ícones =================== */
 .toggle {
     font-size: 1.5rem;
     color: var(--base-color);
@@ -445,10 +455,11 @@ nav.container {
     transition: all 0.4s ease;
 }
 
-/* ================= Garantia para mobile ================= */
+/* =================== Mobile Ajuste =================== */
 @media (max-width: 768px) {
     nav.container {
         flex-direction: column;
+        align-items: stretch;
     }
 
     .nav-top {
@@ -467,6 +478,7 @@ nav.container {
         width: 100%;
     }
 }
+
 
 
 
