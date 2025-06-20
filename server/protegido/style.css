@@ -235,7 +235,7 @@ nav .menu {
     visibility: hidden;
     height: 0; /* Colapsa o menu */
     overflow: hidden;
-    position: absolute; /* Para o overlay */
+    position: absolute;
     top: var(--header-initial-height); /* Posiciona abaixo do nav-top inicial */
     left: 0;
     width: 100%;
@@ -311,11 +311,12 @@ nav.show .icon-menu {
     opacity: 0; /* Oculto por padrão */
     pointer-events: none; /* Não clicável */
     transform: translateY(-20px); /* Fora da vista para animação */
-    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, padding 0.4s ease; /* Adicionado margin-top para transição */
+    /* Adicionado margin-top e padding para transição suave */
+    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, padding 0.4s ease;
     width: 100%;
-    margin-top: 0; /* NOVO: Sem margem inicial */
-    padding-top: 0; /* NOVO: Sem padding inicial */
-    padding-bottom: 0; /* NOVO: Sem padding inicial */
+    margin-top: 0; /* Sem margem inicial */
+    padding-top: 0; /* Sem padding inicial */
+    padding-bottom: 0; /* Sem padding inicial */
 }
 
 /* Quando #header tem a classe 'scroll', o nav-central aparece */
@@ -323,7 +324,7 @@ nav.show .icon-menu {
     opacity: 1;
     pointer-events: all;
     transform: translateY(0);
-    margin-top: 1rem; /* NOVO: Espaçamento para aparecer abaixo do nav-top */
+    margin-top: 1rem; /* Espaçamento para aparecer abaixo do nav-top */
     padding-bottom: 10px; /* Espaçamento abaixo do nav-central */
 }
 
@@ -385,7 +386,7 @@ nav.show .icon-menu {
 #header {
     width: 100%;
     transition: all 0.4s ease;
-    padding: 0.8rem 0; /* Padding inicial */
+    padding: 0.8rem 0; /* Padding inicial compacto */
     position: fixed;
     top: 0;
     left: 0;
@@ -396,15 +397,15 @@ nav.show .icon-menu {
     flex-direction: column; /* Empilha nav.container e nav-central */
     align-items: center; /* Centraliza o conteúdo horizontalmente */
     height: var(--header-initial-height); /* Altura inicial */
-    overflow: hidden; /* NOVO: Importante para esconder nav-central antes do scroll */
+    overflow: hidden; /* IMPORTANTE: Esconde nav-central antes do scroll */
 }
 
 /* Quando o header rola */
 #header.scroll {
-    height: auto; /* NOVO: Permite que o header se expanda */
+    height: auto; /* Permite que o header se expanda */
     padding-top: var(--header-scrolled-padding-top); /* Padding superior maior */
     padding-bottom: var(--header-scrolled-padding-bottom); /* Padding inferior maior */
-    overflow: visible; /* NOVO: Permite que o nav-central apareça */
+    overflow: visible; /* Permite que o nav-central apareça */
 }
 
 /* Container principal da navegação (logo, toggle, menu) */
@@ -436,15 +437,14 @@ nav.container {
     color: var(--base-color);
 }
 
-/* Ajustes no nav-top quando o header rola */
+/* Ajustes no nav-top quando o header rola (para desktop) */
 #header.scroll .nav-top {
-    justify-content: center; /* NOVO: Centraliza o logo no desktop ao rolar */
+    justify-content: center; /* Centraliza o logo no desktop ao rolar */
     height: auto; /* Permite que o nav-top se ajuste */
-    /* Removido padding-bottom aqui, será controlado pelo margin-top do nav-central */
 }
 
 
-/* =================== Mobile Ajuste (max-width: 768px) =================== */
+/* =================== Mobile Ajuste (larguras menores que 768px) =================== */
 @media (max-width: 768px) {
     /* Header inicial no mobile */
     #header {
@@ -467,7 +467,8 @@ nav.container {
     }
 
     /* nav-central no mobile (controlado pelo #header.scroll) */
-    /* Não adicione display: none; ou height: 0; aqui para .nav-central */
+    /* Não adicione display: none; ou height: 0; aqui para .nav-central.
+       Ele deve se comportar exatamente como a regra global acima de `opacity` e `transform`. */
 
     /* Barra de pesquisa e categorias centralizadas no mobile */
     .barra-pesquisa.navbar {
@@ -499,30 +500,14 @@ nav.container {
 
     /* nav-top quando rolado no mobile */
     #header.scroll .nav-top {
-        justify-content: space-between; /* NOVO: Mantém logo e toggle separados no mobile, mesmo ao rolar */
+        justify-content: space-between; /* Mantém logo e toggle separados no mobile, mesmo ao rolar */
         padding-bottom: 0; /* Remove espaçamento extra */
         height: auto;
     }
-
-    /* NOVO: Ajuste para o logo centralizar no scroll mobile SE QUISER */
-    /* Se o ícone do toggle ainda estiver à direita, 'space-between' manterá o logo à esquerda. */
-    /* Para forçar o logo para o centro (e talvez mover o toggle para uma posição fixa ou abaixo),
-       seria necessário um ajuste mais complexo no HTML ou um layout de grid para o nav-top. */
-    /* Exemplo para centralizar o logo forçadamente, mas o toggle ficaria sobreposto ou precisaria de outro lugar:
-    #header.scroll .nav-top .logo {
-        width: 100%;
-        text-align: center;
-    }
-    #header.scroll .nav-top .toggle {
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-    }
-    */
 }
 
 
-/* =================== Desktop Ajuste (min-width: 769px) =================== */
+/* =================== Desktop Ajuste (larguras maiores que 768px) =================== */
 @media (min-width: 769px) {
     /* Header inicial no desktop */
     #header {
@@ -573,20 +558,8 @@ nav.container {
         height: auto; /* Altura automática para o nav-top no desktop */
     }
 
-    /* Nav-central no desktop - posicionado abaixo do nav-top */
-    /* NOVO: Removido position: absolute daqui para ele fluir no layout */
-    .nav-central {
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-20px);
-        transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease;
-        width: 100%; /* Ocupa a largura total para centralizar */
-        padding-top: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Centraliza a barra e categorias */
-        margin-top: 0; /* Reseta margem inicial */
-    }
+    /* Nav-central no desktop - agora se comporta no fluxo */
+    
 
     /* #header.scroll no desktop */
     #header.scroll {
@@ -599,7 +572,6 @@ nav.container {
     #header.scroll .nav-top {
         justify-content: center; /* Centraliza logo quando scrollado no desktop */
         height: auto;
-        /* Removido padding-bottom aqui, o margin-top do nav-central controla o espaçamento */
     }
 
     #header.scroll .nav-central {
