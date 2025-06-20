@@ -408,20 +408,19 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
 
 
 
-document.addEventListener('DOMContentLoaded', function () {
+function toggleHeaderScroll() {
     const divider = document.querySelector('.divider-1');
-    const header = document.querySelector('#header');
+    const dividerPosition = divider.offsetTop;
 
-    window.addEventListener('scroll', function () {
-        const dividerTop = divider.offsetTop;
+    if (window.scrollY >= dividerPosition) {
+        header.classList.add('scroll');
+    } else {
+        header.classList.remove('scroll');
+    }
+}
 
-        if (window.scrollY >= dividerTop - 80) {
-            header.classList.add('scroll');
-        } else {
-            header.classList.remove('scroll');
-        }
-    });
-});
+window.addEventListener('scroll', toggleHeaderScroll);
+
 
 
 
