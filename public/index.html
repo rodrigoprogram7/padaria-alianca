@@ -50,30 +50,51 @@
 <body>
     <header id="header">
   <nav class="container">
-  <div class="navbar-esquerda">
-    <a href="#" class="logo">Padaria <span>Aliança</span></a>
 
-    <div class="barra-pesquisa">
-      <input type="text" id="pesquisa" placeholder=" Buscar produto..." />
-      <ul id="resultados-pesquisa"></ul>
+    <!-- Logo padrão na posição inicial -->
+    <div class="navbar-esquerda">
+      <a href="#" class="logo">Padaria <span>Aliança</span></a>
+
+      <!-- Barra de pesquisa padrão (oculta depois) -->
+      <div class="barra-pesquisa">
+        <input type="text" id="pesquisa" placeholder="Buscar produto..." />
+        <ul id="resultados-pesquisa"></ul>
+      </div>
     </div>
-  </div>
 
-  <!-- Ícones de menu -->
-  <div class="toggle icon-menu">☰</div>
-  <div class="toggle icon-close">×</div>
+    <!-- Logo central + pesquisa + categorias (visível no scroll) -->
+    <div class="nav-central">
+      <a href="#" class="logo centralizado">Padaria <span>Aliança</span></a>
 
-  <!-- Menu principal -->
-  <div class="menu">
-    <ul class="grid">
-      <li><a href="#home" class="title">Início</a></li>
-      <li><a href="#about" class="title">Produtos</a></li>
-      <li><a href="#contact" class="title">Contato</a></li>
-    </ul>
-  </div>
-</nav>
+      <div class="barra-pesquisa navbar">
+        <input type="text" id="pesquisa-navbar" placeholder="Buscar produto..." />
+      </div>
 
+      <div class="categorias-navbar">
+        <button class="cat-btn" onclick="filtrarCategoria('alimentos')">Alimentos</button>
+        <button class="cat-btn" onclick="filtrarCategoria('padaria')">Padaria</button>
+        <button class="cat-btn" onclick="filtrarCategoria('cestas')">Sacolões</button>
+        <button class="cat-btn" onclick="filtrarCategoria('bebidas')">Bebidas</button>
+        <button class="cat-btn" onclick="filtrarCategoria('frios')">Frios</button>
+        <button class="cat-btn" onclick="filtrarCategoria('limpeza')">Limpeza</button>
+      </div>
+    </div>
+
+    <!-- Ícones do menu mobile -->
+    <div class="toggle icon-menu">☰</div>
+    <div class="toggle icon-close">×</div>
+
+    <!-- Menu principal -->
+    <div class="menu">
+      <ul class="grid">
+        <li><a href="#home" class="title">Início</a></li>
+        <li><a href="#about" class="title">Produtos</a></li>
+        <li><a href="#contact" class="title">Contato</a></li>
+      </ul>
+    </div>
+  </nav>
 </header>
+
 
     <main>
         <section class="section" id="home"> <!--Home-->
@@ -113,20 +134,6 @@
 
 <div class="container">
   <div class="produtos">
-    <h2>Escolha a categoria:</h2>
-  <br>
- <br>
-    <center>
-    <div class="mb-3">
-  <button id="btcategoria" data-filtro="alimentos" class="btn btn-secondary btn-sm me-2 filtro-btn active" onclick="filtrarCategoria('alimentos')">Alimentos</button>
-  <button id="btcategoria" data-filtro="padaria" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('padaria')">Padaria</button>
-  <button id="btcategoria" data-filtro="cestas" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('cestas')">Sacolões</button>
-  <button id="btcategoria" data-filtro="bebidas" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('bebidas')">Bebidas, sorvetes</button>
-  <button id="btcategoria" data-filtro="frios" class="btn btn-secondary btn-sm me-2 filtro-btn" onclick="filtrarCategoria('frios')">Frios, Hortifrúti</button>
-  <button id="btcategoria" data-filtro="limpeza" class="btn btn-secondary btn-sm filtro-btn" onclick="filtrarCategoria('limpeza')">Higiene, Limpeza</button>
-</div>
-
-  </center>
    <br>
    <br>
     <!-------------------------------------------------------------------- ALIMENTOS ----------------------------------------------------------------------------->
