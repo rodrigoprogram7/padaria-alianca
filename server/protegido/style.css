@@ -258,6 +258,20 @@ body {
     overflow: hidden;
 }
 
+.nav-central {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+#header.scroll .nav-central {
+    margin-top: 1rem;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+
 #header.scroll .nav-central {
     opacity: 1;
     pointer-events: all;
@@ -269,9 +283,10 @@ body {
 
 /*======================================== Barra de pesquisa ========================================*/
 .barra-pesquisa.navbar {
-    width: 90%;
+    width: 95%;
     max-width: none;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .barra-pesquisa.navbar input {
@@ -291,19 +306,22 @@ body {
 /*======================================== Categorias - Scroll horizontal ========================================*/
 .categorias-navbar {
     display: flex;
+    flex-wrap: nowrap;
     overflow-x: auto;
     white-space: nowrap;
-    flex-wrap: nowrap;
     gap: 8px;
     padding-bottom: 8px;
-    justify-content: center;
-    margin: 0 auto;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .categorias-navbar::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+}
+
+.categorias-navbar::-webkit-scrollbar-thumb {
+    background-color: var(--base-color);
+    border-radius: 4px;
 }
 
 .cat-btn {
@@ -357,6 +375,16 @@ body {
         position: relative; /* MUITO IMPORTANTE para conter o toggle absoluto depois */
         padding: 0 1rem;
     }
+      .nav-top {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        box-sizing: border-box;
+    }
 
     .toggle {
         display: block;
@@ -374,13 +402,33 @@ body {
         text-align: center;
     }
 
+     #header.scroll .nav-top {
+        justify-content: center;
+        position: relative;
+    }
+
+    #header.scroll .toggle {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block;
+    }
+
     #header.scroll .toggle {
         position: absolute;
         right: 1rem;
         top: 50%;
         transform: translateY(-50%);
         display: block; /* Garante que ele continue visível no scroll */
+
+
 }
+        #header, nav.container, .nav-top, .nav-central {
+            max-width: 100%;
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
 }
 
 /*======================================== Resultados da pesquisa ========================================*/
