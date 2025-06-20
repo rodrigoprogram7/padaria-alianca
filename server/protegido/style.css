@@ -343,6 +343,123 @@ nav.show .icon-menu {
 }
 
 
+/* =================== Navbar Inicial =================== */
+#header {
+    transition: all 0.4s ease;
+}
+
+.nav-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-top .logo {
+    transition: all 0.4s ease;
+}
+
+/* ================ Após Scroll ================= */
+#header.scroll {
+    padding-bottom: 1rem;
+    background-color: var(--body-color);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Move logo para centro */
+#header.scroll .nav-top {
+    justify-content: center;
+}
+
+#header.scroll .nav-top .logo {
+    transform: translateY(0);
+}
+
+/* Animação do navbar crescendo */
+#header.scroll {
+    height: auto;
+    padding-top: 1rem;
+}
+
+/* =================== Animações para barra de pesquisa =================== */
+.nav-central {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#header.scroll .nav-central {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =================== Barra de pesquisa =================== */
+.barra-pesquisa.navbar input {
+    width: 90%;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+/* =================== Categorias =================== */
+.categorias-navbar {
+    width: 100%;
+    display: none;
+    overflow-x: auto;
+    gap: 8px;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#header.scroll .categorias-navbar {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.categorias-navbar::-webkit-scrollbar {
+    height: 6px;
+}
+
+.categorias-navbar::-webkit-scrollbar-thumb {
+    background-color: var(--base-color);
+    border-radius: 4px;
+}
+
+.cat-btn {
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border: none;
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    color: var(--title-color);
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 0.9rem;
+}
+
+.cat-btn:hover {
+    background-color: var(--base-color);
+    color: white;
+}
+
+/* =================== Ícone =================== */
+.toggle {
+    font-size: 1.5rem;
+    color: var(--base-color);
+    cursor: pointer;
+    transition: all 0.4s ease;
+}
+
+
+
 
 
 
