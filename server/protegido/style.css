@@ -156,12 +156,12 @@ body {
 /*======================================== Navegação ========================================*/
 nav {
     width: 100%;
-    height: auto; /* Ajustado para auto, pois o conteúdo vai variar */
+    height: auto;
     display: flex;
-    flex-direction: column; /* Novo: Garante que os filhos (nav-top, nav-central, menu) se empilhem */
-    justify-content: space-between; /* Ajuste se necessário para layout de coluna */
-    align-items: center; /* Centraliza os itens na coluna */
-    padding-bottom: 0.8rem; /* Espaçamento inferior para a nav */
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.8rem;
 }
 
 nav ul li {
@@ -195,40 +195,38 @@ nav ul li a.active::after {
     font-weight: bold;
 }
 
-/* Oculta o menu de links por padrão no mobile e mostra no desktop */
 nav .menu {
-    /* Estas propriedades são para o estado de menu hambúrguer fechado no mobile */
     opacity: 0;
     visibility: hidden;
-    height: 0; /* Ajuda a colapsar o espaço */
-    overflow: hidden; /* Garante que o conteúdo oculto não vaze */
-    position: absolute; /* Para que não ocupe espaço quando escondido */
-    top: 50px; /* Ou a altura do seu nav-top */
+    height: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 50px;
     left: 0;
     width: 100%;
-    transition: all 0.3s ease-out; /* Transição para abertura/fechamento */
-    background-color: var(--body-color); /* Fundo para o menu quando aberto */
-    z-index: 80; /* Abaixo do header principal */
+    transition: all 0.3s ease-out;
+    background-color: var(--body-color);
+    z-index: 80;
 }
 
 nav.show .menu {
     opacity: 1;
     visibility: visible;
-    height: calc(100vh - 50px); /* Ocupa o resto da tela, ajustando pela altura do nav-top */
-    position: fixed; /* Fixa o menu quando aberto */
-    display: flex; /* Para organizar os links do menu */
+    height: calc(100vh - 50px);
+    position: fixed;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
 nav.show .menu ul.grid {
-    display: flex; /* Exibe os links do menu */
+    display: flex;
     flex-direction: column;
     gap: 4rem;
 }
 
-nav .menu ul.grid { /* Certifica-se que os links não são visíveis quando o menu está fechado */
+nav .menu ul.grid {
     display: none;
 }
 
@@ -237,14 +235,14 @@ nav .menu ul.grid { /* Certifica-se que os links não são visíveis quando o me
     color: var(--base-color);
     font-size: 1.5rem;
     cursor: pointer;
-    display: block; /* Visível por padrão para mobile */
+    display: block;
 }
 
 nav .icon-close {
     visibility: hidden;
     opacity: 0;
     position: absolute;
-    top: -1.5rem; /* Fora da tela */
+    top: -1.5rem;
     right: 1.5rem;
     transition: 0.2s;
 }
@@ -252,12 +250,12 @@ nav .icon-close {
 nav.show .icon-close {
     visibility: visible;
     opacity: 1;
-    top: 1.5rem; /* Posição visível quando menu está aberto */
-    z-index: 100; /* Acima de tudo */
+    top: 1.5rem;
+    z-index: 100;
 }
 
 nav.show .icon-menu {
-    display: none; /* Esconde o ícone de menu quando o menu está aberto */
+    display: none;
 }
 
 .icon-menu::before {
@@ -268,31 +266,32 @@ nav.show .icon-menu {
 
 /*================ Estilo do navbar no scroll ==================*/
 
-/* Esconde elementos por padrão */
 .nav-central {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* NOVO/AJUSTADO: Centraliza itens filhos horizontalmente */
     gap: 10px;
-    opacity: 0; /* Oculto por padrão */
-    pointer-events: none; /* Não clicável */
-    transform: translateY(-20px); /* Fora da vista */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-20px);
     transition: opacity 0.4s ease, transform 0.4s ease;
     width: 100%;
-    padding-top: 10px; /* Espaçamento com o nav-top quando visível */
+    padding-top: 10px;
+    /* NOVO: Adicionado para garantir centralização quando o parent é um flex container */
+    margin: 0 auto;
 }
 
-/* Quando rola, aparece com animação */
 #header.scroll .nav-central {
     opacity: 1;
     pointer-events: all;
     transform: translateY(0);
 }
 
-/* Barra de pesquisa dentro do navbar */
 .barra-pesquisa.navbar {
     width: 90%;
-    max-width: 500px; /* Limita a largura para melhor aparência */
+    max-width: 500px;
+    /* NOVO: Para centralizar a barra de pesquisa se ela não for 100% de largura */
+    margin: 0 auto; 
 }
 
 .barra-pesquisa.navbar input {
@@ -303,15 +302,16 @@ nav.show .icon-menu {
     font-size: 1rem;
 }
 
-/* Categorias */
 .categorias-navbar {
     width: 100%;
     display: flex;
-    overflow-x: auto; /* Permite rolagem horizontal se muitos botões */
+    overflow-x: auto;
     gap: 8px;
     padding-bottom: 8px;
-    justify-content: center; /* Centraliza os botões */
-    flex-wrap: wrap; /* Permite que os botões quebrem a linha */
+    justify-content: center; /* AJUSTADO: Centraliza os botões de categoria */
+    flex-wrap: wrap;
+    /* NOVO: Para centralizar o contêiner de categorias se ele não for 100% de largura */
+    margin: 0 auto; 
 }
 
 .categorias-navbar::-webkit-scrollbar {
@@ -351,25 +351,27 @@ nav.show .icon-menu {
     left: 0;
     z-index: 999;
     background-color: var(--body-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra padrão */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* NOVO/AJUSTADO: Adicionado display flex para controlar o nav-top e nav-central */
+    display: flex; 
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo principal do header */
 }
 
 nav.container {
     width: 100%;
     display: flex;
-    flex-direction: column; /* Coluna no mobile */
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    /* flex-wrap: wrap; - Removido, pois estamos usando flex-direction: column */
 }
 
-/* =================== Linha topo (logo + ícones) =================== */
 .nav-top {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem; /* Padding para nav-top */
+    padding: 0 1rem;
 }
 
 .nav-top .logo {
@@ -382,20 +384,21 @@ nav.container {
     color: var(--base-color);
 }
 
-/* =================== Scroll ativa =================== */
 #header.scroll .nav-top {
     justify-content: center;
-    padding-bottom: 1rem; /* Adiciona espaço entre o nav-top e o nav-central quando o header rola */
+    padding-bottom: 1rem;
 }
 
 #header.scroll {
-    padding: 0.8rem 0; /* Mantém o padding base, o nav-central adiciona o restante */
+    padding: 0.8rem 0;
     background-color: var(--body-color);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* NOVO/AJUSTADO: Garante que o nav-central centralize ao rolar */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
 }
 
-
-/* =================== Ícones =================== */
 .toggle {
     font-size: 1.5rem;
     color: var(--base-color);
@@ -405,7 +408,6 @@ nav.container {
 
 /* =================== Mobile Ajuste =================== */
 @media (max-width: 768px) {
-    /* No mobile, o nav-container é uma coluna, então o nav-top e o nav-central ficam um abaixo do outro */
     nav.container {
         flex-direction: column;
         align-items: stretch;
@@ -415,58 +417,55 @@ nav.container {
         width: 100%;
     }
 
-    /* O nav-central já está configurado para aparecer com o scroll */
-    /* Nenhuma regra específica aqui para ocultá-lo/mostrá-lo, pois isso é feito pelo #header.scroll */
+    /* As propriedades de .nav-central já estão no bloco principal e são aplicadas */
 
     .barra-pesquisa.navbar {
-        width: 90%;
+        width: 90%; /* Mantido */
+        margin: 0 auto; /* NOVO: Garante centralização no mobile */
     }
 
     .categorias-navbar {
-        width: 100%;
+        width: 100%; /* Mantido */
+        justify-content: center; /* Já estava, mas confirmo que é importante */
+        margin: 0 auto; /* NOVO: Garante centralização no mobile */
     }
 
-    /* Garante que o menu de links esteja escondido por padrão e só apareça com o 'nav.show' */
     nav .menu {
-        display: none; /* Oculta totalmente o menu de links quando não está 'show' */
-        /* As regras de visibilidade, opacity, etc, são para a transição */
+        display: none;
     }
 
     nav.show .menu {
-        display: flex; /* Mostra o menu de links quando 'show' */
+        display: flex;
     }
 
-    /* Ajustes para quando o header.scroll está ativo no mobile */
     #header.scroll .nav-top {
-        padding-bottom: 0; /* Remove padding extra se não quiser no mobile */
-        justify-content: space-between; /* Mantém logo e ícone separados no scroll mobile */
+        padding-bottom: 0;
+        justify-content: space-between;
     }
 
     #header.scroll {
-        padding: 0.8rem 0; /* Mantém compacto no scroll mobile */
+        padding: 0.8rem 0;
     }
-
 }
 
 
 /* =================== Desktop Ajuste =================== */
 @media (min-width: 769px) {
     nav {
-        flex-direction: row; /* Coloca os elementos lado a lado no desktop */
-        height: 50px; /* Volta para a altura fixa no desktop */
+        flex-direction: row;
+        height: 50px;
     }
 
     nav.container {
-        flex-direction: row; /* Navbar em linha no desktop */
+        flex-direction: row;
         justify-content: space-between;
-        padding: 0 1rem; /* Adiciona padding lateral no desktop */
+        padding: 0 1rem;
     }
 
     .toggle {
-        display: none; /* Esconde os ícones de toggle no desktop */
+        display: none;
     }
 
-    /* No desktop, o menu (links de navegação) está sempre visível e em linha */
     nav .menu {
         opacity: 1;
         visibility: visible;
@@ -474,44 +473,55 @@ nav.container {
         height: auto;
         width: auto;
         background: none;
-        display: flex; /* Exibe os links em linha no desktop */
+        display: flex;
         align-items: center;
-        flex-grow: 1; /* Permite que o menu ocupe espaço disponível */
-        justify-content: flex-end; /* Alinha os links à direita, ou 'center' */
-        gap: 20px; /* Espaçamento entre os itens do menu no desktop */
+        flex-grow: 1;
+        justify-content: flex-end;
+        gap: 20px;
     }
 
     nav .menu ul.grid {
-        display: flex; /* Exibe os links de navegação no desktop */
-        gap: 20px; /* Espaçamento entre os links no desktop */
+        display: flex;
+        gap: 20px;
     }
 
-    /* No desktop, o nav-top fica à esquerda e o menu à direita */
     .nav-top {
-        width: auto; /* Deixa a largura automática no desktop */
+        width: auto;
     }
 
-    /* No desktop, o nav-central deve ser visível apenas com o scroll */
     .nav-central {
-        opacity: 0; /* Começa escondido */
+        opacity: 0;
         pointer-events: none;
         transform: translateY(-20px);
         transition: opacity 0.4s ease, transform 0.4s ease;
-        position: absolute; /* Para que não empurre outros elementos no desktop */
+        position: absolute;
         left: 50%;
-        transform: translateX(-50%) translateY(-20px); /* Centraliza e esconde */
-        width: auto; /* Largura automática */
+        transform: translateX(-50%) translateY(-20px);
+        width: auto; /* Permite que o conteúdo determine a largura */
         padding-top: 0;
+        /* NOVO/AJUSTADO: Centraliza os itens internos também no desktop */
+        display: flex; 
+        flex-direction: column;
+        align-items: center; 
     }
 
     #header.scroll .nav-central {
-        opacity: 1; /* Aparece com o scroll */
+        opacity: 1;
         pointer-events: all;
-        transform: translateX(-50%) translateY(0); /* Centraliza e mostra */
+        transform: translateX(-50%) translateY(0);
     }
 
     #header.scroll {
-        padding: 1.5rem 0 2.5rem 0; /* Padding maior quando rolado */
+        padding: 1.5rem 0 2.5rem 0;
+    }
+
+    /* NOVO: Para garantir que a barra de pesquisa e categorias centralizem no desktop */
+    .barra-pesquisa.navbar {
+        margin: 0 auto;
+    }
+
+    .categorias-navbar {
+        margin: 0 auto;
     }
 }
 
