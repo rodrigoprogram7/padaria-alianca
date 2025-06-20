@@ -129,6 +129,7 @@ function alterarQuantidade(botao, delta) {
     if (tipo === 'peso') {
         valor = Math.max(100, valor) // Minimo de 100g
         // Garante que o incremento/decremento seja de 100g para tipo peso
+        // Ex: Se está em 120g e decrementa, vai para 100g, não 20g. Se está em 100g e incrementa, vai para 200g.
         if (delta === 1 && valor % 100 !== 0) valor = Math.ceil(valor / 100) * 100;
         if (delta === -1 && valor % 100 !== 0) valor = Math.floor(valor / 100) * 100;
     } else {
@@ -152,6 +153,11 @@ function alterarQuantidade(botao, delta) {
             subtotalEl.textContent = ''
         }
     }
+
+    // NOVO: Remove o foco do botão ou input para desativar estilos de active/focus
+    // Isso é particularmente útil em dispositivos móveis.
+    botao.blur(); // Remove o foco do botão clicado
+    input.blur(); // Remove o foco do input de quantidade
 }
 
 
@@ -197,6 +203,9 @@ function adicionarAoCarrinho(botao) {
 
     // Reseta a quantidade para o valor inicial
     quantidadeInput.value = tipo === 'peso' ? 100 : 1
+
+    // NOVO: Garante que o botão "Adicionar" também perca o foco
+    botao.blur();
 }
 
 function removerDoCarrinho(nome) {
