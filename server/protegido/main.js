@@ -109,11 +109,12 @@ function filtrarCategoria(categoriaSelecionada) {
     })
 
     // === Scroll suave até a área dos produtos ===
-    const areaProdutos = document.querySelector('.produtos');
+    const areaProdutos = document.querySelector('.pp');
     if (areaProdutos) {
         areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
+
 
 
 /*========== Carrinho ==========*/
