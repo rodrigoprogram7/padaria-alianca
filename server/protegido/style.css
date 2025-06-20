@@ -510,6 +510,7 @@ nav.show .menu ul.grid {
     width: auto;                /* ✅ Corrigido: Não forçar 100% */
     margin: 0 auto;             /* ✅ Corrigido: Garante centralização horizontal */
     padding: 0;
+    right: 200px;
 }
 
 nav.show .menu ul.grid li {
