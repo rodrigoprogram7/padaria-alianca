@@ -185,21 +185,21 @@ body {
     --header-initial-height: 50px;
     --header-scrolled-padding-top-desktop: 1.5rem;
     --header-scrolled-padding-bottom-desktop: 2.5rem;
-    --header-scrolled-padding-top-mobile: 0.8rem; /* NOVO */
-    --header-scrolled-padding-bottom-mobile: 0.8rem; /* NOVO */
+    --header-scrolled-padding-top-mobile: 0.8rem;
+    --header-scrolled-padding-bottom-mobile: 0.8rem;
 }
 
 /*======================================== Navegação ========================================*/
-nav {
+nav { /* Este é o nav.container, que agora envolve apenas nav-top e menu */
     width: 100%;
     height: auto;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Importante: Empilha nav-top e menu */
     justify-content: space-between;
     align-items: center;
 }
 
-/* Estilos de links de navegação (sem mudanças significativas aqui) */
+/* Estilos de links de navegação */
 nav ul li {
     text-align: center;
 }
@@ -235,18 +235,19 @@ nav ul li a.active::after {
 nav .menu {
     opacity: 0;
     visibility: hidden;
-    height: 0;
+    height: 0; /* Colapsa o menu */
     overflow: hidden;
-    position: absolute;
-    top: var(--header-initial-height);
+    position: absolute; /* Para o overlay */
+    top: var(--header-initial-height); /* Posiciona abaixo do nav-top inicial */
     left: 0;
     width: 100%;
     transition: all 0.3s ease-out;
     background-color: var(--body-color);
     z-index: 80;
-    display: block;
+    display: block; /* Para permitir a transição */
 }
 
+/* Esconde os ULs do menu de navegação quando o menu está fechado */
 nav .menu ul.grid {
     display: none;
 }
@@ -254,7 +255,7 @@ nav .menu ul.grid {
 nav.show .menu {
     opacity: 1;
     visibility: visible;
-    height: calc(100vh - var(--header-initial-height));
+    height: calc(100vh - var(--header-initial-height)); /* Ocupa o resto da tela */
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -263,7 +264,7 @@ nav.show .menu {
 }
 
 nav.show .menu ul.grid {
-    display: flex;
+    display: flex; /* Exibe os links quando o menu está aberto */
     flex-direction: column;
     gap: 4rem;
 }
@@ -273,7 +274,7 @@ nav.show .menu ul.grid {
     color: var(--base-color);
     font-size: 1.5rem;
     cursor: pointer;
-    display: block;
+    display: block; /* Visível por padrão para mobile */
 }
 
 nav .icon-close {
@@ -306,21 +307,19 @@ nav.show .icon-menu {
 /* Elemento nav-central (barra de pesquisa + categorias) */
 .nav-central {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* NOVO: Importante para empilhar barra e categorias */
+    align-items: center; /* Centraliza filhos (barra e categorias) */
     gap: 10px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-20px);
-    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, padding 0.4s ease;
+    opacity: 0; /* Oculto por padrão */
+    pointer-events: none; /* Não clicável */
+    transform: translateY(-20px); /* Fora da vista para animação */
+    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, padding 0.4s ease, max-height 0.4s ease;
     width: 100%;
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    /* NOVO: max-height para controlar a altura máxima do nav-central individualmente */
+    margin-top: 0; /* Sem margem inicial */
+    padding-top: 0; /* Sem padding inicial */
+    padding-bottom: 0; /* Sem padding inicial */
     max-height: 0; /* Começa escondido, não ocupa espaço */
     overflow: hidden; /* Esconde o conteúdo se exceder max-height */
-    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, padding 0.4s ease, max-height 0.4s ease; /* Adicionar max-height na transição */
 }
 
 /* Quando #header tem a classe 'scroll', o nav-central aparece */
@@ -328,9 +327,8 @@ nav.show .icon-menu {
     opacity: 1;
     pointer-events: all;
     transform: translateY(0);
-    margin-top: 1rem;
-    padding-bottom: 10px;
-    /* NOVO: Definir um max-height grande o suficiente para o conteúdo aparecer */
+    margin-top: 1rem; /* Espaçamento para aparecer abaixo do nav-top */
+    padding-bottom: 10px; /* Espaçamento abaixo do nav-central */
     max-height: 200px; /* Ajuste este valor se for necessário mais espaço */
 }
 
@@ -400,8 +398,8 @@ nav.show .icon-menu {
     background-color: var(--body-color);
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* CRUCIAL: Empilha nav.container e nav-central verticalmente */
+    align-items: center; /* Centraliza o conteúdo horizontalmente */
     height: var(--header-initial-height); /* Altura inicial */
     overflow: hidden; /* IMPORTANTE: Esconde nav-central antes do scroll */
 }
@@ -416,10 +414,10 @@ nav.show .icon-menu {
 }
 
 /* Container principal da navegação (logo, toggle, menu) */
-nav.container {
+nav.container { /* Este agora contém SOMENTE nav-top e menu */
     width: 100%;
     display: flex;
-    flex-direction: column;
+    flex-direction: column; /* Continua empilhando nav-top e menu */
     justify-content: space-between;
     align-items: center;
 }
@@ -428,10 +426,10 @@ nav.container {
 .nav-top {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-between; /* Logo à esquerda, ícones à direita */
     align-items: center;
     padding: 0 1rem;
-    height: var(--header-initial-height);
+    height: var(--header-initial-height); /* Altura do nav-top, corresponde à altura inicial do header */
 }
 
 .nav-top .logo {
@@ -446,7 +444,7 @@ nav.container {
 
 /* Ajustes no nav-top quando o header rola (para desktop) */
 #header.scroll .nav-top {
-    justify-content: center;
+    justify-content: center; /* Centraliza o logo no desktop ao rolar */
     height: auto;
 }
 
@@ -461,8 +459,8 @@ nav.container {
     }
 
     nav.container {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: column; /* Empilha nav-top e menu */
+        align-items: stretch; /* Estica nav-top para a largura total */
     }
 
     /* nav-top no mobile */
@@ -473,7 +471,13 @@ nav.container {
         padding: 0 1rem;
     }
 
-    /* BARRA DE PESQUISA E CATEGORIAS NO MOBILE - AJUSTES DE TAMANHO */
+    /* BARRA DE PESQUISA E CATEGORIAS NO MOBILE - AJUSTES DE TAMANHO E POSICIONAMENTO */
+    /* NOVO: Força o nav-central a ser um bloco de largura total */
+    .nav-central {
+        width: 100%; /* Garante que ocupe a largura total disponível */
+        flex-direction: column; /* Garante que a barra e as categorias se empilhem */
+    }
+
     .barra-pesquisa.navbar {
         width: 95%; /* NOVO: Um pouco mais de largura para se ajustar */
         margin: 0 auto;
@@ -506,7 +510,6 @@ nav.container {
 
     /* Header quando rolado no mobile - PADDIINGS MAIS COMPACTOS */
     #header.scroll {
-        /* NOVO: Paddings mais compactos para mobile */
         padding-top: var(--header-scrolled-padding-top-mobile);
         padding-bottom: var(--header-scrolled-padding-bottom-mobile);
         height: auto;
@@ -540,12 +543,12 @@ nav.container {
     }
 
     nav {
-        flex-direction: row;
+        flex-direction: row; /* Navbar horizontal */
         height: auto;
     }
 
     nav.container {
-        flex-direction: row;
+        flex-direction: row; /* NOVO: nav.container agora em row no desktop */
         justify-content: space-between;
         padding: 0 1rem;
         width: 100%;
@@ -587,8 +590,8 @@ nav.container {
     /* #header.scroll no desktop */
     #header.scroll {
         height: auto;
-        padding-top: var(--header-scrolled-padding-top-desktop); /* Usa padding desktop */
-        padding-bottom: var(--header-scrolled-padding-bottom-desktop); /* Usa padding desktop */
+        padding-top: var(--header-scrolled-padding-top-desktop);
+        padding-bottom: var(--header-scrolled-padding-bottom-desktop);
         overflow: visible;
     }
 
@@ -602,7 +605,7 @@ nav.container {
         pointer-events: all;
         transform: translateY(0);
         margin-top: 1rem;
-        max-height: 200px; /* Também para desktop, se necessário */
+        max-height: 200px;
     }
 
     .barra-pesquisa.navbar {
