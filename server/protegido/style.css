@@ -477,41 +477,50 @@ nav.show .toggle.icon-close::before {
 
 @media (max-width: 768px) {
     .menu {
-        display: none;
-        opacity: 0;
-        visibility: hidden;
-        height: 0;
-        overflow: hidden;
-    }
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+}
 
-    nav.show .menu {
-        display: flex;
-        opacity: 1;
-        visibility: visible;
-        height: calc(100vh - var(--header-initial-height));
-        position: fixed;
-        top: var(--header-initial-height);
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--body-color);
-        z-index: 80;
-    }
+nav.show .menu {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    height: calc(100vh - var(--header-initial-height));
+    position: fixed;
+    top: var(--header-initial-height);
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--body-color);
+    z-index: 80;
+}
 
-    nav.show .menu ul.grid {
+nav.show .menu ul.grid {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    align-items: center;  /* CENTRALIZA */
-    justify-content: center;  /* CENTRALIZA VERTICALMENTE */
+    align-items: center;        /* Centraliza horizontalmente os itens */
+    justify-content: center;    /* Centraliza verticalmente os itens */
     text-align: center;
-    width: 100%;
+    width: auto;                /* ✅ Corrigido: Não forçar 100% */
+    margin: 0 auto;             /* ✅ Corrigido: Garante centralização horizontal */
     padding: 0;
-    margin: 0;
 }
 
+nav.show .menu ul.grid li {
+    width: auto;
+    text-align: center;
+}
+
+nav.show .menu ul.grid li a {
+    display: inline-block;
+    text-align: center;
+}
 }
 
 nav ul li a.active,
