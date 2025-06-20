@@ -1034,11 +1034,10 @@ footer .social a:hover {
 /* Botões de navegação do carrossel de produto */
 .carousel-btn {
     color: rgb(255, 255, 255); 
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.9); /* Sombra mais forte para contraste */
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.6); /* Fundo mais escuro para garantir visibilidade */
+    background: rgb(255, 255, 255); /* Fundo mais escuro para garantir visibilidade */
     border: none;
     font-size: 2.3rem; /* Tamanho da seta */
     font-weight: bold; /* Garante que o '❮' e '❯' sejam visíveis */
