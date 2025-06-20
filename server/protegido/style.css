@@ -356,9 +356,8 @@ body {
     }
 }
 
-.toggle.icon-menu::before {
-    content: "\e900"; /* ou o código correto do seu ícone de menu */
-    font-family: 'SeuIconFont';
+.icon-menu::before {
+    content: "☰";
     font-size: 1.5rem;
 }
 
@@ -451,6 +450,40 @@ body {
 #resultados-pesquisa li:hover {
     background-color: var(--base-color-second);
 }
+
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+    }
+
+    nav.show .menu {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+        height: calc(100vh - var(--header-initial-height));
+        position: fixed;
+        top: var(--header-initial-height);
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--body-color);
+        z-index: 80;
+    }
+
+    nav.show .menu ul.grid {
+        display: flex;
+        flex-direction: column;
+        gap: 4rem;
+    }
+}
+
 
 
 
