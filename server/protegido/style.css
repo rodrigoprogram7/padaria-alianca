@@ -446,15 +446,28 @@ nav.show .icon-menu {
     }
 
     .categorias-navbar {
-        width: 95%;
-        gap: 6px;
-        padding-bottom: 5px;
-    }
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap; /* Evita quebra de linha */
+    gap: 8px;
+    padding-bottom: 8px;
+        }
 
-    .cat-btn {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-    }
+        .cat-btn {
+            flex: 0 0 auto; /* Faz cada botão ficar com largura mínima sem quebrar */
+        }
+
+        .categorias-navbar::-webkit-scrollbar {
+    display: none;
+}
+
+.categorias-navbar {
+    -ms-overflow-style: none; /* IE e Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+
 
     /* Menu de links (hambúrguer) no mobile */
     .menu { /* Não está mais dentro de nav.show */
@@ -581,6 +594,25 @@ nav.show .icon-menu {
 
 
 
+#resultados-pesquisa {
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1000;
+}
+
+#resultados-pesquisa li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+#resultados-pesquisa li:hover {
+    background-color: var(--base-color-second);
+}
 
 
 

@@ -422,6 +422,32 @@ function toggleHeaderScroll() {
 window.addEventListener('scroll', toggleHeaderScroll);
 
 
+document.getElementById('pesquisa').addEventListener('input', function() {
+    const termo = this.value.toLowerCase();
+    const resultados = document.getElementById('resultados-pesquisa');
+    resultados.innerHTML = '';
+
+    if (termo.length < 2) return;  // Só começa a buscar com 2+ letras
+
+    const produtos = document.querySelectorAll('.produto');
+    produtos.forEach(produto => {
+        const nome = produto.getAttribute('data-nome').toLowerCase();
+        if (nome.includes(termo)) {
+            const li = document.createElement('li');
+            li.textContent = nome;
+            li.onclick = () => {
+                produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                produto.style.border = '2px solid var(--base-color)';
+                setTimeout(() => produto.style.border = '', 1500);
+            };
+            resultados.appendChild(li);
+        }
+    });
+
+    if (resultados.children.length === 0) {
+        resultados.innerHTML = '<li>Nenhum produto encontrado</li>';
+    }
+});
 
 
 
