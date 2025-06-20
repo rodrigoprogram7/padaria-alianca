@@ -416,15 +416,17 @@ nav.show .toggle.icon-close::before {
     /* Após o scroll - Centralizar logo e colocar o toggle no canto direito, mas sem sumir */
     #header.scroll .nav-top {
         justify-content: center;
-        position: relative;
+        height: auto;
     }
 
     #header.scroll .nav-top .logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
+        margin: 0 auto;
         text-align: center;
-        margin: 0;
+    }
+
+     #header.scroll .nav-top {
+        justify-content: center;
+        position: relative;
     }
 
     #header.scroll .toggle {
@@ -434,6 +436,16 @@ nav.show .toggle.icon-close::before {
         transform: translateY(-50%);
         display: block;
     }
+
+    #header.scroll .toggle {
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        display: block; /* Garante que ele continue visível no scroll */
+
+
+}
         #header, nav.container, .nav-top, .nav-central {
             max-width: 100%;
             overflow-x: hidden;
