@@ -323,25 +323,64 @@ body {
     color: white;
 }
 
+@media (max-width: 768px) {
+    nav.container {
+        height: var(--header-initial-height);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #header.scroll nav.container {
+        height: auto;
+        overflow: visible;
+    }
+}
+
+.toggle.icon-menu::before {
+    content: "\e900"; /* ou o código correto do seu ícone de menu */
+    font-family: 'SeuIconFont';
+    font-size: 1.5rem;
+}
+
+
+
 /*======================================== Mobile Nav-top (logo esquerda, ícone direita) ========================================*/
 @media (max-width: 768px) {
     .nav-top {
-        justify-content: space-between;
+        display: flex;
+        justify-content: space-between;  /* LOGO à esquerda, TOGGLE (hamburger) à direita */
+        align-items: center;
+        height: var(--header-initial-height);
+        width: 100%;
+        position: relative; /* MUITO IMPORTANTE para conter o toggle absoluto depois */
         padding: 0 1rem;
     }
 
     .toggle {
         display: block;
+        position: relative; /* Antes do scroll, segue no fluxo normal */
     }
 
+    /* Após o scroll - Centralizar logo e colocar o toggle no canto direito, mas sem sumir */
     #header.scroll .nav-top {
         justify-content: center;
+        height: auto;
+    }
+
+    #header.scroll .nav-top .logo {
+        margin: 0 auto;
+        text-align: center;
     }
 
     #header.scroll .toggle {
         position: absolute;
         right: 1rem;
-    }
+        top: 50%;
+        transform: translateY(-50%);
+        display: block; /* Garante que ele continue visível no scroll */
+}
 }
 
 /*======================================== Resultados da pesquisa ========================================*/
