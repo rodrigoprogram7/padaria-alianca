@@ -495,10 +495,7 @@ nav.container {
 
     /* NOVO: Ajuste para o logo centralizar no scroll mobile SE VOCÊ QUISER */
     /* Caso contrário, o justify-content: space-between do .nav-top irá mantê-lo na esquerda. */
-    #header.scroll .nav-top .logo {
-        /* Para centralizar o logo no mobile quando scrollado, se o toggle não estiver à direita */
-        /* width: 100%; text-align: center; */
-    }
+    
 }
 
 
