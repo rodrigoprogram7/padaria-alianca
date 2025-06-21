@@ -508,19 +508,17 @@ nav.show .menu ul.grid {
     justify-content: center;    /* Centraliza verticalmente os itens */
     text-align: center;
     width: auto;                /* ✅ Corrigido: Não forçar 100% */
-    margin-right: 1000px;            /* ✅ Corrigido: Garante centralização horizontal */
+    margin: 0 auto;             /* ✅ Corrigido: Garante centralização horizontal */
     padding: 0;
 }
 
 nav.show .menu ul.grid li {
     width: auto;
-    margin-right: 1000px;
     text-align: center;
 }
 
 nav.show .menu ul.grid li a {
     display: inline-block;
-    margin-right: 1000px;
     text-align: center;
 }
 }
@@ -533,6 +531,11 @@ nav ul li a:hover {
     transition: all 0.3s ease;
 }
 
+@media (max-width: 768px) {
+    nav.show .menu ul.grid {
+        transform: translateX(-50px); /* Ajuste só para mobile */
+    }
+}
 
 
 
