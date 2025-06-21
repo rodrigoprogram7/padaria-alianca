@@ -1515,8 +1515,9 @@ nav.container {
     overflow-y: auto;
 }
 .produto.highlight {
-    background-color: #fffae6;
-    transition: background-color 0.5s ease;
+    border: 2px solid var(--base-color);
+    box-shadow: 0 0 10px var(--base-color);
+    transition: all 0.3s ease;
 }
 
 
