@@ -475,17 +475,25 @@ nav.show .toggle.icon-close::before {
 }
 
 /*======================================== Resultados da pesquisa ========================================*/
+.barra-pesquisa {
+    position: relative; /* ✅ Necessário para posicionamento absoluto da lista */
+}
+
 #resultados-pesquisa {
+    position: absolute;
+    top: 100%;               /* ✅ Faz a lista aparecer logo abaixo do input */
+    left: 0;
+    width: 100%;             /* ✅ Mesma largura da .barra-pesquisa */
+    max-height: 300px;
+    overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-height: 400px;         /* ✅ Agora cabe até ~6-8 itens */
-    overflow-y: auto;          /* ✅ Permite scroll se ultrapassar altura */
-    position: absolute;
-    width: 100%;
     z-index: 1000;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: none;           /* ✅ Começa invisível */
 }
+
 
 #resultados-pesquisa li {
     padding: 10px;
@@ -1500,17 +1508,25 @@ nav.container {
     font-size: 0.9rem;
 }
 
+.barra-pesquisa {
+    position: relative; /* ✅ Necessário para posicionamento absoluto da lista */
+}
+
 #resultados-pesquisa {
-    position: fixed;               /* ✅ Sai do fluxo do nav */
-    top: 60px;                     /* ✅ Ajuste conforme a altura do seu header */
-    left: 10px;                    /* Ajuste conforme o lado esquerdo */
-    width: 90%;                    /* Ou 100%, como preferir */
+    position: absolute;
+    top: 100%;               /* ✅ Faz a lista aparecer logo abaixo do input */
+    left: 0;
+    width: 100%;             /* ✅ Mesma largura da .barra-pesquisa */
     max-height: 300px;
     overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
-    z-index: 9999;
+    border-radius: 4px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    display: none;           /* ✅ Começa invisível */
 }
+
 
 #resultados-pesquisa li {
     padding: 10px;

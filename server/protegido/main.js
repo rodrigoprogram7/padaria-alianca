@@ -436,11 +436,13 @@ function removerAcentos(texto) {
 }
 
 inputPesquisa.addEventListener('input', function() {
-    const termo = removerAcentos(inputPesquisa.value);
-
+    const termo = removerAcentos(inputPesquisa.value.trim());
     resultadosPesquisa.innerHTML = '';
 
-    if (termo.length < 1) return;  // Só começa a mostrar sugestões com 2 ou mais letras
+    if (termo.length < 1) {
+        resultadosPesquisa.style.display = 'none';  // ✅ Oculta a lista se campo estiver vazio
+        return;
+    }
 
     const produtos = document.querySelectorAll('.produto');
 
@@ -450,33 +452,64 @@ inputPesquisa.addEventListener('input', function() {
         return nomeNormalizado.includes(termo);
     });
 
-    resultados.slice(0, 6).forEach(produto => {  // ✅ Mostra até 4 sugestões
+    if (resultados.length === 0) {
+        resultadosPesquisa.style.display = 'block';
         const li = document.createElement('li');
-        li.textContent = produto.getAttribute('data-nome');
-
-        li.addEventListener('click', function() {
-            const categoria = produto.getAttribute('data-categoria');
-
-            // Troca a categoria visível
-            filtrarCategoria(categoria);
-
-            setTimeout(() => {
-                produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Efeito visual de destaque
-                produto.classList.add('highlight');
-                setTimeout(() => {
-                    produto.classList.remove('highlight');
-                }, 2500);
-            }, 300);
-
-            resultadosPesquisa.innerHTML = '';
-            inputPesquisa.value = '';
-        });
-
+        li.textContent = 'Nenhum produto encontrado';
         resultadosPesquisa.appendChild(li);
-    });
+    } else {
+        resultadosPesquisa.style.display = 'block';
+
+        resultados.slice(0, 6).forEach(produto => {  // ✅ Mostra até 6 sugestões
+            const li = document.createElement('li');
+            li.textContent = produto.getAttribute('data-nome');
+
+            li.addEventListener('click', function() {
+                const categoria = produto.getAttribute('data-categoria');
+
+                // Troca a categoria visível
+                filtrarCategoria(categoria);
+
+                setTimeout(() => {
+                    produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    // Efeito visual de destaque
+                    produto.classList.add('highlight');
+                    setTimeout(() => {
+                        produto.classList.remove('highlight');
+                    }, 2500);
+                }, 300);
+
+                resultadosPesquisa.innerHTML = '';
+                resultadosPesquisa.style.display = 'none';
+                inputPesquisa.value = '';
+            });
+
+            resultadosPesquisa.appendChild(li);
+        });
+    }
 });
+
+// ✅ Ocultar a lista ao clicar fora da barra de pesquisa e da lista
+document.addEventListener('click', function(event) {
+    if (!inputPesquisa.contains(event.target) && !resultadosPesquisa.contains(event.target)) {
+        resultadosPesquisa.innerHTML = '';
+        resultadosPesquisa.style.display = 'none';
+    }
+});
+
+
+
+document.addEventListener('click', function(event) {
+    const barraPesquisa = document.getElementById('pesquisa');
+    const resultados = document.getElementById('resultados-pesquisa');
+
+    if (!barraPesquisa.contains(event.target) && !resultados.contains(event.target)) {
+        resultados.innerHTML = '';
+        resultados.style.display = 'none';
+    }
+});
+
 
 
 
