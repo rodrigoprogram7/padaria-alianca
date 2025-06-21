@@ -476,15 +476,15 @@ nav.show .toggle.icon-close::before {
 
 /*======================================== Resultados da pesquisa ========================================*/
 #resultados-pesquisa {
+    position: fixed;               /* ✅ Sai do fluxo do nav */
+    top: 60px;                     /* ✅ Ajuste conforme a altura do seu header */
+    left: 10px;                    /* Ajuste conforme o lado esquerdo */
+    width: 90%;                    /* Ou 100%, como preferir */
+    max-height: 300px;
+    overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    max-height: none;         /* ✅ Sem limite de altura */
-    overflow-y: visible;      /* ✅ SEM scroll, deixa o navegador expandir a lista conforme o conteúdo */
-    position: absolute;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 9999;
 }
 
 #resultados-pesquisa li {
@@ -1499,15 +1499,15 @@ nav.container {
 }
 
 #resultados-pesquisa {
+    position: fixed;               /* ✅ Sai do fluxo do nav */
+    top: 60px;                     /* ✅ Ajuste conforme a altura do seu header */
+    left: 10px;                    /* Ajuste conforme o lado esquerdo */
+    width: 90%;                    /* Ou 100%, como preferir */
+    max-height: 300px;
+    overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
-    border-radius: 4px;
-    max-height: none;         /* ✅ Sem limite de altura */
-    overflow-y: visible;      /* ✅ SEM scroll, deixa o navegador expandir a lista conforme o conteúdo */
-    position: absolute;
-    width: 100%;
-    z-index: 1000;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 9999;
 }
 
 #resultados-pesquisa li {
