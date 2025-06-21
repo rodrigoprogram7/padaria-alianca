@@ -427,45 +427,41 @@ function toggleHeaderScroll() {
 window.addEventListener('scroll', toggleHeaderScroll);
 
 
-document.getElementById('pesquisa').addEventListener('input', function() {
-    const termo = this.value.toLowerCase().trim();
-    const resultados = document.getElementById('resultados-pesquisa');
-    resultados.innerHTML = '';
+const inputPesquisa = document.getElementById('pesquisa');
+const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
-    if (termo.length < 1) return;  // Só começa a sugerir com 2 ou mais letras
+inputPesquisa.addEventListener('input', function() {
+    const termo = inputPesquisa.value.toLowerCase();
+    resultadosPesquisa.innerHTML = '';
+
+    if (termo.length < 1) return; // Só começa a mostrar sugestões com pelo menos 2 letras
 
     const produtos = document.querySelectorAll('.produto');
-    let encontrou = false;
 
-    produtos.forEach(produto => {
-        const nomeProduto = produto.getAttribute('data-nome').toLowerCase();
-        if (nomeProduto.includes(termo)) {
-            encontrou = true;
-
-            const li = document.createElement('li');
-            li.textContent = nomeProduto;
-            li.onclick = () => {
-                // Exibe todas as categorias para garantir visibilidade do produto
-                produtos.forEach(p => p.style.display = 'flex');
-
-                // Scroll até o produto
-                produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
-                // Destacar o produto (exemplo: borda)
-                produto.style.border = '2px solid var(--base-color)';
-                setTimeout(() => produto.style.border = '', 1500);
-
-                // Limpa o campo de pesquisa
-                document.getElementById('pesquisa').value = '';
-                resultados.innerHTML = '';
-            };
-            resultados.appendChild(li);
-        }
+    const resultados = Array.from(produtos).filter(produto => {
+        const nome = produto.getAttribute('data-nome').toLowerCase();
+        return nome.includes(termo);
     });
 
-    if (!encontrou) {
-        resultados.innerHTML = '<li>Nenhum produto encontrado</li>';
-    }
+    resultados.slice(0, 4).forEach(produto => {  // ✅ Agora mostrando até 4 resultados
+        const li = document.createElement('li');
+        li.textContent = produto.getAttribute('data-nome');
+        li.addEventListener('click', function() {
+            const categoria = produto.getAttribute('data-categoria');
+
+            // ✅ Troca de categoria
+            filtrarCategoria(categoria);
+
+            // ✅ Dá um tempo pro filtro aplicar antes de rolar
+            setTimeout(() => {
+                produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 300);
+
+            resultadosPesquisa.innerHTML = '';
+            inputPesquisa.value = '';
+        });
+        resultadosPesquisa.appendChild(li);
+    });
 });
 
 
@@ -474,3 +470,5 @@ document.getElementById('pesquisa').addEventListener('input', function() {
 
 
 
+
+ 

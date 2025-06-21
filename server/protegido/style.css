@@ -1510,6 +1510,10 @@ nav.container {
     overflow-y: auto;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+#resultados-pesquisa {
+    max-height: 300px; /* Aumentei para caber mais */
+    overflow-y: auto;
+}
 
 #resultados-pesquisa li {
     padding: 8px 12px;
