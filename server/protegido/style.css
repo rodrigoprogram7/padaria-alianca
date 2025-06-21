@@ -363,20 +363,28 @@ body {
   }
 
   /* Estilo geral dos botões de categoria */
-  .categorias-navbar button {
+.categorias-navbar button {
     display: flex;
     align-items: center;
-    gap: 0.5rem;                      /* Espaço entre o ícone e o texto */
-    padding: 10px 24px;               /* ✅ Mais espaço interno (padding) */
-    background-color: white;          /* ✅ Fundo branco */
-    border: 2px solid transparent;    /* ✅ Borda invisível até ficar ativo */
+    gap: 0.5rem;
+    padding: 12px 16px;
+    min-width: 120px;          /* Largura mínima para não ficar pequeno demais */
+    max-width: 200px;          /* ✅ Limite máximo para evitar botões gigantes */
+    white-space: nowrap;        /* ✅ Mantém texto em uma linha */
+    overflow: hidden;           /* ✅ Evita que texto ultrapasse o botão */
+    text-overflow: ellipsis;    /* ✅ Mostra reticências (...) se o texto for muito longo */
+    background-color: white;
+    border: 2px solid transparent;
     border-radius: 6px;
-    font-weight: bold;                /* ✅ Texto em negrito */
-    color: var(--base-color);;                      /* ✅ Texto amarelo */
+    font-weight: bold;
+    color: blue;
     font-size: 1rem;
     cursor: pointer;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
+}
+.categorias-navbar button .categoria-icon {
+    flex-shrink: 0;            /* ✅ Evita que o ícone encolha junto com o texto */
+}
 
   /* Ícone das categorias dentro dos botões */
   .categoria-icon {
