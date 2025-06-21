@@ -504,13 +504,16 @@ nav.show .menu ul.grid {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    align-items: center;        /* Centraliza horizontalmente os itens */
-    justify-content: center;    /* Centraliza verticalmente os itens */
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    width: auto;                /* ✅ Corrigido: Não forçar 100% */
-    margin: 0 auto;             /* ✅ Corrigido: Garante centralização horizontal */
+    width: auto;
+    margin: 0 auto;
     padding: 0;
+
+    margin-right: 20px; /* ✅ Ajuste manual para empurrar tudo um pouco pra esquerda */
 }
+
 
 nav.show .menu ul.grid li {
     width: auto;
