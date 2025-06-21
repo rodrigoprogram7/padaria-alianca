@@ -1495,43 +1495,34 @@ nav.container {
 }
 
 #resultados-pesquisa {
-    position: absolute;
-    top: 110%;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border: 1px solid #eee; /* Adicionado borda */
+    background: white;
+    border: 1px solid #ccc;
     border-radius: 4px;
-    list-style: none;
-    padding: 0;
-    margin: 4px 0 0 0;
+    max-height: 300px;  /* ✅ Altura maior */
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
     z-index: 1000;
-    max-height: 200px;
-    overflow-y: auto;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-#resultados-pesquisa {
-    max-height: 300px; /* Aumentei para caber mais */
-    overflow-y: auto;
+
+#resultados-pesquisa li {
+    padding: 8px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
 }
+
+#resultados-pesquisa li:hover {
+    background-color: var(--base-color-second);
+}
+
+
+/* Efeito destaque no produto encontrado */
 .produto.highlight {
     border: 2px solid var(--base-color);
     box-shadow: 0 0 10px var(--base-color);
     transition: all 0.3s ease;
 }
 
-
-#resultados-pesquisa li {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-#resultados-pesquisa li:hover {
-    background-color: #f0f0f0;
-}
-
-/* Efeito destaque no produto encontrado */
 .produto.encontrado {
     animation: destaqueProduto 1s ease;
     box-shadow: 0 0 0 3px var(--base-color);

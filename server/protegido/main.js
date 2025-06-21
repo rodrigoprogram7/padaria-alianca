@@ -450,7 +450,7 @@ inputPesquisa.addEventListener('input', function() {
         return nomeNormalizado.includes(termo);
     });
 
-    resultados.slice(0, 4).forEach(produto => {  // ✅ Mostra até 4 sugestões
+    resultados.slice(0, 6).forEach(produto => {  // ✅ Mostra até 4 sugestões
         const li = document.createElement('li');
         li.textContent = produto.getAttribute('data-nome');
 
