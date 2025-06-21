@@ -511,7 +511,7 @@ nav.show .menu ul.grid {
     margin: 0 auto;
     padding: 0;
 
-    margin-right: 20px; /* ✅ Ajuste manual para empurrar tudo um pouco pra esquerda */
+    margin-right: 600px; /* ✅ Ajuste manual para empurrar tudo um pouco pra esquerda */
 }
 
 
