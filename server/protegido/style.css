@@ -1344,65 +1344,12 @@ footer .social a:hover {
 }
 
 /*======================================== Carrossel ========================================*/
-.carousel-container {
-    width: 90%;
-    max-width: 800px;
-    margin: 40px auto;
-    overflow: hidden; /* Este é o carrossel geral, pode manter hidden */
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    position: relative;
-}
 
-.carousel-slide {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-}
 
-.carousel-item {
-    min-width: 100%;
-    position: relative;
-}
 
-.carousel-item img {
-    width: 100%;
-    display: block;
-}
 
-.caption {
-    background: #ffffff;
-    color: #333333be;
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 1.1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-top: 1px solid #ddd;
-}
 
-.nav-button { /* Botões de navegação do carrossel principal */
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.161);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 20px;
-    z-index: 1;
-    border-radius: 50%; /* Deixa os botões redondos */
-    transition: background 0.3s;
-}
 
-.nav-button:hover {
-    background: rgba(0, 0, 0, 0.361);
-}
-
-#prevBtn {
-    left: 10px;
-}
 
 #nextBtn {
     right: 10px;

@@ -79,6 +79,10 @@
     <img src="assets/images/categoria/sacolão.webp" class="categoria-icon"> Sacolões
   </button>
 
+  <button class="cat-btn filtro-btn" data-categoria="bazar" onclick="filtrarCategoria('bazar')">
+    <img src="assets/images/eletros/ventilador.webp" class="categoria-icon"> Bazar
+  </button>
+
   <button class="cat-btn filtro-btn" data-categoria="bebidas" onclick="filtrarCategoria('bebidas')">
     <img src="assets/images/categoria/bebidas.webp" class="categoria-icon"> Bebidas
   </button>
@@ -2155,6 +2159,62 @@
         <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
       </div>
     </div>
+
+
+
+
+
+
+    <!-------------------------------------------------------------------- BAZAR ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- BAZAR ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- BAZAR ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- BAZAR ----------------------------------------------------------------------------->
+    <!-------------------------------------------------------------------- BAZAR ----------------------------------------------------------------------------->
+
+    <div class="produto" data-nome="liquidificador" data-preco="100.00" data-categoria="bazar">
+          <img src="assets/images/eletros/liquidificador.webp" alt="liquidificador">
+          <div class="produto-info">
+            <h3>Liquidificador</h3>
+            <p>R$ 100,00</p>
+            <div class="quantidade-box">
+              <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+              <input type="number" min="1" value="1" class="quantidade" />
+              <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+            </div><div class="subtotal-preview"></div>
+            <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+          </div>
+        </div>
+
+        <div class="produto" data-nome="espremedor" data-preco="80.00" data-categoria="bazar">
+      <img src="assets/images/eletros/espremedor.jpg" alt="espremedor">
+      <div class="produto-info">
+        <h3>Espremedor</h3>
+        <p>R$ 80,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div><div class="subtotal-preview"></div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+    <div class="produto" data-nome="ventilador" data-preco="120.00" data-categoria="bazar">
+      <img src="assets/images/eletros/ventilador.webp" alt="ventilador">
+      <div class="produto-info">
+        <h3>Ventilador</h3>
+        <p>R$ 120,00</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade" />
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div><div class="subtotal-preview"></div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
+    </div>
+
+
+
   
     <div id="carrinho"></div>
   </div>
@@ -2172,48 +2232,6 @@
 
 
         </section>
-
-        <div class="divider-2"></div> <!--Divisor de sessões tipo 2-->
-
-<section id="carro">
-        <center>
-          <br>
-          <br>
-      <h2 class="title">Eletrodomesticos</h2>
-      <p class="pp">Dê um upgrade na sua casa</p>
-</center>
-
-        <div class="carousel-container">
-    <button class="nav-button" id="prevBtn">&#10094;</button>
-    <div class="carousel-slide" id="carouselSlide">
-      <div class="carousel-item">
-        <img src="assets/images/eletros/liquidificador.webp" alt="Produto 1">
-        <div class="caption">
-          <span>Liquididicador</span>
-          <strong>R$ 100,00</strong>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="assets/images/eletros/espremedor.jpg" alt="Produto 2">
-        <div class="caption">
-          <span>Espremedor de Laranja</span>
-          <strong>R$ 60,00</strong>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img src="assets/images/eletros/ventilador.webp" alt="Produto 3">
-        <div class="caption">
-          <span>Ventilador</span>
-          <strong>R$ 150,00</strong>
-        </div>
-        
-      </div>
-    </div>
-    <button class="nav-button" id="nextBtn">&#10095;</button>
-  </div>
-</section>
-   <br>
-          
 
   <div class="divider-2"></div> <!--Divisor de sessões tipo 2-->
 

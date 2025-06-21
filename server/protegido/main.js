@@ -39,8 +39,6 @@ const scrollReveal = ScrollReveal({
 scrollReveal.reveal(
     `#home .image, #home .text, #about .title, #about .pp,
     #about .container, #about .carrinho,
-    #carro .title, #carro .pp,
-    #carro .carousel-container,
     #contact .text, #contact .links,
     footer .brand, footer .social`,
     { interval: 100 }
