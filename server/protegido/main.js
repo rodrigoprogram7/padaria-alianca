@@ -440,7 +440,7 @@ inputPesquisa.addEventListener('input', function() {
 
     resultadosPesquisa.innerHTML = '';
 
-    if (termo.length < 2) return;  // Só começa a mostrar sugestões com 2 ou mais letras
+    if (termo.length < 1) return;  // Só começa a mostrar sugestões com 2 ou mais letras
 
     const produtos = document.querySelectorAll('.produto');
 

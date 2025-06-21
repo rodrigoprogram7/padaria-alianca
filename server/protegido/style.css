@@ -479,15 +479,16 @@ nav.show .toggle.icon-close::before {
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-height: 300px;  /* ✅ Altura maior */
-    overflow-y: auto;
+    max-height: 400px;         /* ✅ Agora cabe até ~6-8 itens */
+    overflow-y: auto;          /* ✅ Permite scroll se ultrapassar altura */
     position: absolute;
     width: 100%;
     z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 #resultados-pesquisa li {
-    padding: 8px;
+    padding: 10px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
 }
