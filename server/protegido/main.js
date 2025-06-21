@@ -427,6 +427,17 @@ function toggleHeaderScroll() {
 window.addEventListener('scroll', toggleHeaderScroll);
 
 
+
+
+
+
+
+
+
+
+
+
+
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
@@ -440,7 +451,7 @@ inputPesquisa.addEventListener('input', function() {
     resultadosPesquisa.innerHTML = '';
 
     if (termo.length < 1) {
-        resultadosPesquisa.style.display = 'none';  // ✅ Oculta a lista se campo estiver vazio
+        resultadosPesquisa.style.display = 'none';
         return;
     }
 
@@ -460,20 +471,18 @@ inputPesquisa.addEventListener('input', function() {
     } else {
         resultadosPesquisa.style.display = 'block';
 
-        resultados.slice(0, 6).forEach(produto => {  // ✅ Mostra até 6 sugestões
+        resultados.slice(0, 6).forEach(produto => {
             const li = document.createElement('li');
             li.textContent = produto.getAttribute('data-nome');
 
             li.addEventListener('click', function() {
                 const categoria = produto.getAttribute('data-categoria');
 
-                // Troca a categoria visível
                 filtrarCategoria(categoria);
 
                 setTimeout(() => {
                     produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                    // Efeito visual de destaque
                     produto.classList.add('highlight');
                     setTimeout(() => {
                         produto.classList.remove('highlight');
@@ -490,7 +499,7 @@ inputPesquisa.addEventListener('input', function() {
     }
 });
 
-// ✅ Ocultar a lista ao clicar fora da barra de pesquisa e da lista
+// Ocultar a lista ao clicar fora da barra de pesquisa e da lista
 document.addEventListener('click', function(event) {
     if (!inputPesquisa.contains(event.target) && !resultadosPesquisa.contains(event.target)) {
         resultadosPesquisa.innerHTML = '';
@@ -498,17 +507,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
-
-document.addEventListener('click', function(event) {
-    const barraPesquisa = document.getElementById('pesquisa');
-    const resultados = document.getElementById('resultados-pesquisa');
-
-    if (!barraPesquisa.contains(event.target) && !resultados.contains(event.target)) {
-        resultados.innerHTML = '';
-        resultados.style.display = 'none';
-    }
-});
 
 
 
