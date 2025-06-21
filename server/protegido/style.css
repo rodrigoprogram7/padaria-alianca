@@ -476,23 +476,24 @@ nav.show .toggle.icon-close::before {
 
 /*======================================== Resultados da pesquisa ========================================*/
 .barra-pesquisa {
-    position: relative; /* ✅ Necessário para posicionamento absoluto da lista */
+    position: relative;
 }
 
 #resultados-pesquisa {
     position: absolute;
-    top: 100%;               /* ✅ Faz a lista aparecer logo abaixo do input */
+    top: 100%;
     left: 0;
-    width: 100%;             /* ✅ Mesma largura da .barra-pesquisa */
+    width: 100%;
     max-height: 300px;
     overflow-y: auto;
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
-    z-index: 1000;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: none;           /* ✅ Começa invisível */
+    z-index: 1000;
+    display: none;
 }
+
 
 
 #resultados-pesquisa li {
@@ -1509,7 +1510,7 @@ nav.container {
 }
 
 .barra-pesquisa {
-    position: relative; /* ✅ Necessário para posicionamento absoluto da lista */
+    position: relative;
 }
 
 #resultados-pesquisa {
@@ -1526,6 +1527,7 @@ nav.container {
     z-index: 1000;
     display: none;
 }
+
 
 
 #resultados-pesquisa li {
