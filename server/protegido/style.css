@@ -1585,6 +1585,21 @@ nav.container {
         display: block;
     }
 
+    .produtos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem; /* ajuste o espaço entre os cards como quiser */
+    margin-top: 0;
+    padding-top: 0;
+    justify-content: center; /* Opcional, para centralizar os cards horizontalmente */
+}
+
+.produto {
+    margin: 0;
+    padding: 0;
+    flex: 0 1 200px; /* Largura mínima para cada card. Ajuste conforme seu layout. */
+}
+
     /* Produtos no Mobile: 2 colunas */
     .produtos {
         grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
