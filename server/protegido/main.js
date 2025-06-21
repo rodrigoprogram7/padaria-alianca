@@ -430,46 +430,54 @@ window.addEventListener('scroll', toggleHeaderScroll);
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
+// Função para remover acentos e normalizar texto
+function removerAcentos(texto) {
+    return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+}
+
 inputPesquisa.addEventListener('input', function() {
-    const termo = inputPesquisa.value.toLowerCase();
+    const termo = removerAcentos(inputPesquisa.value);
+
     resultadosPesquisa.innerHTML = '';
 
-    if (termo.length < 1) return; // Só começa a mostrar sugestões com pelo menos 2 letras
+    if (termo.length < 2) return;  // Só começa a mostrar sugestões com 2 ou mais letras
 
     const produtos = document.querySelectorAll('.produto');
 
     const resultados = Array.from(produtos).filter(produto => {
-        const nome = produto.getAttribute('data-nome').toLowerCase();
-        return nome.includes(termo);
+        const nomeOriginal = produto.getAttribute('data-nome') || '';
+        const nomeNormalizado = removerAcentos(nomeOriginal);
+        return nomeNormalizado.includes(termo);
     });
 
-    resultados.slice(0, 4).forEach(produto => {  // ✅ Agora mostrando até 4 resultados
+    resultados.slice(0, 4).forEach(produto => {  // ✅ Mostra até 4 sugestões
         const li = document.createElement('li');
         li.textContent = produto.getAttribute('data-nome');
+
         li.addEventListener('click', function() {
             const categoria = produto.getAttribute('data-categoria');
 
-            // ✅ Troca de categoria
+            // Troca a categoria visível
             filtrarCategoria(categoria);
 
-            // ✅ Dá um tempo pro filtro aplicar antes de rolar
             setTimeout(() => {
                 produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            }, 300);
-            // Adiciona classe de destaque ao produto clicado
-                produto.classList.add('highlight');
 
-                // Remove o destaque após 1.5 segundos
+                // Efeito visual de destaque
+                produto.classList.add('highlight');
                 setTimeout(() => {
                     produto.classList.remove('highlight');
-                }, 1500);
+                }, 2500);
+            }, 300);
 
             resultadosPesquisa.innerHTML = '';
             inputPesquisa.value = '';
         });
+
         resultadosPesquisa.appendChild(li);
     });
 });
+
 
 
 
