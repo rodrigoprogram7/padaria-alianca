@@ -479,8 +479,8 @@ nav.show .toggle.icon-close::before {
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-height: 400px;         /* ✅ Agora cabe até ~6-8 itens */
-    overflow-y: auto;          /* ✅ Permite scroll se ultrapassar altura */
+    max-height: none;         /* ✅ Sem limite de altura */
+    overflow-y: visible;      /* ✅ SEM scroll, deixa o navegador expandir a lista conforme o conteúdo */
     position: absolute;
     width: 100%;
     z-index: 1000;
@@ -496,6 +496,7 @@ nav.show .toggle.icon-close::before {
 #resultados-pesquisa li:hover {
     background-color: var(--base-color-second);
 }
+
 
 
 
@@ -1501,8 +1502,8 @@ nav.container {
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-height: 400px;         /* ✅ Agora cabe até ~6-8 itens */
-    overflow-y: auto;          /* ✅ Permite scroll se ultrapassar altura */
+    max-height: none;         /* ✅ Sem limite de altura */
+    overflow-y: visible;      /* ✅ SEM scroll, deixa o navegador expandir a lista conforme o conteúdo */
     position: absolute;
     width: 100%;
     z-index: 1000;
@@ -1518,6 +1519,7 @@ nav.container {
 #resultados-pesquisa li:hover {
     background-color: var(--base-color-second);
 }
+
 
 
 
