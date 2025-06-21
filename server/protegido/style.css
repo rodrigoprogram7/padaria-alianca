@@ -138,6 +138,27 @@ body {
     box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Centralizar e dar margem ao título e parágrafo da seção "about" (ou qualquer outra que use .title e .pp) */
+.title, .pp {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.title {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.8rem; /* Ajuste conforme sua necessidade */
+}
+
+.pp {
+    margin-bottom: 2rem;
+    font-size: 1.1rem; /* Ajuste conforme o estilo que quiser */
+    color: var(--text-color); /* Mantém a cor de texto padrão */
+}
+
+
 /*======================================== Logo ========================================*/
 .logo {
     font: 700 1.31rem var(--title-font);
@@ -1584,21 +1605,7 @@ nav.container {
     nav.show .icon-close {
         display: block;
     }
-
-    .produtos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem; /* ajuste o espaço entre os cards como quiser */
-    margin-top: 0;
-    padding-top: 0;
-    justify-content: center; /* Opcional, para centralizar os cards horizontalmente */
-}
-
-.produto {
-    margin: 0;
-    padding: 0;
-    flex: 0 1 200px; /* Largura mínima para cada card. Ajuste conforme seu layout. */
-}
+    
 
     /* Produtos no Mobile: 2 colunas */
     .produtos {
