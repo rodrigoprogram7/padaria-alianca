@@ -352,6 +352,55 @@ body {
     border-radius: 4px;
 }
 
+@media (max-width: 768px) {
+  /* Categorias com scroll lateral */
+  .categorias-navbar {
+    display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  /* Estilo geral dos botões de categoria */
+  .categorias-navbar button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;                      /* Espaço entre o ícone e o texto */
+    padding: 10px 14px;               /* ✅ Mais espaço interno (padding) */
+    background-color: white;          /* ✅ Fundo branco */
+    border: 2px solid transparent;    /* ✅ Borda invisível até ficar ativo */
+    border-radius: 6px;
+    font-weight: bold;                /* ✅ Texto em negrito */
+    color: blue;                      /* ✅ Texto azul */
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Ícone das categorias dentro dos botões */
+  .categoria-icon {
+    width: 24px;                      /* ✅ Aumenta o tamanho dos ícones */
+    height: 24px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+
+  /* Efeito de hover (opcional, para dar feedback visual) */
+  .categorias-navbar button:hover {
+    border-color: #007bff;            /* Azul ao passar o mouse */
+  }
+
+  /* ✅ Estilo do botão ativo (apenas a borda) */
+  .categorias-navbar button.active {
+    border-color: #007bff;            /* Borda azul quando ativo */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    background-color: white;          /* ✅ Mantém fundo branco */
+    color: blue;                      /* Mantém o texto azul */
+  }
+}
+
+
 .cat-btn {
     flex: 0 0 auto;
     padding: 8px 16px;
