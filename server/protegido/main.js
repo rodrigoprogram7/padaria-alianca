@@ -456,6 +456,13 @@ inputPesquisa.addEventListener('input', function() {
             setTimeout(() => {
                 produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 300);
+            // Adiciona classe de destaque ao produto clicado
+                produto.classList.add('highlight');
+
+                // Remove o destaque após 1.5 segundos
+                setTimeout(() => {
+                    produto.classList.remove('highlight');
+                }, 1500);
 
             resultadosPesquisa.innerHTML = '';
             inputPesquisa.value = '';
