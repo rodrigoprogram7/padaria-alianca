@@ -430,16 +430,17 @@ window.addEventListener('scroll', toggleHeaderScroll);
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
-// Função para remover acentos
+// Função para remover acentos e normalizar texto
 function removerAcentos(texto) {
     return texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
 inputPesquisa.addEventListener('input', function() {
-    const termo = removerAcentos(inputPesquisa.value.trim());
+    const termo = removerAcentos(inputPesquisa.value);
+
     resultadosPesquisa.innerHTML = '';
 
-    if (termo.length < 1) return;  // Só começa a mostrar com pelo menos 1 letra
+    if (termo.length < 1) return;  // Só começa a mostrar sugestões com 2 ou mais letras
 
     const produtos = document.querySelectorAll('.produto');
 
@@ -449,38 +450,33 @@ inputPesquisa.addEventListener('input', function() {
         return nomeNormalizado.includes(termo);
     });
 
-    if (resultados.length === 0) {
+    resultados.slice(0, 6).forEach(produto => {  // ✅ Mostra até 4 sugestões
         const li = document.createElement('li');
-        li.textContent = 'Nenhum produto encontrado';
-        resultadosPesquisa.appendChild(li);
-    } else {
-        resultados.forEach(produto => {  // ✅ SEM SLICE, MOSTRA TODOS!
-            const li = document.createElement('li');
-            li.textContent = produto.getAttribute('data-nome');
+        li.textContent = produto.getAttribute('data-nome');
 
-            li.addEventListener('click', function() {
-                const categoria = produto.getAttribute('data-categoria');
+        li.addEventListener('click', function() {
+            const categoria = produto.getAttribute('data-categoria');
 
-                filtrarCategoria(categoria);
+            // Troca a categoria visível
+            filtrarCategoria(categoria);
 
+            setTimeout(() => {
+                produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Efeito visual de destaque
+                produto.classList.add('highlight');
                 setTimeout(() => {
-                    produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    produto.classList.remove('highlight');
+                }, 2500);
+            }, 300);
 
-                    produto.classList.add('highlight');
-                    setTimeout(() => {
-                        produto.classList.remove('highlight');
-                    }, 2500);
-                }, 300);
-
-                resultadosPesquisa.innerHTML = '';
-                inputPesquisa.value = '';
-            });
-
-            resultadosPesquisa.appendChild(li);
+            resultadosPesquisa.innerHTML = '';
+            inputPesquisa.value = '';
         });
-    }
-});
 
+        resultadosPesquisa.appendChild(li);
+    });
+});
 
 
 
