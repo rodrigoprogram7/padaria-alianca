@@ -18,6 +18,13 @@ img {
     height: auto;
     display: block; /* Garante que a imagem não tenha espaços extras abaixo dela */
 }
+.categoria-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
 
 /*======================================== Variáveis ========================================*/
 :root {
