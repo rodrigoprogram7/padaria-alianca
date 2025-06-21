@@ -477,54 +477,65 @@ nav.show .toggle.icon-close::before {
 
 @media (max-width: 768px) {
     .menu {
-    display: none;
-    opacity: 0;
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+    }
+
+    nav.show .menu {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+        height: calc(100vh - var(--header-initial-height));
+        position: fixed;
+        top: var(--header-initial-height);
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--body-color);
+        z-index: 80;
+    }
+
+    nav.show .menu ul.grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: auto;             /* ✅ Corrigido */
+        margin: 0 auto;          /* ✅ Corrigido */
+        padding: 0;
+        transform: translateX(0); /* ✅ Evita offset lateral */
+    }
+
+    nav.show .menu ul.grid li {
+        width: auto;
+        text-align: center;
+    }
+
+    nav.show .menu ul.grid li a {
+        display: inline-block;
+        text-align: center;
+    }
+
+    /* ✅ Corrigindo o problema de margens laterais herdadas da .container */
+    nav.container,
+    nav.show.container,
+    nav.show .menu,
+    nav.show .menu ul.grid,
+    nav.show .menu ul.grid li,
+    nav.show .menu ul.grid li a {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 }
 
-nav.show .menu {
-    display: flex;
-    opacity: 1;
-    visibility: visible;
-    height: calc(100vh - var(--header-initial-height));
-    position: fixed;
-    top: var(--header-initial-height);
-    left: 0;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--body-color);
-    z-index: 80;
-}
-
-nav.show .menu ul.grid {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: auto;
-    margin: 0 auto;
-    padding: 0;
-
-    margin-right: 600px; /* ✅ Ajuste manual para empurrar tudo um pouco pra esquerda */
-}
-
-
-nav.show .menu ul.grid li {
-    width: auto;
-    text-align: center;
-}
-
-nav.show .menu ul.grid li a {
-    display: inline-block;
-    text-align: center;
-}
-}
 
 nav ul li a.active,
 nav ul li a:hover {
@@ -534,11 +545,6 @@ nav ul li a:hover {
     transition: all 0.3s ease;
 }
 
-@media (max-width: 768px) {
-    nav.show .menu ul.grid {
-        transform: translateX(-50px); /* Ajuste só para mobile */
-    }
-}
 
 
 
