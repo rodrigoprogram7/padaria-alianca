@@ -479,7 +479,7 @@ nav.show .toggle.icon-close::before {
     background: white;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-height: 150px;
+    max-height: 300px;  /* ✅ Altura maior */
     overflow-y: auto;
     position: absolute;
     width: 100%;
@@ -489,11 +489,13 @@ nav.show .toggle.icon-close::before {
 #resultados-pesquisa li {
     padding: 8px;
     cursor: pointer;
+    border-bottom: 1px solid #eee;
 }
 
 #resultados-pesquisa li:hover {
     background-color: var(--base-color-second);
 }
+
 
 
 @media (max-width: 768px) {
