@@ -1514,6 +1514,11 @@ nav.container {
     max-height: 300px; /* Aumentei para caber mais */
     overflow-y: auto;
 }
+.produto.highlight {
+    background-color: #fffae6;
+    transition: background-color 0.5s ease;
+}
+
 
 #resultados-pesquisa li {
     padding: 8px 12px;
