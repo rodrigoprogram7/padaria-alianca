@@ -1903,23 +1903,27 @@ nav {
 
 
 
-/* Quando o header estiver encolhido (após encostar no carrinho) */
-#header.hide-navbar-central .nav-central {
-    opacity: 0;
-    max-height: 0;
-    overflow: hidden;
-    pointer-events: none;
-    transform: translateY(-20px);
-    transition: all 0.3s ease;
+/* Quando a navbar estiver escondida por causa do carrinho */
+#header.hidden-navbar .nav-central {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s ease;
 }
 
-/* Opcional: Ajusta o topo (logo/hamburger) para centralizar ou deixar só o logo visível */
-#header.hide-navbar-central .nav-top {
-    justify-content: center;
+/* Opcional: você pode também querer encolher o topo (nav-top) */
+#header.hidden-navbar .nav-top {
+  height: 40px; /* ou menos, como preferir */
+  overflow: hidden;
 }
 
-#header.hide-navbar-central .barra-pesquisa,
-#header.hide-navbar-central .categorias-navbar {
-    display: none;
+/* Opcional: esconder barra de pesquisa e categorias totalmente se quiser */
+#header.hidden-navbar .barra-pesquisa,
+#header.hidden-navbar .categorias-navbar {
+  display: none;
 }
+
+
 
