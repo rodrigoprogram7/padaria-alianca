@@ -509,20 +509,17 @@ document.addEventListener('click', function(event) {
 
 
 
-
 window.addEventListener('scroll', function() {
     const nav = document.querySelector('nav.container');
     const alvo = document.getElementById('itens-carrinho');
 
     if (!nav || !alvo) return;
 
-    const alvoTop = alvo.getBoundingClientRect().top;
     const navHeight = nav.offsetHeight;
+    const alvoTop = alvo.getBoundingClientRect().top + window.scrollY;  // Posição real do alvo na página
+    const scrollY = window.scrollY;
 
-    console.log('ScrollY:', window.scrollY, ' | Topo do alvo:', alvoTop, ' | Altura do nav:', navHeight);
-
-    if (nav.classList.contains('show') && alvoTop <= navHeight) {
-        console.log('Removendo classe .show do nav por scroll');
+    if (nav.classList.contains('show') && scrollY >= (alvoTop - navHeight)) {
         nav.classList.remove('show');
     }
 });
