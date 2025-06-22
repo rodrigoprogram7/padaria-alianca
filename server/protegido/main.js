@@ -66,21 +66,29 @@ function ActivateMenuAtCurrentSection() {
 }
 window.addEventListener('scroll', ActivateMenuAtCurrentSection)
 
-/*========== Botão voltar ao topo ==========*/
-const backToTopButton = document.querySelector('.back-to-top')
-backToTopButton.addEventListener('click', function(e) {
-    e.preventDefault()
-    // Alterado para rolar para o topo da página, que é mais comum para um botão "voltar ao topo"
-    window.scrollTo({ top: 0, behavior: 'smooth' }); 
-})
-window.addEventListener('scroll', function() {
-    if (window.scrollY >= 560) {
-        backToTopButton.classList.add('show')
-    } else {
-        backToTopButton.classList.remove('show')
+/*========== Botão ir para o carrinho ==========*/
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.querySelector('.back-to-top');
+    const carrinho = document.getElementById('itens-carrinho');
+
+    if (backToTopButton && carrinho) {
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            carrinho.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY >= 560) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+            ActivateMenuAtCurrentSection();
+        });
     }
-    ActivateMenuAtCurrentSection()
-})
+});
+
+
 
 /*========== Filtro de categorias ==========*/
 function filtrarCategoria(categoriaSelecionada) {
