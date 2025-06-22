@@ -1556,10 +1556,6 @@ nav {
     transition: all 0.3s ease;
 }
 
-
-
-
-
 /* Efeito destaque no produto encontrado */
 .produto.highlight {
     border: 2px solid var(--base-color);

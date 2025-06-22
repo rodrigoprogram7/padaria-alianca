@@ -510,27 +510,19 @@ document.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const nav = document.querySelector('nav.container');
-    const header = document.getElementById('header');
+    const nav = document.querySelector('#header nav');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!alvo) return;
+    if (!alvo || !nav) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log('Carrinho apareceu na tela, fechando nav se estiver aberto...');
+                console.log('Carrinho visível! Fechando o menu mobile...');
 
-                // Caso o NAV tenha a classe show
-                if (nav && nav.classList.contains('show')) {
+                if (nav.classList.contains('show')) {
                     nav.classList.remove('show');
-                    console.log('Nav fechado por scroll');
-                }
-
-                // Caso o HEADER tenha a classe show (se o seu código usar isso)
-                if (header && header.classList.contains('show')) {
-                    header.classList.remove('show');
-                    console.log('Header fechado por scroll');
+                    console.log('Menu mobile fechado por scroll até o carrinho');
                 }
             }
         });
@@ -541,6 +533,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     observer.observe(alvo);
 });
+
 
 
 
