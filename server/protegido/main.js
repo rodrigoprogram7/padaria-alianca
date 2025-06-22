@@ -517,22 +517,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                console.log('Carrinho visível! Fechando o menu mobile...');
-
-                if (nav.classList.contains('show')) {
-                    nav.classList.remove('show');
-                    console.log('Menu mobile fechado por scroll até o carrinho');
-                }
+            if (entry.isIntersecting && nav.classList.contains('show')) {
+                nav.classList.remove('show');
+                console.log('Nav fechado automaticamente ao atingir o carrinho.');
             }
         });
     }, {
         root: null,
-        threshold: 0    // ✅ Fecha assim que QUALQUER parte do carrinho encostar no viewport
+        threshold: 0   // ✅ Assim que QUALQUER parte do carrinho aparecer na viewport
     });
 
     observer.observe(alvo);
 });
+
 
 
 
