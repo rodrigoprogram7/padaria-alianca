@@ -1552,6 +1552,9 @@ nav.container {
 #resultados-pesquisa li:hover {
   background-color: var(--base-color-second);
 }
+nav {
+    transition: all 0.3s ease;
+}
 
 
 

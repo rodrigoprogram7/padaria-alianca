@@ -511,16 +511,15 @@ document.addEventListener('click', function(event) {
 
 
 window.addEventListener('scroll', function() {
-    const header = document.getElementById('header');
+    const nav = document.querySelector('nav');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!alvo) return;  // Evita erro se o ID não existir na página
+    if (!alvo || !nav.classList.contains('show')) return;
 
     const alvoPos = alvo.getBoundingClientRect().top;
 
-    // Quando o topo do #itens-carrinho estiver visível no viewport (ou encostando na altura do header)
-    if (alvoPos <= header.offsetHeight) {
-        header.classList.remove('show');   // ✅ Encolhe o navbar (fecha o menu mobile)
+    if (alvoPos <= nav.offsetHeight) {
+        nav.classList.remove('show');  // ✅ Agora remove a classe .show do <nav>
     }
 });
 
