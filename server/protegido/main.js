@@ -517,13 +517,16 @@ window.addEventListener('scroll', function() {
     if (!nav || !alvo) return;
 
     const alvoTop = alvo.getBoundingClientRect().top;
-    const viewportHeight = window.innerHeight;
+    const navHeight = nav.offsetHeight;
 
-    // ✅ Quando o topo do alvo estiver dentro da viewport (ou tocando o topo da tela)
-    if (nav.classList.contains('show') && alvoTop <= 0) {
+    console.log('ScrollY:', window.scrollY, ' | Topo do alvo:', alvoTop, ' | Altura do nav:', navHeight);
+
+    if (nav.classList.contains('show') && alvoTop <= navHeight) {
+        console.log('Removendo classe .show do nav por scroll');
         nav.classList.remove('show');
     }
 });
+
 
 
 
