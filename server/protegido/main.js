@@ -511,7 +511,7 @@ document.addEventListener('click', function(event) {
 
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('header');
-    const alvo = document.getElementById('itens-carrinho');
+    const alvo = document.getElementById('carrinho');
 
     if (!header || !alvo) return;
 
