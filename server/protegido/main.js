@@ -510,26 +510,34 @@ document.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-  const header = document.getElementById('header');
-  const alvo = document.getElementById('itens-carrinho');
+    const header = document.getElementById('header');
+    const carrinho = document.getElementById('itens-carrinho');
+    const produtos = document.querySelector('.pp'); // ✅ Área onde os produtos começam (ajuste se seu HTML usar outro nome)
 
-  if (!alvo) return;
+    if (!header || !carrinho || !produtos) return;
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        header.classList.add('hidden-navbar');
-      } else {
-        header.classList.remove('hidden-navbar');
-      }
-    });
-  }, {
-    root: null,
-    threshold: 0.1
-  });
+    let navbarOculta = false;
 
-  observer.observe(alvo);
+    function verificarScroll() {
+        const carrinhoTop = carrinho.getBoundingClientRect().top;
+        const produtosTop = produtos.getBoundingClientRect().top;
+
+        // Se o carrinho estiver acima da tela (ou seja, já passou por ele), navbar continua escondida
+        if (carrinhoTop <= 0) {
+            header.classList.add('hidden-navbar');
+            navbarOculta = true;
+        }
+
+        // Se voltou para os produtos (área superior dos produtos visível), mostrar de novo
+        if (produtosTop >= 0) {
+            header.classList.remove('hidden-navbar');
+            navbarOculta = false;
+        }
+    }
+
+    window.addEventListener('scroll', verificarScroll);
 });
+
 
 
 

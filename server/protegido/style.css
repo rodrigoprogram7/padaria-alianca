@@ -1903,27 +1903,33 @@ nav {
 
 
 
-/* Quando a navbar estiver escondida por causa do carrinho */
+/* Quando o navbar estiver escondido (após o carrinho) */
+#header.hidden-navbar {
+  height: 50px; /* ✅ Altura parecida com o topo inicial */
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
 #header.hidden-navbar .nav-central {
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-20px);
-  max-height: 0;
-  overflow: hidden;
-  transition: all 0.4s ease;
+  display: none; /* ✅ Some com categorias e pesquisa */
 }
 
-/* Opcional: você pode também querer encolher o topo (nav-top) */
 #header.hidden-navbar .nav-top {
-  height: 40px; /* ou menos, como preferir */
-  overflow: hidden;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Opcional: esconder barra de pesquisa e categorias totalmente se quiser */
-#header.hidden-navbar .barra-pesquisa,
-#header.hidden-navbar .categorias-navbar {
-  display: none;
+#header.hidden-navbar .toggle {
+  display: none; /* ✅ Esconde o hamburguer quando estiver pequeno */
 }
+
+#header.hidden-navbar .logo {
+  font-size: 1rem;
+  text-align: center;
+}
+
 
 
 
