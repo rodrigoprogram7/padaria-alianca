@@ -472,10 +472,11 @@ nav.show .toggle.icon-close::before {
 
 /*======================================== Mobile Nav-top (logo esquerda, ícone direita) ========================================*/
 @media (max-width: 768px) {
+  /* Navbar inicial (antes do scroll) */
   .nav-top {
     height: 50px;
     display: flex;
-    justify-content: space-between; /* ✅ Logo esquerda, toggle direita */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     padding: 0 15px;
@@ -503,9 +504,11 @@ nav.show .toggle.icon-close::before {
   #header {
     max-width: 100%;
     width: 100%;
+    overflow: hidden;
+    transition: all 0.3s ease;
   }
 
-  /* Estado após scroll - centralizar logo e jogar toggle absoluto pra direita */
+  /* Após o scroll - Se quiser que mude o layout (exemplo: centralizar logo ao scroll) */
   #header.scroll .nav-top {
     justify-content: center;
     height: auto;
@@ -515,6 +518,7 @@ nav.show .toggle.icon-close::before {
   #header.scroll .nav-top .logo {
     margin: 0 auto;
     text-align: center;
+    font-size: 1rem;
   }
 
   #header.scroll .toggle.icon-menu,
@@ -525,7 +529,15 @@ nav.show .toggle.icon-close::before {
     transform: translateY(-50%);
     display: block;
   }
+
+  /* Mantendo controle de largura total */
+  #header, nav.container, .nav-top, .nav-central {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
 }
+
 
 
 /*======================================== Resultados da pesquisa ========================================*/
