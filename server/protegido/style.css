@@ -473,16 +473,13 @@ nav.show .toggle.icon-close::before {
 /*======================================== Mobile Nav-top (logo esquerda, ícone direita) ========================================*/
 @media (max-width: 768px) {
   .nav-top {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+    height: 50px;
     display: flex;
-    justify-content: space-between; /* ✅ Logo à esquerda, toggle (hamburguer) à direita */
+    justify-content: space-between; /* ✅ Logo esquerda, toggle direita */
     align-items: center;
-    height: 50px;                    /* ✅ Mesma altura que o reduzido */
-    padding: 0 1rem;
+    width: 100%;
+    padding: 0 15px;
     box-sizing: border-box;
-    position: relative;              /* ✅ Importante para posicionar o toggle depois */
   }
 
   .logo {
@@ -490,13 +487,25 @@ nav.show .toggle.icon-close::before {
     text-align: left;
   }
 
-  .toggle {
+  .toggle.icon-menu,
+  .toggle.icon-close {
     display: block;
-    position: relative; /* Antes do scroll, segue o fluxo normal */
+    margin-left: auto;
     font-size: 1.2rem;
   }
 
-  /* Após o scroll - Centraliza logo e joga o toggle pra direita com position absolute */
+  nav.container {
+    max-width: 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  #header {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  /* Estado após scroll - centralizar logo e jogar toggle absoluto pra direita */
   #header.scroll .nav-top {
     justify-content: center;
     height: auto;
@@ -508,21 +517,16 @@ nav.show .toggle.icon-close::before {
     text-align: center;
   }
 
-  #header.scroll .toggle {
+  #header.scroll .toggle.icon-menu,
+  #header.scroll .toggle.icon-close {
     position: absolute;
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
     display: block;
   }
-
-  /* Garantindo largura máxima sempre */
-  #header, nav.container, .nav-top, .nav-central {
-    max-width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
-  }
 }
+
 
 /*======================================== Resultados da pesquisa ========================================*/
 .barra-pesquisa {
