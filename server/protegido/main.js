@@ -518,13 +518,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting && nav.classList.contains('show')) {
+                console.log('Carrinho visível! Fechando menu mobile...');
                 nav.classList.remove('show');
-                console.log('Nav fechado automaticamente ao atingir o carrinho.');
             }
         });
     }, {
         root: null,
-        threshold: 0   // ✅ Assim que QUALQUER parte do carrinho aparecer na viewport
+        threshold: 0
     });
 
     observer.observe(alvo);
