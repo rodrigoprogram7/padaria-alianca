@@ -511,15 +511,20 @@ document.addEventListener('click', function(event) {
 
 document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('#header nav');
+    const menu = document.querySelector('nav .menu');
+    const header = document.getElementById('header');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!nav || !alvo) return;
+    if (!alvo) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting && nav.classList.contains('show')) {
-                console.log('Carrinho visível! Fechando menu mobile...');
-                nav.classList.remove('show');
+            if (entry.isIntersecting) {
+                console.log('Carrinho visível! Forçando fechamento de todos os elementos com .show...');
+
+                if (nav && nav.classList.contains('show')) nav.classList.remove('show');
+                if (menu && menu.classList.contains('show')) menu.classList.remove('show');
+                if (header && header.classList.contains('show')) header.classList.remove('show');
             }
         });
     }, {
@@ -529,6 +534,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     observer.observe(alvo);
 });
+
 
 
 
