@@ -1916,18 +1916,14 @@ nav {
 #header.hidden-navbar .nav-top {
   height: 50px;
   display: flex;
-  justify-content: center;
   align-items: center;
   position: relative;
 }
 
 #header.hidden-navbar .logo {
   font-size: 1rem;
+  margin: 0 auto;              /* ✅ Mantém a logo centralizada via flex */
   text-align: center;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 2; /* ✅ Garante que o nome fique acima de qualquer coisa */
 }
 
 #header.hidden-navbar .toggle.icon-menu,
@@ -1937,7 +1933,7 @@ nav {
   top: 50%;
   transform: translateY(-50%);
   display: block;
-  z-index: 3; /* ✅ Garante que o toggle fique por cima e na direita */
 }
+
 
 
