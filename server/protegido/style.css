@@ -1896,3 +1896,27 @@ nav {
         margin-top: 0; 
     }
 }
+
+
+
+
+
+
+
+/* Quando o header estiver escondendo a barra de pesquisa e categorias */
+#header.hide-navbar-central .nav-central {
+    opacity: 0;
+    pointer-events: none;
+    max-height: 0;
+    transform: translateY(-20px);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+#header.hide-navbar-central .nav-top {
+    justify-content: center;
+}
+
+#header.hide-navbar-central .toggle {
+    display: none; /* Se quiser esconder o menu hamburger quando encolher */
+}

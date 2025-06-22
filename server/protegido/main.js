@@ -510,30 +510,27 @@ document.addEventListener('click', function(event) {
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    const nav = document.querySelector('#header nav');
-    const menu = document.querySelector('nav .menu');
     const header = document.getElementById('header');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!alvo) return;
+    if (!header || !alvo) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log('Carrinho visível! Forçando fechamento de todos os elementos com .show...');
-
-                if (nav && nav.classList.contains('show')) nav.classList.remove('show');
-                if (menu && menu.classList.contains('show')) menu.classList.remove('show');
-                if (header && header.classList.contains('show')) header.classList.remove('show');
+                header.classList.add('hide-navbar-central');  // Quando o carrinho encostar
+            } else {
+                header.classList.remove('hide-navbar-central');  // Quando voltar para cima
             }
         });
     }, {
         root: null,
-        threshold: 0
+        threshold: 0.1  // Detecta quando pelo menos 10% do carrinho aparece na tela
     });
 
     observer.observe(alvo);
 });
+
 
 
 
