@@ -1916,24 +1916,24 @@ nav {
 #header.hidden-navbar .nav-top {
   height: 50px;
   display: flex;
+  justify-content: space-between;  /* ✅ Logo na esquerda, hamburguer na direita */
   align-items: center;
-  position: relative;
+  padding: 0 10px;
 }
 
 #header.hidden-navbar .logo {
   font-size: 1rem;
-  margin: 0 auto;              /* ✅ Mantém a logo centralizada via flex */
-  text-align: center;
+  text-align: left;
 }
 
 #header.hidden-navbar .toggle.icon-menu,
 #header.hidden-navbar .toggle.icon-close {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
   display: block;
+  position: static;                /* ✅ Não usa mais absolute */
+  margin-left: auto;
+  font-size: 1.2rem;
 }
+
 
 
 
