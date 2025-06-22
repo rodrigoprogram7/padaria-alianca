@@ -1903,7 +1903,6 @@ nav {
 
 
 
-/* Navbar reduzida (pequena) */
 #header.hidden-navbar {
   height: 50px;
   overflow: hidden;
@@ -1929,3 +1928,4 @@ nav {
   font-size: 1rem;
   text-align: center;
 }
+

@@ -515,20 +515,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
     if (!header || !carrinho) return;
 
-    const carrinhoTop = carrinho.offsetTop;
-
-    function verificarScroll() {
+    window.addEventListener('scroll', function() {
+        const carrinhoRect = carrinho.getBoundingClientRect();
+        const carrinhoTopInPage = window.scrollY + carrinhoRect.top;
         const scrollY = window.scrollY;
 
-        if (scrollY >= carrinhoTop) {
-            header.classList.add('hidden-navbar');  // ✅ Navbar pequeno ao descer além do carrinho
+        // Se o scroll já passou o topo do carrinho → encolhe
+        if (scrollY >= carrinhoTopInPage) {
+            header.classList.add('hidden-navbar');
         } else {
-            header.classList.remove('hidden-navbar');  // ✅ Navbar grande acima do carrinho
+            header.classList.remove('hidden-navbar');
         }
-    }
-
-    window.addEventListener('scroll', verificarScroll);
+    });
 });
+
 
 
 
