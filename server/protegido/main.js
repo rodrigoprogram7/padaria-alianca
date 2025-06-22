@@ -511,24 +511,19 @@ document.addEventListener('click', function(event) {
 
 
 window.addEventListener('scroll', function() {
-    const nav = document.querySelector('nav');
-    const header = document.getElementById('header');
+    const nav = document.querySelector('nav.container');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!alvo) return;
+    if (!alvo || !nav) return;
 
     const alvoPos = alvo.getBoundingClientRect().top;
+    const navHeight = nav.offsetHeight;
 
-    // Caso o nav tenha a classe .show
-    if (nav && nav.classList.contains('show') && alvoPos <= nav.offsetHeight) {
+    if (nav.classList.contains('show') && alvoPos <= navHeight) {
         nav.classList.remove('show');
     }
-
-    // Caso o header tenha a classe .show
-    if (header && header.classList.contains('show') && alvoPos <= header.offsetHeight) {
-        header.classList.remove('show');
-    }
 });
+
 
 
 
