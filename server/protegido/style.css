@@ -1903,15 +1903,15 @@ nav {
 
 
 
-/* Quando o navbar estiver escondido (após o carrinho) */
+/* Navbar reduzida (pequena) */
 #header.hidden-navbar {
-  height: 50px; /* ✅ Altura parecida com o topo inicial */
+  height: 50px;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 #header.hidden-navbar .nav-central {
-  display: none; /* ✅ Some com categorias e pesquisa */
+  display: none;
 }
 
 #header.hidden-navbar .nav-top {
@@ -1922,14 +1922,10 @@ nav {
 }
 
 #header.hidden-navbar .toggle {
-  display: none; /* ✅ Esconde o hamburguer quando estiver pequeno */
+  display: none;
 }
 
 #header.hidden-navbar .logo {
   font-size: 1rem;
   text-align: center;
 }
-
-
-
-

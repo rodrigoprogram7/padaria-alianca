@@ -512,31 +512,24 @@ document.addEventListener('click', function(event) {
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('header');
     const carrinho = document.getElementById('itens-carrinho');
-    const produtos = document.querySelector('.pp'); // ✅ Área onde os produtos começam (ajuste se seu HTML usar outro nome)
 
-    if (!header || !carrinho || !produtos) return;
+    if (!header || !carrinho) return;
 
-    let navbarOculta = false;
+    const carrinhoTop = carrinho.offsetTop;
 
     function verificarScroll() {
-        const carrinhoTop = carrinho.getBoundingClientRect().top;
-        const produtosTop = produtos.getBoundingClientRect().top;
+        const scrollY = window.scrollY;
 
-        // Se o carrinho estiver acima da tela (ou seja, já passou por ele), navbar continua escondida
-        if (carrinhoTop <= 0) {
-            header.classList.add('hidden-navbar');
-            navbarOculta = true;
-        }
-
-        // Se voltou para os produtos (área superior dos produtos visível), mostrar de novo
-        if (produtosTop >= 0) {
-            header.classList.remove('hidden-navbar');
-            navbarOculta = false;
+        if (scrollY >= carrinhoTop) {
+            header.classList.add('hidden-navbar');  // ✅ Navbar pequeno ao descer além do carrinho
+        } else {
+            header.classList.remove('hidden-navbar');  // ✅ Navbar grande acima do carrinho
         }
     }
 
     window.addEventListener('scroll', verificarScroll);
 });
+
 
 
 
