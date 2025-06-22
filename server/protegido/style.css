@@ -1916,9 +1916,11 @@ nav {
 #header.hidden-navbar .nav-top {
   height: 50px;
   display: flex;
-  justify-content: space-between;  /* ✅ Logo na esquerda, hamburguer na direita */
+  justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
+  width: 100%;           /* ✅ Faz o nav-top ocupar 100% da largura */
+  padding: 0 15px;        /* ✅ Espaçamento lateral opcional */
+  box-sizing: border-box; /* ✅ Garante que o padding não atrapalhe o layout */
 }
 
 #header.hidden-navbar .logo {
@@ -1929,10 +1931,10 @@ nav {
 #header.hidden-navbar .toggle.icon-menu,
 #header.hidden-navbar .toggle.icon-close {
   display: block;
-  position: static;                /* ✅ Não usa mais absolute */
-  margin-left: auto;
+  margin-left: auto;       /* ✅ Empurra o toggle para a direita */
   font-size: 1.2rem;
 }
+
 
 
 
