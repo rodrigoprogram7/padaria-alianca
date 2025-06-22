@@ -511,25 +511,22 @@ document.addEventListener('click', function(event) {
 
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('header');
-    const alvo = document.getElementById('carrinho');
+    const alvo = document.getElementById('itens-carrinho');
 
     if (!header || !alvo) return;
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                header.classList.add('hide-navbar-central');  // Quando o carrinho encostar
-            } else {
-                header.classList.remove('hide-navbar-central');  // Quando voltar para cima
-            }
-        });
-    }, {
-        root: null,
-        threshold: 0.1  // Detecta quando pelo menos 10% do carrinho aparece na tela
-    });
+    window.addEventListener('scroll', function() {
+        const alvoTop = alvo.getBoundingClientRect().top + window.scrollY;
+        const scrollPos = window.scrollY;
 
-    observer.observe(alvo);
+        if (scrollPos >= alvoTop - header.offsetHeight) {
+            header.classList.add('hide-navbar-central');
+        } else {
+            header.classList.remove('hide-navbar-central');
+        }
+    });
 });
+
 
 
 
