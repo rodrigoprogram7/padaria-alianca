@@ -471,9 +471,9 @@ nav.show .toggle.icon-close::before {
 
 
 /*======================================== Mobile Nav-top (logo esquerda, ícone direita) ========================================*/
+/* Navbar inicial no mobile - igual ao .hidden-navbar */
 @media (max-width: 768px) {
-  /* Navbar inicial (antes do scroll) */
-  .nav-top {
+  #header .nav-top {
     height: 50px;
     display: flex;
     justify-content: space-between;
@@ -483,19 +483,19 @@ nav.show .toggle.icon-close::before {
     box-sizing: border-box;
   }
 
-  .logo {
+  #header .logo {
     font-size: 1rem;
     text-align: left;
   }
 
-  .toggle.icon-menu,
-  .toggle.icon-close {
+  #header .toggle.icon-menu,
+  #header .toggle.icon-close {
     display: block;
     margin-left: auto;
     font-size: 1.2rem;
   }
 
-  nav.container {
+  #header nav {
     max-width: 100%;
     width: 100%;
     padding: 0;
@@ -506,35 +506,6 @@ nav.show .toggle.icon-close::before {
     width: 100%;
     overflow: hidden;
     transition: all 0.3s ease;
-  }
-
-  /* Após o scroll - Se quiser que mude o layout (exemplo: centralizar logo ao scroll) */
-  #header.scroll .nav-top {
-    justify-content: center;
-    height: auto;
-    position: relative;
-  }
-
-  #header.scroll .nav-top .logo {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  #header.scroll .toggle.icon-menu,
-  #header.scroll .toggle.icon-close {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-  }
-
-  /* Mantendo controle de largura total */
-  #header, nav.container, .nav-top, .nav-central {
-    max-width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
   }
 }
 
