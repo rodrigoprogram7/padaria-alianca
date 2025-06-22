@@ -513,7 +513,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('#header nav');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!alvo || !nav) return;
+    if (!nav || !alvo) return;
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -528,11 +528,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, {
         root: null,
-        threshold: 0.1
+        threshold: 0    // ✅ Fecha assim que QUALQUER parte do carrinho encostar no viewport
     });
 
     observer.observe(alvo);
 });
+
 
 
 
