@@ -514,12 +514,20 @@ window.addEventListener('scroll', function() {
     const nav = document.querySelector('nav');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!alvo || !nav.classList.contains('show')) return;
+    if (!nav || !alvo) return;
+
+    // Só continua se o menu estiver aberto (classe .show presente)
+    if (!nav.classList.contains('show')) return;
 
     const alvoPos = alvo.getBoundingClientRect().top;
+    const navHeight = nav.offsetHeight;
 
-    if (alvoPos <= nav.offsetHeight) {
-        nav.classList.remove('show');  // ✅ Agora remove a classe .show do <nav>
+    console.log('Posição alvo:', alvoPos, ' | Altura nav:', navHeight);  // ✅ Para debug
+
+    // Quando o topo do alvo atingir ou passar da altura do nav
+    if (alvoPos <= navHeight) {
+        console.log('Fechando nav por scroll até o carrinho');
+        nav.classList.remove('show');
     }
 });
 
