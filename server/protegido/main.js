@@ -514,15 +514,17 @@ window.addEventListener('scroll', function() {
     const nav = document.querySelector('nav.container');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!alvo || !nav) return;
+    if (!nav || !alvo) return;
 
-    const alvoPos = alvo.getBoundingClientRect().top;
-    const navHeight = nav.offsetHeight;
+    const alvoTop = alvo.getBoundingClientRect().top;
+    const viewportHeight = window.innerHeight;
 
-    if (nav.classList.contains('show') && alvoPos <= navHeight) {
+    // ✅ Quando o topo do alvo estiver dentro da viewport (ou tocando o topo da tela)
+    if (nav.classList.contains('show') && alvoTop <= 0) {
         nav.classList.remove('show');
     }
 });
+
 
 
 
