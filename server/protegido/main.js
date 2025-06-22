@@ -509,20 +509,28 @@ document.addEventListener('click', function(event) {
 
 
 
-window.addEventListener('scroll', function() {
+document.addEventListener('DOMContentLoaded', function() {
     const nav = document.querySelector('nav.container');
     const alvo = document.getElementById('itens-carrinho');
 
-    if (!nav || !alvo) return;
+    if (nav && alvo) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && nav.classList.contains('show')) {
+                    console.log('Carrinho visível! Fechando o menu mobile.');
+                    nav.classList.remove('show');
+                }
+            });
+        }, {
+            root: null,
+            threshold: 0.1
+        });
 
-    const navHeight = nav.offsetHeight;
-    const alvoTop = alvo.getBoundingClientRect().top + window.scrollY;  // Posição real do alvo na página
-    const scrollY = window.scrollY;
-
-    if (nav.classList.contains('show') && scrollY >= (alvoTop - navHeight)) {
-        nav.classList.remove('show');
+        observer.observe(alvo);
     }
 });
+
+
 
 
 
