@@ -1983,7 +1983,7 @@ body.dark-mode .categorias-navbar button,
 body.dark-mode .produto,
 body.dark-mode .carrinho-item {
   background-color: #1e1e1e;
-  color: #383c45;
+  color: #fff;
 }
 
 body.dark-mode .button,
