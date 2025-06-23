@@ -2015,10 +2015,6 @@ body.dark-mode .btn-primary:hover {
   background-color: #d0d0d0; /* Opcional: Fundo um pouco mais escuro no hover */
 }
 
-body.dark-mode .container{
-    background-color: rgb(33, 30, 30);
-}
-
 body.dark-mode .toggle.icon-menu::before,
 body.dark-mode .toggle.icon-close::before {
   color: #fff;
