@@ -1989,7 +1989,7 @@ body.dark-mode .carrinho{
     background-color: rgb(33, 30, 30);
 }
 body.dark-mode .produtos{
-    background-color: #05111c;
+    background-color: rgb(28, 23, 23);
 }
 body.dark-mode .btt, .btt2 {
     display: flex;
@@ -2001,6 +2001,10 @@ body.dark-mode .btt, .btt2 {
     transition: all 0.2s ease-in-out;
     font-weight: bold; /* Para os ícones de + e - */
     color: #555;
+}
+body.dark-mode .btt:active,
+.btt2:active {
+    box-shadow: inset 2px 2px 5px #1c1c1c, inset -2px -2px 5px #1c1c1c;
 }
 
 body.dark-mode .button,
