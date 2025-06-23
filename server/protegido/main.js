@@ -264,24 +264,25 @@ function atualizarCarrinho() {
         const div = document.createElement('div')
         div.classList.add('carrinho-item')
         div.innerHTML = `
-            <div class="carrinho-nome">
-                <img src="${item.imagem}" alt="${nome}" class="carrinho-miniatura">
-                <span>${nome}</span>
-            </div>
-            <div class="carrinho-quantidade">
-                <button class="btt" onclick="diminuirQuantidade('${nome}')">−</button>
-                <span>${item.tipo === 'peso' ? item.quantidade + 'g' : item.quantidade}</span>
-                <button class="btt" onclick="aumentarQuantidade('${nome}')">+</button>
-            </div>
-            <center>
-                <div class="carrinho-subtotal">R$ ${subtotal.toFixed(2)}</div>
-            </center>
-            <div class="carrinho-acoes">
-                <button onclick="removerDoCarrinho('${nome}')">
-                    <img id="imgg" src="assets/images/sistema/excluir.png" alt="">
-                </button>
-            </div>
-        `
+    <div class="carrinho-nome">
+        <img src="${item.imagem}" alt="${nome}" class="carrinho-miniatura">
+        <span class="nome-produto">${nome}</span>
+    </div>
+
+    <div class="carrinho-quantidade-controles">
+        <button class="btt" onclick="diminuirQuantidade('${nome}')">−</button>
+        <span>${item.tipo === 'peso' ? item.quantidade + 'g' : item.quantidade}</span>
+        <button class="btt" onclick="aumentarQuantidade('${nome}')">+</button>
+    </div>
+
+    <div class="carrinho-subtotal">R$ ${subtotal.toFixed(2)}</div>
+
+    <div class="carrinho-acoes">
+        <button onclick="removerDoCarrinho('${nome}')">
+            <img id="imgg" src="assets/images/sistema/excluir.png" alt="">
+        </button>
+    </div>
+`;
         container.appendChild(div)
     }
 
