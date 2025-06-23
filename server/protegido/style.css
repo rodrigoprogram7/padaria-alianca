@@ -2019,12 +2019,25 @@ body.dark-mode .toggle.icon-menu::before,
 body.dark-mode .toggle.icon-close::before {
   color: #fff;
 }
-body.dark-mode .produto {
+body.dark-mode .produto,
+body.dark-mode .categorias-navbar button {
   border: 1px solid #444; /* Borda cinza discreta */
-  border-radius: 8px;      /* Cantos levemente arredondados (opcional) */
-  padding: 10px;           /* Espaçamento interno para não grudar o conteúdo na borda */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra sutil de fundo */
+  border-radius: 8px;      /* Cantos levemente arredondados */
+  padding: 10px;           /* Espaço interno */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra suave */
 }
+
+body.dark-mode .categorias-navbar button {
+  background-color: #1e1e1e;  /* Fundo escuro para as categorias no dark-mode */
+  color: #e0e0e0;             /* Texto claro para contraste */
+}
+
+body.dark-mode .categorias-navbar button:hover,
+body.dark-mode .categorias-navbar button.active {
+  border-color: #ffc107;       /* Cor de destaque no hover ou ativo */
+  background-color: #333;       /* Fundo levemente mais claro no hover */
+}
+
 
 
 body.dark-mode nav ul li a {
