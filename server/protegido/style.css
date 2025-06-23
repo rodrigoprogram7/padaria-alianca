@@ -2016,11 +2016,12 @@ body.dark-mode .barra-pesquisa.navbar input {
 
 #toggle-dark-mode {
   cursor: pointer;
-  color: var(--base-color);
+  color: var(--title-color);
   text-decoration: none;
   transition: color 0.3s;
 }
 
 #toggle-dark-mode:hover {
-  color: #f1c40f;
+  color: var(--base-color);
 }
+
