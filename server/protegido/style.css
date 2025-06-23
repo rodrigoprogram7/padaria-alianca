@@ -1993,6 +1993,9 @@ body.dark-mode .btt2 {
   background-color: #333;
   color: #fff;
 }
+body.dark-mode .container{
+    background-color: rgb(33, 30, 30);
+}
 
 body.dark-mode .toggle.icon-menu::before,
 body.dark-mode .toggle.icon-close::before {
