@@ -484,6 +484,11 @@ nav.show .toggle.icon-close::before {
     box-sizing: border-box;
     position: relative;              /* ✅ Importante para posicionar o toggle depois */
   }
+   #toggle-dark-mode {
+    margin-right: auto; /* ✅ Joga o botão pra esquerda */
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+  }
 
   .logo {
     font-size: 1rem;
