@@ -634,6 +634,28 @@ nav ul li a:hover {
 }
 
 
+@media (max-width: 768px) {
+  #header:not(.scroll) .nav-top {
+    justify-content: center;
+    height: auto;
+    position: relative;
+  }
+
+  #header:not(.scroll) .nav-top .logo {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #header:not(.scroll) .toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+
+
 
 
 
