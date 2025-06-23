@@ -1989,7 +1989,16 @@ body.dark-mode .carrinho{
     background-color: rgb(33, 30, 30);
 }
 body.dark-mode .produtos{
-    background-color: #0f273b;
+    background-color: #05111c;
+}
+body.dark-mode .quantidade-box button {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 body.dark-mode .button,
