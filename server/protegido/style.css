@@ -1985,6 +1985,9 @@ body.dark-mode .carrinho-item {
   background-color: #1e1e1e;
   color: #fff;
 }
+body.dark-mode .carrinho{
+    background-color: rgb(33, 30, 30);
+}
 
 body.dark-mode .button,
 body.dark-mode #bt,
