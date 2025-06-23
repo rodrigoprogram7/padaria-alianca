@@ -1986,7 +1986,7 @@ body.dark-mode .carrinho-item {
   color: #fff;
 }
 body.dark-mode .carrinho{
-    background-color: rgb(33, 30, 30);
+        background-color: hsl(var(--hue-color), 29%, 12%);
 }
 
 body.dark-mode .button,
