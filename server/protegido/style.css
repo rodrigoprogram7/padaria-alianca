@@ -1959,12 +1959,12 @@ nav {
 
 
  /* Modo Escuro */
- body.dark-mode {
-    --body-color: #121212;
-    --text-color: #e0e0e0;
-    --title-color: #ffffff;
-    --base-color-second: #333333;
-    --base-color-alt: #ffc107;
+body.dark-mode {
+  --body-color: #121212;
+  --text-color: #e0e0e0;
+  --title-color: #ffffff;
+  --base-color-second: #333333;
+  --base-color-alt: #ffc107;
 }
 
 body.dark-mode header,
@@ -1977,52 +1977,45 @@ body.dark-mode .barra-pesquisa.navbar,
 body.dark-mode .categorias-navbar button,
 body.dark-mode .produto,
 body.dark-mode .carrinho-item {
-    background-color: #1e1e1e;
-    color: #e0e0e0;
+  background-color: #1e1e1e;
+  color: #e0e0e0;
 }
 
 body.dark-mode .button,
 body.dark-mode #bt,
 body.dark-mode .btt,
 body.dark-mode .btt2 {
-    background-color: #333;
-    color: #fff;
+  background-color: #333;
+  color: #fff;
 }
 
 body.dark-mode .toggle.icon-menu::before,
 body.dark-mode .toggle.icon-close::before {
-    color: #fff;
+  color: #fff;
 }
 
 body.dark-mode nav ul li a {
-    color: #e0e0e0;
+  color: #e0e0e0;
 }
 
 body.dark-mode nav ul li a.active,
 body.dark-mode nav ul li a:hover {
-    border-color: #ffc107;
+  border-color: #ffc107;
 }
 
 body.dark-mode .barra-pesquisa.navbar input {
-    background-color: #333;
-    color: #fff;
-    border-color: #555;
+  background-color: #333;
+  color: #fff;
+  border-color: #555;
 }
+
 #toggle-dark-mode {
-    cursor: pointer;
-    color: var(--base-color);
-    text-decoration: none;
-    transition: color 0.3s;
+  cursor: pointer;
+  color: var(--base-color);
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
 #toggle-dark-mode:hover {
-    color: #f1c40f;
+  color: #f1c40f;
 }
-
-
-  
-
-
-
-
-
