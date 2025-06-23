@@ -109,18 +109,23 @@ function filtrarCategoria(categoriaSelecionada) {
         produto.style.display = categoria === categoriaSelecionada ? 'flex' : 'none';
     });
 
+    // ✅ Reaplicar o ScrollReveal após o filtro
+    ScrollReveal().clean('body');
+    scrollReveal.reveal(
+        `#home .image, #home .text, #about .title, #about .pp,
+        #about .container, #about .carrinho,
+        #contact .text, #contact .links,
+        footer .brand, footer .social`,
+        { interval: 100 }
+    );
+
     // Scroll suave para a lista de produtos
     const areaProdutos = document.querySelector('.pp');
     if (areaProdutos) {
         areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-
 }
 
-window.onload = () => {
-    atualizarCarrinho();
-    filtrarCategoria('alimentos');  // Categoria inicial + botão ativo
-};
 
 
 
