@@ -504,7 +504,6 @@ nav.show .toggle.icon-close::before {
   }
 
   #header.scroll .nav-top .logo {
-    font-size: 1rem;
     margin: 0 auto;
     text-align: center;
   }
@@ -1935,7 +1934,7 @@ nav {
 }
 
 #header.hidden-navbar .logo {
-  font-size: 3rem;
+  font-size: 1rem;
   text-align: left;
 }
 
