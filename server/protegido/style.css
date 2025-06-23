@@ -2019,6 +2019,13 @@ body.dark-mode .toggle.icon-menu::before,
 body.dark-mode .toggle.icon-close::before {
   color: #fff;
 }
+body.dark-mode .produto {
+  border: 1px solid #444; /* Borda cinza discreta */
+  border-radius: 8px;      /* Cantos levemente arredondados (opcional) */
+  padding: 10px;           /* Espaçamento interno para não grudar o conteúdo na borda */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra sutil de fundo */
+}
+
 
 body.dark-mode nav ul li a {
   color: #e0e0e0;
