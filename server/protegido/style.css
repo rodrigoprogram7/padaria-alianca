@@ -644,6 +644,7 @@ nav ul li a:hover {
   #header:not(.scroll) .nav-top .logo {
     margin: 0 auto;
     text-align: center;
+    font-size: 1rem;
   }
 
   #header:not(.scroll) .toggle {
