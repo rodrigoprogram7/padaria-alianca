@@ -1991,21 +1991,13 @@ body.dark-mode .carrinho{
 body.dark-mode .produtos{
     background-color: rgb(28, 23, 23);
 }
-body.dark-mode .btt, .btt2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    font-weight: bold; /* Para os ícones de + e - */
-    color: #555;
+body.dark-mode .btt,
+body.dark-mode .btt2,
+body.dark-mode #bt,
+body.dark-mode .btn-primary {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
 }
-body.dark-mode .btt:active,
-.btt2:active {
-    box-shadow: inset 2px 2px 5px #1c1c1c, inset -2px -2px 5px #1c1c1c;
-}
+
 
 body.dark-mode .button,
 body.dark-mode #bt,
