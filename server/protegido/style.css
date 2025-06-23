@@ -1991,14 +1991,16 @@ body.dark-mode .carrinho{
 body.dark-mode .produtos{
     background-color: #05111c;
 }
-body.dark-mode .quantidade-box button {
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
-    font-weight: bold;
+body.dark-mode .btt, .btt2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-weight: bold; /* Para os ícones de + e - */
+    color: #555;
 }
 
 body.dark-mode .button,
