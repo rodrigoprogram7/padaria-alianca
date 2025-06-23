@@ -124,8 +124,32 @@ function filtrarCategoria(categoriaSelecionada) {
 
 window.onload = () => {
     atualizarCarrinho();
-    filtrarCategoria('alimentos');  // Categoria inicial + botão ativo
+    filtrarCategoriaSemScroll('alimentos');  // Categoria inicial SEM scroll
 };
+function filtrarCategoriaSemScroll(categoriaSelecionada) {
+    document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+
+    const botaoAtivo = document.querySelector(`.filtro-btn[data-categoria="${categoriaSelecionada}"]`);
+    if (botaoAtivo) botaoAtivo.classList.add('active');
+
+    const produtos = document.querySelectorAll('.produto');
+    produtos.forEach(produto => {
+        const categoria = produto.getAttribute('data-categoria');
+        produto.style.display = categoria === categoriaSelecionada ? 'flex' : 'none';
+    });
+
+    // Atualiza ScrollReveal
+    ScrollReveal().clean('body');
+    scrollReveal.reveal(
+        `#home .image, #home .text, #about .title, #about .pp,
+        #about .container, #about .carrinho,
+        #contact .text, #contact .links,
+        footer .brand, footer .social`,
+        { interval: 100 }
+    );
+}
+
+
 
 
 
