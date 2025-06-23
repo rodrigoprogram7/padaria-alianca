@@ -114,13 +114,15 @@ function filtrarCategoria(categoriaSelecionada) {
         areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    scrollReveal.reveal(
-        `#home .image, #home .text, #about .title, #about .pp,
-        #about .container, #about .carrinho,
-        #contact .text, #contact .links,
-        footer .brand, footer .social`,
-        { interval: 100 }
-    );
+    // Reaplicar o ScrollReveal após mudar os produtos
+        ScrollReveal().clean('body');
+        scrollReveal.reveal(
+            `#home .image, #home .text, #about .title, #about .pp,
+            #about .container, #about .carrinho,
+            #contact .text, #contact .links,
+            footer .brand, footer .social`,
+            { interval: 100 }
+        );
 
 }
 
