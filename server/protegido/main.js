@@ -132,45 +132,43 @@ function salvarCarrinho() {
 }
 
 function alterarQuantidade(botao, delta) {
-    const produtoEl = botao.closest('.produto')
-    const input = produtoEl.querySelector('.quantidade')
-    let valor = parseInt(input.value) + delta
-
-    const tipo = produtoEl.getAttribute('data-tipo') || 'unidade'
+    const produtoEl = botao.closest('.produto');
+    const input = produtoEl.querySelector('.quantidade');
+    let valor = parseInt(input.value);
+    const tipo = produtoEl.getAttribute('data-tipo') || 'unidade';
 
     if (tipo === 'peso') {
-        valor = Math.max(100, valor) // Minimo de 100g
-        // Garante que o incremento/decremento seja de 100g para tipo peso
-        // Ex: Se está em 120g e decrementa, vai para 100g, não 20g. Se está em 100g e incrementa, vai para 200g.
-        if (delta === 1 && valor % 100 !== 0) valor = Math.ceil(valor / 100) * 100;
-        if (delta === -1 && valor % 100 !== 0) valor = Math.floor(valor / 100) * 100;
+        valor = valor <= 0 ? 100 : valor;
+        valor += delta * 100;
+        valor = Math.max(100, valor);
     } else {
-        valor = Math.max(1, valor) // Mínimo de 1 unidade
+        valor = valor <= 0 ? 1 : valor;
+        valor += delta;
+        valor = Math.max(1, valor);
     }
 
-    input.value = valor
+    input.value = valor;
 
-    const preco = parseFloat(produtoEl.getAttribute('data-preco'))
-    const subtotalEl = produtoEl.querySelector('.subtotal-preview')
+    const preco = parseFloat(produtoEl.getAttribute('data-preco'));
+    const subtotalEl = produtoEl.querySelector('.subtotal-preview');
     if (subtotalEl) {
-        if ((tipo === 'peso' && valor >= 100) || (tipo === 'unidade' && valor >= 1)) { // Ajustado para incluir 100g/1unidade
-            let subtotal = tipo === 'peso' ? preco * (valor / 100) : preco * valor
+        if ((tipo === 'peso' && valor >= 100) || (tipo === 'unidade' && valor >= 1)) {
+            let subtotal = tipo === 'peso' ? preco * (valor / 100) : preco * valor;
             subtotalEl.textContent = tipo === 'peso'
                 ? `Subtotal: R$ ${subtotal.toFixed(2)} (${valor}g)`
-                : `Subtotal: R$ ${subtotal.toFixed(2)}`
-            subtotalEl.style.color = 'green'
-            subtotalEl.style.fontWeight = 'bold'
-            subtotalEl.style.marginTop = '5px'
+                : `Subtotal: R$ ${subtotal.toFixed(2)}`;
+            subtotalEl.style.color = 'green';
+            subtotalEl.style.fontWeight = 'bold';
+            subtotalEl.style.marginTop = '5px';
         } else {
-            subtotalEl.textContent = ''
+            subtotalEl.textContent = '';
         }
     }
 
-    // NOVO: Remove o foco do botão ou input para desativar estilos de active/focus
-    // Isso é particularmente útil em dispositivos móveis.
-    botao.blur(); // Remove o foco do botão clicado
-    input.blur(); // Remove o foco do input de quantidade
+    botao.blur();
+    input.blur();
 }
+
 
 
 function adicionarAoCarrinho(botao) {
