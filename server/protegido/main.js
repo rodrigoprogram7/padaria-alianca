@@ -563,3 +563,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+document.addEventListener('click', function(event) {
+    const nav = document.querySelector('nav.container');
+    const toggle = document.querySelector('.toggle.icon-menu');
+
+    const isClickInsideNav = nav.contains(event.target);
+    const isClickOnToggle = event.target.closest('.toggle');
+
+    // Se o menu estiver aberto e o clique for fora do nav e fora do toggle, fecha o menu
+    if (nav.classList.contains('show') && !isClickInsideNav && !isClickOnToggle) {
+        nav.classList.remove('show');
+    }
+});
+
