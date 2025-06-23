@@ -1168,7 +1168,7 @@ footer .social a:hover {
 
 .quantidade-box button:hover {
     background-color: var(--base-color);
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .quantidade-box input {
