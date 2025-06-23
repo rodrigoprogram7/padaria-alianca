@@ -1,4 +1,3 @@
-
 /*========== Configurações do menu ==========*/
 const nav = document.querySelector('#header nav')
 const toggle = document.querySelectorAll('nav .toggle')
@@ -121,9 +120,6 @@ window.onload = () => {
     atualizarCarrinho();
     filtrarCategoria('alimentos');  // Categoria inicial + botão ativo
 };
-
-
-
 
 /*========== Carrinho ==========*/
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || {}
@@ -432,18 +428,6 @@ function toggleHeaderScroll() {
 
 window.addEventListener('scroll', toggleHeaderScroll);
 
-
-
-
-
-
-
-
-
-
-
-
-
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
@@ -513,10 +497,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const header = document.getElementById('header');
     const carrinho = document.getElementById('carrinho');
@@ -536,9 +516,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-
-
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -577,4 +554,3 @@ document.addEventListener('click', function(event) {
         nav.classList.remove('show');
     }
 });
-

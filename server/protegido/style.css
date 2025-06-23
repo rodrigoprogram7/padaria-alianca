@@ -18,17 +18,26 @@ img {
     height: auto;
     display: block; /* Garante que a imagem não tenha espaços extras abaixo dela */
 }
+
+/* Estilo base para ícones de categoria, se forem imagens */
 .categoria-icon {
     width: 22px;
     height: 22px;
     margin-right: 8px;
-    vertical-align: middle;
+    /* vertical-align: middle; - Isso só funciona em inline/inline-block. Se o pai for flex, use align-items: center; */
 }
 
 
 /*======================================== Variáveis ========================================*/
 :root {
+    /* Header Heights */
     --header-height: 4.5rem;
+    --header-initial-height-mobile: 50px;
+    --header-scrolled-height: auto; /* Pode ser uma altura definida */
+
+    /* Padding para header scrollado - Desktop */
+    --header-scrolled-padding-top-desktop: 0.8rem;
+    --header-scrolled-padding-bottom-desktop: 0.8rem;
 
     /* Cores */
     --hue: 46;
@@ -39,223 +48,201 @@ img {
     --text-color: hsl(0 0% 46%);
     --text-color-light: hsl(0 0% 98%);
     --body-color: hsl(0 0% 98%);
-    
+    --input-background-color: #f0f0f0; /* Nova variável para fundos de input */
+    --button-primary-bg: #007bff; /* Nova variável para background de botão primário */
+    --button-primary-text: white; /* Nova variável para texto de botão primário */
+
     /* Tamanho das fontes*/
-    --title-font-size-base: 1.875rem; /* Renomeado para base */
-    --subtitle-font-size: 1rem;
-    
-    /* Tipo das fontes*/
-    --title-font: "Poppins", sans-serif;
-    --body-font: "DM Sans", sans-serif;
+    --title-font-size-base: 1.875rem;
+    --section-title-mobile-size: 1.8rem; /* Para títulos de seção em mobile */
+    --subtitle-font-size: 1.25rem;
+    --h3-font-size: 1rem;
+    --normal-font-size: 0.938rem;
+    --small-font-size: 0.813rem;
+    --smaller-font-size: 0.75rem;
+
+    /* Fontes */
+    --title-font: 'Poppins', sans-serif;
+    --body-font: 'DM Sans', sans-serif;
+
+    /* Spacing */
+    --mb-0-5: 0.5rem;
+    --mb-0-75: 0.75rem;
+    --mb-1: 1rem;
+    --mb-1-5: 1.5rem;
+    --mb-2: 2rem;
+    --mb-2-5: 2.5rem;
+    --mb-3: 3rem;
+}
+
+/* Ajustes de fonte para telas maiores */
+@media screen and (min-width: 968px) {
+    :root {
+        --title-font-size-base: 2.5rem;
+        --subtitle-font-size: 1.5rem;
+        --h3-font-size: 1.25rem;
+        --normal-font-size: 1rem;
+        --small-font-size: 0.875rem;
+        --smaller-font-size: 0.813rem;
+    }
+}
+
+/* Dark Mode Variables */
+body.dark-mode {
+    --title-color: hsl(0 0% 95%);
+    --text-color: hsl(0 0% 75%);
+    --body-color: hsl(200 12% 12%);
+    --input-background-color: hsl(200 12% 16%);
+    --button-primary-bg: #4a4a4a; /* Cor diferente para dark mode */
+    --button-primary-text: #fff;
+    /* Outras cores para dark mode conforme necessário */
 }
 
 /*======================================== Base ========================================*/
-html {
-    scroll-behavior: smooth;
-}
-
 body {
-    font: 400 1rem var(--body-font);
-    color: var(--text-color);
+    font-family: var(--body-font);
+    font-size: var(--normal-font-size);
     background-color: var(--body-color);
-    -webkit-font-smoothing: antialiased;
+    color: var(--text-color);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    overflow-x: hidden; /* Previne scroll horizontal acidental em todo o body */
 }
 
-.title {
-    font: 700 var(--title-font-size-base) var(--title-font); /* Usando a variável base */
+h1, h2, h3, h4 {
     color: var(--title-color);
-    -webkit-font-smoothing: auto;
+    font-family: var(--title-font);
+    font-weight: 700;
 }
 
+.section {
+    padding: 2rem 0;
+}
+
+/* Container base para conteúdo */
+.container {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    width: auto; /* Permite que o container se ajuste */
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura */
+}
+
+/* Botões gerais */
 .button {
+    display: inline-block;
     background-color: var(--base-color);
     color: var(--text-color-light);
-    height: 3.5rem;
-    display: inline-flex;
-    align-items: center;
-    padding: 0 2rem;
-    border-radius: 0.25rem;
-    font: 500 1rem var(--body-font);
-    transition: background 0.3s;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    transition: 0.3s;
 }
 
 .button:hover {
     background-color: var(--base-color-alt);
 }
 
-.divider-1,
-.divider-2 {
-    height: 1px;
-    background: linear-gradient(270deg, 
-        hsla(var(--hue), 36%, 57%, 1), 
-        hsla(var(--hue), 65%, 88%, 0.34)
-    );
-}
-
-.divider-2 {
-    background: linear-gradient(270deg, 
-        hsla(var(--hue), 65%, 88%, 0.34),
-        hsla(var(--hue), 36%, 57%, 1)
-    );
-}
-
-/*======================================== Layout ========================================*/
-.container {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-}
-
-.grid {
-    display: grid;
-    gap: 2rem;
-}
-
-.section {
-    padding: calc(5rem + var(--header-height)) 0;
-}
-
-.section .title {
+.title {
+    font: 700 var(--title-font-size-base) var(--title-font);
+    color: var(--title-color);
+    -webkit-font-smoothing: auto;
+    text-align: center; /* Centraliza por padrão */
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 2rem;
     margin-bottom: 1rem;
 }
 
-.section .subtitle {
-    font-size: var(--subtitle-font-size);
-}
-
-.section header {
-    margin-bottom: 4rem;
-}
-
-.section header strong {
-    color: var(--base-color);
-}
-
-#header {
-    border-bottom: 1px solid #e4e4e4;
-    display: flex;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    background-color: var(--body-color);
-}
-
-#header.scroll {
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Centralizar e dar margem ao título e parágrafo da seção "about" (ou qualquer outra que use .title e .pp) */
-.title, .pp {
+.pp {
     text-align: center;
     margin-left: auto;
     margin-right: auto;
     display: block;
-}
-
-.title {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-size: 1.8rem; /* Ajuste conforme sua necessidade */
-}
-
-.pp {
     margin-bottom: 2rem;
-    font-size: 1.1rem; /* Ajuste conforme o estilo que quiser */
-    color: var(--text-color); /* Mantém a cor de texto padrão */
+    font-size: 1.1rem;
+    color: var(--text-color);
 }
 
-
-/*======================================== Logo ========================================*/
-.logo {
-    font: 700 1.31rem var(--title-font);
-    color: var(--title-color);
-    margin-top: -2px;
-}
-
-.logo span {
-    color: var(--base-color);
-}
-
-.logo-alt span {
-    color: var(--body-color);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*======================================== Header Ajustado ========================================*/
+/*======================================== Header ========================================*/
+/* Base para o Header */
 #header {
     width: 100%;
-    transition: all 0.4s ease;
-    height: 50px; /* Navbar compacta antes do scroll */
-    padding: 0.4rem 0;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
     background-color: var(--body-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: all 0.4s ease; /* Transição para altura, padding e sombra */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Sombra padrão */
+    height: var(--header-initial-height-mobile); /* Altura padrão para mobile */
+    padding: 0.4rem 0; /* Padding padrão */
 }
 
+/* Estilos de Header para quando scrollado */
 #header.scroll {
-    height: auto; /* Cresce após passar da divider */
+    height: var(--header-scrolled-height);
     padding-top: var(--header-scrolled-padding-top-desktop);
     padding-bottom: var(--header-scrolled-padding-bottom-desktop);
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada */
 }
 
-/*======================================== nav-top ========================================*/
+/* Esconder a barra de pesquisa/categorias no scroll, se aplicável */
+#header.hidden-navbar .nav-central {
+    display: none;
+}
+#header.hidden-navbar {
+    height: var(--header-initial-height-mobile); /* Mantém altura compacta */
+    overflow: hidden; /* Garante que o conteúdo escondido não ocupe espaço */
+}
+
+/* Logo */
+.logo {
+    font: 700 1.3rem var(--title-font); /* Unificado para 1.3rem */
+    color: var(--title-color);
+    margin-top: -2px; /* Se for padrão para todos os logos */
+    transition: all 0.4s ease;
+}
+
+/* Toggle (Menu Hamburguer) */
+.toggle {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--title-color);
+}
+.toggle.icon-close::before {
+    display: none; /* Esconde o ícone de fechar por padrão */
+}
+
+/* Navegação Container - Estilos base */
+nav.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
+    padding: 10px 16px;
+    height: var(--header-height); /* Usa a variável */
+}
+
+/* Nav-top (Logo e Toggle) - Mobile first */
 .nav-top {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Logo esquerda, ícone direita (mobile) */
+    justify-content: space-between; /* Logo esquerda, ícone direita */
     align-items: center;
+    height: var(--header-initial-height-mobile);
     padding: 0 1rem;
-    height: var(--header-initial-height);
-}
-
-.nav-top .logo {
-    font: 700 1.3rem var(--title-font);
-    color: var(--title-color);
-    transition: all 0.4s ease;
-}
-
-.nav-top .logo, .toggle {
-    transition: all 0.4s ease;
-}
-
-.logo span {
-    color: var(--base-color);
-}
-
-/* Quando o header rolar */
-#header.scroll .nav-top {
-    justify-content: center;
+    box-sizing: border-box;
     position: relative;
-    height: auto;
+    transition: all 0.4s ease; /* Para transição do logo e toggle */
 }
+
+/* nav-top quando o header rola (mobile) */
+#header.scroll .nav-top {
+    justify-content: center; /* Centraliza logo */
+    height: var(--header-initial-height-mobile); /* Mantém altura compacta */
+    padding: 0 1rem;
+}
+
 #header.scroll .nav-top .logo {
     margin: 0 auto;
     text-align: center;
@@ -268,659 +255,569 @@ body {
     transform: translateY(-50%);
 }
 
-/*======================================== nav-central ========================================*/
+/* Nav-central (Barra de pesquisa e Categorias) */
 .nav-central {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 10px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-20px);
-    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, max-height 0.4s ease;
     width: 100%;
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    max-height: 0;
-    overflow: hidden;
-}
-
-.nav-central {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+    padding: 0.5rem 1rem;
+    flex-wrap: wrap; /* Permite quebrar linha */
     box-sizing: border-box;
-}
-
-#header.scroll .nav-central {
-    margin-top: 1rem;
-    max-width: 100%;
-    overflow-x: hidden;
-}
-
-
-#header.scroll .nav-central {
+    overflow: hidden; /* Esconde overflow X se barra de rolagem for desnecessária */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out; /* Transição para esconder/mostrar */
+    max-height: 100px; /* Altura máxima padrão */
     opacity: 1;
-    pointer-events: all;
-    transform: translateY(0);
-    margin-top: 1rem;
-    padding-bottom: 10px;
-    max-height: 300px;
 }
 
-/*======================================== Barra de pesquisa ========================================*/
+/* Barra de Pesquisa */
 .barra-pesquisa.navbar {
-    width: 95%;
-    max-width: none;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.barra-pesquisa.navbar input {
-    width: 100%;
-    padding: 10px 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-    .barra-pesquisa.navbar {
-        width: 95%;
-    }
-}
-
-/*======================================== Categorias - Scroll horizontal ========================================*/
-.categorias-navbar {
+    flex-grow: 1; /* Permite que a barra de pesquisa ocupe espaço */
+    margin-bottom: 0.5rem; /* Espaçamento com as categorias abaixo */
     display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 8px;
-    padding-bottom: 8px;
-    width: 100%;
-    box-sizing: border-box;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: var(--input-background-color);
 }
 
+.barra-pesquisa.navbar input[type="text"] {
+    border: none;
+    padding: 10px 15px;
+    flex-grow: 1;
+    font-size: var(--normal-font-size);
+    background-color: transparent;
+    color: var(--text-color);
+}
+
+.barra-pesquisa.navbar button[type="submit"] {
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color);
+    transition: color 0.2s ease;
+}
+
+.barra-pesquisa.navbar button[type="submit"]:hover {
+    color: var(--base-color);
+}
+
+/* Categorias Navbar */
+.categorias-navbar {
+    width: 100%;
+    overflow-x: auto; /* Permite scroll horizontal das categorias */
+    white-space: nowrap; /* Impede quebrar linha dos botões */
+    padding-bottom: 0.5rem; /* Espaço para a barra de rolagem */
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: var(--base-color) transparent; /* Firefox */
+}
+
+/* Webkit scrollbar (Chrome, Safari) */
 .categorias-navbar::-webkit-scrollbar {
     height: 6px;
 }
 
 .categorias-navbar::-webkit-scrollbar-thumb {
     background-color: var(--base-color);
-    border-radius: 4px;
+    border-radius: 3px;
 }
 
-@media (max-width: 768px) {
-  /* Categorias com scroll lateral */
-  .categorias-navbar {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-  }
+.categorias-navbar::-webkit-scrollbar-track {
+    background-color: transparent;
+}
 
-  /* Estilo geral dos botões de categoria */
+
 .categorias-navbar button {
-    display: flex;
+    display: inline-flex; /* Use inline-flex para botões que rolam horizontalmente */
     align-items: center;
     gap: 0.5rem;
-    padding: 12px 16px;
-    width: 150px;
-    white-space: nowrap;        /* ✅ Mantém texto em uma linha */
-    overflow: hidden;           /* ✅ Evita que texto ultrapasse o botão */
-    text-overflow: ellipsis;    /* ✅ Mostra reticências (...) se o texto for muito longo */
-    background-color: white;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    font-weight: bold;
-    color: rgb(0, 153, 255);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.categorias-navbar button .categoria-icon {
-    flex-shrink: 0;            /* ✅ Evita que o ícone encolha junto com o texto */
-}
-
-  /* Ícone das categorias dentro dos botões */
-  .categoria-icon {
-    width: 24px;                      /* ✅ Aumenta o tamanho dos ícones */
-    height: 24px;
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-
-  /* Efeito de hover (opcional, para dar feedback visual) */
-  .categorias-navbar button:hover {
-    border-color: #f1ea12b8;            /* Azul ao passar o mouse */
-  }
-
-  /* ✅ Estilo do botão ativo (apenas a borda) */
-  .categorias-navbar button.active {
-    border-color: var(--base-color);;            /* Borda azul quando ativo */
-    box-shadow: 0 0 5px rgba(255, 247, 0, 0.5);
-    background-color: white;          /* ✅ Mantém fundo branco */
-    color: var(--base-color);;                      /* Mantém o texto azul */
-  }
-}
-
-
-.cat-btn {
-    flex: 0 0 auto;
-    padding: 8px 16px;
-    border: none;
-    background-color: #e0e0e0;
+    padding: 8px 12px; /* Ajuste para mobile */
+    margin-right: 8px; /* Espaço entre os botões */
+    border: 1px solid #ddd;
     border-radius: 20px;
-    color: var(--title-color);
+    background-color: var(--body-color);
+    color: var(--text-color);
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 0.9rem;
-}
-
-.cat-btn:hover {
-    background-color: var(--base-color);
-    color: white;
-}
-
-@media (max-width: 768px) {
-    nav.container {
-        height: var(--header-initial-height);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    #header.scroll nav.container {
-        height: auto;
-        overflow: visible;
-    }
-}
-
-.icon-menu::before {
-    content: none;
-}
-.toggle.icon-menu::before {
-    content: "☰"; /* Ícone do menu hamburger */
-    font-size: 1.8rem;
-    color: var(--base-color);
-}
-
-.toggle.icon-close::before {
-    content: "✖"; /* Ícone X */
-    font-size: 1.8rem;
-    color: var(--base-color);
-    display: none; /* Por padrão, o X fica invisível */
-}
-
-/* Quando o menu estiver aberto, esconde o hamburger e mostra o X */
-nav.show .toggle.icon-menu::before {
-    display: none;
-}
-
-nav.show .toggle.icon-close::before {
-    display: block;
-}
-
-
-
-
-
-
-/*======================================== Mobile Nav-top (logo esquerda, ícone direita) ========================================*/
-@media (max-width: 768px) {
-  .nav-top {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: space-between; /* ✅ Logo à esquerda, toggle (hamburguer) à direita */
-    align-items: center;
-    height: 50px;                    /* ✅ Mesma altura que o reduzido */
-    padding: 0 1rem;
-    box-sizing: border-box;
-    position: relative;              /* ✅ Importante para posicionar o toggle depois */
-  }
-   #toggle-dark-mode {
-    margin-right: auto; /* ✅ Joga o botão pra esquerda */
-    margin-left: 0.5rem;
-    font-size: 1.4rem;
-  }
-
-  .logo {
-    font-size: 1rem;
-    text-align: left;
-  }
-
-  .toggle {
-    display: block;
-    position: relative; /* Antes do scroll, segue o fluxo normal */
-    font-size: 1.2rem;
-  }
-
-  /* Após o scroll - Centraliza logo e joga o toggle pra direita com position absolute */
-  #header.scroll .nav-top {
-    justify-content: center;
-    height: auto;
-    position: relative;
-  }
-
-  #header.scroll .nav-top .logo {
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  #header.scroll .toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-  }
-
-  /* Garantindo largura máxima sempre */
-  #header, nav.container, .nav-top, .nav-central {
-    max-width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
-  }
-}
-
-/*======================================== Resultados da pesquisa ========================================*/
-.barra-pesquisa {
-  position: relative;
-}
-
-#resultados-pesquisa {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 300px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-  display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#resultados-pesquisa li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
-
-#resultados-pesquisa li:hover {
-  background-color: var(--base-color-second);
-}
-
-
-
-
-
-
-
-@media (max-width: 768px) {
-    .menu {
-        display: none;
-        opacity: 0;
-        visibility: hidden;
-        height: 0;
-        overflow: hidden;
-    }
-
-    nav.show .menu {
-        display: flex;
-        opacity: 1;
-        visibility: visible;
-        height: calc(100vh - var(--header-initial-height));
-        position: fixed;
-        top: var(--header-initial-height);
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--body-color);
-        z-index: 80;
-    }
-
-    nav.show .menu ul.grid {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        width: auto;             /* ✅ Corrigido */
-        margin: 0 auto;          /* ✅ Corrigido */
-        padding: 0;
-        transform: translateX(0); /* ✅ Evita offset lateral */
-    }
-
-    nav.show .menu ul.grid li {
-        width: auto;
-        text-align: center;
-    }
-
-    nav.show .menu ul.grid li a {
-        display: inline-block;
-        text-align: center;
-    }
-
-    /* ✅ Corrigindo o problema de margens laterais herdadas da .container */
-    nav.container,
-    nav.show.container,
-    nav.show .menu,
-    nav.show .menu ul.grid,
-    nav.show .menu ul.grid li,
-    nav.show .menu ul.grid li a {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-}
-
-
-nav ul li a.active,
-nav ul li a:hover {
-    color: var(--base-color);
-    border-bottom: 2px solid var(--base-color);
-    padding-bottom: 4px;
     transition: all 0.3s ease;
+    font-size: var(--small-font-size);
 }
 
-
-@media (max-width: 768px) {
-  #header:not(.scroll) .nav-top {
-    justify-content: center;
-    height: auto;
-    position: relative;
-  }
-
-  #header:not(.scroll) .nav-top .logo {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  #header:not(.scroll) .toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-  }
+.categorias-navbar button:hover,
+.categorias-navbar button.active {
+    background-color: var(--base-color);
+    color: var(--text-color-light);
+    border-color: var(--base-color);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*======================================== Home ========================================*/
+/*======================================== Home Section ========================================*/
 #home {
-    overflow: hidden;
+    position: relative;
+    background: url('imgs/home.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    z-index: 1;
+}
+
+#home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: -1;
 }
 
 #home .container {
-    margin: 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem; /* Garante padding em telas pequenas */
 }
 
-#home .image {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    margin: auto;
-    animation: slideInLeft 1s ease-out forwards;
+#home h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-out forwards;
 }
 
-#home .image::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    background: var(--base-color-second);
-    position: absolute;
-    top: -16.8%;
-    left: 16.7%;
-    z-index: 0;
-    border-radius: 0.25px;
-    animation: slideInRight 1s ease-out forwards;
+#home p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out forwards;
+    animation-delay: 0.3s;
 }
 
-#home .image img {
-    position: relative;
-    right: 2.93rem;
-    border-radius: 0.25px;
-    z-index: 1; /* Garante que a imagem fique acima do pseudo-elemento */
+#home .button {
+    animation: zoomIn 1s ease-out forwards;
+    animation-delay: 0.6s;
 }
 
-#home .text {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+/* Keyframes para animações */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/*======================================== About Section ========================================*/
+#about {
+    background-color: var(--body-color);
+    padding: 4rem 0;
     text-align: center;
 }
 
-#home .text h1 {
-    margin-bottom: 1rem;
-}
-
-#home .text p {
-    margin-bottom: 2rem;
-}
-
-#home .text p span {
-    font-style: italic;
-}
-
-/* Animações imagem inicial */
-@keyframes slideInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/*======================================== Categorias (About) ========================================*/
-#about {
-    background-color: var(--body-color);
-}
-
 #about .container {
-    margin: 0; /* Ajuste para centralizar no desktop */
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
 }
 
-/*======================================== Contato ========================================*/
-#contact .grid {
-    gap: 4rem;
-}
-
-#contact .text p {
-    margin-bottom: 2rem;
-}
-
-#contact .button i, 
-#contact ul li i {
-    font-size: 1.5rem;
-    margin-right: 0.625rem;
-}
-
-#contact ul.grid {
+#about .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 2rem;
 }
 
-#contact ul li {
-    display: flex;
-    align-items: center;
+#about .image-wrapper {
+    flex: 1;
+    max-width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-#contact ul li i {
+#about .text-content {
+    flex: 2;
+    text-align: left;
+}
+
+#about h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: var(--title-color);
+}
+
+#about p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: var(--text-color);
+}
+
+/*======================================== Produtos Section ========================================*/
+#produtos-em-destaque {
+    padding: 4rem 0;
+    background-color: var(--body-color);
+    text-align: center;
+}
+
+#produtos-em-destaque .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+}
+
+#produtos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.produto {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding-bottom: 1rem; /* Espaço para o botão */
+}
+
+.produto:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.produto img {
+    width: 100%;
+    height: 200px; /* Altura fixa para as imagens dos produtos no grid */
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.produto h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--title-color);
+}
+
+.produto .preco {
+    font-size: 1.1rem;
+    color: var(--base-color);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Botão adicionar ao carrinho */
+.produto button.adicionar {
+    margin-top: 8px;
+    width: 100%;
+    max-width: 120px; /* Desktop padrão */
+    height: 32px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    border: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-size: 1rem; /* Desktop padrão */
+    cursor: pointer;
+}
+
+.produto button.adicionar:hover {
+    background-color: #0056b3; /* Cor mais escura no hover */
+}
+
+/* Produto Carousel */
+.produto.carrossel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    overflow: visible; /* Permite que setas e outros elementos saiam dos limites */
+    position: relative; /* Para posicionamento absoluto das setas */
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.imagem-grande-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden; /* Esconde partes da imagem que excedem, mas mantém setas visíveis se bem posicionadas */
+    margin-bottom: 1rem;
+}
+
+.imagem-grande-wrapper img {
+    width: 100%;
+    height: 300px;
+    object-fit: contain; /* Ajusta a imagem dentro do wrapper */
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    z-index: 10;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-btn:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-prev {
+    left: 10px; /* Ajuste para ficar dentro da imagem-grande-wrapper */
+}
+
+.carousel-next {
+    right: 10px; /* Ajuste para ficar dentro da imagem-grande-wrapper */
+}
+
+.carousel-thumbs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1rem;
+    overflow-x: auto; /* Permite scroll das miniaturas */
+    padding-bottom: 5px; /* Espaço para scrollbar */
+}
+
+.carousel-thumbs img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.carousel-thumbs img.active {
+    border-color: var(--base-color);
+}
+
+/*======================================== Footer ========================================*/
+footer {
+    background-color: var(--title-color);
+    color: var(--text-color-light);
+    padding: 2rem 0;
+    text-align: center;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 1rem;
+}
+
+footer .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+footer .footer-section {
+    flex: 1;
+    min-width: 200px;
+    text-align: left;
+}
+
+footer .footer-section h3 {
+    color: var(--text-color-light);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+footer .footer-section p,
+footer .footer-section ul li a {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-color-light);
+}
+
+footer .footer-section ul {
+    padding: 0;
+}
+
+footer .footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+footer .footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+footer .social-links a {
+    color: var(--text-color-light);
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+}
+
+footer .social-links a:hover {
     color: var(--base-color);
 }
 
-/*======================================== Rodapé ========================================*/
-#imgg {
-    width: 30px;
-    height: 30px;
+footer .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    font-size: 0.8rem;
 }
 
-#bt { /* Botão genérico, talvez seja melhor renomear para algo mais específico se for só para o footer */
-    background-color: #007bff;
+/* Placeholder for footer logo image */
+.footer-logo-img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 1rem;
+}
+
+/* Placeholder for generic button in footer */
+.footer-action-button {
+    background-color: var(--base-color);
     color: white;
+    padding: 10px 15px;
     border: none;
-    width: 110px; 
-    height: 30px; 
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-footer {
-    background: var(--base-color);
+.footer-action-button:hover {
+    background-color: var(--base-color-alt);
 }
 
-footer.section {
-    padding: 4rem 0; 
-}    
-
-footer .logo {
-    display: inline-block;
-    margin-bottom: 1.5rem;
+/*======================================== Dark Mode ========================================*/
+body.dark-mode .nav-top .logo,
+body.dark-mode .toggle {
+    color: var(--title-color); /* Garante que o logo e o toggle fiquem claros */
 }
 
-footer .brand p {
+body.dark-mode .barra-pesquisa.navbar {
+    background-color: var(--input-background-color);
+    border-color: #555;
+}
+
+body.dark-mode .barra-pesquisa.navbar input[type="text"] {
+    color: var(--title-color);
+}
+
+body.dark-mode .barra-pesquisa.navbar button[type="submit"] {
+    color: var(--text-color);
+}
+
+body.dark-mode .categorias-navbar button {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border: 1px solid #444;
+}
+
+body.dark-mode .categorias-navbar button:hover,
+body.dark-mode .categorias-navbar button.active {
+    background-color: #333;
+    border-color: #ffc107;
     color: var(--text-color-light);
-    margin-bottom: 0.75rem;
 }
 
-footer i {
-    font-size: 1.5rem;
-    color: var(--text-color-light);
+body.dark-mode .produto {
+    background-color: #2a2a2a;
+    border-color: #444;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
-footer .social {
-    grid-auto-flow: column;
-    width: fit-content;
+body.dark-mode .produto h3,
+body.dark-mode .produto .preco {
+    color: var(--title-color);
 }
 
-footer .social a {
-    transition: 0.3s;
-    display: inline-block;
+body.dark-mode .produto button.adicionar {
+    background-color: var(--button-primary-bg); /* Usa a variável dark mode */
+    color: var(--button-primary-text);
 }
 
-footer .social a:hover {
-    transform: translateY(-8px);
+body.dark-mode .produto button.adicionar:hover {
+    background-color: #666; /* Ajuste para hover no dark mode */
 }
 
-/*======================================== Botão de voltar ao início ========================================*/
-.back-to-top {
-    background: var(--base-color);
-    color: var(--text-color-light);
-    font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    border-radius: 50%;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s;
-    transform: translateY(100%);
-    z-index: 999;
+body.dark-mode .btt,
+body.dark-mode .btt2,
+body.dark-mode .footer-action-button,
+body.dark-mode .button { /* Aplica ao botão geral também */
+  box-shadow: none;
+  color: #fff; /* Altera a cor do texto para claro para dar contraste */
+  background-color: var(--button-primary-bg);
 }
 
-.back-to-top.show {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
+body.dark-mode .btt:hover,
+body.dark-mode .btt2:hover,
+body.dark-mode .footer-action-button:hover,
+body.dark-mode .button:hover {
+  background-color: #d0d0d0; /* Opcional: Fundo um pouco mais escuro no hover */
+  color: #222;
 }
 
-/*======================================== Responsividade ========================================*/
+/*
+    Aviso: O código original tinha `!important` para `box-shadow: none;` e `color: #222;`
+    no dark mode. Isso foi removido para melhor manutenção. Certifique-se de que a ordem
+    das regras ou a especificidade dos seletores garante que os estilos do dark mode
+    prevalecem sobre os estilos padrão.
+*/
 
-/* Dispositivos Largos: 992px > */
-@media (min-width: 992px) {
-    :root {
-        --title-font-size-base: 2.25rem; /* Ajuste para títulos maiores */
-        --subtitle-font-size: 1.125rem;
-    }
-
-    #home .container {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        align-items: center;
-    }
-
-    #home .image {
-        order: 1;
-        max-width: 300px;
-        margin: auto;
-    }
-
-    #home .text {
-        order: 0;
-        max-width: 600px; /* Ajuste para o texto não ficar muito largo */
-    }
+body.dark-mode .toggle.icon-menu::before,
+body.dark-mode .toggle.icon-close::before {
+  color: #fff;
 }
 
-/* Dispositivos Extra Largos: 1200px > */
-@media (min-width: 1200px) {
-    /* reusable classes */
+
+/*======================================== Responsive ========================================*/
+
+/* Desktop Styles */
+@media (min-width: 769px) {
     .container {
         max-width: 1120px;
         margin-left: auto;
@@ -928,1140 +825,198 @@ footer .social a:hover {
     }
 
     .section {
-        padding: 10rem 0;
-    }
-    
-    .section header, 
-    #testimonials header { /* Adicionei #testimonials header que estava separado */
-        max-width: 32rem;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
+        padding: 6rem 0 2rem;
     }
 
-    .button {
-        height: 3.125rem;
+    /* Header Desktop */
+    #header {
+        height: var(--header-height); /* Altura fixa para desktop */
+        padding: 0.8rem 0;
     }
 
-    /* Nav */
-    nav .menu {
-        opacity: 1;
-        visibility: visible;
-        top: 0;
-        position: static; /* Volta para o fluxo normal */
-        height: auto;
-        width: auto;
-        background: transparent;
-    }
-
-    nav .menu ul {
-        display: flex;
-        gap: 2rem;
-    }
-
-    nav .menu ul li a.title {
-        font: 400 1rem var(--body-font);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    nav .menu ul li a.title.active {
-        font-weight: bold;
-        -webkit-font-smoothing: auto;
-    }
-
-    nav .icon-menu,
-    nav .icon-close { /* Esconde os ícones de toggle no desktop */
-        display: none;
-    }
-
-    /* Layout */
-    main {
-        margin-top: var(--header-height);
-    }
-    
-    /* Home */
-    #home .container {
-        grid-auto-flow: column;
-        width: fit-content;
-        justify-content: space-between;
-        margin: 0 auto;
-    }
-
-    #home .image {
-        order: 1;
-    }
-
-    #home .text {
-        order: 0;
-        max-width: 24rem;
-        text-align: left;
-    }
-
-    /* About */
-    #about .container {
-        margin: 0 auto;
-        grid-auto-flow: column;
-    }
-    
-    /* Services */
-    .cards {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .card {
-        padding-left: 3rem;
-        padding-right: 3rem;
-    }
-
-    /* Testimonials*/
-    #testimonials .container {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Contact */
-    #contact .container {
-        grid-auto-flow: column;
-        align-items: center;
-    }
-
-    #contact .text {
-        max-width: 25rem;
-    }
-
-    /* Footer */
-    footer.section {
-        padding: 3.75rem 0;
-    }
-
-    footer .container {
-        grid-auto-flow: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    footer .logo {
-        font-size: 2.25rem;
-    }
-}
-
-/*======================================== Componentes de Produtos e Carrinho ========================================*/
-
-/* Filtro de Categoria */
-#btcategoria {
-    margin-top: 5px;
-    width: 100px;
-    height: 50px;
-}
-
-.filtro-btn {
-    background-color: #e0e0e0;
-    color: #333;
-    border: none;
-    width: 80px; 
-    height: 40px; 
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.filtro-btn:hover {
-    background-color: #d5d5d5;
-}
-
-.filtro-btn.active {
-    background-color: var(--base-color);
-    color: white;
-}
-
-/* Layout Geral */
-.container.shop { /* Adicionei uma classe para diferenciar do container global */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    /* Adicionado para garantir que o container do shop NÃO corte as setas */
-    overflow: visible; 
-}
-
-.produtos, 
-.carrinho {
-    flex: 1;
-    min-width: 320px;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
-    /* Certifique-se de que estes NÃO tenham overflow: hidden; se forem pais */
-    overflow: visible; 
-}
-
-/* Layout dos produtos em 2 colunas */
-.produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Mais flexível */
-    gap: 20px;
-}
-
-/* Estilo de cada item de produto */
-.produto {
-    display: flex;
-    flex-direction: column;
-    background: white;
-    border-radius: 10px;
-    align-items: center;
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    /* O produto individual NÃO deve ter overflow: hidden; */
-    overflow: visible; 
-}
-
-.produto:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-}
-
-.produto img {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    margin-bottom: -50px; /* Ajuste para o texto sobrepor um pouco */
-    object-fit: cover;
-}
-
-.produto-info {
-    width: 100%;
-    text-align: center;
-    padding-top: 50px; /* Espaço para a imagem sobreposta */
-}
-
-.produto-info h3 {
-    margin: 4px 0;
-    font-size: 1rem;
-}
-
-.produto-info p {
-    margin: 4px 0;
-    color: #555;
-}
-
-.quantidade-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 6px 0;
-    gap: 5px; /* Espaço entre os botões e input */
-}
-
-.quantidade-box button {
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--base-color-second);
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.quantidade-box button:hover {
-    background-color: var(--base-color);
-    color: white;
-}
-
-.quantidade-box input {
-    width: 40px;
-    height: 28px;
-    text-align: center;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.produto button.adicionar { /* Mantido para ser específico para o botão de adicionar */
-    margin-top: 8px;
-    width: 100%;
-    max-width: 120px;
-    height: 32px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
-}
-
-.produto button.adicionar:hover {
-    background-color: #0056b3;
-}
-
-
-/* Itens do Carrinho */
-.carrinho h2 {
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-.carrinho-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
-}
-
-.carrinho-item:last-child {
-    border-bottom: none; /* Remove a borda do último item */
-}
-
-.carrinho-nome {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.carrinho-miniatura {
-    width: 24px;
-    height: 24px;
-    object-fit: cover;
-    border-radius: 4px;
-}
-
-.carrinho-quantidade {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.carrinho-subtotal {
-    flex: 1;
-    text-align: right; /* Alinha o subtotal à direita */
-    font-weight: bold;
-}
-
-.carrinho-acoes {
-    display: flex;
-    gap: 5px;
-}
-
-.carrinho-acoes button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #ff5252;
-    padding: 5px; /* Adicionado padding para facilitar o clique */
-}
-
-.carrinho-acoes button:hover {
-    color: #e04848;
-}
-
-/* Botões com estilo Neumorphism */
-.btt,
-.btt2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #e6e6e6, #ffffff);
-    box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    font-weight: bold; /* Para os ícones de + e - */
-    color: #555;
-}
-
-.btt {
-    width: 20px;
-    height: 20px;
-    font-size: 14px;
-}
-
-.btt2 { /* Usado para o botão de "remover" no carrinho */
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-}
-
-.btt:active,
-.btt2:active {
-    box-shadow: inset 2px 2px 5px #b0b0b0, inset -2px -2px 5px #f0f0f0;
-}
-
-
-
-/* Total do Carrinho */
-.total {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: right; /* Alinha o total à direita */
-    padding-top: 10px;
-    border-top: 1px solid #eee;
-}
-
-#whatsapp {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #25D366;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-#whatsapp:hover {
-    background-color: #1DA851;
-}
-
-/* Alerta */
-.alerta {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-20px);
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 9999;
-    pointer-events: none;
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    80% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-}
-
-.alerta.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-.alerta.hide {
-    animation: fadeOut 2s forwards;
-}
-
-/*======================================== Carrossel ========================================*/
-
-
-
-
-
-
-
-#nextBtn {
-    right: 10px;
-}
-
-/* Carrossel de Imagens do Produto (para detalhes) */
-.produto.carrossel {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 40px;
-    flex-wrap: wrap;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    position: relative; 
-    min-height: 220px; 
-    margin-bottom: 40px; 
-    /* SUPER IMPORTANTE: Este deve estar visível para as setas saírem SE ELAS FOSSEM IRMÃS */
-    /* Mas no seu HTML, as setas estão dentro do .imagem-grande-wrapper */
-    overflow: visible; 
-}
-
-/* Coluna Esquerda: imagem e thumbs */
-.produto.carrossel .produto-img-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 160px; /* Aumentado um pouco */
-    position: relative; /* Para posicionar botões de navegação */
-    z-index: 5; /* Garante que os botões do carrossel fiquem visíveis */
-    /* Mantido Hidden no desktop, para sobreposição interna das setas */
-    overflow: hidden; 
-}
-
-/* Wrapper da imagem grande (no carrossel de produto) */
-.imagem-grande-wrapper {
-    position: relative; /* Essencial para o posicionamento das setas */
-    width: 160px; /* Deve ser igual ao width do pai para alinhar */
-    height: 160px; /* Mantém proporção 1:1 */
-    /* IMPORTANTE: Mantenha HIDDEN aqui, pois as setas estão DENTRO dele no HTML */
-    overflow: hidden; 
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.imagem-grande-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    margin-bottom: 0; /* Remove margin-bottom que estava causando problemas */
-}
-
-/* Botões de navegação do carrossel de produto */
-.carousel-btn {
-    color: rgb(255, 255, 255); 
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgb(255, 255, 255); /* Fundo mais escuro para garantir visibilidade */
-    border: none;
-    font-size: 2.3rem; /* Tamanho da seta */
-    font-weight: bold; /* Garante que o '❮' e '❯' sejam visíveis */
-    cursor: pointer;
-    z-index: 999; /* Z-index MUITO ALTO para garantir visibilidade máxima */
-    opacity: 1; /* Garante que estejam visíveis */
-    transition: opacity 0.3s, background 0.3s;
-    border-radius: 50%; /* Botões redondos */
-    width: 40px; /* Tamanho fixo */
-    height: 40px; /* Tamanho fixo */
-    display: flex; /* Para centralizar o texto/símbolo */
-    justify-content: center;
-    align-items: center;
-}
-
-/* Posicionamento para desktop - Setas DENTRO do imagem-grande-wrapper */
-.carousel-btn.carousel-prev {
-    left: 5px; /* Posição dentro do wrapper */
-}
-
-.carousel-btn.carousel-next {
-    right: 5px; /* Posição dentro do wrapper */
-}
-
-/* Miniaturas */
-.carousel-thumbs {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-    max-width: 100%; /* Ajustado para se adaptar ao container pai */
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 4px 2px;
-    background-color: transparent; /* Não precisa de fundo se estiver dentro de um wrapper */
-    z-index: 10;
-    min-height: 55px; /* Garante espaço */
-    justify-content: center; /* Centraliza miniaturas */
-}
-
-.carousel-thumbs::-webkit-scrollbar {
-    height: 6px;
-}
-
-.carousel-thumbs::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-}
-
-.carousel-thumbs img {
-    flex: 0 0 auto;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: border-color 0.3s, transform 0.2s;
-}
-
-.carousel-thumbs img.active { /* Mantido active para desktop */
-    border-color: var(--base-color);
-    transform: scale(1.05);
-}
-
-.carousel-thumbs img:hover {
-    border-color: var(--base-color-alt);
-}
-
-/* Coluna Direita (informações do produto no carrossel) */
-.produto.carrossel .produto-info {
-    flex: 1;
-    margin-top: 0; /* Removido o margin-top excessivo */
-    text-align: left; /* Garante que o texto fique alinhado à esquerda */
-}
-
-/*======================================== Barra de Pesquisa e Menu Mobile ========================================*/
-
-/* Nav Container */
-nav.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 10px 16px;
-    height: var(--header-height); /* Usa a variável para altura */
-}
-
-/* Agrupamento logo + pesquisa */
-.navbar-esquerda {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0;
-}
-
-/* Barra de pesquisa */
-.barra-pesquisa {
-    position: relative;
-    flex: 1;
-    max-width: 250px;
-    margin-top: -2px; 
-}
-
-.barra-pesquisa input {
-    width: 100%;
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-
-.barra-pesquisa {
-  position: relative;
-}
-
-#resultados-pesquisa {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 300px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-  display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#resultados-pesquisa li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
-
-#resultados-pesquisa li:hover {
-  background-color: var(--base-color-second);
-}
-nav {
-    transition: all 0.3s ease;
-}
-
-/* Efeito destaque no produto encontrado */
-.produto.highlight {
-    border: 2px solid var(--base-color);
-    box-shadow: 0 0 10px var(--base-color);
-    transition: all 0.3s ease;
-}
-
-.produto.encontrado {
-    animation: destaqueProduto 1s ease;
-    box-shadow: 0 0 0 3px var(--base-color);
-    border-radius: 8px;
-    transition: box-shadow 0.3s ease;
-}
-
-@keyframes destaqueProduto {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.6);
-    }
-    50% {
-        transform: scale(1.02);
-        box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.6);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.4);
-    }
-}
-
-/* Mensagem de Erro */
-.erro-pedido {
-    color: red;
-    font-weight: bold;
-    margin-top: 8px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.erro-pedido.show {
-    opacity: 1;
-}
-
-@keyframes tremer {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-.erro-pedido.tremer {
-    animation: tremer 0.4s;
-}
-
-
-/*======================================== Media Queries (Responsividade) ========================================*/
-
-/* Mobile Específico (max-width: 768px) */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Produtos e Carrinho em coluna */
-        /* Garante que o container geral não corte nada */
-        overflow: visible;
+    #header.scroll {
+        height: var(--header-height); /* Mantém altura no scroll para desktop */
+        padding-top: var(--header-scrolled-padding-top-desktop);
+        padding-bottom: var(--header-scrolled-padding-bottom-desktop);
     }
 
     nav.container {
-        flex-wrap: wrap;
-        align-items: flex-start; /* Alinha no topo */
-    }
-
-    .navbar-esquerda {
-        width: 100%;
+        flex-direction: row;
         justify-content: space-between;
-        margin-bottom: 8px;
+        align-items: center;
+        height: 100%; /* Ocupa a altura do header */
+        padding: 0; /* Removido padding para alinhamento */
     }
 
-    .barra-pesquisa {
-        flex-grow: 1;
-        max-width: calc(100% - 70px); /* Ajusta para deixar espaço para o toggle */
+    .nav-top {
+        width: auto;
+        justify-content: flex-start; /* Logo à esquerda */
+        height: auto;
+        padding: 0;
     }
 
     .toggle {
-        position: static; /* Volta para o fluxo normal */
-        margin-left: 10px; /* Espaçamento à direita da barra de pesquisa */
+        display: none; /* Esconde o toggle (hamburguer) no desktop */
     }
 
-    nav.show .icon-close {
-        display: block;
-    }
-    
-
-    /* Produtos no Mobile: 2 colunas */
-    .produtos {
-        grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
-        gap: 15px; /* Espaçamento entre os produtos */
-        align-items: start; /* Adicionado para alinhar os itens no topo e evitar esticamento */
-        /* Garante que a grade de produtos não corte */
-        overflow: visible;
-    }
-
-    .produto {
-        display: flex; /* Garante flexbox para alinhamento interno */
-        flex-direction: column; /* Imagem e info empilhadas verticalmente */
-        background: white;
-        border-radius: 10px;
+    /* Nav central (Pesquisa e Categorias) Desktop */
+    .nav-central {
+        display: flex !important; /* Sempre visível no desktop */
+        flex-direction: row;
+        justify-content: space-between;
         align-items: center;
-        padding: 10px;
-        box-shadow: 0 0 5px rgba(0,0,0,0.1);
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
-        margin-bottom: 0; 
-        width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
-        height: fit-content; /* CHAVE: A altura do card se ajusta ao conteúdo */
-        /* O produto individual NÃO deve ter overflow: hidden; */
-        overflow: visible; 
+        width: auto;
+        flex-grow: 1; /* Permite que ocupe espaço */
+        max-height: none; /* Remove limitação de altura */
+        opacity: 1; /* Sempre opaco */
+        padding: 0 1rem; /* Espaçamento */
     }
 
-    .produto:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    .barra-pesquisa.navbar {
+        width: 300px; /* Largura definida para a barra de pesquisa */
+        margin-bottom: 0;
+        margin-right: 1rem; /* Espaço entre a barra e as categorias */
     }
 
-    /* As imagens de produtos padrão devem ser menores no layout de card */
-    .produto:not(.carrossel) img { /* Seleciona apenas imagens de produtos NÃO carrossel */
-        width: 100px; /* Tamanho fixo para imagem no layout de card */
-        height: 100px;
-        border-radius: 8px;
-        margin-bottom: -50px; /* Mantém a imagem "entrando" no texto, se desejado */
-        object-fit: cover;
+    .categorias-navbar {
+        width: auto; /* Ajusta largura ao conteúdo */
+        overflow-x: visible; /* Não precisa de scroll horizontal no desktop */
+        white-space: nowrap;
+        padding-bottom: 0;
     }
 
-    .produto-info {
-        width: 100%; /* Garante que o info block ocupe a largura total */
-        padding-top: 50px; /* Compensação para a imagem */
-        text-align: center; /* Centraliza o texto dentro de cada card */
+    .categorias-navbar button {
+        padding: 10px 15px; /* Ajusta padding para desktop */
+        font-size: var(--normal-font-size);
     }
 
-    .produto-info h3 {
-        margin: 4px 0;
-        font-size: 0.95rem; /* Ajuste para caber melhor */
+    /* Home Section Desktop */
+    #home h1 {
+        font-size: 3.5rem;
     }
 
-    .produto-info p {
-        margin: 2px 0;
-        color: #555;
-        font-size: 0.85rem; /* Ajuste para caber melhor */
+    #home p {
+        font-size: 1.4rem;
     }
 
-    .quantidade-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 6px 0;
-        gap: 5px; /* Espaço entre os botões e input */
+    /* About Section Desktop */
+    #about .content {
+        flex-direction: row;
+        text-align: left;
     }
 
-    .quantidade-box button {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--base-color-second);
-        cursor: pointer;
-        transition: background-color 0.2s;
+    #about .image-wrapper {
+        order: 2; /* Imagem à direita no desktop */
     }
 
-    .quantidade-box button:hover {
-        background-color: var(--base-color);
-        color: rgb(0, 0, 0);
+    #about .text-content {
+        order: 1; /* Texto à esquerda no desktop */
     }
 
-    .quantidade-box input {
-        width: 40px;
-        height: 28px;
-        text-align: center;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
+    #about h2 {
+        font-size: 2.5rem;
+    }
+
+    /* Produtos Section Desktop */
+    #produtos-em-destaque .title {
+        font-size: var(--title-font-size-base); /* Usa a variável base para desktop */
     }
 
     .produto button.adicionar {
-        margin-top: 8px;
-        width: 100%;
-        max-width: 100px; /* Ajuste o max-width para o botão */
-        height: 28px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        transition: background-color 0.3s ease;
-        font-size: 0.8rem;
+        max-width: 150px; /* Ajuste para desktop */
     }
 
-    .produto button.adicionar:hover {
-        background-color: #0056b3;
-    }
-
-    /* --- Carrossel de produto no mobile (DENTRO DO PRODUTO) --- */
+    /* Carrossel de Produtos Desktop */
     .produto.carrossel {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0;
-        padding: 10px; 
-        margin-bottom: 0;
-        min-height: auto; 
-        /* Mantido VISIBLE, mas o corte principal vem do .imagem-grande-wrapper no seu HTML */
-        overflow: visible; 
-        max-width: 100%; 
-        width: 100%; 
-        height: fit-content;
-    }
-
-    .produto.carrossel .produto-img-wrapper {
-        width: 100%; 
-        max-width: 100px; /* Mantém a imagem grande (e seu wrapper) com 100px de largura */
-        margin-bottom: 0; 
-        position: relative; 
-        flex-shrink: 0; 
-        /* MUITO IMPORTANTE: Este deve ser VISIBLE, pois é o pai dos botões */
-        overflow: visible; 
+        flex-direction: row; /* Layout horizontal */
+        max-width: 800px;
+        justify-content: center;
+        align-items: flex-start;
     }
 
     .imagem-grande-wrapper {
-        position: relative; /* **ESSENCIAL** para as setas se posicionarem */
-        width: 100px; /* Continua sendo o tamanho da imagem */
-        height: 100px; 
-        /* IMPORTANTE: Mantido HIDDEN aqui porque as setas estão DENTRO dele no HTML.
-           Isso fará com que as setas fiquem sobre a imagem, e não fora. */
-        overflow: hidden; 
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        margin: 0 auto; 
+        flex: 2; /* Ocupa mais espaço */
+        height: auto;
+        margin-bottom: 0;
+        margin-right: 1rem;
     }
 
     .imagem-grande-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; 
-        margin-bottom: 0; 
+        height: 400px; /* Altura maior para desktop */
     }
 
-    /* Setas de navegação do carrossel de produto (Mobile) */
-    .carousel-btn {
-        position: absolute;
-        top: 33%;
-        transform: translateY(-50%);
-        background: var(--base-color); /* Fundo mais escuro para mobile */
-        border: none;
-        color: white;
-        font-size: 1.2rem; /* Tamanho da seta no mobile */
-        padding: 0;
-        border-radius: 50%;
-        cursor: pointer;
-        opacity: 1; /* Garante visibilidade */
-        transition: background-color 0.3s, opacity 0.3s;
-        z-index: 999; /* Z-index MUITO ALTO para garantir visibilidade máxima */
-        width: 30px; 
-        height: 30px; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* POSICIONAMENTO DAS SETAS NO MOBILE (DENTRO DO .imagem-grande-wrapper) */
-    /* Como os botões estão DENTRO do .imagem-grande-wrapper no HTML, eles devem estar posicionados DENTRO dele */
-    .carousel-btn.carousel-prev {
-        left: -30px; /* Deixa 5px da borda esquerda da IMAGEM */
-    }
-    
-    .carousel-btn.carousel-next {
-        right: -30px; /* Deixa 5px da borda direita da IMAGEM */
-    }
-
-    /* Miniaturas (Mobile) */
     .carousel-thumbs {
-        display: flex;
-        flex-direction: row; 
-        flex-wrap: nowrap; 
-        max-width: 100%; 
-        overflow-x: auto; /* Permite o scroll horizontal */
-        overflow-y: hidden;
-        padding: 4px;
-        gap: 4px; 
-        -webkit-overflow-scrolling: touch; 
-        min-height: 40px; 
-        justify-content: center; 
-        margin-top: 8px; 
-        scroll-behavior: smooth; /* Para um scroll suave via JavaScript */
-    }
-
-    /* Esconder a barra de rolagem para alguns navegadores */
-    .carousel-thumbs::-webkit-scrollbar {
-        height: 0px; 
-        background: transparent; 
-    }
-
-    .carousel-thumbs::-webkit-scrollbar-thumb {
-        background: transparent; 
+        flex-direction: column; /* Miniaturas na vertical */
+        flex: 1;
+        gap: 8px;
+        margin-top: 0;
+        overflow-x: visible;
+        overflow-y: auto; /* Permite scroll vertical se muitas miniaturas */
+        max-height: 400px; /* Limita a altura das miniaturas */
     }
 
     .carousel-thumbs img {
-        /* Miniaturas acompanham o tamanho da imagem grande (33% de 100px) */
-        width: 33px; 
-        height: 33px; 
-        object-fit: cover;
-        opacity: 0.7;
-        cursor: pointer;
-        border-radius: 5px;
-        border: 2px solid transparent;
-        transition: opacity 0.3s, border-color 0.3s;
-        flex-shrink: 0; /* Impede que as imagens se "espremam" */
+        width: 100px;
+        height: 100px;
     }
 
-    .carousel-thumbs img:hover {
+    .carousel-prev {
+        left: 0; /* Reposiciona para fora do carrossel, alinhado ao wrapper */
+        transform: translate(-100%, -50%); /* Move para fora do contêiner principal */
+    }
+
+    .carousel-next {
+        right: 0; /* Reposiciona para fora do carrossel, alinhado ao wrapper */
+        transform: translate(100%, -50%); /* Move para fora do contêiner principal */
+    }
+}
+
+/* Mobile Styles (Apenas para ajustes que sobrescrevem o desktop, se necessário) */
+@media (max-width: 768px) {
+    .section .title {
+        font-size: var(--section-title-mobile-size);
+    }
+
+    /* Header Mobile - Quando o menu está aberto */
+    nav.show .menu {
+        display: flex;
         opacity: 1;
+        visibility: visible;
+        height: calc(100vh - var(--header-initial-height-mobile)); /* Usa a altura do header fixo */
+        position: fixed;
+        top: var(--header-initial-height-mobile); /* Alinha abaixo do header */
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--body-color);
+        z-index: 80;
+        overflow-y: auto; /* Se o conteúdo do menu for maior que a tela */
+        transition: all 0.3s ease;
     }
 
-    .carousel-thumbs img.ativo { 
-        border-color: var(--base-color);
-        opacity: 1;
+    /* Oculta icon-menu e mostra icon-close quando nav está show */
+    nav.show .toggle.icon-menu::before { display: none; }
+    nav.show .toggle.icon-close::before { display: block; }
+
+    /* Força menu a não ser visível quando não tem nav.show */
+    .menu {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
     }
-    
-    .produto.carrossel .produto-info {
-        text-align: center; 
-        margin-top: 10px; 
-        padding-top: 0; 
-        flex-grow: 0; 
-        flex-shrink: 0; 
+
+    /* Footer Mobile */
+    footer .footer-section {
+        text-align: center;
+        min-width: unset; /* Remove min-width para mobile */
+        width: 100%; /* Ocupa a largura total */
     }
-    
-    .produto.carrossel .produto-info h3 {
-        margin-top: 0; 
+
+    footer .footer-content {
+        flex-direction: column;
+        align-items: center;
     }
-}
-
-
-
-
-
-
-
-#header.hidden-navbar {
-  height: 50px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-#header.hidden-navbar .nav-central {
-  display: none;
-}
-
-#header.hidden-navbar .nav-top {
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;           /* ✅ Faz o nav-top ocupar 100% da largura */
-  padding: 0 15px;        /* ✅ Espaçamento lateral opcional */
-  box-sizing: border-box; /* ✅ Garante que o padding não atrapalhe o layout */
-}
-
-#header.hidden-navbar .logo {
-  font-size: 1rem;
-  text-align: left;
-}
-
-#header.hidden-navbar .toggle.icon-menu,
-#header.hidden-navbar .toggle.icon-close {
-  display: block;
-  margin-left: auto;       /* ✅ Empurra o toggle para a direita */
-  font-size: 1.2rem;
-}
-#header.hidden-navbar nav {
-  max-width: 100%;
-  width: 100%;
-  padding: 0;
-}
-#header.hidden-navbar {
-  max-width: 100%;
-  width: 100%;
-}
-
-
-
-
-
- /* Modo Escuro */
-body.dark-mode {
-  --body-color: #121212;
-  --text-color: #e0e0e0;
-  --title-color: #ffffff;
-  --base-color-second: #333333;
-  --base-color-alt: #ffc107;
-}
-
-body.dark-mode header,
-body.dark-mode nav.container,
-body.dark-mode .nav-top,
-body.dark-mode .nav-central,
-body.dark-mode .menu,
-body.dark-mode footer,
-body.dark-mode .barra-pesquisa.navbar,
-body.dark-mode .categorias-navbar button,
-body.dark-mode .produto,
-body.dark-mode .carrinho-item {
-  background-color: #1e1e1e;
-  color: #fff;
-}
-body.dark-mode .carrinho{
-    background-color: rgb(33, 30, 30);
-}
-body.dark-mode .produtos{
-    background-color: rgb(28, 23, 23);
-}
-body.dark-mode .btt,
-body.dark-mode .btt2,
-body.dark-mode #bt,
-body.dark-mode .btn-primary {
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.7);
-}
-
-
-body.dark-mode .btt,
-body.dark-mode .btt2,
-body.dark-mode #bt,
-body.dark-mode .btn-primary {
-  box-shadow: none !important;
-  color: #222 !important; /* Cor escura para os símbolos + e - */
-  background-color: #e0e0e0; /* Opcional: Fundo mais claro no dark mode para dar contraste */
-}
-
-body.dark-mode .btt:hover,
-body.dark-mode .btt2:hover,
-body.dark-mode #bt:hover,
-body.dark-mode .btn-primary:hover {
-  background-color: #d0d0d0; /* Opcional: Fundo um pouco mais escuro no hover */
-}
-
-body.dark-mode .toggle.icon-menu::before,
-body.dark-mode .toggle.icon-close::before {
-  color: #fff;
-}
-body.dark-mode .produto,
-body.dark-mode .categorias-navbar button {
-  border: 1px solid #444; /* Borda cinza discreta */
-  border-radius: 8px;      /* Cantos levemente arredondados */
-  padding: 10px;           /* Espaço interno */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra suave */
-}
-
-body.dark-mode .categorias-navbar button {
-  background-color: #1e1e1e;  /* Fundo escuro para as categorias no dark-mode */
-  color: #e0e0e0;             /* Texto claro para contraste */
-}
-
-body.dark-mode .categorias-navbar button:hover,
-body.dark-mode .categorias-navbar button.active {
-  border-color: #ffc107;       /* Cor de destaque no hover ou ativo */
-  background-color: #333;       /* Fundo levemente mais claro no hover */
-}
-
-
-
-body.dark-mode nav ul li a {
-  color: #e0e0e0;
-}
-
-body.dark-mode nav ul li a.active,
-body.dark-mode nav ul li a:hover {
-  border-color: #ffc107;
-}
-
-body.dark-mode .barra-pesquisa.navbar input {
-  background-color: #333;
-  color: #fff;
-  border-color: #555;
-}
-
-#toggle-dark-mode {
-  cursor: pointer;
-  color: var(--title-color);
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-#toggle-dark-mode:hover {
-  color: var(--base-color);
 }
