@@ -1,8 +1,3 @@
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}
-window.scrollTo(0, 0);
-
 
 /*========== Configurações do menu ==========*/
 const nav = document.querySelector('#header nav')
@@ -124,10 +119,8 @@ function filtrarCategoria(categoriaSelecionada) {
 
 window.onload = () => {
     atualizarCarrinho();
-    filtrarCategoriaSemScroll('alimentos');  // Categoria inicial SEM scroll
+    filtrarCategoria('alimentos');  // Categoria inicial + botão ativo
 };
-
-
 
 
 
