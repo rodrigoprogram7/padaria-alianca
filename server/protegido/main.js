@@ -541,6 +541,50 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleDarkMode = document.getElementById('toggle-dark-mode');
+
+    toggleDarkMode.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+
+        if (document.body.classList.contains('dark-mode')) {
+            toggleDarkMode.textContent = '☀️ Modo Claro';
+        } else {
+            toggleDarkMode.textContent = '🌙 Modo Escuro';
+        }
+    });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleDarkMode = document.getElementById('toggle-dark-mode');
+
+    // ✅ Carregar o estado salvo no localStorage
+    if (localStorage.getItem('modoEscuro') === 'ativado') {
+        document.body.classList.add('dark-mode');
+        toggleDarkMode.textContent = '☀️';
+    }
+
+    toggleDarkMode.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (document.body.classList.contains('dark-mode')) {
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('modoEscuro', 'desativado');
+            toggleDarkMode.textContent = '🌙';
+        } else {
+            document.body.classList.add('dark-mode');
+            localStorage.setItem('modoEscuro', 'ativado');
+            toggleDarkMode.textContent = '☀️';
+        }
+    });
+});
+
+
+
+
+
+
+
+
 
 
 
