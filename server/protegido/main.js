@@ -524,7 +524,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carrega o estado salvo
     if (localStorage.getItem('modoEscuro') === 'ativado') {
         document.body.classList.add('dark-mode');
-        toggleDarkMode.innerHTML = `☀️ <span class="dark-mode-label">Modo Claro</span>`;
+        toggleDarkMode.innerHTML = `☼ <span class="dark-mode-label">☼</span>`;
     }
 
     toggleDarkMode.addEventListener('click', function(e) {
@@ -533,11 +533,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.body.classList.contains('dark-mode')) {
             document.body.classList.remove('dark-mode');
             localStorage.setItem('modoEscuro', 'desativado');
-            toggleDarkMode.innerHTML = `🌙 <span class="dark-mode-label">Modo Escuro</span>`;
+            toggleDarkMode.innerHTML = `☾ <span class="dark-mode-label"> ☾ </span>`;
         } else {
             document.body.classList.add('dark-mode');
             localStorage.setItem('modoEscuro', 'ativado');
-            toggleDarkMode.innerHTML = `☀️ <span class="dark-mode-label">Modo Claro</span>`;
+            toggleDarkMode.innerHTML = `☼ <span class="dark-mode-label">☼</span>`;
         }
     });
 });
