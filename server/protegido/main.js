@@ -521,10 +521,10 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const toggleDarkMode = document.getElementById('toggle-dark-mode');
 
-    // 👉 Verifica se o modo escuro estava ativado antes (salvo no localStorage)
+    // Carrega o estado salvo
     if (localStorage.getItem('modoEscuro') === 'ativado') {
         document.body.classList.add('dark-mode');
-        toggleDarkMode.textContent = '☀️';
+        toggleDarkMode.innerHTML = `☀️ <span class="dark-mode-label">Modo Claro</span>`;
     }
 
     toggleDarkMode.addEventListener('click', function(e) {
@@ -533,14 +533,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.body.classList.contains('dark-mode')) {
             document.body.classList.remove('dark-mode');
             localStorage.setItem('modoEscuro', 'desativado');
-            toggleDarkMode.textContent = '🌙';
+            toggleDarkMode.innerHTML = `🌙 <span class="dark-mode-label">Modo Escuro</span>`;
         } else {
             document.body.classList.add('dark-mode');
             localStorage.setItem('modoEscuro', 'ativado');
-            toggleDarkMode.textContent = '☀️';
+            toggleDarkMode.innerHTML = `☀️ <span class="dark-mode-label">Modo Claro</span>`;
         }
     });
 });
+
 
 document.addEventListener('click', function(event) {
     const nav = document.querySelector('nav.container');

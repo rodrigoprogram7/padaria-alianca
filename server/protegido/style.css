@@ -1960,13 +1960,33 @@ body.dark-mode .barra-pesquisa.navbar input {
   border-color: #555;
 }
 
-#toggle-dark-mode {
+#toggle-dark-mode,
+.dark-mode-toggle {
   cursor: pointer;
   color: var(--title-color);
   text-decoration: none;
   transition: color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-#toggle-dark-mode:hover {
+#toggle-dark-mode:hover,
+.dark-mode-toggle:hover {
   color: var(--base-color);
 }
+
+.dark-mode-toggle span {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+}
+
+body.dark-mode .dark-mode-toggle {
+  color: #ffc107;
+}
+
+body.dark-mode .dark-mode-toggle span {
+  transform: translateX(5px);
+  opacity: 0.8;
+}
+
