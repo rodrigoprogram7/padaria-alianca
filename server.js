@@ -1,66 +1,116 @@
 const express = require('express');
 const path = require('path');
-require('dotenv').config(); // carrega variáveis do .env
+const mongoose = require('mongoose');
+const session = require('express-session');
+const bcrypt = require('bcrypt');
+const multer = require('multer');
+require('dotenv').config();
 
 const app = express();
 
-// Middleware para bloquear hotlinking
+// ✅ Conexão com MongoDB
+mongoose.connect('mongodb+srv://rodrigode777:thyago2001th5508@padariaalianca.vjscsci.mongodb.net/?retryWrites=true&w=majority&appName=padariaalianca', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('✅ Conectado ao MongoDB Atlas'))
+.catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
+
+// ✅ Configuração do Multer (upload de imagem)
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => cb(null, 'public/uploads'),
+  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+});
+const upload = multer({ storage });
+
+// ✅ Middleware
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(session({
+  secret: 'segredo_super_seguro',
+  resave: false,
+  saveUninitialized: false
+}));
+
+// ✅ Proteção contra hotlinking
 app.use((req, res, next) => {
   const referer = req.get('Referer');
   const host = req.get('Host');
-
-  // Permitir acesso direto ou se o referer for do mesmo domínio
-  if (!referer || referer.includes(host)) {
-    return next(); // ok
-  }
-
-  // Bloquear acesso se for hotlink
+  if (!referer || referer.includes(host)) return next();
   if (req.url.match(/\.(jpg|jpeg|png|gif|webp|svg)$/i)) {
     return res.status(403).send('Hotlinking não permitido.');
   }
-
   next();
 });
 
+// ✅ Proteção de arquivos específicos
 const protegidoPath = path.join(__dirname, 'server', 'protegido');
-
-// Middleware para proteger arquivos CSS e JS
 function bloquearAcessoDireto(req, res, next) {
   const referer = req.get('Referer');
   const host = req.get('Host');
-
-  if (!referer || referer.includes(host)) {
-    return next(); // Acesso permitido
-  }
-
+  if (!referer || referer.includes(host)) return next();
   return res.status(403).send('Acesso negado.');
 }
-
-// Rota protegida para o CSS
 app.get('/estilo.css', bloquearAcessoDireto, (req, res) => {
   res.sendFile(path.join(protegidoPath, 'style.css'));
 });
-
-// Rota protegida para o JS
 app.get('/script.js', bloquearAcessoDireto, (req, res) => {
   res.sendFile(path.join(protegidoPath, 'main.js'));
 });
 
-
-// Agora o conteúdo estático
-app.use(express.static('public'));
-
-
-// Middleware para entender JSON
-app.use(express.json());
-
-// Torna a pasta "public" acessível ao navegador
-app.use(express.static('public'));
-
-// Rota segura de pedido
+// ✅ Rota de pedido
 app.use('/pedido', require('./server/routes/pedido'));
 
-// Inicia o servidor
+// ✅ Login simples
+const ADMIN_HASH = '$2b$10$zZK7IEWQe4QJKQu3kusT0ulIMG1W6Bziq1mNlq925LAbF9YMRNZCW';
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin', 'login.html'));
+});
+app.post('/login', async (req, res) => {
+  const { usuario, senha } = req.body;
+  if (usuario === 'tramalho250@gmail.com' && await bcrypt.compare(senha, ADMIN_HASH)) {
+    req.session.logado = true;
+    res.redirect('/admin/painel');
+  } else {
+    res.send('❌ Login inválido');
+  }
+});
+function proteger(req, res, next) {
+  if (req.session.logado) return next();
+  res.redirect('/login');
+}
+app.get('/admin/painel', proteger, (req, res) => {
+  res.sendFile(path.join(__dirname, 'admin', 'painel.html'));
+});
+
+// ✅ Rotas de Produto
+const Product = require('./models/Product');
+
+// Buscar produtos
+app.get('/produtos', async (req, res) => {
+  try {
+    const produtos = await Product.find();
+    res.json(produtos);
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao buscar produtos' });
+  }
+});
+
+// Adicionar produto com imagem
+app.post('/produtos', upload.single('imagem'), async (req, res) => {
+  try {
+    const { nome, preco, categoria, tipo } = req.body;
+    const imagem = req.file ? '/uploads/' + req.file.filename : '';
+    const novoProduto = new Product({ nome, preco, categoria, tipo, imagem });
+    await novoProduto.save();
+    res.status(201).json({ mensagem: 'Produto adicionado com sucesso!' });
+  } catch (err) {
+    res.status(500).json({ erro: 'Erro ao adicionar produto' });
+  }
+});
+
+// ✅ Inicializa o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
