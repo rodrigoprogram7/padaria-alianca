@@ -90,36 +90,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
-/*========== Filtro de categorias ==========*/
 function filtrarCategoria(categoriaSelecionada) {
-    // Remove .active de todos
-    document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+  // Remove .active de todos os botões
+  document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
 
-    // Adiciona .active ao botão da categoria atual
-    const botaoAtivo = document.querySelector(`.filtro-btn[data-categoria="${categoriaSelecionada}"]`);
-    if (botaoAtivo) {
-        botaoAtivo.classList.add('active');
-    }
+  // Ativa o botão atual
+  const botaoAtivo = document.querySelector(`.filtro-btn[data-categoria="${categoriaSelecionada}"]`);
+  if (botaoAtivo) {
+    botaoAtivo.classList.add('active');
+  }
 
-    // Filtrar os produtos
-    const produtos = document.querySelectorAll('.produto');
-    produtos.forEach(produto => {
-        const categoria = produto.getAttribute('data-categoria');
-        produto.style.display = categoria === categoriaSelecionada ? 'flex' : 'none';
-    });
+  // Filtrar os produtos carregados do banco
+  const produtosFiltrados = categoriaSelecionada === 'todos'
+    ? produtos
+    : produtos.filter(prod => prod.categoria === categoriaSelecionada);
 
-    // Scroll suave para a lista de produtos
-    const areaProdutos = document.querySelector('.pp');
-    if (areaProdutos) {
-        areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  renderizarProdutos(produtosFiltrados); // Recria os cards na tela
 
+  // Scroll suave
+  const areaProdutos = document.querySelector('.pp');
+  if (areaProdutos) {
+    areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 }
 
-window.onload = () => {
-    atualizarCarrinho();
-    filtrarCategoria('alimentos');  // Categoria inicial + botão ativo
-};
 
 /*========== Carrinho ==========*/
 let carrinho = JSON.parse(localStorage.getItem('carrinho')) || {}
