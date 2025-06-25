@@ -1,3 +1,21 @@
+let produtos = [];
+
+async function carregarProdutos() {
+  try {
+    const res = await fetch('/produtos');
+    produtos = await res.json();
+    filtrarCategoria('mercearia'); // 👉 mostra a categoria inicial
+  } catch (err) {
+    console.error('Erro ao carregar produtos do servidor');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  carregarProdutos();
+});
+
+
+
 /*========== Configurações do menu ==========*/
 const nav = document.querySelector('#header nav')
 const toggle = document.querySelectorAll('nav .toggle')
@@ -88,6 +106,29 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+function renderizarProdutos(lista) {
+  const container = document.getElementById('container-produtos');
+  container.innerHTML = '';
+
+  lista.forEach(prod => {
+    const card = document.createElement('div');
+    card.classList.add('produto');
+    card.setAttribute('data-categoria', prod.categoria);
+
+    // Aqui você pode criar o carrossel se quiser usar várias imagens
+    const imagemPrincipal = prod.imagens && prod.imagens.length > 0 ? prod.imagens[0] : 'placeholder.jpg';
+
+    card.innerHTML = `
+      <img src="${imagemPrincipal}" alt="${prod.nome}" />
+      <h3>${prod.nome}</h3>
+      <p>R$ ${parseFloat(prod.preco).toFixed(2)} (${prod.tipo})</p>
+      <button class="btn-adicionar" data-nome="${prod.nome}" data-preco="${prod.preco}">Adicionar</button>
+    `;
+
+    container.appendChild(card);
+  });
+}
+
 
 
 function filtrarCategoria(categoriaSelecionada) {
@@ -125,7 +166,7 @@ function salvarCarrinho() {
 function alterarQuantidade(botao, delta) {
     const produtoEl = botao.closest('.produto');
     const input = produtoEl.querySelector('.quantidade');
-    let valor = parseInt(input.value);
+    let valor = parseInt(input.value) || 0;
     const tipo = produtoEl.getAttribute('data-tipo') || 'unidade';
 
     if (tipo === 'peso') {
