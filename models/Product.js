@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
   nome: String,
   preco: String,
-  categoria: String,      // ✅ nova propriedade
-  tipo: String,           // ✅ "peso" ou "unidade"
-  imagem: String          // caminho do arquivo da imagem
+  categoria: String,
+  tipo: String,
+  imagens: [String]  // ✅ agora é uma lista de imagens
 });
 
 module.exports = mongoose.model('Product', productSchema);

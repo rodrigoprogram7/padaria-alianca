@@ -29,7 +29,8 @@
     <label><input type="radio" name="tipo" value="peso"> Peso</label>
   </div>
 
-  <input type="file" id="imagem" name="imagem" accept="image/*" required>
+  <input type="file" id="imagens" name="imagens" accept="image/*" multiple required>
+<small>Máximo 5 imagens</small>
 
   <input type="hidden" id="produtoId">
   <button type="submit">Salvar Produto</button>
@@ -58,28 +59,26 @@
       });
     }
 
-    document.getElementById('form-produto').addEventListener('submit', async (e) => {
-  e.preventDefault();
+  document.getElementById('form-produto').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  const form = document.getElementById('form-produto');
-  const formData = new FormData(form);
+    const form = document.getElementById('form-produto');
+    const formData = new FormData(form); // ✅ importante para incluir arquivos
 
-  const id = document.getElementById('produtoId').value;
+    const res = await fetch('/produtos', {
+      method: 'POST',
+      body: formData // ✅ envia texto e imagens
+    });
 
-  const url = id ? `/produtos/${id}` : '/produtos';
-  const method = id ? 'PUT' : 'POST';
-
-  const res = await fetch(url, {
-    method,
-    body: formData
+    if (res.ok) {
+      alert('Produto adicionado com sucesso!');
+      form.reset();
+    } else {
+      alert('Erro ao adicionar produto');
+    }
   });
 
-  if (res.ok) {
-    form.reset();
-    document.getElementById('produtoId').value = '';
-    carregarProdutos();
-  }
-});
+
 
   </script>
 </body>
