@@ -117,7 +117,10 @@ function renderizarProdutos(lista) {
     card.setAttribute('data-preco', prod.preco);
     card.setAttribute('data-categoria', prod.categoria);
 
-    const imagem = (prod.imagens && prod.imagens.length > 0) ? prod.imagens[0] : 'assets/images/alimentos/sem-imagem.jpg';
+   const imagem = (prod.imagens && prod.imagens.length > 0) 
+  ? `${prod.imagens[0].startsWith('/') ? '' : '/'}${prod.imagens[0]}`
+  : 'assets/images/alimentos/sem-imagem.jpg';
+
 
     card.innerHTML = `
       <img src="${imagem}" alt="${prod.nome}">
