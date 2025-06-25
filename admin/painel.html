@@ -464,7 +464,7 @@
             <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
             <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
 
-            <form id="form-produto" enctype="multipart/form-data">
+            <form id="form-produto" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
                     <label for="nome-produto">Nome do Produto:</label>
                     <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
@@ -472,7 +472,7 @@
 
                 <div class="form-group">
                     <label for="preco-produto">Preço:</label>
-                    <input type="number" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
+                    <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
                 </div>
 
                 <div class="form-group">
@@ -532,215 +532,165 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const formProduto = document.getElementById('form-produto');
-            const produtosLista = document.getElementById('produtos-lista');
-            const imageUploadArea = document.getElementById('image-upload-area');
-            const imagensProdutoInput = document.getElementById('imagens-produto');
-            const imagePreview = document.getElementById('image-preview');
-            const feedbackMessage = document.getElementById('feedback-message');
-            const noProductsMessage = document.getElementById('no-products-message');
+document.addEventListener('DOMContentLoaded', () => {
+  const formProduto = document.getElementById('form-produto');
+  const produtosLista = document.getElementById('produtos-lista');
+  const imageUploadArea = document.getElementById('image-upload-area');
+  const imagensProdutoInput = document.getElementById('imagens-produto');
+  const imagePreview = document.getElementById('image-preview');
+  const feedbackMessage = document.getElementById('feedback-message');
+  const noProductsMessage = document.getElementById('no-products-message');
 
-            let uploadedFiles = []; // Para armazenar os arquivos de imagem para pré-visualização
+  let uploadedFiles = [];
 
-            // Função para exibir mensagem de feedback
-            const showFeedback = (message, type) => {
-                feedbackMessage.textContent = message;
-                feedbackMessage.className = `feedback-message ${type}`;
-                feedbackMessage.style.display = 'flex';
-                setTimeout(() => {
-                    feedbackMessage.style.display = 'none';
-                }, 3000);
-            };
+  const showFeedback = (message, type) => {
+    feedbackMessage.textContent = message;
+    feedbackMessage.className = `feedback-message ${type}`;
+    feedbackMessage.style.display = 'flex';
+    setTimeout(() => {
+      feedbackMessage.style.display = 'none';
+    }, 3000);
+  };
 
-            // Função para renderizar as imagens pré-visualizadas
-            const renderImagePreviews = () => {
-                imagePreview.innerHTML = '';
-                if (uploadedFiles.length === 0) {
-                    imagePreview.style.display = 'none';
-                    return;
-                }
-                imagePreview.style.display = 'flex';
+  const renderImagePreviews = () => {
+    imagePreview.innerHTML = '';
+    if (uploadedFiles.length === 0) {
+      imagePreview.style.display = 'none';
+      return;
+    }
+    imagePreview.style.display = 'flex';
 
-                uploadedFiles.forEach((file, index) => {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const imgContainer = document.createElement('div');
-                        imgContainer.classList.add('img-container');
+    uploadedFiles.forEach((file, index) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('img-container');
 
-                        const img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.alt = `Pré-visualização da imagem ${index + 1}`;
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.alt = `Pré-visualização da imagem ${index + 1}`;
 
-                        const removeButton = document.createElement('span');
-                        removeButton.classList.add('remove-img');
-                        removeButton.innerHTML = '<i class="fas fa-times"></i>';
-                        removeButton.onclick = () => {
-                            uploadedFiles.splice(index, 1);
-                            renderImagePreviews();
-                        };
+        const removeButton = document.createElement('span');
+        removeButton.classList.add('remove-img');
+        removeButton.innerHTML = '<i class="fas fa-times"></i>';
+        removeButton.onclick = () => {
+          uploadedFiles.splice(index, 1);
+          renderImagePreviews();
+        };
 
-                        imgContainer.appendChild(img);
-                        imgContainer.appendChild(removeButton);
-                        imagePreview.appendChild(imgContainer);
-                    };
-                    reader.readAsDataURL(file);
-                });
-            };
+        imgContainer.appendChild(img);
+        imgContainer.appendChild(removeButton);
+        imagePreview.appendChild(imgContainer);
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
-            // Adiciona evento de mudança para o input de arquivo
-            imagensProdutoInput.addEventListener('change', (event) => {
-                const files = Array.from(event.target.files);
-                if (uploadedFiles.length + files.length > 5) {
-                    showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
-                    imagensProdutoInput.value = ''; // Limpa a seleção
-                    return;
-                }
-                uploadedFiles = [...uploadedFiles, ...files];
-                renderImagePreviews();
-            });
+  imagensProdutoInput.addEventListener('change', (event) => {
+    const files = Array.from(event.target.files);
+    if (files.length > 5) {
+      showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
+      imagensProdutoInput.value = '';
+      return;
+    }
+    uploadedFiles = files;
+    renderImagePreviews();
+  });
 
-            // Previne o comportamento padrão de arrastar e soltar
-            imageUploadArea.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                imageUploadArea.style.borderColor = 'var(--primary-color)';
-                imageUploadArea.style.backgroundColor = 'rgba(74, 144, 226, 0.05)';
-            });
+  imageUploadArea.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    imageUploadArea.style.borderColor = 'var(--primary-color)';
+    imageUploadArea.style.backgroundColor = 'rgba(74, 144, 226, 0.05)';
+  });
 
-            imageUploadArea.addEventListener('dragleave', () => {
-                imageUploadArea.style.borderColor = 'var(--border-color)';
-                imageUploadArea.style.backgroundColor = 'var(--bg-dark)';
-            });
+  imageUploadArea.addEventListener('dragleave', () => {
+    imageUploadArea.style.borderColor = 'var(--border-color)';
+    imageUploadArea.style.backgroundColor = 'var(--bg-dark)';
+  });
 
-            // Lida com o drop de arquivos
-            imageUploadArea.addEventListener('drop', (e) => {
-                e.preventDefault();
-                imageUploadArea.style.borderColor = 'var(--border-color)';
-                imageUploadArea.style.backgroundColor = 'var(--bg-dark)';
+  imageUploadArea.addEventListener('drop', (e) => {
+    e.preventDefault();
+    imageUploadArea.style.borderColor = 'var(--border-color)';
+    imageUploadArea.style.backgroundColor = 'var(--bg-dark)';
 
-                const files = Array.from(e.dataTransfer.files);
-                if (uploadedFiles.length + files.length > 5) {
-                    showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
-                    return;
-                }
+    const files = Array.from(e.dataTransfer.files);
+    if (files.length > 5) {
+      showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
+      return;
+    }
 
-                // Simula a atribuição ao input file
-                const dataTransfer = new DataTransfer();
-                files.forEach(file => dataTransfer.items.add(file));
-                imagensProdutoInput.files = dataTransfer.files;
+    imagensProdutoInput.files = e.dataTransfer.files;
+    uploadedFiles = files;
+    renderImagePreviews();
+  });
 
-                uploadedFiles = [...uploadedFiles, ...files];
-                renderImagePreviews();
-            });
+  async function renderProdutosDoBanco() {
+    const res = await fetch('/produtos');
+    const produtos = await res.json();
 
+    produtosLista.innerHTML = '';
+    if (produtos.length === 0) {
+      noProductsMessage.style.display = 'block';
+      return;
+    } else {
+      noProductsMessage.style.display = 'none';
+    }
 
-            // Array para simular o armazenamento de produtos
-            let produtosCadastrados = JSON.parse(localStorage.getItem('produtos')) || [];
+    produtos.forEach(produto => {
+      const produtoCard = document.createElement('div');
+      produtoCard.classList.add('produto-card');
 
-            // Função para renderizar os produtos na lista
-            const renderProdutos = () => {
-                produtosLista.innerHTML = '';
-                if (produtosCadastrados.length === 0) {
-                    noProductsMessage.style.display = 'block';
-                    return;
-                } else {
-                    noProductsMessage.style.display = 'none';
-                }
+      const img = (produto.imagens && produto.imagens.length > 0) ? produto.imagens[0] : 'https://via.placeholder.com/80';
 
-                produtosCadastrados.forEach((produto, index) => {
-                    const produtoCard = document.createElement('div');
-                    produtoCard.classList.add('produto-card');
-                    produtoCard.setAttribute('data-index', index);
+      produtoCard.innerHTML = `
+        <div class="produto-card-header">
+          <div class="produto-card-img">
+            <img src="${img}" alt="${produto.nome}">
+          </div>
+          <div class="produto-card-details">
+            <h3>${produto.nome}</h3>
+            <p>Categoria: ${produto.categoria}</p>
+            <p>Tipo: ${produto.tipo}</p>
+            <p class="price">R$ ${parseFloat(produto.preco).toFixed(2)}</p>
+          </div>
+        </div>
+      `;
+      produtosLista.appendChild(produtoCard);
+    });
+  }
 
-                    const defaultImage = 'https://via.placeholder.com/80/E0E6F0/666666?text=Sem+Foto'; // Imagem padrão
+  formProduto.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-                    produtoCard.innerHTML = `
-                        <div class="produto-card-header">
-                            <div class="produto-card-img">
-                                <img src="${produto.imagens[0] || defaultImage}" alt="${produto.nome}">
-                            </div>
-                            <div class="produto-card-details">
-                                <h3>${produto.nome}</h3>
-                                <p>Categoria: ${produto.categoria.charAt(0).toUpperCase() + produto.categoria.slice(1)}</p>
-                                <p>Tipo: ${produto.tipo.charAt(0).toUpperCase() + produto.tipo.slice(1)}</p>
-                                <p class="price">R$ ${parseFloat(produto.preco).toFixed(2).replace('.', ',')}</p>
-                            </div>
-                        </div>
-                        <div class="produto-card-actions">
-                            <button class="btn-edit"><i class="fas fa-edit"></i> Editar</button>
-                            <button class="btn-delete"><i class="fas fa-trash-alt"></i> Excluir</button>
-                        </div>
-                    `;
-                    produtosLista.appendChild(produtoCard);
-                });
-            };
+    const files = imagensProdutoInput.files;
+    if (files.length > 5) {
+      showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
+      return;
+    }
 
-            // Evento de submit do formulário
-            formProduto.addEventListener('submit', (e) => {
-                e.preventDefault();
+    const formData = new FormData(formProduto);
 
-                const formData = new FormData(formProduto);
-                const novoProduto = {
-                    nome: formData.get('nome'),
-                    preco: formData.get('preco'),
-                    categoria: formData.get('categoria'),
-                    tipo: formData.get('tipo'),
-                    imagens: [] // Será preenchido com Data URLs
-                };
+    const res = await fetch('/produtos', {
+      method: 'POST',
+      body: formData
+    });
 
-                // Lidar com as imagens (apenas para simulação, em um backend você enviaria os arquivos)
-                if (uploadedFiles.length > 0) {
-                    let imagesProcessed = 0;
-                    uploadedFiles.forEach((file, index) => {
-                        const reader = new FileReader();
-                        reader.onload = (e) => {
-                            novoProduto.imagens.push(e.target.result);
-                            imagesProcessed++;
-                            if (imagesProcessed === uploadedFiles.length) {
-                                // Todas as imagens foram processadas, agora adicione o produto
-                                produtosCadastrados.push(novoProduto);
-                                localStorage.setItem('produtos', JSON.stringify(produtosCadastrados));
-                                renderProdutos();
-                                formProduto.reset();
-                                uploadedFiles = []; // Limpa os arquivos carregados
-                                renderImagePreviews(); // Limpa as pré-visualizações
-                                showFeedback('Produto adicionado com sucesso!', 'success');
-                            }
-                        };
-                        reader.readAsDataURL(file);
-                    });
-                } else {
-                    // Adicionar produto sem imagens (usará imagem padrão)
-                    produtosCadastrados.push(novoProduto);
-                    localStorage.setItem('produtos', JSON.stringify(produtosCadastrados));
-                    renderProdutos();
-                    formProduto.reset();
-                    showFeedback('Produto adicionado com sucesso (sem imagens)!', 'success');
-                }
-            });
+    if (res.ok) {
+      showFeedback('Produto adicionado com sucesso!', 'success');
+      formProduto.reset();
+      imagensProdutoInput.value = '';
+      imagePreview.innerHTML = '';
+      uploadedFiles = [];
+      renderProdutosDoBanco();
+    } else {
+      showFeedback('Erro ao adicionar produto', 'error');
+    }
+  });
 
-            // Delegação de eventos para botões de Excluir
-            produtosLista.addEventListener('click', (e) => {
-                if (e.target.classList.contains('btn-delete') || e.target.closest('.btn-delete')) {
-                    const card = e.target.closest('.produto-card');
-                    const index = card.getAttribute('data-index');
-                    if (confirm('Tem certeza que deseja excluir este produto?')) {
-                        produtosCadastrados.splice(index, 1);
-                        localStorage.setItem('produtos', JSON.stringify(produtosCadastrados));
-                        renderProdutos();
-                        showFeedback('Produto excluído com sucesso!', 'success');
-                    }
-                }
-                // Adicione lógica para o botão Editar aqui, se necessário
-                if (e.target.classList.contains('btn-edit') || e.target.closest('.btn-edit')) {
-                    showFeedback('Funcionalidade de edição em desenvolvimento!', 'info');
-                }
-            });
+  renderProdutosDoBanco();
+});
+</script>
 
-            // Renderiza os produtos ao carregar a página
-            renderProdutos();
-        });
-    </script>
 
 </body>
 </html>

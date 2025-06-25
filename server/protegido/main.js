@@ -113,16 +113,25 @@ function renderizarProdutos(lista) {
   lista.forEach(prod => {
     const card = document.createElement('div');
     card.classList.add('produto');
+    card.setAttribute('data-nome', prod.nome);
+    card.setAttribute('data-preco', prod.preco);
     card.setAttribute('data-categoria', prod.categoria);
 
-    // Aqui você pode criar o carrossel se quiser usar várias imagens
-    const imagemPrincipal = prod.imagens && prod.imagens.length > 0 ? prod.imagens[0] : 'placeholder.jpg';
+    const imagem = (prod.imagens && prod.imagens.length > 0) ? prod.imagens[0] : 'assets/images/alimentos/sem-imagem.jpg';
 
     card.innerHTML = `
-      <img src="${imagemPrincipal}" alt="${prod.nome}" />
-      <h3>${prod.nome}</h3>
-      <p>R$ ${parseFloat(prod.preco).toFixed(2)} (${prod.tipo})</p>
-      <button class="btn-adicionar" data-nome="${prod.nome}" data-preco="${prod.preco}">Adicionar</button>
+      <img src="${imagem}" alt="${prod.nome}">
+      <div class="produto-info">
+        <h3>${prod.nome}</h3>
+        <p>R$ ${parseFloat(prod.preco).toFixed(2).replace('.', ',')}</p>
+        <div class="quantidade-box">
+          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+          <input type="number" min="1" value="1" class="quantidade">
+          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+        </div>
+        <div class="subtotal-preview"></div>
+        <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      </div>
     `;
 
     container.appendChild(card);
