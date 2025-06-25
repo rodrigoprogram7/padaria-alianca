@@ -9,10 +9,11 @@ require('dotenv').config();
 const app = express();
 
 // ✅ Conexão com MongoDB
-mongoose.connect('mongodb+srv://rodrigode777:thyago2001th5508@padariaalianca.vjscsci.mongodb.net/?retryWrites=true&w=majority&appName=padariaalianca', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
+
 .then(() => console.log('✅ Conectado ao MongoDB Atlas'))
 .catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
 
