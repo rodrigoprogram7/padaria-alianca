@@ -100,7 +100,7 @@ app.get('/produtos', async (req, res) => {
 // Adicionar produto com imagem
 app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
   const { nome, preco, categoria, tipo } = req.body;
-  const imagens = req.files.map(file => '/uploads/' + file.filename);
+  const imagens = req.files.map(file => 'uploads/' + file.filename);
   const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
   await novoProduto.save();
   res.status(201).json({ mensagem: 'Produto adicionado com sucesso!' });
