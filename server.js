@@ -100,27 +100,29 @@ app.get('/produtos', async (req, res) => {
 
 // Adicionar produto com imagem
 app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
-  const { modo, nome, preco, categoria, tipo } = req.body;
+  const { modo, nome, preco, categoria, tipo, v_nome, v_preco } = req.body;
 
   try {
     if (modo === 'unico') {
-      // Produto único
       const imagens = req.files.map(file => '/uploads/' + file.filename);
       const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
       await novoProduto.save();
       return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
 
     } else if (modo === 'variacoes') {
+      // v_nome e v_preco são arrays
+      if (!Array.isArray(v_nome) || !Array.isArray(v_preco)) {
+        return res.status(400).json({ mensagem: 'Dados das variações inválidos.' });
+      }
+
       const imagens = req.files.map(file => '/uploads/' + file.filename);
       const variacoes = [];
 
-      for (let i = 0; i < imagens.length; i++) {
-        const vNome = req.body[`variacoes[${i}][nome]`];
-        const vPreco = req.body[`variacoes[${i}][preco]`];
-        if (vNome && vPreco && imagens[i]) {
+      for (let i = 0; i < v_nome.length; i++) {
+        if (v_nome[i] && v_preco[i] && imagens[i]) {
           variacoes.push({
-            nome: vNome,
-            preco: parseFloat(vPreco),
+            nome: v_nome[i],
+            preco: parseFloat(v_preco[i]),
             imagem: imagens[i]
           });
         }
@@ -142,6 +144,7 @@ app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
     return res.status(500).json({ mensagem: 'Erro ao salvar produto.' });
   }
 });
+
 
 
 
