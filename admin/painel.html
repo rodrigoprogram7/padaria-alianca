@@ -588,8 +588,37 @@
         }
       });
     });
+
+    document.getElementById('form-produto').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
+      const form = document.getElementById('form-produto');
+      const formData = new FormData(form);
+
+      formData.append('modo', tipoCard);
+
+      const res = await fetch('/produtos', {
+        method: 'POST',
+        body: formData
+      });
+
+      const json = await res.json();
+      const msg = document.getElementById('feedback-message');
+      msg.textContent = json.mensagem || 'Erro ao salvar';
+      msg.className = 'feedback-message ' + (res.ok ? 'success' : 'error');
+      msg.style.display = 'flex';
+      setTimeout(() => msg.style.display = 'none', 3000);
+
+      if (res.ok) {
+        form.reset();
+        blocoVariacoes.innerHTML = '';
+        document.getElementById('image-preview').innerHTML = '';
+      }
+    });
   </script>
 </body>
+</html>
+
 
 
 </html>
