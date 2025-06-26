@@ -561,15 +561,24 @@
       const modo = radio.value;
 
       if (modo === 'variacoes' && radio.checked) {
-        blocoUnico.style.display = 'none';
-        seletorQtd.style.display = 'block';
-        imageUploadArea.style.display = 'none';
-      } else {
-        blocoUnico.style.display = 'block';
-        seletorQtd.style.display = 'none';
-        blocoVariacoes.innerHTML = '';
-        imageUploadArea.style.display = 'block';
-      }
+  blocoUnico.style.display = 'none';
+  seletorQtd.style.display = 'block';
+  imageUploadArea.style.display = 'none';
+
+  // Remove required dos campos do produto único
+  document.getElementById('nome-produto').removeAttribute('required');
+  document.getElementById('preco-produto').removeAttribute('required');
+} else {
+  blocoUnico.style.display = 'block';
+  seletorQtd.style.display = 'none';
+  blocoVariacoes.innerHTML = '';
+  imageUploadArea.style.display = 'block';
+
+  // Recoloca required nos campos do produto único
+  document.getElementById('nome-produto').setAttribute('required', true);
+  document.getElementById('preco-produto').setAttribute('required', true);
+}
+
     });
   });
 
