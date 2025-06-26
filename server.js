@@ -110,17 +110,21 @@ app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
       return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
 
     } else if (modo === 'variacoes') {
+      const v_nome = req.body['v_nome'];
+      const v_preco = req.body['v_preco'];
+
+      if (!v_nome || !v_preco || !Array.isArray(v_nome) || !Array.isArray(v_preco)) {
+        return res.status(400).json({ mensagem: 'Nenhuma variação válida recebida.' });
+      }
+
       const imagens = req.files.map(file => '/uploads/' + file.filename);
       const variacoes = [];
 
-      for (let i = 0; i < imagens.length; i++) {
-        const vNome = req.body[`variacoes[${i}][nome]`];
-        const vPreco = req.body[`variacoes[${i}][preco]`];
-
-        if (vNome && vPreco && imagens[i]) {
+      for (let i = 0; i < v_nome.length; i++) {
+        if (v_nome[i] && v_preco[i] && imagens[i]) {
           variacoes.push({
-            nome: vNome,
-            preco: parseFloat(vPreco),
+            nome: v_nome[i],
+            preco: parseFloat(v_preco[i]),
             imagem: imagens[i]
           });
         }
@@ -135,11 +139,11 @@ app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
       return res.status(201).json({ mensagem: 'Produto com variações adicionado com sucesso!' });
 
     } else {
-      return res.status(400).json({ mensagem: 'Modo de produto inválido.' });
+      return res.status(400).json({ mensagem: 'Modo inválido.' });
     }
   } catch (err) {
-    console.error(err);
-    return res.status(500).json({ mensagem: 'Erro ao salvar produto.' });
+    console.error('Erro ao salvar produto:', err);
+    return res.status(500).json({ mensagem: 'Erro interno ao salvar produto.' });
   }
 });
 
