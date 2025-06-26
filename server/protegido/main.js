@@ -170,7 +170,7 @@ function renderizarCardComVariacoes(prod) {
       <button class="carousel-btn carousel-prev">❮</button>
       <button class="carousel-btn carousel-next">❯</button>
       <div class="carousel-thumbs">
-        ${prod.variacoes.map(v => `<img src="${v.imagem}" alt="${v.nome}">`).join('')}
+       ${prod.variacoes.map(v => `<img src="${v.imagem}" alt="${v.nome}">`).join('')}
       </div>
     </div>
     <div class="produto-info">
