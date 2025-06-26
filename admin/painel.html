@@ -458,245 +458,138 @@
     </style>
 </head>
 <body>
+  <div class="container">
+    <div class="form-section dashboard-section">
+      <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
+      <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
 
-    <div class="container">
-        <div class="form-section dashboard-section">
-            <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
-            <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
-
-            <div class="form-group">
-                <label>Tipo de Card:</label>
-                <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
-                <label><input type="radio" name="tipoCard" value="variacoes"> Múltiplos produtos no mesmo card</label>
-                </div>
-
-            <form id="form-produto" enctype="multipart/form-data" method="POST">
-                <div class="form-group">
-                    <label for="nome-produto">Nome do Produto:</label>
-                    <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="preco-produto">Preço:</label>
-                    <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="categoria-produto">Categoria:</label>
-                    <select id="categoria-produto" name="categoria" required>
-                        <option value="" disabled selected>Selecione uma categoria</option>
-                        <option value="mercearia">Mercearia</option>
-                        <option value="padaria">Padaria</option>
-                        <option value="sacoloes">Sacolões</option>
-                        <option value="bazar">Bazar</option>
-                        <option value="bebidas">Bebidas</option>
-                        <option value="pereciveis">Perecíveis</option>
-                        <option value="higiene">Higiene</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Tipo:</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="tipo" value="unidade" checked> Unidade
-                        </label>
-                        <label>
-                            <input type="radio" name="tipo" value="peso"> Peso
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Imagens (até 5):</label>
-                    <div class="image-upload-area" id="image-upload-area">
-                        <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                        <p>Arraste e solte ou clique para selecionar imagens</p>
-                        <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*" required>
-                    </div>
-                    <div class="image-preview" id="image-preview">
-                        </div>
-                </div>
-
-                <button type="submit" class="button-submit">
-                    <i class="fas fa-plus"></i> Adicionar Produto
-                </button>
-
-                <div id="feedback-message" class="feedback-message"></div>
-            </form>
+      <!-- ✅ FORMULÁRIO ATUALIZADO -->
+      <form id="form-produto" enctype="multipart/form-data" method="POST">
+        <div class="form-group">
+          <label>Tipo de Card:</label>
+          <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
+          <label><input type="radio" name="tipoCard" value="variacoes"> Múltiplos produtos no mesmo card</label>
         </div>
 
-        <div class="list-section dashboard-section">
-            <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
-            <div class="produto-lista" id="produtos-lista">
-                </div>
-            <div id="no-products-message" style="text-align: center; color: var(--light-text-color); margin-top: 30px; display: none;">
-                <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
-                <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
+        <!-- PRODUTO ÚNICO -->
+        <div id="bloco-unico">
+          <div class="form-group">
+            <label for="nome-produto">Nome do Produto:</label>
+            <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
+          </div>
+
+          <div class="form-group">
+            <label for="preco-produto">Preço:</label>
+            <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
+          </div>
+
+          <div class="form-group">
+            <label>Imagens (até 5):</label>
+            <div class="image-upload-area" id="image-upload-area">
+              <i class="fas fa-cloud-upload-alt upload-icon"></i>
+              <p>Arraste e solte ou clique para selecionar imagens</p>
+              <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*" required>
             </div>
+            <div class="image-preview" id="image-preview"></div>
+          </div>
         </div>
+
+        <!-- RADIO QUANTIDADE VARIAÇÕES -->
+        <div id="seletor-qtd-variacoes" style="display: none;">
+          <label>Quantos produtos nesse card?</label>
+          <div>
+            <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
+            <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
+            <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
+            <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
+            <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
+          </div>
+        </div>
+
+        <!-- BLOCOS DAS VARIAÇÕES -->
+        <div id="bloco-variacoes"></div>
+
+        <!-- CATEGORIA E TIPO (COMUM) -->
+        <div class="form-group">
+          <label for="categoria-produto">Categoria:</label>
+          <select id="categoria-produto" name="categoria" required>
+            <option value="" disabled selected>Selecione uma categoria</option>
+            <option value="mercearia">Mercearia</option>
+            <option value="padaria">Padaria</option>
+            <option value="sacoloes">Sacolões</option>
+            <option value="bazar">Bazar</option>
+            <option value="bebidas">Bebidas</option>
+            <option value="pereciveis">Perecíveis</option>
+            <option value="higiene">Higiene</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tipo:</label>
+          <div class="radio-group">
+            <label><input type="radio" name="tipo" value="unidade" checked> Unidade</label>
+            <label><input type="radio" name="tipo" value="peso"> Peso</label>
+          </div>
+        </div>
+
+        <button type="submit" class="button-submit">
+          <i class="fas fa-plus"></i> Adicionar Produto
+        </button>
+        <div id="feedback-message" class="feedback-message"></div>
+      </form>
     </div>
 
-    <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const formProduto = document.getElementById('form-produto');
-  const produtosLista = document.getElementById('produtos-lista');
-  const imageUploadArea = document.getElementById('image-upload-area');
-  const imagensProdutoInput = document.getElementById('imagens-produto');
-  const imagePreview = document.getElementById('image-preview');
-  const feedbackMessage = document.getElementById('feedback-message');
-  const noProductsMessage = document.getElementById('no-products-message');
+    <div class="list-section dashboard-section">
+      <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
+      <div class="produto-lista" id="produtos-lista"></div>
+      <div id="no-products-message" style="text-align: center; color: var(--light-text-color); margin-top: 30px; display: none;">
+        <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
+        <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
+      </div>
+    </div>
+  </div>
 
-  let uploadedFiles = [];
+  <script>
+    const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
+    const blocoUnico = document.getElementById('bloco-unico');
+    const seletorQtd = document.getElementById('seletor-qtd-variacoes');
+    const blocoVariacoes = document.getElementById('bloco-variacoes');
 
-  const showFeedback = (message, type) => {
-    feedbackMessage.textContent = message;
-    feedbackMessage.className = `feedback-message ${type}`;
-    feedbackMessage.style.display = 'flex';
-    setTimeout(() => {
-      feedbackMessage.style.display = 'none';
-    }, 3000);
-  };
-
-  const renderImagePreviews = () => {
-    imagePreview.innerHTML = '';
-    if (uploadedFiles.length === 0) {
-      imagePreview.style.display = 'none';
-      return;
-    }
-    imagePreview.style.display = 'flex';
-
-    uploadedFiles.forEach((file, index) => {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('img-container');
-
-        const img = document.createElement('img');
-        img.src = e.target.result;
-        img.alt = `Pré-visualização da imagem ${index + 1}`;
-
-        const removeButton = document.createElement('span');
-        removeButton.classList.add('remove-img');
-        removeButton.innerHTML = '<i class="fas fa-times"></i>';
-        removeButton.onclick = () => {
-          uploadedFiles.splice(index, 1);
-          renderImagePreviews();
-        };
-
-        imgContainer.appendChild(img);
-        imgContainer.appendChild(removeButton);
-        imagePreview.appendChild(imgContainer);
-      };
-      reader.readAsDataURL(file);
-    });
-  };
-
-  imagensProdutoInput.addEventListener('change', (event) => {
-    const files = Array.from(event.target.files);
-    if (files.length > 5) {
-      showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
-      imagensProdutoInput.value = '';
-      return;
-    }
-    uploadedFiles = files;
-    renderImagePreviews();
-  });
-
-  imageUploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault();
-    imageUploadArea.style.borderColor = 'var(--primary-color)';
-    imageUploadArea.style.backgroundColor = 'rgba(74, 144, 226, 0.05)';
-  });
-
-  imageUploadArea.addEventListener('dragleave', () => {
-    imageUploadArea.style.borderColor = 'var(--border-color)';
-    imageUploadArea.style.backgroundColor = 'var(--bg-dark)';
-  });
-
-  imageUploadArea.addEventListener('drop', (e) => {
-    e.preventDefault();
-    imageUploadArea.style.borderColor = 'var(--border-color)';
-    imageUploadArea.style.backgroundColor = 'var(--bg-dark)';
-
-    const files = Array.from(e.dataTransfer.files);
-    if (files.length > 5) {
-      showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
-      return;
-    }
-
-    imagensProdutoInput.files = e.dataTransfer.files;
-    uploadedFiles = files;
-    renderImagePreviews();
-  });
-
-  async function renderProdutosDoBanco() {
-    const res = await fetch('/produtos');
-    const produtos = await res.json();
-
-    produtosLista.innerHTML = '';
-    if (produtos.length === 0) {
-      noProductsMessage.style.display = 'block';
-      return;
-    } else {
-      noProductsMessage.style.display = 'none';
-    }
-
-    produtos.forEach(produto => {
-      const produtoCard = document.createElement('div');
-      produtoCard.classList.add('produto-card');
-
-      const img = (produto.imagens && produto.imagens.length > 0) ? produto.imagens[0] : 'https://via.placeholder.com/80';
-
-      produtoCard.innerHTML = `
-        <div class="produto-card-header">
-          <div class="produto-card-img">
-            <img src="${img}" alt="${produto.nome}">
-          </div>
-          <div class="produto-card-details">
-            <h3>${produto.nome}</h3>
-            <p>Categoria: ${produto.categoria}</p>
-            <p>Tipo: ${produto.tipo}</p>
-            <p class="price">R$ ${parseFloat(produto.preco).toFixed(2)}</p>
-          </div>
-        </div>
-      `;
-      produtosLista.appendChild(produtoCard);
-    });
-  }
-
-  formProduto.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const files = imagensProdutoInput.files;
-    if (files.length > 5) {
-      showFeedback('Você pode enviar no máximo 5 imagens.', 'error');
-      return;
-    }
-
-    const formData = new FormData(formProduto);
-
-    const res = await fetch('/produtos', {
-      method: 'POST',
-      body: formData
+    tipoCardRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'variacoes' && radio.checked) {
+          blocoUnico.style.display = 'none';
+          seletorQtd.style.display = 'block';
+        } else {
+          blocoUnico.style.display = 'block';
+          seletorQtd.style.display = 'none';
+          blocoVariacoes.innerHTML = '';
+        }
+      });
     });
 
-    if (res.ok) {
-      showFeedback('Produto adicionado com sucesso!', 'success');
-      formProduto.reset();
-      imagensProdutoInput.value = '';
-      imagePreview.innerHTML = '';
-      uploadedFiles = [];
-      renderProdutosDoBanco();
-    } else {
-      showFeedback('Erro ao adicionar produto', 'error');
-    }
-  });
-
-  renderProdutosDoBanco();
-});
-</script>
-
-
+    document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const qtd = parseInt(radio.value);
+        blocoVariacoes.innerHTML = '';
+        for (let i = 0; i < qtd; i++) {
+          const div = document.createElement('div');
+          div.classList.add('form-group');
+          div.innerHTML = `
+            <h4>Produto ${i + 1}</h4>
+            <label>Nome:</label>
+            <input type="text" name="variacoes[${i}][nome]" required>
+            <label>Preço:</label>
+            <input type="text" name="variacoes[${i}][preco]" required>
+            <label>Imagem:</label>
+            <input type="file" name="imagens" accept="image/*" required>
+          `;
+          blocoVariacoes.appendChild(div);
+        }
+      });
+    });
+  </script>
 </body>
+
+
 </html>
