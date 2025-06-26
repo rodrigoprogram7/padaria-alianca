@@ -100,45 +100,46 @@ app.get('/produtos', async (req, res) => {
 
 // Adicionar produto com imagem
 app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
-  try {
-    const { nome, preco, categoria, tipo, modo } = req.body;
+  const { modo, nome, preco, categoria, tipo } = req.body;
 
+  try {
     if (modo === 'unico') {
+      // Produto único
       const imagens = req.files.map(file => '/uploads/' + file.filename);
       const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
       await novoProduto.save();
-      return res.status(201).json({ mensagem: '✅ Produto único adicionado com sucesso!' });
-    }
+      return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
 
-    if (modo === 'variacoes') {
+    } else if (modo === 'variacoes') {
+      const imagens = req.files.map(file => '/uploads/' + file.filename);
       const variacoes = [];
 
-      // Exemplo de campos: variacoes[0][nome], variacoes[1][preco]
-      const total = req.body['variacoes[0][nome]'] ? req.files.length : 0;
-
-      for (let i = 0; i < total; i++) {
-        const nome = req.body[`variacoes[${i}][nome]`];
-        const preco = req.body[`variacoes[${i}][preco]`];
-        const imagem = req.files[i] ? '/uploads/' + req.files[i].filename : '';
-        if (nome && preco && imagem) {
-          variacoes.push({ nome, preco, imagem });
+      for (let i = 0; i < imagens.length; i++) {
+        const vNome = req.body[`variacoes[${i}][nome]`];
+        const vPreco = req.body[`variacoes[${i}][preco]`];
+        if (vNome && vPreco && imagens[i]) {
+          variacoes.push({
+            nome: vNome,
+            preco: parseFloat(vPreco),
+            imagem: imagens[i]
+          });
         }
       }
 
       if (variacoes.length === 0) {
-        return res.status(400).json({ mensagem: '❌ Nenhuma variação válida recebida.' });
+        return res.status(400).json({ mensagem: 'Nenhuma variação válida recebida.' });
       }
 
-      const novoCard = new Product({ categoria, tipo, variacoes });
-      await novoCard.save();
+      const produtoVariado = new Product({ categoria, tipo, variacoes });
+      await produtoVariado.save();
+      return res.status(201).json({ mensagem: 'Produto com variações adicionado com sucesso!' });
 
-      return res.status(201).json({ mensagem: '✅ Variações adicionadas com sucesso!' });
+    } else {
+      return res.status(400).json({ mensagem: 'Modo de produto inválido.' });
     }
-
-    res.status(400).json({ mensagem: '❌ Modo inválido.' });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ erro: 'Erro ao adicionar produto.' });
+    return res.status(500).json({ mensagem: 'Erro ao salvar produto.' });
   }
 });
 
