@@ -113,48 +113,80 @@ function renderizarProdutos(produtos) {
   lista.innerHTML = '';
 
   produtos.forEach(prod => {
-    const precoFormatado = parseFloat(prod.preco).toFixed(2).replace('.', ',');
-    const tipo = prod.tipo || 'unidade';
-
-    // Garante pelo menos uma imagem
-    const imagens = prod.imagens && prod.imagens.length > 0 ? prod.imagens : ['assets/images/alimentos/sem-imagem.jpg'];
-    const imagemPrincipal = '/' + imagens[0]; // primeira imagem com barra
-
-    const card = document.createElement('div');
-    card.classList.add('produto');
-    card.setAttribute('data-nome', prod.nome.toLowerCase());
-    card.setAttribute('data-preco', prod.preco);
-    card.setAttribute('data-categoria', prod.categoria);
-    card.setAttribute('data-tipo', tipo);
-
-    // Criação da estrutura visual
-    card.innerHTML = `
-      <div class="produto-img-area">
-        <img src="${imagemPrincipal}" alt="${prod.nome}" class="img-principal">
-
-        ${imagens.length > 1 ? `
-          <div class="miniaturas">
-            ${imagens.map(img => `<img src="/${img}" alt="thumb">`).join('')}
-          </div>
-        ` : ''}
-      </div>
-
-      <div class="produto-info">
-        <h3>${prod.nome}</h3>
-        <p>R$ ${precoFormatado}</p>
-        <div class="quantidade-box">
-          <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
-          <input type="number" class="quantidade" min="1" value="1">
-          <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
-        </div>
-        <div class="subtotal-preview"></div>
-        <button class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
-      </div>
-    `;
-
-    lista.appendChild(card);
+    if (prod.tipoCard === 'variacoes') {
+      lista.appendChild(renderizarCardComVariacoes(prod));
+    } else {
+      lista.appendChild(renderizarCardUnico(prod));
+    }
   });
 }
+
+function renderizarCardUnico(prod) {
+  const precoFormatado = parseFloat(prod.preco).toFixed(2).replace('.', ',');
+  const imagem = prod.imagens?.[0] ? '/' + prod.imagens[0] : '/assets/images/alimentos/sem-imagem.jpg';
+
+  const card = document.createElement('div');
+  card.className = 'produto';
+  card.setAttribute('data-nome', prod.nome.toLowerCase());
+  card.setAttribute('data-preco', prod.preco);
+  card.setAttribute('data-categoria', prod.categoria);
+  card.setAttribute('data-tipo', prod.tipo || 'unidade');
+
+  card.innerHTML = `
+    <img src="${imagem}" alt="${prod.nome}">
+    <div class="produto-info">
+      <h3>${prod.nome}</h3>
+      <p>R$ ${precoFormatado}</p>
+      <div class="quantidade-box">
+        <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+        <input type="number" min="1" value="1" class="quantidade">
+        <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+      </div>
+      <div class="subtotal-preview"></div>
+      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+    </div>
+  `;
+
+  return card;
+}
+
+function renderizarCardComVariacoes(prod) {
+  const primeira = prod.variacoes[0];
+  const precoFormatado = parseFloat(primeira.preco).toFixed(2).replace('.', ',');
+
+  const card = document.createElement('div');
+  card.className = 'produto carrossel';
+  card.setAttribute('data-categoria', prod.categoria);
+  card.setAttribute('data-preco', primeira.preco);
+  card.setAttribute('data-variacoes', JSON.stringify(prod.variacoes));
+
+  card.innerHTML = `
+    <div class="produto-img-wrapper">
+      <div class="imagem-grande-wrapper">
+        <img src="/${primeira.img}" alt="${primeira.nome}">
+      </div>
+      <button class="carousel-btn carousel-prev">❮</button>
+      <button class="carousel-btn carousel-next">❯</button>
+      <div class="carousel-thumbs">
+        ${prod.variacoes.map(v => `<img src="/${v.img}" alt="${v.nome}">`).join('')}
+      </div>
+    </div>
+    <div class="produto-info">
+      <h3>${primeira.nome}</h3>
+      <p>R$ ${precoFormatado}</p>
+      <div class="quantidade-box">
+        <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+        <input type="number" min="1" value="1" class="quantidade">
+        <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
+      </div>
+      <div class="subtotal-preview"></div>
+      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+    </div>
+  `;
+
+  return card;
+}
+
 
 
 

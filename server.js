@@ -99,13 +99,39 @@ app.get('/produtos', async (req, res) => {
 });
 
 // Adicionar produto com imagem
+// Novo app.post adaptado para unitário e variações
 app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
-  const { nome, preco, categoria, tipo } = req.body;
-  const imagens = req.files.map(file => 'uploads/' + file.filename);
-  const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
-  await novoProduto.save();
-  res.status(201).json({ mensagem: 'Produto adicionado com sucesso!' });
+  const { tipoCard, nome, preco, tipo, categoria } = req.body;
+
+  try {
+    if (tipoCard === 'variacoes') {
+      const variacoes = [];
+      const count = parseInt(req.body.totalVariacoes || 0);
+
+      for (let i = 0; i < count; i++) {
+        variacoes.push({
+          nome: req.body[`variacoes[${i}][nome]`],
+          preco: req.body[`variacoes[${i}][preco]`],
+          img: 'uploads/' + req.files[i].filename
+        });
+      }
+
+      const produto = new Product({ tipoCard, categoria, variacoes });
+      await produto.save();
+      return res.status(201).json({ mensagem: 'Card com variações adicionado!' });
+
+    } else {
+      const imagens = req.files.map(file => 'uploads/' + file.filename);
+      const produto = new Product({ tipoCard, nome, preco, tipo, categoria, imagens });
+      await produto.save();
+      return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ erro: 'Erro ao adicionar produto' });
+  }
 });
+
 
 
 
