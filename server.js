@@ -99,38 +99,53 @@ app.get('/produtos', async (req, res) => {
 });
 
 // Adicionar produto com imagem
-// Novo app.post adaptado para unitário e variações
 app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
-  const { tipoCard, nome, preco, tipo, categoria } = req.body;
-
   try {
-    if (tipoCard === 'variacoes') {
-      const variacoes = [];
-      const count = parseInt(req.body.totalVariacoes || 0);
+    const { nome, preco, categoria, tipo, modo } = req.body;
 
-      for (let i = 0; i < count; i++) {
-        variacoes.push({
-          nome: req.body[`variacoes[${i}][nome]`],
-          preco: req.body[`variacoes[${i}][preco]`],
-          img: 'uploads/' + req.files[i].filename
-        });
+    // Produto único
+    if (modo === 'unico') {
+      const imagens = req.files.map(file => '/uploads/' + file.filename);
+      const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
+      await novoProduto.save();
+      return res.status(201).json({ mensagem: '✅ Produto único adicionado com sucesso!' });
+    }
+
+    // Múltiplos produtos no mesmo card
+    if (modo === 'variacoes') {
+      const variacoes = [];
+      const totalVariacoes = Object.keys(req.body)
+        .filter(key => key.startsWith('variacoes'))
+        .reduce((acc, key) => {
+          const match = key.match(/variacoes\\[(\\d+)\\]/);
+          if (match) acc.add(Number(match[1]));
+          return acc;
+        }, new Set());
+
+      const files = req.files;
+
+      for (let i of [...totalVariacoes].sort()) {
+        const nome = req.body[`variacoes[${i}][nome]`];
+        const preco = req.body[`variacoes[${i}][preco]`];
+        const imagem = files[i] ? '/uploads/' + files[i].filename : '';
+
+        variacoes.push({ nome, preco, imagem });
       }
 
-      const produto = new Product({ tipoCard, categoria, variacoes });
-      await produto.save();
-      return res.status(201).json({ mensagem: 'Card com variações adicionado!' });
+      const novoCard = new Product({ categoria, tipo, variacoes });
+      await novoCard.save();
 
-    } else {
-      const imagens = req.files.map(file => 'uploads/' + file.filename);
-      const produto = new Product({ tipoCard, nome, preco, tipo, categoria, imagens });
-      await produto.save();
-      return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
+      return res.status(201).json({ mensagem: '✅ Variações adicionadas com sucesso!' });
     }
+
+    res.status(400).json({ mensagem: '❌ Modo inválido.' });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ erro: 'Erro ao adicionar produto' });
+    res.status(500).json({ erro: 'Erro ao adicionar produto.' });
   }
 });
+
 
 
 

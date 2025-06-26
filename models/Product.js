@@ -1,21 +1,17 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-  tipoCard: { type: String, enum: ['unico', 'variacoes'], default: 'unico' },
-
-  // Para produto único
-  nome: String,
+  nome: String, // para produto único
   preco: Number,
-  tipo: String,
   categoria: String,
+  tipo: String,
   imagens: [String],
 
-  // Para cards com múltiplos produtos
   variacoes: [
     {
       nome: String,
       preco: Number,
-      img: String
+      imagem: String
     }
   ]
 });
