@@ -13,7 +13,6 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-
 .then(() => console.log('✅ Conectado ao MongoDB Atlas'))
 .catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
 
@@ -102,38 +101,36 @@ app.get('/produtos', async (req, res) => {
   }
 });
 
-// Adicionar produto com imagem
-app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
-  const { modo, nome, preco, categoria, tipo } = req.body;
+// Adicionar produto com imagem (unidade ou variações)
+app.post('/produtos', upload.fields([
+  { name: 'imagens', maxCount: 5 },
+  { name: 'v_imagens', maxCount: 5 }
+]), async (req, res) => {
+  const { modo, nome, preco, categoria, tipo, v_nome, v_preco } = req.body;
 
   try {
     if (modo === 'unico') {
-      const imagens = req.files.map(file => '/uploads/' + file.filename);
+      const imagens = (req.files['imagens'] || []).map(file => '/uploads/' + file.filename);
       const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
       await novoProduto.save();
       return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
 
     } else if (modo === 'variacoes') {
-      const v_nome = req.body['v_nome'];
-      const v_preco = req.body['v_preco'];
+      const nomes = Array.isArray(v_nome) ? v_nome : [v_nome];
+      const precos = Array.isArray(v_preco) ? v_preco : [v_preco];
+      const imagens = req.files['v_imagens'] || [];
 
-      if (!v_nome || !v_preco || !Array.isArray(v_nome) || !Array.isArray(v_preco)) {
-        return res.status(400).json({ mensagem: 'Nenhuma variação válida recebida.' });
-      }
+      const variacoes = [];
 
-            const imagens = req.files.map(file => '/uploads/' + file.filename);
-        const variacoes = [];
-
-        for (let i = 0; i < v_nome.length; i++) {
-          if (v_nome[i] && v_preco[i] && imagens[i]) {
-            variacoes.push({
-              nome: v_nome[i],
-              preco: parseFloat(v_preco[i]),
-              imagem: imagens[i]
-            });
-          }
+      for (let i = 0; i < nomes.length; i++) {
+        if (nomes[i] && precos[i] && imagens[i]) {
+          variacoes.push({
+            nome: nomes[i],
+            preco: parseFloat(precos[i]),
+            imagem: '/uploads/' + imagens[i].filename
+          });
         }
-
+      }
 
       if (variacoes.length === 0) {
         return res.status(400).json({ mensagem: 'Nenhuma variação válida recebida.' });
@@ -151,11 +148,6 @@ app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
     return res.status(500).json({ mensagem: 'Erro interno ao salvar produto.' });
   }
 });
-
-
-
-
-
 
 
 
