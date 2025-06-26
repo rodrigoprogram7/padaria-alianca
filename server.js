@@ -28,6 +28,10 @@ const upload = multer({ storage });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
+
+// ✅ Serve a pasta de uploads diretamente no navegador
+app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+
 app.use(session({
   secret: 'segredo_super_seguro',
   resave: false,
