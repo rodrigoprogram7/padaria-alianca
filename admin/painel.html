@@ -463,7 +463,6 @@
       <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
       <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
 
-      <!-- ✅ FORMULÁRIO ATUALIZADO -->
       <form id="form-produto" enctype="multipart/form-data" method="POST">
         <div class="form-group">
           <label>Tipo de Card:</label>
@@ -509,7 +508,7 @@
         <!-- BLOCOS DAS VARIAÇÕES -->
         <div id="bloco-variacoes"></div>
 
-        <!-- CATEGORIA E TIPO (COMUM) -->
+        <!-- CATEGORIA E TIPO -->
         <div class="form-group">
           <label for="categoria-produto">Categoria:</label>
           <select id="categoria-produto" name="categoria" required>
@@ -550,94 +549,91 @@
   </div>
 
   <script>
-  const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
-  const blocoUnico = document.getElementById('bloco-unico');
-  const seletorQtd = document.getElementById('seletor-qtd-variacoes');
-  const blocoVariacoes = document.getElementById('bloco-variacoes');
-  const imageUploadArea = document.getElementById('image-upload-area');
+    const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
+    const blocoUnico = document.getElementById('bloco-unico');
+    const seletorQtd = document.getElementById('seletor-qtd-variacoes');
+    const blocoVariacoes = document.getElementById('bloco-variacoes');
+    const imageUploadArea = document.getElementById('image-upload-area');
 
-  tipoCardRadios.forEach(radio => {
-  radio.addEventListener('change', () => {
-    const modo = radio.value;
+    tipoCardRadios.forEach(radio => {
+      radio.addEventListener('change', () => {
+        const modo = radio.value;
 
-    if (modo === 'variacoes' && radio.checked) {
-      blocoUnico.style.display = 'none';
-      seletorQtd.style.display = 'block';
-      imageUploadArea.style.display = 'none';
+        if (modo === 'variacoes' && radio.checked) {
+          blocoUnico.style.display = 'none';
+          seletorQtd.style.display = 'block';
+          imageUploadArea.style.display = 'none';
 
-      // Remove required do produto único
-      document.getElementById('nome-produto').removeAttribute('required');
-      document.getElementById('preco-produto').removeAttribute('required');
-      document.getElementById('imagens-produto').removeAttribute('required');
-    } else {
-      blocoUnico.style.display = 'block';
-      seletorQtd.style.display = 'none';
-      blocoVariacoes.innerHTML = '';
-      imageUploadArea.style.display = 'block';
+          document.getElementById('nome-produto').removeAttribute('required');
+          document.getElementById('preco-produto').removeAttribute('required');
+          document.getElementById('imagens-produto').removeAttribute('required');
+        } else {
+          blocoUnico.style.display = 'block';
+          seletorQtd.style.display = 'none';
+          blocoVariacoes.innerHTML = '';
+          imageUploadArea.style.display = 'block';
 
-      // Recoloca required
-      document.getElementById('nome-produto').setAttribute('required', true);
-      document.getElementById('preco-produto').setAttribute('required', true);
-      document.getElementById('imagens-produto').setAttribute('required', true);
-    }
-  });
-});
+          document.getElementById('nome-produto').setAttribute('required', true);
+          document.getElementById('preco-produto').setAttribute('required', true);
+          document.getElementById('imagens-produto').setAttribute('required', true);
+        }
+      });
+    });
 
-  document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
-    radio.addEventListener('change', () => {
-      const qtd = parseInt(radio.value);
-      blocoVariacoes.innerHTML = '';
-      for (let i = 0; i < qtd; i++) {
-        const div = document.createElement('div');
-        div.classList.add('form-group');
-        div.innerHTML = `
-          <h4>Produto ${i + 1}</h4>
-          <label>Nome:</label>
-          <input type="text" name="v_nome" required>
-          <label>Preço:</label>
-          <input type="text" name="v_preco" required>
-          <label>Imagem:</label>
-          <input type="file" name="imagens" accept="image/*" required>
-        `;
-        blocoVariacoes.appendChild(div);
+    document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        const qtd = parseInt(radio.value);
+        blocoVariacoes.innerHTML = '';
+        for (let i = 0; i < qtd; i++) {
+          const div = document.createElement('div');
+          div.classList.add('form-group');
+          div.innerHTML = `
+            <h4>Produto ${i + 1}</h4>
+            <label>Nome:</label>
+            <input type="text" name="v_nome[]" required>
+            <label>Preço:</label>
+            <input type="text" name="v_preco[]" required>
+            <label>Imagem:</label>
+            <input type="file" name="imagens" accept="image/*" required>
+          `;
+          blocoVariacoes.appendChild(div);
+        }
+      });
+    });
+
+    document.getElementById('form-produto').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
+      const form = document.getElementById('form-produto');
+      const formData = new FormData(form);
+
+      formData.append('modo', tipoCard);
+
+      const res = await fetch('/produtos', {
+        method: 'POST',
+        body: formData
+      });
+
+      const json = await res.json();
+      const msg = document.getElementById('feedback-message');
+      msg.textContent = json.mensagem || 'Erro ao salvar';
+      msg.className = 'feedback-message ' + (res.ok ? 'success' : 'error');
+      msg.style.display = 'flex';
+      setTimeout(() => msg.style.display = 'none', 3000);
+
+      if (res.ok) {
+        form.reset();
+        blocoVariacoes.innerHTML = '';
+        document.getElementById('image-preview').innerHTML = '';
+        imageUploadArea.style.display = 'block';
       }
     });
-  });
 
-  document.getElementById('form-produto').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
-    const form = document.getElementById('form-produto');
-    const formData = new FormData(form);
-
-    formData.append('modo', tipoCard);
-
-    const res = await fetch('/produtos', {
-      method: 'POST',
-      body: formData
-    });
-
-    const json = await res.json();
-    const msg = document.getElementById('feedback-message');
-    msg.textContent = json.mensagem || 'Erro ao salvar';
-    msg.className = 'feedback-message ' + (res.ok ? 'success' : 'error');
-    msg.style.display = 'flex';
-    setTimeout(() => msg.style.display = 'none', 3000);
-
-    if (res.ok) {
-      form.reset();
-      blocoVariacoes.innerHTML = '';
-      document.getElementById('image-preview').innerHTML = '';
-      imageUploadArea.style.display = 'block'; // reexibe imagem única se voltar
-    }
-  });
-
-  // Ao carregar a página, ativa o estado inicial corretamente
-  const selecionado = document.querySelector('input[name="tipoCard"]:checked');
-  if (selecionado) selecionado.dispatchEvent(new Event('change'));
-</script>
-
+    const selecionado = document.querySelector('input[name="tipoCard"]:checked');
+    if (selecionado) selecionado.dispatchEvent(new Event('change'));
+  </script>
 </body>
+
 </html>
 
 

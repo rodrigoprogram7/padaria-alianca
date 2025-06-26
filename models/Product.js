@@ -1,25 +1,28 @@
 const mongoose = require('mongoose');
 
 const ProductSchema = new mongoose.Schema({
-  nome: String,            // Usado apenas quando for produto único
-  preco: Number,           // Mesmo caso acima
-  categoria: {             // Fixo para ambos os modos
+  nome: String,            // Para produto único
+  preco: Number,           // Para produto único
+  categoria: {
     type: String,
     required: true
   },
-  tipo: {                  // "unidade" ou "peso"
+  tipo: {
     type: String,
     required: true
   },
-  imagens: [String],       // Para produto único (até 5 imagens)
+  imagens: [String],       // Para produto único
 
-  variacoes: [             // Para produtos com múltiplas variações
-    {
-      nome: { type: String, required: true },
-      preco: { type: Number, required: true },
-      imagem: { type: String, required: true }
-    }
-  ]
+  variacoes: {
+    type: [
+      {
+        nome: String,
+        preco: Number,
+        imagem: String
+      }
+    ],
+    default: undefined     // 🔥 Impede validação se for ausente
+  }
 });
 
 module.exports = mongoose.model('Product', ProductSchema);
