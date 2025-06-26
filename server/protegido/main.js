@@ -113,7 +113,8 @@ function renderizarProdutos(produtos) {
   lista.innerHTML = '';
 
   produtos.forEach(prod => {
-    if (prod.tipoCard === 'variacoes') {
+    // ✅ Verifica se é um card com variações (mais de um produto no mesmo card)
+    if (prod.variacoes && prod.variacoes.length > 0) {
       lista.appendChild(renderizarCardComVariacoes(prod));
     } else {
       lista.appendChild(renderizarCardUnico(prod));
@@ -158,17 +159,18 @@ function renderizarCardComVariacoes(prod) {
   card.className = 'produto carrossel';
   card.setAttribute('data-categoria', prod.categoria);
   card.setAttribute('data-preco', primeira.preco);
+  card.setAttribute('data-tipo', prod.tipo || 'unidade');
   card.setAttribute('data-variacoes', JSON.stringify(prod.variacoes));
 
   card.innerHTML = `
     <div class="produto-img-wrapper">
       <div class="imagem-grande-wrapper">
-        <img src="/${primeira.img}" alt="${primeira.nome}">
+        <img src="${primeira.imagem}" alt="${primeira.nome}">
       </div>
       <button class="carousel-btn carousel-prev">❮</button>
       <button class="carousel-btn carousel-next">❯</button>
       <div class="carousel-thumbs">
-        ${prod.variacoes.map(v => `<img src="/${v.img}" alt="${v.nome}">`).join('')}
+        ${prod.variacoes.map(v => `<img src="${v.imagem}" alt="${v.nome}">`).join('')}
       </div>
     </div>
     <div class="produto-info">
@@ -186,10 +188,6 @@ function renderizarCardComVariacoes(prod) {
 
   return card;
 }
-
-
-
-
 
 function filtrarCategoria(categoriaSelecionada) {
   // Remove .active de todos os botões

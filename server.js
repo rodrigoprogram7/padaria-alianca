@@ -117,18 +117,19 @@ app.post('/produtos', upload.array('imagens', 5), async (req, res) => {
         return res.status(400).json({ mensagem: 'Nenhuma variação válida recebida.' });
       }
 
-      const imagens = req.files.map(file => '/uploads/' + file.filename);
-      const variacoes = [];
+            const imagens = req.files.map(file => '/uploads/' + file.filename);
+        const variacoes = [];
 
-      for (let i = 0; i < v_nome.length; i++) {
-        if (v_nome[i] && v_preco[i] && imagens[i]) {
-          variacoes.push({
-            nome: v_nome[i],
-            preco: parseFloat(v_preco[i]),
-            imagem: imagens[i]
-          });
+        for (let i = 0; i < v_nome.length; i++) {
+          if (v_nome[i] && v_preco[i] && imagens[i]) {
+            variacoes.push({
+              nome: v_nome[i],
+              preco: parseFloat(v_preco[i]),
+              imagem: imagens[i]
+            });
+          }
         }
-      }
+
 
       if (variacoes.length === 0) {
         return res.status(400).json({ mensagem: 'Nenhuma variação válida recebida.' });
