@@ -11,13 +11,10 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 const app = express();
 
-// ✅ Conexão com MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('✅ Conectado ao MongoDB Atlas'))
-.catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
+// ✅ Conexão MongoDB
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('✅ Conectado ao MongoDB Atlas'))
+  .catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
 
 // ✅ Configuração do Cloudinary
 cloudinary.config({
@@ -26,20 +23,19 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-// ✅ Configuração do Multer com Cloudinary
+// ✅ Multer com Cloudinary
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: async (req, file) => {
-    return {
-      folder: 'padaria/uploads',
-      format: 'jpg',
-      public_id: Date.now() + '-' + file.originalname.replace(/\.[^/.]+$/, '')
-    };
+  params: {
+    folder: 'padaria/uploads',
+    allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
+    format: async () => 'webp',
+    public_id: (req, file) => Date.now() + '-' + file.originalname.replace(/\.[^/.]+$/, '')
   }
 });
 const upload = multer({ storage });
 
-// ✅ Middleware
+// ✅ Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -61,7 +57,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// ✅ Proteção de arquivos específicos
+// ✅ Rota de arquivos protegidos
 const protegidoPath = path.join(__dirname, 'server', 'protegido');
 function bloquearAcessoDireto(req, res, next) {
   const referer = req.get('Referer');
@@ -75,9 +71,6 @@ app.get('/estilo.css', bloquearAcessoDireto, (req, res) => {
 app.get('/script.js', bloquearAcessoDireto, (req, res) => {
   res.sendFile(path.join(protegidoPath, 'main.js'));
 });
-
-// ✅ Rota de pedido
-app.use('/pedido', require('./server/routes/pedido'));
 
 // ✅ Login simples
 const ADMIN_HASH = '$2b$10$zZK7IEWQe4QJKQu3kusT0ulIMG1W6Bziq1mNlq925LAbF9YMRNZCW';
@@ -101,10 +94,10 @@ app.get('/admin/painel', proteger, (req, res) => {
   res.sendFile(path.join(__dirname, 'admin', 'painel.html'));
 });
 
-// ✅ Rotas de Produto
+// ✅ Modelo
 const Product = require('./models/Product');
 
-// Buscar produtos
+// ✅ Buscar produtos
 app.get('/produtos', async (req, res) => {
   try {
     const produtos = await Product.find();
@@ -114,7 +107,7 @@ app.get('/produtos', async (req, res) => {
   }
 });
 
-// Adicionar produto com imagem (unidade ou variações)
+// ✅ Adicionar produtos
 app.post('/produtos', upload.fields([
   { name: 'imagens', maxCount: 5 },
   { name: 'v_imagens', maxCount: 5 }
@@ -124,8 +117,8 @@ app.post('/produtos', upload.fields([
   try {
     if (modo === 'unico') {
       const imagens = (req.files['imagens'] || []).map(file => file.path);
-      const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
-      await novoProduto.save();
+      const novo = new Product({ nome, preco, categoria, tipo, imagens });
+      await novo.save();
       return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
 
     } else if (modo === 'variacoes') {
@@ -134,7 +127,6 @@ app.post('/produtos', upload.fields([
       const imagens = req.files['v_imagens'] || [];
 
       const variacoes = [];
-
       for (let i = 0; i < nomes.length; i++) {
         if (nomes[i] && precos[i] && imagens[i]) {
           variacoes.push({
@@ -149,51 +141,46 @@ app.post('/produtos', upload.fields([
         return res.status(400).json({ mensagem: 'Nenhuma variação válida recebida.' });
       }
 
-      const produtoVariado = new Product({ categoria, tipo, variacoes });
-      await produtoVariado.save();
+      const novo = new Product({ categoria, tipo, variacoes });
+      await novo.save();
       return res.status(201).json({ mensagem: 'Produto com variações adicionado com sucesso!' });
-
-    } else {
-      return res.status(400).json({ mensagem: 'Modo inválido.' });
     }
+
+    res.status(400).json({ mensagem: 'Modo inválido.' });
   } catch (err) {
     console.error('Erro ao salvar produto:', err);
-    return res.status(500).json({ mensagem: 'Erro interno ao salvar produto.' });
+    res.status(500).json({ mensagem: 'Erro interno ao salvar produto.' });
   }
 });
 
-// 🔴 Remover produto
+// ✅ Excluir produto
 app.delete('/produtos/:id', async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json({ mensagem: 'Produto removido com sucesso!' });
   } catch (err) {
+    console.error('Erro ao excluir produto:', err);
     res.status(500).json({ mensagem: 'Erro ao remover o produto.' });
   }
 });
 
-// 🟡 Editar produto (simples para produto único)
-app.put('/produtos/:id', upload.fields([
-  { name: 'imagens', maxCount: 5 },
-  { name: 'v_imagens', maxCount: 5 }
-]), async (req, res) => {
+// ✅ Editar produto
+app.put('/produtos/:id', upload.single('imagem'), async (req, res) => {
   try {
-    const { nome, preco, categoria, tipo } = req.body;
-    const imagens = (req.files['imagens'] || []).map(f => '/uploads/' + f.filename);
-    const update = { nome, preco, categoria, tipo };
-
-    if (imagens.length > 0) update.imagens = imagens;
-
+    const { nome, preco } = req.body;
+    const update = { nome, preco };
+    if (req.file && req.file.path) {
+      update.imagens = [req.file.path];
+    }
     await Product.findByIdAndUpdate(req.params.id, update);
-    res.status(200).json({ mensagem: 'Produto atualizado com sucesso!' });
+    res.json({ mensagem: 'Produto atualizado com sucesso!' });
   } catch (err) {
     console.error('Erro ao editar produto:', err);
     res.status(500).json({ mensagem: 'Erro ao editar produto.' });
   }
 });
 
-
-// ✅ Inicializa o servidor
+// ✅ Inicializa servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Servidor rodando em http://localhost:${PORT}`);
