@@ -455,6 +455,86 @@
                 padding: 20px;
             }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.painel-produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.painel-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  background: white;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.painel-card img {
+  width: 100%;
+  height: 90px;
+  object-fit: cover;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.filter-bar {
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+.filtro-btn {
+  margin: 4px;
+  padding: 5px 12px;
+  cursor: pointer;
+  border: none;
+  background: #ddd;
+  border-radius: 4px;
+}
+
+.filtro-btn.active {
+  background-color: #007bff;
+  color: white;
+}
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -462,7 +542,6 @@
     <div class="form-section dashboard-section">
       <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
       <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
-
       <form id="form-produto" enctype="multipart/form-data" method="POST">
         <div class="form-group">
           <label>Tipo de Card:</label>
@@ -538,24 +617,57 @@
       </form>
     </div>
 
-    <div class="list-section dashboard-section">
-      <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
-      <div class="produto-lista" id="produtos-lista"></div>
-      <div id="no-products-message" style="text-align: center; color: var(--light-text-color); margin-top: 30px; display: none;">
-        <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
-        <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
-      </div>
-        <!-- Exemplo de card no painel -->
-<div class="card-produto" data-id="PRODUTO_ID">
-  <p>Nome: Arroz Integral</p>
-  <p>Preço: R$ 12.50</p>
-  <button class="btn-editar">✏️ Editar</button>
-  <button class="btn-remover">🗑️ Remover</button>
-</div>
-    </div>
+   <!-- ✅ Menu de filtros -->
+<div class="filtro-admin">
+  <div class="filtro-categorias">
+    <button class="filtro-btn active" data-categoria="todos">Todos</button>
+    <button class="filtro-btn" data-categoria="mercearia">Mercearia</button>
+    <button class="filtro-btn" data-categoria="padaria">Padaria</button>
+    <button class="filtro-btn" data-categoria="sacoloes">Sacolões</button>
+    <button class="filtro-btn" data-categoria="bazar">Bazar</button>
+    <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
+    <button class="filtro-btn" data-categoria="pereciveis">Perecíveis</button>
+    <button class="filtro-btn" data-categoria="higiene">Higiene</button>
   </div>
 
+  <div class="filtro-busca">
+    <input type="text" id="busca-admin" placeholder="Buscar produto por nome...">
+  </div>
+</div>
 
+<!-- ✅ Lista dos produtos -->
+<div class="produto-admin-lista" id="produtos-lista"></div>
+
+<!-- ✅ Modal de Exclusão -->
+<div id="modal-excluir" class="modal" style="display: none;">
+  <div class="modal-conteudo">
+    <p>Tem certeza que deseja excluir o produto?</p>
+    <div class="modal-botoes">
+      <button id="confirmar-excluir" class="btn btn-danger">Sim</button>
+      <button onclick="fecharModal('modal-excluir')" class="btn btn-cancelar">Não</button>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Modal de Edição -->
+<div id="modal-editar" class="modal" style="display: none;">
+  <div class="modal-conteudo">
+    <h3>Editar Produto</h3>
+    <form id="form-editar" enctype="multipart/form-data">
+      <input type="hidden" name="id" id="editar-id">
+      <label>Nome:</label>
+      <input type="text" name="nome" id="editar-nome" required>
+      <label>Preço:</label>
+      <input type="text" name="preco" id="editar-preco" required>
+      <label>Nova Imagem:</label>
+      <input type="file" name="novaImagem" id="editar-imagem" accept="image/*">
+      <div class="modal-botoes">
+        <button type="submit" class="btn btn-success">Salvar</button>
+        <button type="button" onclick="fecharModal('modal-editar')" class="btn btn-cancelar">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
 
 
   <script>
@@ -666,6 +778,154 @@ document.getElementById('produtos-lista').addEventListener('click', async (e) =>
     alert('🔧 Função de edição ainda será implementada.'); // Aqui você pode abrir um modal de edição
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// painel.js
+
+let produtos = [];
+
+// Buscar produtos do banco e renderizar
+async function carregarProdutos() {
+  const res = await fetch('/produtos');
+  produtos = await res.json();
+  renderizarLista(produtos);
+}
+
+// Renderizar lista de produtos no painel
+function renderizarLista(produtosFiltrados) {
+  const container = document.getElementById('produtos-lista');
+  container.innerHTML = '';
+
+  produtosFiltrados.forEach(prod => {
+    const card = document.createElement('div');
+    card.className = 'produto-card';
+
+    const imagem = prod.imagens?.[0] || prod.variacoes?.[0]?.imagem || '/assets/images/alimentos/sem-imagem.jpg';
+    const nome = prod.nome || prod.variacoes?.[0]?.nome || 'Sem nome';
+    const preco = prod.preco || prod.variacoes?.[0]?.preco || '0.00';
+
+    card.innerHTML = `
+      <img src="${imagem}" alt="${nome}" class="produto-img">
+      <h4>${nome}</h4>
+      <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
+      <button class="editar-btn" onclick="abrirModalEditar('${prod._id}')">Editar</button>
+      <button class="excluir-btn" onclick="abrirModalExcluir('${prod._id}')">Excluir</button>
+    `;
+
+    container.appendChild(card);
+  });
+
+  document.getElementById('no-products-message').style.display = produtosFiltrados.length ? 'none' : 'block';
+}
+
+// Filtro por categoria
+function filtrarCategoriaPainel(cat) {
+  const filtrado = cat === 'todos' ? produtos : produtos.filter(p => p.categoria === cat);
+  renderizarLista(filtrado);
+}
+
+// Filtro por nome
+function pesquisarNomePainel() {
+  const termo = document.getElementById('busca-nome').value.toLowerCase();
+  const resultado = produtos.filter(p => {
+    const nome = p.nome || p.variacoes?.[0]?.nome || '';
+    return nome.toLowerCase().includes(termo);
+  });
+  renderizarLista(resultado);
+}
+
+// Abrir modal de edição
+function abrirModalEditar(id) {
+  const produto = produtos.find(p => p._id === id);
+  if (!produto) return;
+
+  const nome = produto.nome || produto.variacoes?.[0]?.nome || '';
+  const preco = produto.preco || produto.variacoes?.[0]?.preco || '';
+
+  document.getElementById('edit-id').value = id;
+  document.getElementById('edit-nome').value = nome;
+  document.getElementById('edit-preco').value = preco;
+
+  document.getElementById('modal-editar').style.display = 'flex';
+}
+
+// Confirmar edição
+async function salvarEdicao() {
+  const id = document.getElementById('edit-id').value;
+  const nome = document.getElementById('edit-nome').value;
+  const preco = document.getElementById('edit-preco').value;
+  const imagem = document.getElementById('edit-imagem').files[0];
+
+  const formData = new FormData();
+  formData.append('nome', nome);
+  formData.append('preco', preco);
+  if (imagem) formData.append('imagem', imagem);
+
+  const res = await fetch(`/produtos/${id}`, {
+    method: 'PUT',
+    body: formData
+  });
+
+  const json = await res.json();
+  alert(json.mensagem);
+  document.getElementById('modal-editar').style.display = 'none';
+  carregarProdutos();
+}
+
+// Abrir modal de confirmação de exclusão
+function abrirModalExcluir(id) {
+  document.getElementById('delete-id').value = id;
+  document.getElementById('modal-excluir').style.display = 'flex';
+}
+
+// Confirmar exclusão
+async function confirmarExclusao() {
+  const id = document.getElementById('delete-id').value;
+  const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
+  const json = await res.json();
+  alert(json.mensagem);
+  document.getElementById('modal-excluir').style.display = 'none';
+  carregarProdutos();
+}
+
+// Fechar modais
+function fecharModais() {
+  document.getElementById('modal-editar').style.display = 'none';
+  document.getElementById('modal-excluir').style.display = 'none';
+}
+
+window.addEventListener('DOMContentLoaded', carregarProdutos);
+
 
 
 
