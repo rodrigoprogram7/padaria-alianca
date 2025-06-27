@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 require('dotenv').config();
 
 const app = express();
@@ -16,10 +18,23 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log('✅ Conectado ao MongoDB Atlas'))
 .catch(err => console.error('❌ Erro ao conectar no MongoDB:', err));
 
-// ✅ Configuração do Multer (upload de imagem)
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, 'public/uploads'),
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+// ✅ Configuração do Cloudinary
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// ✅ Configuração do Multer com Cloudinary
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: async (req, file) => {
+    return {
+      folder: 'padaria/uploads',
+      format: 'jpg',
+      public_id: Date.now() + '-' + file.originalname.replace(/\.[^/.]+$/, '')
+    };
+  }
 });
 const upload = multer({ storage });
 
@@ -27,9 +42,6 @@ const upload = multer({ storage });
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
-// ✅ Serve a pasta de uploads diretamente no navegador
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 
 app.use(session({
   secret: 'segredo_super_seguro',
@@ -110,7 +122,7 @@ app.post('/produtos', upload.fields([
 
   try {
     if (modo === 'unico') {
-      const imagens = (req.files['imagens'] || []).map(file => '/uploads/' + file.filename);
+      const imagens = (req.files['imagens'] || []).map(file => file.path);
       const novoProduto = new Product({ nome, preco, categoria, tipo, imagens });
       await novoProduto.save();
       return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
@@ -127,7 +139,7 @@ app.post('/produtos', upload.fields([
           variacoes.push({
             nome: nomes[i],
             preco: parseFloat(precos[i]),
-            imagem: '/uploads/' + imagens[i].filename
+            imagem: imagens[i].path
           });
         }
       }
@@ -148,8 +160,6 @@ app.post('/produtos', upload.fields([
     return res.status(500).json({ mensagem: 'Erro interno ao salvar produto.' });
   }
 });
-
-
 
 // ✅ Inicializa o servidor
 const PORT = process.env.PORT || 3000;
