@@ -548,6 +548,15 @@
     </div>
   </div>
 
+  <!-- Exemplo de card no painel -->
+<div class="card-produto" data-id="PRODUTO_ID">
+  <p>Nome: Arroz Integral</p>
+  <p>Preço: R$ 12.50</p>
+  <button class="btn-editar">✏️ Editar</button>
+  <button class="btn-remover">🗑️ Remover</button>
+</div>
+
+
   <script>
     const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
     const blocoUnico = document.getElementById('bloco-unico');
@@ -630,6 +639,35 @@
     // Estado inicial do formulário
     const selecionado = document.querySelector('input[name="tipoCard"]:checked');
     if (selecionado) selecionado.dispatchEvent(new Event('change'));
+
+
+
+
+
+
+
+
+document.getElementById('produtos-lista').addEventListener('click', async (e) => {
+  const card = e.target.closest('.card-produto');
+  if (!card) return;
+  const id = card.dataset.id;
+
+  if (e.target.classList.contains('btn-remover')) {
+    if (confirm('Tem certeza que deseja remover este produto?')) {
+      const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
+      const data = await res.json();
+      alert(data.mensagem);
+      if (res.ok) card.remove();
+    }
+  }
+
+  if (e.target.classList.contains('btn-editar')) {
+    alert('🔧 Função de edição ainda será implementada.'); // Aqui você pode abrir um modal de edição
+  }
+});
+
+
+
   </script>
 </body>
 

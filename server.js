@@ -162,6 +162,37 @@ app.post('/produtos', upload.fields([
   }
 });
 
+// 🔴 Remover produto
+app.delete('/produtos/:id', async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.status(200).json({ mensagem: 'Produto removido com sucesso!' });
+  } catch (err) {
+    res.status(500).json({ mensagem: 'Erro ao remover o produto.' });
+  }
+});
+
+// 🟡 Editar produto (simples para produto único)
+app.put('/produtos/:id', upload.fields([
+  { name: 'imagens', maxCount: 5 },
+  { name: 'v_imagens', maxCount: 5 }
+]), async (req, res) => {
+  try {
+    const { nome, preco, categoria, tipo } = req.body;
+    const imagens = (req.files['imagens'] || []).map(f => '/uploads/' + f.filename);
+    const update = { nome, preco, categoria, tipo };
+
+    if (imagens.length > 0) update.imagens = imagens;
+
+    await Product.findByIdAndUpdate(req.params.id, update);
+    res.status(200).json({ mensagem: 'Produto atualizado com sucesso!' });
+  } catch (err) {
+    console.error('Erro ao editar produto:', err);
+    res.status(500).json({ mensagem: 'Erro ao editar produto.' });
+  }
+});
+
+
 // ✅ Inicializa o servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
