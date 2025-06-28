@@ -864,6 +864,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let produtos = []; // Array para armazenar os produtos carregados
 
+    // ***** IMPORTANTE: Configure o caminho base das suas imagens aqui! *****
+    // Ex: Se suas imagens são servidas de 'seu-dominio.com/uploads/imagem.jpg', use '/uploads/'
+    // Se a imagem completa já vem do backend (ex: 'http://...', ou já o caminho completo relativo '/assets/images/...'), deixe como ''.
+    // Para resolver o "undefined", deixe-a vazia por enquanto e veja o console.log(prod)
+    // Se sua URL de imagem no banco de dados já é a URL COMPLETA, como "https://padaria-alianca.onrender.com/uploads/minha-imagem.jpg",
+    // então BASE_IMAGE_URL deve ser uma string vazia: ''.
+    // Se seu banco de dados salva apenas "minha-imagem.jpg" e o servidor as serve de "/uploads/", então use '/uploads/'.
+    const BASE_IMAGE_URL = ''; // Mantenha vazio por enquanto para depurar o "undefined"
+
     // --- Funções de UI e Animações ---
 
     /**
@@ -961,8 +970,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <label>Preço:</label>
                     <input type="text" name="v_preco[${i}]" placeholder="Preço da variação" step="0.01" required>
                     <label>Imagem:</label>
-                    <input type="file" name="v_imagens" accept="image/*" required>
-                `;
+                    <input type="file" name="v_imagens_${i}" accept="image/*" required> `;
                 blocoVariacoes.appendChild(div);
             }
         });
@@ -1060,7 +1068,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderizarLista(produtosFiltrados) {
         produtosLista.innerHTML = ''; // Limpa lista anterior
 
-        if (produtosFiltrados.length === 0) {
+        if (!produtosFiltrados || produtosFiltrados.length === 0) {
             noProductsMessage.style.display = 'block';
             return;
         } else {
@@ -1073,32 +1081,46 @@ document.addEventListener('DOMContentLoaded', () => {
             // Adiciona um pequeno atraso para animação sequencial
             card.style.animationDelay = `${index * 0.05}s`;
 
-            // Lógica para determinar a imagem, nome e preço com base no tipo de card
-            let imagem;
-            let nome;
-            let preco;
+            let imagemUrl;
+            let nomeProduto;
+            let precoProduto;
+            const fallbackImage = '/assets/images/alimentos/sem-imagem.jpg'; // Imagem de fallback
+
+            // ***** ADIÇÃO PARA DEPURAR O OBJETO DO PRODUTO *****
+            // Abra o console do navegador (F12) e verifique a estrutura do objeto 'prod'.
+            // Procure pela propriedade que contém o nome do arquivo da imagem, nome do produto e preço.
+            console.log("Objeto Produto recebido do backend:", prod);
+            // **************************************************
 
             if (prod.tipoCard === 'unico') {
-                imagem = prod.imagens?.[0] || '/assets/images/alimentos/sem-imagem.jpg';
-                nome = prod.nome || 'Sem nome';
-                preco = prod.preco || '0.00';
+                // VERIFIQUE AQUI: Qual é a propriedade que contém o nome da imagem para produto único?
+                // Ex: prod.imagemPrincipal, prod.imageName, prod.caminhoDaFoto etc.
+                // Ex: Se prod.imagens é um array de nomes de arquivos, use prod.imagens[0]
+                const imageName = prod.imagens && prod.imagens.length > 0 ? prod.imagens[0] : null;
+                imagemUrl = imageName ? `${BASE_IMAGE_URL}${imageName}` : fallbackImage;
+                
+                nomeProduto = prod.nome || 'Nome Indisponível';
+                precoProduto = prod.preco || '0.00';
             } else if (prod.tipoCard === 'variacoes' && prod.variacoes && prod.variacoes.length > 0) {
-                // Para cards de variação, mostra o nome/preço da primeira variação e uma imagem genérica ou da primeira variação
-                imagem = prod.variacoes[0].imagem || '/assets/images/alimentos/sem-imagem.jpg';
-                nome = prod.variacoes[0].nome || 'Variações'; // Nome genérico para o card de variações
-                preco = prod.variacoes[0].preco || '0.00'; // Preço da primeira variação
-                // Você pode ajustar isso para mostrar "A partir de R$ X.XX" se desejar
+                // VERIFIQUE AQUI: Qual é a propriedade que contém o nome da imagem para variações?
+                // Ex: prod.variacoes[0].imagem, prod.variacoes[0].foto, prod.variacoes[0].image etc.
+                const firstVariation = prod.variacoes[0];
+                const variationImageName = firstVariation.imagem || null; // Verifique se é 'imagem' ou outra propriedade
+                imagemUrl = variationImageName ? `${BASE_IMAGE_URL}${variationImageName}` : fallbackImage;
+                
+                nomeProduto = firstVariation.nome || 'Variações Indisponíveis';
+                precoProduto = firstVariation.preco || '0.00';
             } else {
-                // Fallback para casos onde não há imagem ou tipo de card não definido
-                imagem = '/assets/images/alimentos/sem-imagem.jpg';
-                nome = 'Produto Desconhecido';
-                preco = '0.00';
+                // Fallback para casos onde o tipo de card não é reconhecido ou dados estão ausentes
+                imagemUrl = fallbackImage;
+                nomeProduto = 'Produto Desconhecido';
+                precoProduto = '0.00';
             }
             
             card.innerHTML = `
-                <img src="${imagem}" alt="${nome}" class="produto-img">
-                <h4>${nome}</h4>
-                <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
+                <img src="${imagemUrl}" alt="${nomeProduto}" class="produto-img">
+                <h4>${nomeProduto}</h4>
+                <p>R$ ${parseFloat(precoProduto).toFixed(2).replace('.', ',')}</p>
                 <div class="botoes-acao">
                     <button class="editar-btn" data-id="${prod._id}"><i class="fas fa-edit"></i> Editar</button>
                     <button class="excluir-btn" data-id="${prod._id}"><i class="fas fa-trash-alt"></i> Excluir</button>
