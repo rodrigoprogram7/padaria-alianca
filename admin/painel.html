@@ -945,26 +945,27 @@ input:focus:invalid {
     });
 
     // Gerar campos para variações de produto dinamicamente
-    document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
-        radio.addEventListener('change', () => {
-            const qtd = parseInt(radio.value);
-            blocoVariacoes.innerHTML = ''; // Limpa campos anteriores
-            for (let i = 0; i < qtd; i++) {
-                const div = document.createElement('div');
-                div.classList.add('form-group');
-                div.innerHTML = `
-                    <h4>Produto ${i + 1}</h4>
-                    <label>Nome:</label>
-                    <input type="text" name="variacoes[${i}][nome]" placeholder="Nome da variação" required>
-                    <label>Preço:</label>
-                    <input type="text" name="variacoes[${i}][preco]" placeholder="Preço da variação" step="0.01" required>
-                    <label>Imagem:</label>
-                    <input type="file" name="variacoes[${i}][imagem]" accept="image/*" required>
-                `;
-                blocoVariacoes.appendChild(div);
-            }
-        });
+    // Atualização na geração dos campos de variações
+  document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      const qtd = parseInt(radio.value);
+      blocoVariacoes.innerHTML = ''; // Limpa campos anteriores
+      for (let i = 0; i < qtd; i++) {
+        const div = document.createElement('div');
+        div.classList.add('form-group');
+        div.innerHTML = `
+          <h4>Produto ${i + 1}</h4>
+          <label>Nome:</label>
+          <input type="text" name="v_nome[]" placeholder="Nome da variação" required>
+          <label>Preço:</label>
+          <input type="text" name="v_preco[]" placeholder="Preço da variação" step="0.01" required>
+          <label>Imagem:</label>
+          <input type="file" name="v_imagens" accept="image/*" required>
+        `;
+        blocoVariacoes.appendChild(div);
+      }
     });
+  });
 
     // Pré-visualização de imagens para o modo único
     document.getElementById('imagens-produto').addEventListener('change', (e) => {
