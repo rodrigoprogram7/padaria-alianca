@@ -124,7 +124,8 @@ function renderizarProdutos(produtos) {
 
 function renderizarCardUnico(prod) {
   const precoFormatado = parseFloat(prod.preco).toFixed(2).replace('.', ',');
-  const imagem = prod.imagens?.[0] ? '/' + prod.imagens[0] : '/assets/images/alimentos/sem-imagem.jpg';
+  const imagem = prod.imagens?.[0] || '/assets/images/alimentos/sem-imagem.jpg';
+
 
   const card = document.createElement('div');
   card.className = 'produto';
