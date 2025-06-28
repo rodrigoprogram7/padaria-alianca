@@ -57,10 +57,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/style-painel.css', bloquearAcessoDireto, (req, res) => {
-  res.sendFile(path.join(protegidoPath, 'style-painel.css'));
-});
-
 
 // ✅ Rota de arquivos protegidos
 const protegidoPath = path.join(__dirname, 'server', 'protegido');
