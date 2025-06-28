@@ -145,12 +145,13 @@ function renderizarCardUnico(prod) {
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
-      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
     </div>
   `;
 
   return card;
 }
+
 
 function renderizarCardComVariacoes(prod) {
   const primeira = prod.variacoes[0];
@@ -183,13 +184,13 @@ function renderizarCardComVariacoes(prod) {
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
-      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
     </div>
   `;
 
   return card;
 }
-
+ 
 function filtrarCategoria(categoriaSelecionada) {
   // Remove .active de todos os botões
   document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
