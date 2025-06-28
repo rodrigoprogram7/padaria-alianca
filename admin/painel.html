@@ -7,209 +7,194 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
     <style>
-
-:root {
-            --primary-color: #4CAF50;
-            --primary-dark-color: #45a049;
-            --secondary-color: #2196F3;
-            --secondary-dark-color: #1976D2;
-            --background-color: #f4f7f6;
-            --card-background: #ffffff;
-            --text-color: #333;
-            --light-text-color: #666;
+        /* Variáveis CSS para facilitar a manutenção e padronização */
+        :root {
+            --primary-color: #4CAF50; /* Verde vibrante */
+            --primary-dark: #388E3C;
+            --secondary-color: #FFC107; /* Amarelo para destaque */
+            --background-light: #f4f7f6; /* Fundo claro */
+            --background-dark: #e0e4e8; /* Fundo secundário */
+            --text-color-dark: #333;
+            --text-color-light: #666;
             --border-color: #ddd;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --danger-color: #f44336;
-            --danger-dark-color: #d32f2f;
-            --success-color: #4CAF50;
-            --success-dark-color: #388E3C;
-            --info-color: #2196F3;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
+            --shadow-light: 0 4px 8px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 6px 12px rgba(0, 0, 0, 0.12);
+            --border-radius: 8px;
+            --transition-speed: 0.3s;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
+            margin: 0;
             padding: 20px;
+            background-color: var(--background-light);
+            color: var(--text-color-dark);
+            line-height: 1.6;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start; /* Alinha ao topo */
+            min-height: 100vh;
+            box-sizing: border-box; /* Garante padding e borda inclusos na largura/altura */
         }
 
         .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
             max-width: 1200px;
-            margin: 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 15px;
-            background-color: var(--background-color);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px var(--shadow-color);
+            width: 100%;
+            margin-top: 20px; /* Espaço do topo */
+            padding: 0 15px; /* Padding nas laterais */
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: 1fr 2fr;
+                padding: 0;
+            }
         }
 
         .dashboard-section {
-            background-color: var(--card-background);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            flex: 1 1 48%; /* Permite que as seções ocupem quase metade da largura */
-            min-width: 300px; /* Garante que não fiquem muito estreitas em telas menores */
+            background-color: #fff;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 20px; /* Espaço entre as seções em mobile */
+            transition: transform var(--transition-speed) ease-in-out, box-shadow var(--transition-speed) ease-in-out;
         }
 
-        .form-section {
-            order: 1; /* Garante que o formulário venha primeiro */
+        .dashboard-section:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-medium);
         }
-
-        .list-section {
-            order: 3; /* A lista de produtos agora vem depois da barra de filtro */
-        }
-        
-        /* Ajuste na ordem da barra de filtro */
-        .filter-bar {
-            grid-column: 1 / -1; /* Ocupa todas as colunas no grid */
-            background-color: var(--card-background);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: center;
-            order: 2; /* A barra de filtro agora vem depois do formulário */
-        }
-
 
         h1, h2, h3 {
-            color: var(--primary-color);
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-top: 0;
             margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        h1 .fas, h2 .fas {
-            color: var(--secondary-color);
+        h1 i, h2 i, h3 i {
+            color: var(--primary-color);
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .form-group label {
             display: block;
             margin-bottom: 8px;
             font-weight: 600;
-            color: var(--light-text-color);
+            color: var(--text-color-dark);
         }
 
         .form-group input[type="text"],
         .form-group input[type="number"],
         .form-group input[type="file"],
         .form-group select {
-            width: 100%;
-            padding: 10px 12px;
+            width: calc(100% - 20px); /* Ajusta para padding */
+            padding: 12px;
             border: 1px solid var(--border-color);
-            border-radius: 5px;
-            font-size: 1em;
-            color: var(--text-color);
-            background-color: #fff;
-            transition: border-color 0.3s ease;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            color: var(--text-color-dark);
+            background-color: #fcfcfc;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
         }
 
         .form-group input[type="text"]:focus,
         .form-group input[type="number"]:focus,
         .form-group select:focus {
             border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
             outline: none;
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
         }
 
-        .form-group input[type="radio"] {
-            margin-right: 8px;
-        }
-
-        .radio-group label {
+        .radio-group label, .form-group > label > input[type="radio"] + span {
+            margin-right: 15px;
             display: inline-flex;
             align-items: center;
-            margin-right: 20px;
-            font-weight: normal;
+            cursor: pointer;
+            font-weight: 400;
+            color: var(--text-color-dark);
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
+            accent-color: var(--primary-color); /* Cor do radio button */
         }
 
         .button-submit {
             background-color: var(--primary-color);
             color: white;
-            padding: 12px 25px;
+            padding: 14px 25px;
             border: none;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             cursor: pointer;
-            font-size: 1.1em;
+            font-size: 1.1rem;
             font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
             display: flex;
             align-items: center;
-            gap: 8px;
-            margin-top: 20px;
+            gap: 10px;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            box-shadow: var(--shadow-light);
         }
 
         .button-submit:hover {
-            background-color: var(--primary-dark-color);
+            background-color: var(--primary-dark);
             transform: translateY(-2px);
         }
 
         .feedback-message {
-            display: none;
             margin-top: 20px;
-            padding: 12px;
-            border-radius: 5px;
-            font-weight: 500;
+            padding: 15px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
             text-align: center;
+            display: none; /* Controlado via JS */
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            opacity: 0; /* Para animação */
+            transform: translateY(10px); /* Para animação */
+            transition: opacity var(--transition-speed) ease-out, transform var(--transition-speed) ease-out;
         }
 
         .feedback-message.success {
-            background-color: var(--success-color);
-            color: white;
+            background-color: #e6ffe6; /* Verde claro */
+            color: var(--primary-dark);
+            border: 1px solid var(--primary-color);
         }
 
         .feedback-message.error {
-            background-color: var(--danger-color);
-            color: white;
+            background-color: #ffe6e6; /* Vermelho claro */
+            color: #d32f2f; /* Vermelho escuro */
+            border: 1px solid #d32f2f;
         }
 
+        /* Estilos para o upload de imagem */
         .image-upload-area {
             border: 2px dashed var(--border-color);
-            border-radius: 8px;
+            border-radius: var(--border-radius);
             padding: 30px;
             text-align: center;
             cursor: pointer;
-            transition: border-color 0.3s ease, background-color 0.3s ease;
-            margin-top: 10px;
+            background-color: var(--background-dark);
+            transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
             position: relative;
+            overflow: hidden;
         }
 
         .image-upload-area:hover {
+            background-color: #d6dbdf;
             border-color: var(--primary-color);
-            background-color: #f9fdf9;
-        }
-
-        .image-upload-area .upload-icon {
-            font-size: 3em;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .image-upload-area p {
-            color: var(--light-text-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
         }
 
         .image-upload-area input[type="file"] {
@@ -222,684 +207,723 @@
             cursor: pointer;
         }
 
+        .upload-icon {
+            font-size: 3.5em;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .image-upload-area p {
+            margin: 0;
+            color: var(--text-color-light);
+        }
+
         .image-preview {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            margin-top: 20px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
+            margin-top: 15px;
         }
 
         .image-preview img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: var(--border-radius);
             border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px var(--shadow-color);
+            box-shadow: var(--shadow-light);
+            transition: transform var(--transition-speed) ease;
+        }
+        .image-preview img:hover {
+            transform: scale(1.05);
         }
 
+        /* Seções de variação de produtos */
+        #bloco-variacoes .form-group {
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: var(--background-dark);
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+        }
+        #bloco-variacoes h4 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding-bottom: 10px;
+        }
 
-        .filter-bar .categorias-fixas {
+        /* Filter Bar */
+        .filter-bar {
+            background-color: #fff;
+            padding: 20px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .filter-bar {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+        }
+
+        .categorias-fixas {
             display: flex;
             flex-wrap: wrap;
             gap: 10px;
-            flex-grow: 1;
+            justify-content: center;
         }
 
         .filtro-btn {
-            background-color: #eee;
-            color: var(--text-color);
-            padding: 8px 15px;
-            border: none;
+            background-color: var(--background-dark);
+            color: var(--text-color-dark);
+            border: 1px solid var(--border-color);
+            padding: 10px 18px;
             border-radius: 20px;
             cursor: pointer;
             font-size: 0.9em;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            font-weight: 500;
+            transition: all var(--transition-speed) ease;
         }
 
         .filtro-btn:hover {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
             color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .filtro-btn.active {
             background-color: var(--primary-color);
             color: white;
+            border-color: var(--primary-dark);
+            box-shadow: var(--shadow-light);
         }
 
         #barra-pesquisa {
+            width: 100%;
+            max-width: 300px;
             padding: 10px 15px;
             border: 1px solid var(--border-color);
             border-radius: 20px;
-            font-size: 1em;
-            flex-grow: 1;
-            max-width: 300px;
-        }
-        
-        #barra-pesquisa::placeholder {
-            color: var(--light-text-color);
+            font-size: 1rem;
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
         }
 
-        /* --- Ajustes para 4 colunas e cards menores --- */
+        #barra-pesquisa:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+            outline: none;
+        }
+
+        /* Lista de produtos */
         .produto-lista {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 4 colunas em telas maiores */
-            gap: 15px; /* Reduzido o gap para otimizar espaço */
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
         }
 
         .produto-card {
             background-color: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-light);
             overflow: hidden;
-            box-shadow: 0 2px 5px var(--shadow-color);
             text-align: center;
-            padding-bottom: 10px; /* Reduzido padding */
+            padding: 20px;
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            transition: transform 0.2s ease;
-            font-size: 0.9em; /* Reduz o tamanho da fonte geral do card */
+            justify-content: space-between;
         }
 
         .produto-card:hover {
             transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
         }
 
-        .produto-card .produto-img {
+        .produto-img {
             width: 100%;
-            height: 100px; /* Altura menor para a imagem */
+            height: 150px;
             object-fit: cover;
-            margin-bottom: 10px; /* Reduzido margin */
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
         }
 
         .produto-card h4 {
-            font-size: 1em; /* Ajustado tamanho da fonte */
-            margin-bottom: 5px; /* Reduzido margin */
-            color: var(--text-color);
-            padding: 0 8px; /* Reduzido padding */
-            white-space: nowrap; /* Evita quebras de linha no nome do produto */
-            overflow: hidden; /* Oculta o que transborda */
-            text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            color: var(--text-color-dark);
+            height: 2.8em; /* Limita a altura para 2 linhas de texto */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2; /* Número de linhas */
+            -webkit-box-orient: vertical;
         }
 
         .produto-card p {
-            font-size: 1.1em; /* Ajustado tamanho da fonte */
+            font-size: 1.25rem;
             font-weight: 700;
-            color: var(--primary-dark-color);
-            margin-bottom: 10px; /* Reduzido margin */
+            color: var(--primary-dark);
+            margin-bottom: 15px;
         }
 
-        .produto-card .editar-btn,
-        .produto-card .excluir-btn {
-            padding: 6px 10px; /* Reduzido padding */
+        .editar-btn, .excluir-btn, .btn {
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 0.8em; /* Reduzido tamanho da fonte dos botões */
-            transition: background-color 0.3s ease;
-            margin: 0 3px; /* Reduzido margin */
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+            margin: 5px;
+            width: calc(50% - 10px); /* Ajuste para ter 2 botões na mesma linha */
         }
 
-        .produto-card .editar-btn {
+        .editar-btn {
             background-color: var(--secondary-color);
+            color: var(--text-color-dark);
+        }
+
+        .editar-btn:hover {
+            background-color: #fdd835;
+            transform: translateY(-1px);
+        }
+
+        .excluir-btn, .btn-danger {
+            background-color: #ef5350; /* Vermelho */
             color: white;
         }
 
-        .produto-card .editar-btn:hover {
-            background-color: var(--secondary-dark-color);
+        .excluir-btn:hover, .btn-danger:hover {
+            background-color: #d32f2f;
+            transform: translateY(-1px);
         }
 
-        .produto-card .excluir-btn {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .produto-card .excluir-btn:hover {
-            background-color: var(--danger-dark-color);
-        }
-
-        /* Modals */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-conteudo {
-            background-color: var(--card-background);
-            margin: auto;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-conteudo h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .modal-conteudo .form-group {
-            text-align: left;
-        }
-
-        .modal-botoes {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .modal-botoes .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .modal-botoes .btn-primary {
+        .btn-primary {
             background-color: var(--primary-color);
             color: white;
         }
 
-        .modal-botoes .btn-primary:hover {
-            background-color: var(--primary-dark-color);
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
         }
 
-        .modal-botoes .btn-danger {
-            background-color: var(--danger-color);
-            color: white;
+        .btn {
+            background-color: var(--background-dark);
+            color: var(--text-color-dark);
+        }
+        .btn:hover {
+            background-color: #ccc;
         }
 
-        .modal-botoes .btn-danger:hover {
-            background-color: var(--danger-dark-color);
+        /* Modais */
+        .modal {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            opacity: 0; /* Para animação */
+            transition: opacity var(--transition-speed) ease;
+        }
+
+        .modal-conteudo {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-medium);
+            width: 90%;
+            max-width: 500px;
+            transform: translateY(-20px); /* Para animação */
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .modal h3 {
+            margin-bottom: 25px;
+            text-align: center;
+            color: var(--primary-dark);
+        }
+
+        .modal-botoes {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
         }
 
         .modal-botoes .btn {
-            background-color: #ccc;
-            color: var(--text-color);
+            padding: 10px 20px;
+            font-size: 1em;
+            width: auto;
         }
 
-        .modal-botoes .btn:hover {
-            background-color: #bbb;
+        /* Mensagem de nenhum produto */
+        #no-products-message {
+            color: var(--text-color-light);
+            margin-top: 30px;
+            font-size: 1.1em;
+        }
+        #no-products-message i {
+            font-size: 3em !important; /* Mais destaque */
+            color: var(--border-color);
+            margin-bottom: 15px;
         }
 
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                padding: 10px;
-            }
-
-            .dashboard-section {
-                flex: 1 1 100%;
-                margin-bottom: 20px;
-            }
-
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .filter-bar .categorias-fixas {
-                width: 100%;
-                justify-content: center;
-            }
-
-            #barra-pesquisa {
-                width: 100%;
-                max-width: none;
-            }
-
-            .produto-lista {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 2 ou 3 colunas em tablets */
-                gap: 10px;
-            }
-
-            .produto-card .produto-img {
-                height: 80px; /* Ajuste para telas menores */
-            }
-        }
-
+        /* Responsividade para botões de ação */
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
+            .editar-btn, .excluir-btn {
+                width: 100%;
+                margin: 5px 0;
             }
-
-            .dashboard-section {
+            .produto-card {
                 padding: 15px;
             }
-
-            h1 {
-                font-size: 1.5em;
-            }
-
-            h2 {
-                font-size: 1.3em;
-            }
-
-            .button-submit {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .modal-conteudo {
-                padding: 20px;
-            }
-            
-            .produto-lista {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* 2 colunas em smartphones */
-                gap: 8px;
-            }
-
-            .produto-card h4 {
-                font-size: 0.9em;
-            }
-            .produto-card p {
-                font-size: 1em;
-            }
-            .produto-card .editar-btn,
-            .produto-card .excluir-btn {
-                font-size: 0.7em;
-                padding: 5px 8px;
-            }
         }
-
     </style>
 
 </head>
 <body>
-  <div class="container">
-    <div class="form-section dashboard-section">
-      <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
-      <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
-      <form id="form-produto" enctype="multipart/form-data" method="POST">
-        <div class="form-group">
-          <label>Tipo de Card:</label>
-          <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
-          <label><input type="radio" name="tipoCard" value="variacoes"> Múltiplos produtos no mesmo card</label>
+    <div class="container">
+        <div class="form-section dashboard-section">
+            <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
+            <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
+            <form id="form-produto" enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    <label>Tipo de Card:</label>
+                    <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
+                    <label><input type="radio" name="tipoCard" value="variacoes"> Múltiplos produtos no mesmo card</label>
+                </div>
+
+                <div id="bloco-unico">
+                    <div class="form-group">
+                        <label for="nome-produto">Nome do Produto:</label>
+                        <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preco-produto">Preço:</label>
+                        <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Imagens (até 5):</label>
+                        <div class="image-upload-area" id="image-upload-area">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p>Arraste e solte ou clique para selecionar imagens</p>
+                            <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*">
+                        </div>
+                        <div class="image-preview" id="image-preview"></div>
+                    </div>
+                </div>
+
+                <div id="seletor-qtd-variacoes" style="display: none;">
+                    <label>Quantos produtos nesse card?</label>
+                    <div>
+                        <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
+                        <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
+                        <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
+                        <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
+                        <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
+                    </div>
+                </div>
+
+                <div id="bloco-variacoes"></div>
+
+                <div class="form-group">
+                    <label for="categoria-produto">Categoria:</label>
+                    <select id="categoria-produto" name="categoria" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="mercearia">Mercearia</option>
+                        <option value="padaria">Padaria</option>
+                        <option value="sacoloes">Sacolões</option>
+                        <option value="bazar">Bazar</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="pereciveis">Perecíveis</option>
+                        <option value="higiene">Higiene</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="tipo" value="unidade" checked> Unidade</label>
+                        <label><input type="radio" name="tipo" value="peso"> Peso</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="button-submit">
+                    <i class="fas fa-plus"></i> Adicionar Produto
+                </button>
+                <div id="feedback-message" class="feedback-message"></div>
+            </form>
         </div>
-
-        <div id="bloco-unico">
-          <div class="form-group">
-            <label for="nome-produto">Nome do Produto:</label>
-            <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
-          </div>
-
-          <div class="form-group">
-            <label for="preco-produto">Preço:</label>
-            <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
-          </div>
-
-          <div class="form-group">
-            <label>Imagens (até 5):</label>
-            <div class="image-upload-area" id="image-upload-area">
-              <i class="fas fa-cloud-upload-alt upload-icon"></i>
-              <p>Arraste e solte ou clique para selecionar imagens</p>
-              <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*">
-            </div>
-            <div class="image-preview" id="image-preview"></div>
-          </div>
-        </div>
-
-        <div id="seletor-qtd-variacoes" style="display: none;">
-          <label>Quantos produtos nesse card?</label>
-          <div>
-            <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
-            <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
-            <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
-            <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
-            <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
-          </div>
-        </div>
-
-        <div id="bloco-variacoes"></div>
-
-        <div class="form-group">
-          <label for="categoria-produto">Categoria:</label>
-          <select id="categoria-produto" name="categoria" required>
-            <option value="" disabled selected>Selecione uma categoria</option>
-            <option value="mercearia">Mercearia</option>
-            <option value="padaria">Padaria</option>
-            <option value="sacoloes">Sacolões</option>
-            <option value="bazar">Bazar</option>
-            <option value="bebidas">Bebidas</option>
-            <option value="pereciveis">Perecíveis</option>
-            <option value="higiene">Higiene</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Tipo:</label>
-          <div class="radio-group">
-            <label><input type="radio" name="tipo" value="unidade" checked> Unidade</label>
-            <label><input type="radio" name="tipo" value="peso"> Peso</label>
-          </div>
-        </div>
-
-        <button type="submit" class="button-submit">
-          <i class="fas fa-plus"></i> Adicionar Produto
-        </button>
-        <div id="feedback-message" class="feedback-message"></div>
-      </form>
-    </div>
 
         <div class="filter-bar">
-      <div class="categorias-fixas">
-        <button class="filtro-btn active" data-categoria="todos">Todos</button>
-        <button class="filtro-btn" data-categoria="mercearia">Mercearia</button>
-        <button class="filtro-btn" data-categoria="padaria">Padaria</button>
-        <button class="filtro-btn" data-categoria="sacoloes">Sacolões</button>
-        <button class="filtro-btn" data-categoria="bazar">Bazar</button>
-        <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
-        <button class="filtro-btn" data-categoria="pereciveis">Perecíveis</button>
-        <button class="filtro-btn" data-categoria="higiene">Higiene</button>
-      </div>
-      <input type="text" id="barra-pesquisa" placeholder="🔍 Buscar por nome...">
-    </div>
-
-    <div class="list-section dashboard-section">
-      <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
-      <div class="produto-lista grid-mobile" id="produtos-lista"></div>
-      <div id="no-products-message" style="text-align:center; color: var(--light-text-color); margin-top: 30px; display: none;">
-        <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
-        <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
-      </div>
-    </div>
-
-    <div id="modal-confirmar-exclusao" class="modal">
-      <div class="modal-conteudo">
-        <p>Tem certeza que deseja excluir o produto?</p>
-        <div class="modal-botoes">
-          <button id="confirmar-exclusao" class="btn btn-danger">Sim</button>
-          <button id="cancelar-exclusao" class="btn">Não</button>
+            <div class="categorias-fixas">
+                <button class="filtro-btn active" data-categoria="todos">Todos</button>
+                <button class="filtro-btn" data-categoria="mercearia">Mercearia</button>
+                <button class="filtro-btn" data-categoria="padaria">Padaria</button>
+                <button class="filtro-btn" data-categoria="sacoloes">Sacolões</button>
+                <button class="filtro-btn" data-categoria="bazar">Bazar</button>
+                <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
+                <button class="filtro-btn" data-categoria="pereciveis">Perecíveis</button>
+                <button class="filtro-btn" data-categoria="higiene">Higiene</button>
+            </div>
+            <input type="text" id="barra-pesquisa" placeholder="🔍 Buscar por nome...">
         </div>
-      </div>
-    </div>
 
-    <div id="modal-editar" class="modal">
-      <div class="modal-conteudo">
-        <h3>Editar Produto</h3>
-        <form id="form-editar-produto">
-          <input type="hidden" id="edit-id" name="id">
-          <div class="form-group">
-            <label for="edit-nome">Nome:</label>
-            <input type="text" id="edit-nome" name="nome" required>
-          </div>
-          <div class="form-group">
-            <label for="edit-preco">Preço:</label>
-            <input type="text" id="edit-preco" name="preco" required>
-          </div>
-          <div class="form-group">
-            <label for="edit-imagem">Nova Imagem:</label>
-            <input type="file" id="edit-imagem" name="novaImagem" accept="image/*">
-          </div>
-          <div class="modal-botoes">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <button type="button" id="cancelar-edicao" class="btn">Cancelar</button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div class="list-section dashboard-section">
+            <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
+            <div class="produto-lista grid-mobile" id="produtos-lista"></div>
+            <div id="no-products-message" style="text-align:center; color: var(--light-text-color); margin-top: 30px; display: none;">
+                <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
+                <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
+            </div>
+        </div>
 
-  </div> <script>
-    const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
-    const blocoUnico = document.getElementById('bloco-unico');
-    const seletorQtd = document.getElementById('seletor-qtd-variacoes');
-    const blocoVariacoes = document.getElementById('bloco-variacoes');
-    const imageUploadArea = document.getElementById('image-upload-area');
+        <div id="modal-confirmar-exclusao" class="modal">
+            <div class="modal-conteudo">
+                <p>Tem certeza que deseja excluir o produto?</p>
+                <div class="modal-botoes">
+                    <button id="confirmar-exclusao" class="btn btn-danger">Sim</button>
+                    <button id="cancelar-exclusao" class="btn">Não</button>
+                </div>
+            </div>
+        </div>
 
-    tipoCardRadios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        const modo = radio.value;
+        <div id="modal-editar" class="modal">
+            <div class="modal-conteudo">
+                <h3>Editar Produto</h3>
+                <form id="form-editar-produto">
+                    <input type="hidden" id="edit-id" name="id">
+                    <div class="form-group">
+                        <label for="edit-nome">Nome:</label>
+                        <input type="text" id="edit-nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-preco">Preço:</label>
+                        <input type="text" id="edit-preco" name="preco" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-imagem">Nova Imagem:</label>
+                        <input type="file" id="edit-imagem" name="novaImagem" accept="image/*">
+                        <img id="edit-image-current-preview" src="" alt="Imagem Atual" style="max-width: 100px; max-height: 100px; margin-top: 10px; border-radius: 5px; display: none;">
+                    </div>
+                    <div class="modal-botoes">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" id="cancelar-edicao" class="btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div> 
 
-        if (modo === 'variacoes' && radio.checked) {
-          blocoUnico.style.display = 'none';
-          seletorQtd.style.display = 'block';
-          imageUploadArea.style.display = 'none';
-          document.getElementById('nome-produto').removeAttribute('required');
-          document.getElementById('preco-produto').removeAttribute('required');
-          document.getElementById('imagens-produto').removeAttribute('required');
-        } else {
-          blocoUnico.style.display = 'block';
-          seletorQtd.style.display = 'none';
-          blocoVariacoes.innerHTML = '';
-          imageUploadArea.style.display = 'block';
-          document.getElementById('nome-produto').setAttribute('required', true);
-          document.getElementById('preco-produto').setAttribute('required', true);
-          document.getElementById('imagens-produto').setAttribute('required', true);
+    <script>
+        const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
+        const blocoUnico = document.getElementById('bloco-unico');
+        const seletorQtd = document.getElementById('seletor-qtd-variacoes');
+        const blocoVariacoes = document.getElementById('bloco-variacoes');
+        const imageUploadArea = document.getElementById('image-upload-area');
+        const imagePreview = document.getElementById('image-preview');
+        const imagensProdutoInput = document.getElementById('imagens-produto');
+        const feedbackMessage = document.getElementById('feedback-message');
+
+        // Função para animar a exibição/ocultação de elementos
+        function toggleElementVisibility(element, show, displayStyle = 'block') {
+            if (show) {
+                element.style.display = displayStyle;
+                requestAnimationFrame(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                });
+            } else {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    element.style.display = 'none';
+                }, 300); // Deve corresponder ao transition-speed do CSS
+            }
         }
-      });
-    });
 
-    // 🧠 Correção: nomes com colchetes para funcionar com arrays
-    document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
-      radio.addEventListener('change', () => {
-        const qtd = parseInt(radio.value);
-        blocoVariacoes.innerHTML = '';
-        for (let i = 0; i < qtd; i++) {
-          const div = document.createElement('div');
-          div.classList.add('form-group');
-          div.innerHTML = `
-            <h4>Produto ${i + 1}</h4>
-            <label>Nome:</label>
-            <input type="text" name="v_nome[${i}]" required>
-            <label>Preço:</label>
-            <input type="text" name="v_preco[${i}]" required>
-            <label>Imagem:</label>
-            <input type="file" name="v_imagens" accept="image/*" required>
-          `;
-          blocoVariacoes.appendChild(div);
+        tipoCardRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                const modo = radio.value;
+
+                if (modo === 'variacoes' && radio.checked) {
+                    toggleElementVisibility(blocoUnico, false);
+                    toggleElementVisibility(seletorQtd, true);
+                    toggleElementVisibility(imageUploadArea, false);
+                    document.getElementById('nome-produto').removeAttribute('required');
+                    document.getElementById('preco-produto').removeAttribute('required');
+                    document.getElementById('imagens-produto').removeAttribute('required');
+                } else {
+                    toggleElementVisibility(blocoUnico, true);
+                    toggleElementVisibility(seletorQtd, false);
+                    blocoVariacoes.innerHTML = '';
+                    toggleElementVisibility(imageUploadArea, true);
+                    document.getElementById('nome-produto').setAttribute('required', true);
+                    document.getElementById('preco-produto').setAttribute('required', true);
+                    document.getElementById('imagens-produto').setAttribute('required', true);
+                }
+            });
+        });
+
+        // Correção: nomes com colchetes para funcionar com arrays
+        document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const qtd = parseInt(radio.value);
+                blocoVariacoes.innerHTML = '';
+                for (let i = 0; i < qtd; i++) {
+                    const div = document.createElement('div');
+                    div.classList.add('form-group');
+                    div.style.opacity = '0'; // Para animação
+                    div.style.transform = 'translateY(20px)'; // Para animação
+                    div.innerHTML = `
+                        <h4>Produto ${i + 1}</h4>
+                        <label>Nome:</label>
+                        <input type="text" name="v_nome[${i}]" required>
+                        <label>Preço:</label>
+                        <input type="text" name="v_preco[${i}]" required>
+                        <label>Imagem:</label>
+                        <input type="file" name="v_imagens_multiplo[${i}]" accept="image/*" required>
+                    `;
+                    blocoVariacoes.appendChild(div);
+                    // Animação para cada novo bloco de variação
+                    requestAnimationFrame(() => {
+                        div.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+                        div.style.opacity = '1';
+                        div.style.transform = 'translateY(0)';
+                    });
+                }
+            });
+        });
+
+        // Pré-visualização de imagens para o upload único
+        imagensProdutoInput.addEventListener('change', function() {
+            imagePreview.innerHTML = '';
+            if (this.files && this.files[0]) {
+                Array.from(this.files).forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        img.alt = file.name;
+                        imagePreview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        });
+
+        document.getElementById('form-produto').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
+            const form = document.getElementById('form-produto');
+            const formData = new FormData(form);
+            formData.append('modo', tipoCard);
+
+            // Animação de carregamento (opcional, pode ser um spinner)
+            const submitButton = form.querySelector('.button-submit');
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Adicionando...';
+
+            const res = await fetch('/produtos', {
+                method: 'POST',
+                body: formData
+            });
+
+            const json = await res.json();
+            feedbackMessage.textContent = json.mensagem || 'Erro ao salvar';
+            feedbackMessage.className = 'feedback-message ' + (res.ok ? 'success' : 'error');
+            toggleElementVisibility(feedbackMessage, true, 'flex'); // Exibe com animação
+            
+            submitButton.disabled = false;
+            submitButton.innerHTML = '<i class="fas fa-plus"></i> Adicionar Produto';
+
+            if (res.ok) {
+                form.reset();
+                blocoVariacoes.innerHTML = '';
+                imagePreview.innerHTML = ''; // Limpa as pré-visualizações
+                toggleElementVisibility(imageUploadArea, true); // Garante que a área de upload volte
+                // Re-define o estado inicial dos rádios para "produto único" se for o caso
+                document.querySelector('input[name="tipoCard"][value="unico"]').checked = true;
+                toggleElementVisibility(blocoUnico, true);
+                toggleElementVisibility(seletorQtd, false);
+                carregarProdutos(); // Recarrega a lista de produtos
+            }
+
+            setTimeout(() => toggleElementVisibility(feedbackMessage, false), 3000); // Oculta com animação
+        });
+
+        // Estado inicial do formulário
+        const selecionado = document.querySelector('input[name="tipoCard"]:checked');
+        if (selecionado) selecionado.dispatchEvent(new Event('change'));
+
+        // painel.js (parte já existente, apenas adicionando a pré-visualização de imagem no modal de edição)
+        let produtos = [];
+
+        async function carregarProdutos() {
+            const res = await fetch('/produtos');
+            produtos = await res.json();
+            renderizarLista(produtos);
         }
-      });
-    });
 
-    document.getElementById('form-produto').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
-      const form = document.getElementById('form-produto');
-      const formData = new FormData(form);
-      formData.append('modo', tipoCard);
+        function renderizarLista(produtosFiltrados) {
+            const container = document.getElementById('produtos-lista');
+            container.innerHTML = '';
 
-      const res = await fetch('/produtos', {
-        method: 'POST',
-        body: formData
-      });
+            if (produtosFiltrados.length === 0) {
+                document.getElementById('no-products-message').style.display = 'block';
+            } else {
+                document.getElementById('no-products-message').style.display = 'none';
+            }
 
-      const json = await res.json();
-      const msg = document.getElementById('feedback-message');
-      msg.textContent = json.mensagem || 'Erro ao salvar';
-      msg.className = 'feedback-message ' + (res.ok ? 'success' : 'error');
-      msg.style.display = 'flex';
-      setTimeout(() => msg.style.display = 'none', 3000);
+            produtosFiltrados.forEach(prod => {
+                const card = document.createElement('div');
+                card.className = 'produto-card';
+                card.dataset.id = prod._id; // Garante o ID para exclusão/edição
 
-      if (res.ok) {
-        form.reset();
-        blocoVariacoes.innerHTML = '';
-        document.getElementById('image-preview').innerHTML = '';
-        imageUploadArea.style.display = 'block';
-      }
-    });
+                const imagem = prod.imagens?.[0] || prod.variacoes?.[0]?.imagem || 'https://via.placeholder.com/150?text=Sem+Imagem'; // Fallback para imagem
+                const nome = prod.nome || prod.variacoes?.[0]?.nome || 'Produto sem nome';
+                const preco = prod.preco || (prod.variacoes && prod.variacoes.length > 0 ? prod.variacoes[0].preco : '0.00');
 
-    // Estado inicial do formulário
-    const selecionado = document.querySelector('input[name="tipoCard"]:checked');
-    if (selecionado) selecionado.dispatchEvent(new Event('change'));
-document.getElementById('produtos-lista').addEventListener('click', async (e) => {
-  const card = e.target.closest('.card-produto');
-  if (!card) return;
-  const id = card.dataset.id;
+                card.innerHTML = `
+                    <img src="${imagem}" alt="${nome}" class="produto-img">
+                    <h4>${nome}</h4>
+                    <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
+                    <div class="card-actions">
+                        <button class="editar-btn" onclick="abrirModalEditar('${prod._id}')">Editar</button>
+                        <button class="excluir-btn" onclick="abrirModalExcluir('${prod._id}')">Excluir</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
 
-  if (e.target.classList.contains('btn-remover')) {
-    if (confirm('Tem certeza que deseja remover este produto?')) {
-      const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
-      const data = await res.json();
-      alert(data.mensagem);
-      if (res.ok) card.remove();
-    }
-  }
+        function filtrarCategoriaPainel(cat) {
+            const filtrado = cat === 'todos' ? produtos : produtos.filter(p => p.categoria === cat);
+            renderizarLista(filtrado);
+        }
 
-  if (e.target.classList.contains('btn-editar')) {
-    alert('🔧 Função de edição ainda será implementada.'); // Aqui você pode abrir um modal de edição
-  }
-});
-// painel.js
+        function pesquisarNomePainel() {
+            const termo = document.getElementById('barra-pesquisa').value.toLowerCase();
+            const resultado = produtos.filter(p => {
+                const nome = p.nome || (p.variacoes && p.variacoes.length > 0 ? p.variacoes[0].nome : '');
+                return nome.toLowerCase().includes(termo);
+            });
+            renderizarLista(resultado);
+        }
 
-let produtos = [];
+        // Abrir modal de edição
+        function abrirModalEditar(id) {
+            const produto = produtos.find(p => p._id === id);
+            if (!produto) return;
 
-// Buscar produtos do banco e renderizar
-async function carregarProdutos() {
-  const res = await fetch('/produtos');
-  produtos = await res.json();
-  renderizarLista(produtos);
-}
+            const nome = produto.nome || (produto.variacoes && produto.variacoes.length > 0 ? produto.variacoes[0].nome : '');
+            const preco = produto.preco || (produto.variacoes && produto.variacoes.length > 0 ? produto.variacoes[0].preco : '');
 
-// Renderizar lista de produtos no painel
-function renderizarLista(produtosFiltrados) {
-  const container = document.getElementById('produtos-lista');
-  container.innerHTML = '';
+            document.getElementById('edit-id').value = id;
+            document.getElementById('edit-nome').value = nome;
+            document.getElementById('edit-preco').value = preco;
 
-  produtosFiltrados.forEach(prod => {
-    const card = document.createElement('div');
-    card.className = 'produto-card';
+            // Pré-visualização da imagem atual no modal de edição
+            const editImagePreview = document.getElementById('edit-image-current-preview');
+            if (editImagePreview) {
+                const currentImage = prod.imagens?.[0] || prod.variacoes?.[0]?.imagem || 'https://via.placeholder.com/50?text=';
+                editImagePreview.src = currentImage;
+                editImagePreview.style.display = 'block';
+            }
 
-    const imagem = prod.imagens?.[0] || prod.variacoes?.[0]?.imagem || '/assets/images/alimentos/sem-imagem.jpg';
-    const nome = prod.nome || prod.variacoes?.[0]?.nome || 'Sem nome';
-    const preco = prod.preco || prod.variacoes?.[0]?.preco || '0.00';
+            toggleElementVisibility(document.getElementById('modal-editar'), true, 'flex');
+        }
 
-    card.innerHTML = `
-      <img src="${imagem}" alt="${nome}" class="produto-img">
-      <h4>${nome}</h4>
-      <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
-      <button class="editar-btn" onclick="abrirModalEditar('${prod._id}')">Editar</button>
-      <button class="excluir-btn" onclick="abrirModalExcluir('${prod._id}')">Excluir</button>
-    `;
+        // Confirmar edição
+        async function salvarEdicao() {
+            const id = document.getElementById('edit-id').value;
+            const nome = document.getElementById('edit-nome').value;
+            const preco = document.getElementById('edit-preco').value;
+            const imagem = document.getElementById('edit-imagem').files[0];
 
-    container.appendChild(card);
-  });
+            const formData = new FormData();
+            formData.append('nome', nome);
+            formData.append('preco', preco);
+            if (imagem) formData.append('imagem', imagem);
 
-  document.getElementById('no-products-message').style.display = produtosFiltrados.length ? 'none' : 'block';
-}
+            const res = await fetch(`/produtos/${id}`, {
+                method: 'PUT',
+                body: formData
+            });
 
-// Filtro por categoria
-function filtrarCategoriaPainel(cat) {
-  const filtrado = cat === 'todos' ? produtos : produtos.filter(p => p.categoria === cat);
-  renderizarLista(filtrado);
-}
+            const json = await res.json();
+            alert(json.mensagem); // Manter alert por simplicidade, ou usar feedback message animado
+            toggleElementVisibility(document.getElementById('modal-editar'), false);
+            carregarProdutos();
+        }
 
-// Filtro por nome
-function pesquisarNomePainel() {
-  const termo = document.getElementById('barra-pesquisa').value.toLowerCase(); // Corrigido ID
-  const resultado = produtos.filter(p => {
-    const nome = p.nome || p.variacoes?.[0]?.nome || '';
-    return nome.toLowerCase().includes(termo);
-  });
-  renderizarLista(resultado);
-}
+        // Abrir modal de confirmação de exclusão
+        function abrirModalExcluir(id) {
+            const modalConfirmarExclusao = document.getElementById('modal-confirmar-exclusao');
+            modalConfirmarExclusao.dataset.productId = id;
+            toggleElementVisibility(modalConfirmarExclusao, true, 'flex');
+        }
 
-// Abrir modal de edição
-function abrirModalEditar(id) {
-  const produto = produtos.find(p => p._id === id);
-  if (!produto) return;
+        // Confirmar exclusão
+        async function confirmarExclusao() {
+            const modalConfirmarExclusao = document.getElementById('modal-confirmar-exclusao');
+            const id = modalConfirmarExclusao.dataset.productId;
 
-  const nome = produto.nome || produto.variacoes?.[0]?.nome || '';
-  const preco = produto.preco || produto.variacoes?.[0]?.preco || '';
+            const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
+            const json = await res.json();
+            alert(json.mensagem); // Manter alert por simplicidade, ou usar feedback message animado
+            toggleElementVisibility(modalConfirmarExclusao, false);
+            carregarProdutos();
+        }
 
-  document.getElementById('edit-id').value = id;
-  document.getElementById('edit-nome').value = nome;
-  document.getElementById('edit-preco').value = preco;
+        // Fechar modais
+        function fecharModais() {
+            toggleElementVisibility(document.getElementById('modal-editar'), false);
+            toggleElementVisibility(document.getElementById('modal-confirmar-exclusao'), false);
+        }
 
-  document.getElementById('modal-editar').style.display = 'flex';
-}
+        // Event Listeners para botões dos modais
+        document.getElementById('cancelar-edicao').addEventListener('click', fecharModais);
+        document.getElementById('cancelar-exclusao').addEventListener('click', fecharModais);
+        document.getElementById('confirmar-exclusao').addEventListener('click', confirmarExclusao);
+        document.getElementById('form-editar-produto').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            salvarEdicao();
+        });
 
-// Confirmar edição
-async function salvarEdicao() {
-  const id = document.getElementById('edit-id').value;
-  const nome = document.getElementById('edit-nome').value;
-  const preco = document.getElementById('edit-preco').value;
-  const imagem = document.getElementById('edit-imagem').files[0];
+        // Event listeners para os botões de filtro de categoria
+        document.querySelectorAll('.filtro-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                filtrarCategoriaPainel(this.dataset.categoria);
+            });
+        });
 
-  const formData = new FormData();
-  formData.append('nome', nome);
-  formData.append('preco', preco);
-  if (imagem) formData.append('imagem', imagem);
+        // Event listener para a barra de pesquisa
+        document.getElementById('barra-pesquisa').addEventListener('input', pesquisarNomePainel);
 
-  const res = await fetch(`/produtos/${id}`, {
-    method: 'PUT',
-    body: formData
-  });
-
-  const json = await res.json();
-  alert(json.mensagem);
-  document.getElementById('modal-editar').style.display = 'none';
-  carregarProdutos();
-}
-// Abrir modal de confirmação de exclusão
-function abrirModalExcluir(id) {
-  // Ajuste: O ID do produto a ser excluído deve ser armazenado para uso posterior
-  // Você pode criar um input hidden no modal de exclusão para isso
-  const modalConfirmarExclusao = document.getElementById('modal-confirmar-exclusao');
-  modalConfirmarExclusao.dataset.productId = id; // Armazena o ID no dataset do modal
-  modalConfirmarExclusao.style.display = 'flex';
-}
-
-// Confirmar exclusão
-async function confirmarExclusao() {
-  const modalConfirmarExclusao = document.getElementById('modal-confirmar-exclusao');
-  const id = modalConfirmarExclusao.dataset.productId; // Recupera o ID do dataset
-
-  const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
-  const json = await res.json();
-  alert(json.mensagem);
-  modalConfirmarExclusao.style.display = 'none';
-  carregarProdutos();
-}
-// Fechar modais
-function fecharModais() {
-  document.getElementById('modal-editar').style.display = 'none';
-  document.getElementById('modal-confirmar-exclusao').style.display = 'none'; // Corrigido ID do modal
-}
-
-// Event Listeners para botões dos modais
-document.getElementById('cancelar-edicao').addEventListener('click', fecharModais);
-document.getElementById('cancelar-exclusao').addEventListener('click', fecharModais);
-document.getElementById('confirmar-exclusao').addEventListener('click', confirmarExclusao);
-document.getElementById('form-editar-produto').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    salvarEdicao();
-});
-
-// Event listeners para os botões de filtro de categoria
-document.querySelectorAll('.filtro-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        filtrarCategoriaPainel(this.dataset.categoria);
-    });
-});
-
-// Event listener para a barra de pesquisa
-document.getElementById('barra-pesquisa').addEventListener('input', pesquisarNomePainel);
-
-window.addEventListener('DOMContentLoaded', carregarProdutos);
-  </script>
+        window.addEventListener('DOMContentLoaded', carregarProdutos);
+    </script>
 </body>
 </html>
