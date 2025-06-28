@@ -2,9 +2,21 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Login - Administração</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Administração</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Reset básico */
+        /* Estilos Globais e Reset Básico */
+        :root {
+            --primary-color: #007bff; /* Azul vibrante */
+            --primary-dark: #0056b3; /* Azul mais escuro para hover */
+            --text-color: #333;
+            --background-light: #f0f2f5;
+            --card-background: #ffffff;
+            --border-color: #ddd;
+            --shadow-light: rgba(0, 0, 0, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,143 +24,134 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #cbac11, #2575fc);
+            font-family: 'Poppins', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* AJUSTADO: Usa min-height para evitar cortes em teclados virtuais */
-            color: #fff;
-            padding: 20px; /* Adiciona um padding geral para não colar nas bordas em telas menores */
+            min-height: 100vh;
+            background: var(--background-light);
+            color: var(--text-color);
+            background: linear-gradient(135deg, #e0f2f7 0%, #c1e7f0 100%); /* Gradiente suave */
         }
 
+        /* Container Principal do Login */
         .login-container {
-            background: #ffffff;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 90%;
-            max-width: 400px;
+            background: var(--card-background);
+            padding: 40px;
+            border-radius: 12px; /* Bordas mais suaves */
+            box-shadow: 0 10px 30px var(--shadow-light); /* Sombra mais pronunciada */
+            width: 100%;
+            max-width: 400px; /* Largura máxima para desktops */
+            text-align: center;
+            animation: fadeIn 0.8s ease-out; /* Animação de entrada */
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .login-container h1 {
-            text-align: center;
-            margin-bottom: 20px;
-            font-size: 2em; /* Tamanho base para desktop */
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 600; /* Mais destaque para o título */
+            font-size: 2em;
         }
 
+        /* Grupos de Formulário */
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-align: left; /* Alinha o label e input à esquerda */
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-            font-size: 1.1em; /* Ajuste para melhor legibilidade */
+            margin-bottom: 8px;
+            font-weight: 400;
+            color: var(--text-color);
+            font-size: 0.95em;
         }
 
-        .form-group input {
+        .form-group input[type="text"],
+        .form-group input[type="password"] {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 16px;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px; /* Bordas mais suaves nos inputs */
+            font-size: 1em;
+            color: var(--text-color);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Transição suave no foco */
         }
 
-        .form-group input:focus {
-            border-color: #2575fc;
+        .form-group input[type="text"]:focus,
+        .form-group input[type="password"]:focus {
+            border-color: var(--primary-color);
             outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); /* Sombra no foco */
         }
 
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        /* Botão de Entrar */
         .btn {
             width: 100%;
-            padding: 10px;
-            background: #2575fc;
-            color: #fff;
+            padding: 15px;
+            background-color: var(--primary-color);
+            color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 8px; /* Bordas suaves */
+            font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+            margin-top: 20px; /* Espaço acima do botão */
         }
 
         .btn:hover {
-            background: #6a11cb;
+            background-color: var(--primary-dark);
+            transform: translateY(-2px); /* Efeito de "levantar" no hover */
         }
 
-        /* Removido o footer da sua versão original, mas se for adicionado, considere: */
-        /* .footer {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-            color: #fff; // Para combinar com o fundo do body
+        .btn:active {
+            transform: translateY(0); /* Retorna ao normal no clique */
         }
 
-        .footer a {
-            color: #2575fc;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            text-decoration: underline;
-        } */
-
-        /* --- Media Queries --- */
-
-        /* Para telas de até 768px (tablets e smartphones maiores) */
+        /* Responsividade para Mobile */
         @media (max-width: 768px) {
             .login-container {
-                padding: 20px;
-                width: 95%; /* Ocupa um pouco mais de largura em tablets */
+                margin: 20px; /* Margem para não "colar" nas bordas em telas menores */
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 15px;
+                padding: 25px;
+                border-radius: 10px;
             }
 
             .login-container h1 {
                 font-size: 1.8em;
-            }
-
-            .form-group label {
-                font-size: 1em;
+                margin-bottom: 25px;
             }
 
             .form-group input {
-                font-size: 15px;
-            }
-
-            .btn {
-                font-size: 15px;
-            }
-        }
-
-        /* Para telas de até 480px (smartphones) */
-        @media (max-width: 480px) {
-            body {
-                padding: 15px; /* Diminui o padding geral para telas muito pequenas */
-            }
-
-            .login-container {
-                padding: 15px;
-                width: 100%; /* Ocupa a largura total (com padding do body) */
-            }
-
-            .login-container h1 {
-                font-size: 1.5em; /* Reduz o tamanho do título */
-                margin-bottom: 15px;
-            }
-
-            .form-group label {
+                padding: 10px 12px;
                 font-size: 0.95em;
             }
 
-            .form-group input {
-                font-size: 14px;
-                padding: 8px; /* Ajusta o padding dos inputs */
-            }
-
             .btn {
-                font-size: 14px;
-                padding: 8px; /* Ajusta o padding do botão */
+                padding: 12px;
+                font-size: 1em;
             }
         }
     </style>
