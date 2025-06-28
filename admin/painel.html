@@ -617,57 +617,70 @@
       </form>
     </div>
 
-   <!-- ✅ Menu de filtros -->
-<div class="filtro-admin">
-  <div class="filtro-categorias">
-    <button class="filtro-btn active" data-categoria="todos">Todos</button>
-    <button class="filtro-btn" data-categoria="mercearia">Mercearia</button>
-    <button class="filtro-btn" data-categoria="padaria">Padaria</button>
-    <button class="filtro-btn" data-categoria="sacoloes">Sacolões</button>
-    <button class="filtro-btn" data-categoria="bazar">Bazar</button>
-    <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
-    <button class="filtro-btn" data-categoria="pereciveis">Perecíveis</button>
-    <button class="filtro-btn" data-categoria="higiene">Higiene</button>
-  </div>
-
-  <div class="filtro-busca">
-    <input type="text" id="busca-admin" placeholder="Buscar produto por nome...">
-  </div>
-</div>
-
-<!-- ✅ Lista dos produtos -->
-<div class="produto-admin-lista" id="produtos-lista"></div>
-
-<!-- ✅ Modal de Exclusão -->
-<div id="modal-excluir" class="modal" style="display: none;">
-  <div class="modal-conteudo">
-    <p>Tem certeza que deseja excluir o produto?</p>
-    <div class="modal-botoes">
-      <button id="confirmar-excluir" class="btn btn-danger">Sim</button>
-      <button onclick="fecharModal('modal-excluir')" class="btn btn-cancelar">Não</button>
-    </div>
-  </div>
-</div>
-
-<!-- ✅ Modal de Edição -->
-<div id="modal-editar" class="modal" style="display: none;">
-  <div class="modal-conteudo">
-    <h3>Editar Produto</h3>
-    <form id="form-editar" enctype="multipart/form-data">
-      <input type="hidden" name="id" id="editar-id">
-      <label>Nome:</label>
-      <input type="text" name="nome" id="editar-nome" required>
-      <label>Preço:</label>
-      <input type="text" name="preco" id="editar-preco" required>
-      <label>Nova Imagem:</label>
-      <input type="file" name="novaImagem" id="editar-imagem" accept="image/*">
-      <div class="modal-botoes">
-        <button type="submit" class="btn btn-success">Salvar</button>
-        <button type="button" onclick="fecharModal('modal-editar')" class="btn btn-cancelar">Cancelar</button>
+       <!-- 🔎 MENU DE CATEGORIAS E PESQUISA -->
+    <div class="filter-bar">
+      <div class="categorias-fixas">
+        <button class="filtro-btn active" data-categoria="todos">Todos</button>
+        <button class="filtro-btn" data-categoria="mercearia">Mercearia</button>
+        <button class="filtro-btn" data-categoria="padaria">Padaria</button>
+        <button class="filtro-btn" data-categoria="sacoloes">Sacolões</button>
+        <button class="filtro-btn" data-categoria="bazar">Bazar</button>
+        <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
+        <button class="filtro-btn" data-categoria="pereciveis">Perecíveis</button>
+        <button class="filtro-btn" data-categoria="higiene">Higiene</button>
       </div>
-    </form>
-  </div>
-</div>
+      <input type="text" id="barra-pesquisa" placeholder="🔍 Buscar por nome...">
+    </div>
+
+    <!-- 🗂 LISTA DE PRODUTOS -->
+    <div class="list-section dashboard-section">
+      <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
+      <div class="produto-lista grid-mobile" id="produtos-lista"></div>
+      <div id="no-products-message" style="text-align:center; color: var(--light-text-color); margin-top: 30px; display: none;">
+        <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
+        <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
+      </div>
+    </div>
+
+    <!-- ❌ MODAL DE CONFIRMAÇÃO DE EXCLUSÃO -->
+    <div id="modal-confirmar-exclusao" class="modal">
+      <div class="modal-conteudo">
+        <p>Tem certeza que deseja excluir o produto?</p>
+        <div class="modal-botoes">
+          <button id="confirmar-exclusao" class="btn btn-danger">Sim</button>
+          <button id="cancelar-exclusao" class="btn">Não</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✏️ MODAL DE EDIÇÃO -->
+    <div id="modal-editar" class="modal">
+      <div class="modal-conteudo">
+        <h3>Editar Produto</h3>
+        <form id="form-editar-produto">
+          <input type="hidden" id="edit-id" name="id">
+          <div class="form-group">
+            <label for="edit-nome">Nome:</label>
+            <input type="text" id="edit-nome" name="nome" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-preco">Preço:</label>
+            <input type="text" id="edit-preco" name="preco" required>
+          </div>
+          <div class="form-group">
+            <label for="edit-imagem">Nova Imagem:</label>
+            <input type="file" id="edit-imagem" name="novaImagem" accept="image/*">
+          </div>
+          <div class="modal-botoes">
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="button" id="cancelar-edicao" class="btn">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div> <!-- fecha container -->
+
 
 
   <script>
