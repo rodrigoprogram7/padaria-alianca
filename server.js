@@ -153,9 +153,25 @@ app.post('/produtos', upload.fields([
   }
 });
 
-// ✅ Excluir produto
+// ✅ Excluir produto com remoção da imagem
 app.delete('/produtos/:id', async (req, res) => {
   try {
+    const produto = await Product.findById(req.params.id);
+
+    if (produto.imagens?.length) {
+      for (const img of produto.imagens) {
+        const publicId = img.split('/').pop().split('.')[0];
+        await cloudinary.uploader.destroy(`padaria/uploads/${publicId}`);
+      }
+    }
+
+    if (produto.variacoes?.length) {
+      for (const v of produto.variacoes) {
+        const publicId = v.imagem.split('/').pop().split('.')[0];
+        await cloudinary.uploader.destroy(`padaria/uploads/${publicId}`);
+      }
+    }
+
     await Product.findByIdAndDelete(req.params.id);
     res.status(200).json({ mensagem: 'Produto removido com sucesso!' });
   } catch (err) {
@@ -169,9 +185,11 @@ app.put('/produtos/:id', upload.single('imagem'), async (req, res) => {
   try {
     const { nome, preco } = req.body;
     const update = { nome, preco };
+
     if (req.file && req.file.path) {
       update.imagens = [req.file.path];
     }
+
     await Product.findByIdAndUpdate(req.params.id, update);
     res.json({ mensagem: 'Produto atualizado com sucesso!' });
   } catch (err) {
