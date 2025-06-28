@@ -65,8 +65,24 @@
         }
 
         .list-section {
-            order: 2; /* Garante que a lista venha depois */
+            order: 3; /* A lista de produtos agora vem depois da barra de filtro */
         }
+        
+        /* Ajuste na ordem da barra de filtro */
+        .filter-bar {
+            grid-column: 1 / -1; /* Ocupa todas as colunas no grid */
+            background-color: var(--card-background);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px var(--shadow-color);
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            order: 2; /* A barra de filtro agora vem depois do formulário */
+        }
+
 
         h1, h2, h3 {
             color: var(--primary-color);
@@ -221,19 +237,6 @@
             box-shadow: 0 1px 3px var(--shadow-color);
         }
 
-        .filter-bar {
-            grid-column: 1 / -1; /* Ocupa todas as colunas no grid */
-            background-color: var(--card-background);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: center;
-            order: 0; /* Garante que a barra de filtro venha antes de tudo */
-        }
 
         .filter-bar .categorias-fixas {
             display: flex;
