@@ -11,895 +11,1241 @@
     <style>
 
 :root {
-            --primary-color: #4CAF50;
-            --primary-dark-color: #45a049;
-            --secondary-color: #2196F3;
-            --secondary-dark-color: #1976D2;
-            --background-color: #f4f7f6;
-            --card-background: #ffffff;
-            --text-color: #333;
-            --light-text-color: #666;
-            --border-color: #ddd;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --danger-color: #f44336;
-            --danger-dark-color: #d32f2f;
-            --success-color: #4CAF50;
-            --success-dark-color: #388E3C;
-            --info-color: #2196F3;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 15px;
-            background-color: var(--background-color);
-            border-radius: 8px;
-            box-shadow: 0 4px 10px var(--shadow-color);
-        }
-
-        .dashboard-section {
-            background-color: var(--card-background);
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            flex: 1 1 48%; /* Permite que as seções ocupem quase metade da largura */
-            min-width: 300px; /* Garante que não fiquem muito estreitas em telas menores */
-        }
-
-        .form-section {
-            order: 1; /* Garante que o formulário venha primeiro */
-        }
-
-        .list-section {
-            order: 3; /* A lista de produtos agora vem depois da barra de filtro */
-        }
-        
-        /* Ajuste na ordem da barra de filtro */
-        .filter-bar {
-            grid-column: 1 / -1; /* Ocupa todas as colunas no grid */
-            background-color: var(--card-background);
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            margin-bottom: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            align-items: center;
-            order: 2; /* A barra de filtro agora vem depois do formulário */
-        }
-
-
-        h1, h2, h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        h1 .fas, h2 .fas {
-            color: var(--secondary-color);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--light-text-color);
-        }
-
-        .form-group input[type="text"],
-        .form-group input[type="number"],
-        .form-group input[type="file"],
-        .form-group select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            font-size: 1em;
-            color: var(--text-color);
-            background-color: #fff;
-            transition: border-color 0.3s ease;
-        }
-
-        .form-group input[type="text"]:focus,
-        .form-group input[type="number"]:focus,
-        .form-group select:focus {
-            border-color: var(--primary-color);
-            outline: none;
-            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
-        }
-
-        .form-group input[type="radio"] {
-            margin-right: 8px;
-        }
-
-        .radio-group label {
-            display: inline-flex;
-            align-items: center;
-            margin-right: 20px;
-            font-weight: normal;
-        }
-
-        .button-submit {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 20px;
-        }
-
-        .button-submit:hover {
-            background-color: var(--primary-dark-color);
-            transform: translateY(-2px);
-        }
-
-        .feedback-message {
-            display: none;
-            margin-top: 20px;
-            padding: 12px;
-            border-radius: 5px;
-            font-weight: 500;
-            text-align: center;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .feedback-message.success {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        .feedback-message.error {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .image-upload-area {
-            border: 2px dashed var(--border-color);
-            border-radius: 8px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: border-color 0.3s ease, background-color 0.3s ease;
-            margin-top: 10px;
-            position: relative;
-        }
-
-        .image-upload-area:hover {
-            border-color: var(--primary-color);
-            background-color: #f9fdf9;
-        }
-
-        .image-upload-area .upload-icon {
-            font-size: 3em;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .image-upload-area p {
-            color: var(--light-text-color);
-        }
-
-        .image-upload-area input[type="file"] {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .image-preview {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 20px;
-            border-top: 1px solid var(--border-color);
-            padding-top: 15px;
-        }
-
-        .image-preview img {
-            width: 100px;
-            height: 100px;
-            object-fit: cover;
-            border-radius: 5px;
-            border: 1px solid var(--border-color);
-            box-shadow: 0 1px 3px var(--shadow-color);
-        }
-
-
-        .filter-bar .categorias-fixas {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            flex-grow: 1;
-        }
-
-        .filtro-btn {
-            background-color: #eee;
-            color: var(--text-color);
-            padding: 8px 15px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .filtro-btn:hover {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .filtro-btn.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        #barra-pesquisa {
-            padding: 10px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            font-size: 1em;
-            flex-grow: 1;
-            max-width: 300px;
-        }
-        
-        #barra-pesquisa::placeholder {
-            color: var(--light-text-color);
-        }
-
-        /* --- Ajustes para 4 colunas e cards menores --- */
-        .produto-lista {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* 4 colunas em telas maiores */
-            gap: 15px; /* Reduzido o gap para otimizar espaço */
-            margin-top: 20px;
-        }
-
-        .produto-card {
-            background-color: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 5px var(--shadow-color);
-            text-align: center;
-            padding-bottom: 10px; /* Reduzido padding */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.2s ease;
-            font-size: 0.9em; /* Reduz o tamanho da fonte geral do card */
-        }
-
-        .produto-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .produto-card .produto-img {
-            width: 100%;
-            height: 100px; /* Altura menor para a imagem */
-            object-fit: cover;
-            margin-bottom: 10px; /* Reduzido margin */
-        }
-
-        .produto-card h4 {
-            font-size: 1em; /* Ajustado tamanho da fonte */
-            margin-bottom: 5px; /* Reduzido margin */
-            color: var(--text-color);
-            padding: 0 8px; /* Reduzido padding */
-            white-space: nowrap; /* Evita quebras de linha no nome do produto */
-            overflow: hidden; /* Oculta o que transborda */
-            text-overflow: ellipsis; /* Adiciona "..." se o texto for muito longo */
-        }
-
-        .produto-card p {
-            font-size: 1.1em; /* Ajustado tamanho da fonte */
-            font-weight: 700;
-            color: var(--primary-dark-color);
-            margin-bottom: 10px; /* Reduzido margin */
-        }
-
-        .produto-card .editar-btn,
-        .produto-card .excluir-btn {
-            padding: 6px 10px; /* Reduzido padding */
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.8em; /* Reduzido tamanho da fonte dos botões */
-            transition: background-color 0.3s ease;
-            margin: 0 3px; /* Reduzido margin */
-        }
-
-        .produto-card .editar-btn {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .produto-card .editar-btn:hover {
-            background-color: var(--secondary-dark-color);
-        }
-
-        .produto-card .excluir-btn {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .produto-card .excluir-btn:hover {
-            background-color: var(--danger-dark-color);
-        }
-
-        /* Modals */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000; /* Sit on top */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .modal-conteudo {
-            background-color: var(--card-background);
-            margin: auto;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px var(--shadow-color);
-            width: 90%;
-            max-width: 500px;
-            text-align: center;
-            position: relative;
-        }
-
-        .modal-conteudo h3 {
-            color: var(--primary-color);
-            margin-bottom: 20px;
-        }
-
-        .modal-conteudo .form-group {
-            text-align: left;
-        }
-
-        .modal-botoes {
-            margin-top: 25px;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-
-        .modal-botoes .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 1em;
-            transition: background-color 0.3s ease;
-        }
-
-        .modal-botoes .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .modal-botoes .btn-primary:hover {
-            background-color: var(--primary-dark-color);
-        }
-
-        .modal-botoes .btn-danger {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .modal-botoes .btn-danger:hover {
-            background-color: var(--danger-dark-color);
-        }
-
-        .modal-botoes .btn {
-            background-color: #ccc;
-            color: var(--text-color);
-        }
-
-        .modal-botoes .btn:hover {
-            background-color: #bbb;
-        }
-
-
-        /* Responsividade */
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                padding: 10px;
-            }
-
-            .dashboard-section {
-                flex: 1 1 100%;
-                margin-bottom: 20px;
-            }
-
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .filter-bar .categorias-fixas {
-                width: 100%;
-                justify-content: center;
-            }
-
-            #barra-pesquisa {
-                width: 100%;
-                max-width: none;
-            }
-
-            .produto-lista {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 2 ou 3 colunas em tablets */
-                gap: 10px;
-            }
-
-            .produto-card .produto-img {
-                height: 80px; /* Ajuste para telas menores */
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
-            .dashboard-section {
-                padding: 15px;
-            }
-
-            h1 {
-                font-size: 1.5em;
-            }
-
-            h2 {
-                font-size: 1.3em;
-            }
-
-            .button-submit {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .modal-conteudo {
-                padding: 20px;
-            }
-            
-            .produto-lista {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* 2 colunas em smartphones */
-                gap: 8px;
-            }
-
-            .produto-card h4 {
-                font-size: 0.9em;
-            }
-            .produto-card p {
-                font-size: 1em;
-            }
-            .produto-card .editar-btn,
-            .produto-card .excluir-btn {
-                font-size: 0.7em;
-                padding: 5px 8px;
-            }
-        }
+    /* Cores atualizadas para um visual mais moderno e suave */
+    --primary-color: #5cb85c; /* Verde mais vibrante, mas suave */
+    --primary-dark-color: #4cae4c;
+    --secondary-color: #5bc0de; /* Azul ciano */
+    --secondary-dark-color: #46b8da;
+    --background-color: #eef2f6; /* Fundo levemente cinza-azulado */
+    --card-background: #ffffff;
+    --text-color: #34495e; /* Texto mais escuro para contraste */
+    --light-text-color: #7f8c8d; /* Cinza para textos secundários */
+    --border-color: #e0e6ed; /* Borda mais suave */
+    --shadow-color: rgba(0, 0, 0, 0.08); /* Sombra mais sutil */
+    --hover-shadow: rgba(0, 0, 0, 0.15); /* Sombra mais pronunciada no hover */
+    --danger-color: #e74c3c; /* Vermelho vibrante */
+    --danger-dark-color: #c0392b;
+    --success-color: #2ecc71; /* Verde de sucesso mais vívido */
+    --success-dark-color: #27ae60;
+    --info-color: #3498db; /* Azul informativo */
+    --warning-color: #f39c12; /* Amarelo de aviso */
+
+    /* Espaçamento e tipografia */
+    --spacing-xs: 5px;
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 20px;
+    --spacing-xl: 30px;
+
+    --font-size-sm: 0.875em;
+    --font-size-md: 1em;
+    --font-size-lg: 1.125em;
+    --font-size-xl: 1.5em;
+    --font-size-xxl: 2em;
+
+    /* Transições */
+    --transition-speed: 0.3s;
+    --transition-timing: ease-in-out;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: var(--spacing-lg);
+    -webkit-font-smoothing: antialiased; /* Suaviza a renderização da fonte */
+    text-rendering: optimizeLegibility; /* Melhora a legibilidade */
+}
+
+.container {
+    max-width: 1200px;
+    margin: var(--spacing-lg) auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-lg);
+    padding: var(--spacing-md);
+    background-color: var(--background-color); /* Fundo do container igual ao body para mesclar */
+    border-radius: 12px; /* Bordas mais arredondadas */
+    box-shadow: 0 8px 20px var(--shadow-color); /* Sombra mais suave e espalhada */
+}
+
+.dashboard-section {
+    background-color: var(--card-background);
+    padding: var(--spacing-xl);
+    border-radius: 12px; /* Bordas mais arredondadas */
+    box-shadow: 0 4px 12px var(--shadow-color); /* Sombra mais suave */
+    flex: 1 1 48%;
+    min-width: 300px;
+    transition: transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
+}
+
+.dashboard-section:hover {
+    transform: translateY(-3px); /* Leve elevação no hover */
+    box-shadow: 0 6px 16px var(--hover-shadow);
+}
+
+.form-section {
+    order: 1;
+}
+
+.list-section {
+    order: 3;
+}
+
+.filter-bar {
+    grid-column: 1 / -1;
+    background-color: var(--card-background);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    align-items: center;
+    order: 2;
+    transition: transform var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
+}
+
+.filter-bar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px var(--hover-shadow);
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    font-weight: 600;
+}
+
+h1 {
+    font-size: var(--font-size-xxl);
+}
+
+h2 {
+    font-size: var(--font-size-xl);
+}
+
+h3 {
+    font-size: var(--font-size-lg);
+    color: var(--text-color); /* H3 mais discreto */
+}
+
+h1 .fas, h2 .fas {
+    color: var(--secondary-color);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-md);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    color: var(--light-text-color);
+    font-size: var(--font-size-sm);
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group input[type="file"],
+.form-group select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Bordas um pouco mais arredondadas */
+    font-size: var(--font-size-md);
+    color: var(--text-color);
+    background-color: #fff;
+    transition: border-color var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="number"]:focus,
+.form-group select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(92, 184, 92, 0.2); /* Sombra de foco mais suave */
+}
+
+.form-group input[type="radio"] {
+    margin-right: var(--spacing-xs);
+}
+
+.radio-group label {
+    display: inline-flex;
+    align-items: center;
+    margin-right: var(--spacing-lg);
+    font-weight: normal;
+    font-size: var(--font-size-md); /* Ajusta o tamanho da fonte */
+    cursor: pointer;
+}
+
+.button-submit {
+    background-color: var(--primary-color);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-xl); /* Mais padding para botões maiores */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), /* Efeito "pop" no clique */
+                box-shadow var(--transition-speed) var(--transition-timing);
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centraliza o conteúdo do botão */
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    box-shadow: 0 4px 10px rgba(92, 184, 92, 0.2); /* Sombra para botões */
+}
+
+.button-submit:hover {
+    background-color: var(--primary-dark-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(92, 184, 92, 0.3);
+}
+
+.button-submit:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 5px rgba(92, 184, 92, 0.2);
+}
+
+.feedback-message {
+    display: flex; /* Altera para flex para centralizar ícone e texto */
+    margin-top: var(--spacing-lg);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    opacity: 0; /* Começa invisível para animação */
+    transform: translateY(10px); /* Começa um pouco abaixo para animação */
+    transition: opacity var(--transition-speed) var(--transition-timing),
+                transform var(--transition-speed) var(--transition-timing);
+}
+
+.feedback-message.show { /* Classe para mostrar a mensagem */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.feedback-message.success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.feedback-message.error {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.image-upload-area {
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: var(--spacing-xl);
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--transition-speed) var(--transition-timing),
+                background-color var(--transition-speed) var(--transition-timing);
+    margin-top: var(--spacing-sm);
+    position: relative;
+    background-color: #fcfcfc;
+}
+
+.image-upload-area:hover {
+    border-color: var(--secondary-color); /* Cor de hover diferente */
+    background-color: #f0f8ff; /* Fundo azul claro no hover */
+}
+
+.image-upload-area .upload-icon {
+    font-size: 3.5em; /* Ícone um pouco maior */
+    color: var(--secondary-color);
+    margin-bottom: var(--spacing-sm);
+    transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.image-upload-area:hover .upload-icon {
+    color: var(--secondary-dark-color);
+}
+
+.image-upload-area p {
+    color: var(--light-text-color);
+    font-size: var(--font-size-sm);
+}
+
+.image-upload-area input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    margin-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+    padding-top: var(--spacing-md);
+}
+
+.image-preview img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 6px var(--shadow-color);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.image-preview img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px var(--hover-shadow);
+}
+
+.filter-bar .categorias-fixas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    flex-grow: 1;
+}
+
+.filtro-btn {
+    background-color: #f0f4f7; /* Cor de fundo mais clara */
+    color: var(--text-color);
+    padding: 8px 18px; /* Mais padding */
+    border: none;
+    border-radius: 25px; /* Mais arredondado */
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                color var(--transition-speed) var(--transition-timing),
+                transform 0.2s ease,
+                box-shadow var(--transition-speed) var(--transition-timing);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Sombra leve */
+}
+
+.filtro-btn:hover {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(91, 192, 222, 0.2);
+}
+
+.filtro-btn.active {
+    background-color: var(--primary-color);
+    color: white;
+    box-shadow: 0 4px 8px rgba(92, 184, 92, 0.2);
+    transform: translateY(-1px); /* Mantém uma leve elevação */
+}
+
+#barra-pesquisa {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border-color);
+    border-radius: 25px;
+    font-size: var(--font-size-md);
+    flex-grow: 1;
+    max-width: 300px;
+    background-color: #fff;
+    transition: border-color var(--transition-speed) var(--transition-timing),
+                box-shadow var(--transition-speed) var(--transition-timing);
+}
+
+#barra-pesquisa:focus {
+    border-color: var(--secondary-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(91, 192, 222, 0.2);
+}
+
+#barra-pesquisa::placeholder {
+    color: var(--light-text-color);
+    opacity: 0.8; /* Torna o placeholder um pouco mais visível */
+}
+
+/* --- Ajustes para 4 colunas e cards menores --- */
+.produto-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Aumentado minmax para cards mais expressivos */
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.produto-card {
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    text-align: center;
+    padding-bottom: var(--spacing-sm);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+                box-shadow 0.2s var(--transition-timing);
+    font-size: var(--font-size-md);
+    cursor: pointer; /* Adicionado cursor pointer para indicar interatividade */
+}
+
+.produto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 18px var(--hover-shadow);
+}
+
+.produto-card .produto-img {
+    width: 100%;
+    height: 120px; /* Altura um pouco maior para a imagem */
+    object-fit: cover;
+    margin-bottom: var(--spacing-sm);
+    border-bottom: 1px solid var(--border-color); /* Separador sutil da imagem */
+}
+
+.produto-card h4 {
+    font-size: var(--font-size-md);
+    margin-bottom: var(--spacing-xs);
+    color: var(--text-color);
+    padding: 0 var(--spacing-sm);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+
+.produto-card p {
+    font-size: var(--font-size-lg); /* Preço mais destacado */
+    font-weight: 700;
+    color: var(--primary-dark-color);
+    margin-bottom: var(--spacing-sm);
+}
+
+.produto-card .botoes-acao {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-xs);
+    width: 100%; /* Garante que os botões ocupem a largura do card */
+    padding: 0 var(--spacing-sm);
+}
+
+.produto-card .editar-btn,
+.produto-card .excluir-btn {
+    padding: 8px 12px; /* Mais padding para botões */
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+    flex-grow: 1; /* Faz os botões crescerem para preencher o espaço */
+}
+
+.produto-card .editar-btn {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.produto-card .editar-btn:hover {
+    background-color: var(--secondary-dark-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(91, 192, 222, 0.2);
+}
+
+.produto-card .excluir-btn {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.produto-card .excluir-btn:hover {
+    background-color: var(--danger-dark-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(231, 76, 60, 0.2);
+}
+
+/* Modals */
+.modal {
+    display: flex;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5); /* Sombra mais escura */
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-lg);
+    opacity: 0; /* Inicia invisível */
+    visibility: hidden; /* Garante que não é interativo quando oculto */
+    transition: opacity var(--transition-speed) var(--transition-timing),
+                visibility var(--transition-speed) var(--transition-timing);
+}
+
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-conteudo {
+    background-color: var(--card-background);
+    margin: auto;
+    padding: var(--spacing-xl);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px var(--shadow-color); /* Sombra mais profunda */
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    position: relative;
+    transform: translateY(-20px); /* Começa um pouco acima para animação */
+    transition: transform var(--transition-speed) var(--transition-timing) 0.1s; /* Pequeno atraso na animação do modal */
+}
+
+.modal.show .modal-conteudo {
+    transform: translateY(0);
+}
+
+.modal-conteudo h3 {
+    color: var(--primary-color);
+    margin-bottom: var(--spacing-lg);
+    font-size: var(--font-size-xl);
+}
+
+.modal-conteudo .form-group {
+    text-align: left;
+    margin-bottom: var(--spacing-md);
+}
+
+.modal-botoes {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.modal-botoes .btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    transition: background-color var(--transition-speed) var(--transition-timing),
+                transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.modal-botoes .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.modal-botoes .btn-primary:hover {
+    background-color: var(--primary-dark-color);
+    transform: translateY(-1px);
+}
+
+.modal-botoes .btn-danger {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+.modal-botoes .btn-danger:hover {
+    background-color: var(--danger-dark-color);
+    transform: translateY(-1px);
+}
+
+.modal-botoes .btn-secondary { /* Corrigido para um botão "cancelar" mais neutro */
+    background-color: #bdc3c7;
+    color: var(--text-color);
+}
+
+.modal-botoes .btn-secondary:hover {
+    background-color: #95a5a6;
+    transform: translateY(-1px);
+}
+
+/* Validação de formulário: feedback visual */
+input:invalid:not(:placeholder-shown),
+select:invalid:not([value=""]) {
+    border-color: var(--danger-color);
+    box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
+}
+
+input:focus:invalid {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        padding: var(--spacing-sm);
+        gap: var(--spacing-md);
+    }
+
+    .dashboard-section {
+        flex: 1 1 100%;
+        margin-bottom: 0; /* Removido margin-bottom duplicado pelo gap */
+        padding: var(--spacing-lg);
+    }
+
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: var(--spacing-md);
+        margin-bottom: 0; /* Removido margin-bottom duplicado pelo gap */
+    }
+
+    .filter-bar .categorias-fixas {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: var(--spacing-sm); /* Espaçamento entre categorias e pesquisa */
+    }
+
+    #barra-pesquisa {
+        width: 100%;
+        max-width: none;
+    }
+
+    .produto-lista {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 2 ou 3 colunas em tablets */
+        gap: var(--spacing-sm);
+    }
+
+    .produto-card .produto-img {
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: var(--spacing-sm);
+    }
+
+    .dashboard-section {
+        padding: var(--spacing-md);
+    }
+
+    h1 {
+        font-size: var(--font-size-xl);
+    }
+
+    h2 {
+        font-size: var(--font-size-lg);
+    }
+
+    .button-submit {
+        width: 100%;
+        justify-content: center;
+        font-size: var(--font-size-md);
+        padding: 10px 20px;
+    }
+
+    .modal-conteudo {
+        padding: var(--spacing-lg);
+    }
+    
+    .produto-lista {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 2 colunas em smartphones */
+        gap: var(--spacing-xs);
+    }
+
+    .produto-card h4 {
+        font-size: var(--font-size-sm);
+    }
+    .produto-card p {
+        font-size: var(--font-size-md);
+    }
+    .produto-card .editar-btn,
+    .produto-card .excluir-btn {
+        font-size: 0.75em;
+        padding: 6px 10px;
+    }
+}
+
+/* Animação para cards ao carregar (inicialmente ocultos) */
+.produto-card.fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
     </style>
 
 </head>
 <body>
   <div class="container">
-    <div class="form-section dashboard-section">
-      <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
-      <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
-      <form id="form-produto" enctype="multipart/form-data" method="POST">
-        <div class="form-group">
-          <label>Tipo de Card:</label>
-          <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
-          <label><input type="radio" name="tipoCard" value="variacoes"> Múltiplos produtos no mesmo card</label>
+        <div class="form-section dashboard-section">
+            <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
+            <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
+            <form id="form-produto" enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    <label>Tipo de Card:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
+                        <label><input type="radio" name="tipoCard" value="variacoes"> Múltiplos produtos no mesmo card</label>
+                    </div>
+                </div>
+
+                <div id="bloco-unico">
+                    <div class="form-group">
+                        <label for="nome-produto">Nome do Produto:</label>
+                        <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="preco-produto">Preço:</label>
+                        <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Imagens (até 5):</label>
+                        <div class="image-upload-area" id="image-upload-area">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p>Arraste e solte ou clique para selecionar imagens</p>
+                            <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*">
+                        </div>
+                        <div class="image-preview" id="image-preview"></div>
+                    </div>
+                </div>
+
+                <div id="seletor-qtd-variacoes" style="display: none;">
+                    <label>Quantos produtos nesse card?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
+                        <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
+                        <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
+                        <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
+                        <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
+                    </div>
+                </div>
+
+                <div id="bloco-variacoes"></div>
+
+                <div class="form-group">
+                    <label for="categoria-produto">Categoria:</label>
+                    <select id="categoria-produto" name="categoria" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="mercearia">Mercearia</option>
+                        <option value="padaria">Padaria</option>
+                        <option value="sacoloes">Sacolões</option>
+                        <option value="bazar">Bazar</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="pereciveis">Perecíveis</option>
+                        <option value="higiene">Higiene</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="tipo" value="unidade" checked> Unidade</label>
+                        <label><input type="radio" name="tipo" value="peso"> Peso</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="button-submit">
+                    <i class="fas fa-plus"></i> Adicionar Produto
+                </button>
+                <div id="feedback-message" class="feedback-message"></div>
+            </form>
         </div>
-
-        <div id="bloco-unico">
-          <div class="form-group">
-            <label for="nome-produto">Nome do Produto:</label>
-            <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
-          </div>
-
-          <div class="form-group">
-            <label for="preco-produto">Preço:</label>
-            <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
-          </div>
-
-          <div class="form-group">
-            <label>Imagens (até 5):</label>
-            <div class="image-upload-area" id="image-upload-area">
-              <i class="fas fa-cloud-upload-alt upload-icon"></i>
-              <p>Arraste e solte ou clique para selecionar imagens</p>
-              <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*">
-            </div>
-            <div class="image-preview" id="image-preview"></div>
-          </div>
-        </div>
-
-        <div id="seletor-qtd-variacoes" style="display: none;">
-          <label>Quantos produtos nesse card?</label>
-          <div>
-            <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
-            <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
-            <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
-            <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
-            <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
-          </div>
-        </div>
-
-        <div id="bloco-variacoes"></div>
-
-        <div class="form-group">
-          <label for="categoria-produto">Categoria:</label>
-          <select id="categoria-produto" name="categoria" required>
-            <option value="" disabled selected>Selecione uma categoria</option>
-            <option value="mercearia">Mercearia</option>
-            <option value="padaria">Padaria</option>
-            <option value="sacoloes">Sacolões</option>
-            <option value="bazar">Bazar</option>
-            <option value="bebidas">Bebidas</option>
-            <option value="pereciveis">Perecíveis</option>
-            <option value="higiene">Higiene</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label>Tipo:</label>
-          <div class="radio-group">
-            <label><input type="radio" name="tipo" value="unidade" checked> Unidade</label>
-            <label><input type="radio" name="tipo" value="peso"> Peso</label>
-          </div>
-        </div>
-
-        <button type="submit" class="button-submit">
-          <i class="fas fa-plus"></i> Adicionar Produto
-        </button>
-        <div id="feedback-message" class="feedback-message"></div>
-      </form>
-    </div>
 
         <div class="filter-bar">
-      <div class="categorias-fixas">
-        <button class="filtro-btn active" data-categoria="todos">Todos</button>
-        <button class="filtro-btn" data-categoria="mercearia">Mercearia</button>
-        <button class="filtro-btn" data-categoria="padaria">Padaria</button>
-        <button class="filtro-btn" data-categoria="sacoloes">Sacolões</button>
-        <button class="filtro-btn" data-categoria="bazar">Bazar</button>
-        <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
-        <button class="filtro-btn" data-categoria="pereciveis">Perecíveis</button>
-        <button class="filtro-btn" data-categoria="higiene">Higiene</button>
-      </div>
-      <input type="text" id="barra-pesquisa" placeholder="🔍 Buscar por nome...">
-    </div>
-
-    <div class="list-section dashboard-section">
-      <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
-      <div class="produto-lista grid-mobile" id="produtos-lista"></div>
-      <div id="no-products-message" style="text-align:center; color: var(--light-text-color); margin-top: 30px; display: none;">
-        <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
-        <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
-      </div>
-    </div>
-
-    <div id="modal-confirmar-exclusao" class="modal">
-      <div class="modal-conteudo">
-        <p>Tem certeza que deseja excluir o produto?</p>
-        <div class="modal-botoes">
-          <button id="confirmar-exclusao" class="btn btn-danger">Sim</button>
-          <button id="cancelar-exclusao" class="btn">Não</button>
+            <div class="categorias-fixas">
+                <button class="filtro-btn active" data-categoria="todos">Todos</button>
+                <button class="filtro-btn" data-categoria="mercearia">Mercearia</button>
+                <button class="filtro-btn" data-categoria="padaria">Padaria</button>
+                <button class="filtro-btn" data-categoria="sacoloes">Sacolões</button>
+                <button class="filtro-btn" data-categoria="bazar">Bazar</button>
+                <button class="filtro-btn" data-categoria="bebidas">Bebidas</button>
+                <button class="filtro-btn" data-categoria="pereciveis">Perecíveis</button>
+                <button class="filtro-btn" data-categoria="higiene">Higiene</button>
+            </div>
+            <input type="text" id="barra-pesquisa" placeholder="🔍 Buscar por nome...">
         </div>
-      </div>
-    </div>
 
-    <div id="modal-editar" class="modal">
-      <div class="modal-conteudo">
-        <h3>Editar Produto</h3>
-        <form id="form-editar-produto">
-          <input type="hidden" id="edit-id" name="id">
-          <div class="form-group">
-            <label for="edit-nome">Nome:</label>
-            <input type="text" id="edit-nome" name="nome" required>
-          </div>
-          <div class="form-group">
-            <label for="edit-preco">Preço:</label>
-            <input type="text" id="edit-preco" name="preco" required>
-          </div>
-          <div class="form-group">
-            <label for="edit-imagem">Nova Imagem:</label>
-            <input type="file" id="edit-imagem" name="novaImagem" accept="image/*">
-          </div>
-          <div class="modal-botoes">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <button type="button" id="cancelar-edicao" class="btn">Cancelar</button>
-          </div>
-        </form>
-      </div>
-    </div>
+        <div class="list-section dashboard-section">
+            <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
+            <div class="produto-lista grid-mobile" id="produtos-lista"></div>
+            <div id="no-products-message" style="text-align:center; color: var(--light-text-color); margin-top: 30px; display: none;">
+                <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
+                <p>Nenhum produto cadastrado ainda. Comece adicionando um!</p>
+            </div>
+        </div>
 
-  </div> <script>
+        <div id="modal-confirmar-exclusao" class="modal">
+            <div class="modal-conteudo">
+                <p>Tem certeza que deseja excluir o produto?</p>
+                <div class="modal-botoes">
+                    <button id="confirmar-exclusao" class="btn btn-danger">Sim</button>
+                    <button id="cancelar-exclusao" class="btn">Não</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal-editar" class="modal">
+            <div class="modal-conteudo">
+                <h3>Editar Produto</h3>
+                <form id="form-editar-produto">
+                    <input type="hidden" id="edit-id" name="id">
+                    <div class="form-group">
+                        <label for="edit-nome">Nome:</label>
+                        <input type="text" id="edit-nome" name="nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-preco">Preço:</label>
+                        <input type="text" id="edit-preco" name="preco" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-imagem">Nova Imagem:</label>
+                        <input type="file" id="edit-imagem" name="novaImagem" accept="image/*">
+                        <small>Deixe em branco para manter a imagem atual.</small>
+                    </div>
+                    <div class="modal-botoes">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" id="cancelar-edicao" class="btn">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div> <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    // Referências aos elementos DOM
     const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
     const blocoUnico = document.getElementById('bloco-unico');
     const seletorQtd = document.getElementById('seletor-qtd-variacoes');
     const blocoVariacoes = document.getElementById('bloco-variacoes');
     const imageUploadArea = document.getElementById('image-upload-area');
+    const imagePreview = document.getElementById('image-preview');
+    const formProduto = document.getElementById('form-produto');
+    const feedbackMessage = document.getElementById('feedback-message');
+    const produtosLista = document.getElementById('produtos-lista');
+    const noProductsMessage = document.getElementById('no-products-message');
+    const modalConfirmarExclusao = document.getElementById('modal-confirmar-exclusao');
+    const modalEditar = document.getElementById('modal-editar');
+    const formEditarProduto = document.getElementById('form-editar-produto');
+    const barraPesquisa = document.getElementById('barra-pesquisa');
+    const filtroBtns = document.querySelectorAll('.filtro-btn');
 
-    tipoCardRadios.forEach(radio => {
-      radio.addEventListener('change', () => {
-        const modo = radio.value;
+    let produtos = []; // Array para armazenar os produtos carregados
 
-        if (modo === 'variacoes' && radio.checked) {
-          blocoUnico.style.display = 'none';
-          seletorQtd.style.display = 'block';
-          imageUploadArea.style.display = 'none';
-          document.getElementById('nome-produto').removeAttribute('required');
-          document.getElementById('preco-produto').removeAttribute('required');
-          document.getElementById('imagens-produto').removeAttribute('required');
-        } else {
-          blocoUnico.style.display = 'block';
-          seletorQtd.style.display = 'none';
-          blocoVariacoes.innerHTML = '';
-          imageUploadArea.style.display = 'block';
-          document.getElementById('nome-produto').setAttribute('required', true);
-          document.getElementById('preco-produto').setAttribute('required', true);
-          document.getElementById('imagens-produto').setAttribute('required', true);
-        }
-      });
-    });
+    // --- Funções de UI e Animações ---
 
-    // 🧠 Correção: nomes com colchetes para funcionar com arrays
-    document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
-      radio.addEventListener('change', () => {
-        const qtd = parseInt(radio.value);
-        blocoVariacoes.innerHTML = '';
-        for (let i = 0; i < qtd; i++) {
-          const div = document.createElement('div');
-          div.classList.add('form-group');
-          div.innerHTML = `
-            <h4>Produto ${i + 1}</h4>
-            <label>Nome:</label>
-            <input type="text" name="v_nome[${i}]" required>
-            <label>Preço:</label>
-            <input type="text" name="v_preco[${i}]" required>
-            <label>Imagem:</label>
-            <input type="file" name="v_imagens" accept="image/*" required>
-          `;
-          blocoVariacoes.appendChild(div);
-        }
-      });
-    });
-
-    document.getElementById('form-produto').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
-      const form = document.getElementById('form-produto');
-      const formData = new FormData(form);
-      formData.append('modo', tipoCard);
-
-      const res = await fetch('/produtos', {
-        method: 'POST',
-        body: formData
-      });
-
-      const json = await res.json();
-      const msg = document.getElementById('feedback-message');
-      msg.textContent = json.mensagem || 'Erro ao salvar';
-      msg.className = 'feedback-message ' + (res.ok ? 'success' : 'error');
-      msg.style.display = 'flex';
-      setTimeout(() => msg.style.display = 'none', 3000);
-
-      if (res.ok) {
-        form.reset();
-        blocoVariacoes.innerHTML = '';
-        document.getElementById('image-preview').innerHTML = '';
-        imageUploadArea.style.display = 'block';
-      }
-    });
-
-    // Estado inicial do formulário
-    const selecionado = document.querySelector('input[name="tipoCard"]:checked');
-    if (selecionado) selecionado.dispatchEvent(new Event('change'));
-document.getElementById('produtos-lista').addEventListener('click', async (e) => {
-  const card = e.target.closest('.card-produto');
-  if (!card) return;
-  const id = card.dataset.id;
-
-  if (e.target.classList.contains('btn-remover')) {
-    if (confirm('Tem certeza que deseja remover este produto?')) {
-      const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
-      const data = await res.json();
-      alert(data.mensagem);
-      if (res.ok) card.remove();
+    /**
+     * Exibe uma mensagem de feedback com animação.
+     * @param {string} message - A mensagem a ser exibida.
+     * @param {boolean} isSuccess - True para mensagem de sucesso, false para erro.
+     */
+    function showFeedback(message, isSuccess) {
+        feedbackMessage.textContent = message;
+        feedbackMessage.className = `feedback-message ${isSuccess ? 'success' : 'error'}`;
+        feedbackMessage.classList.add('show'); // Adiciona classe para animação
+        setTimeout(() => {
+            feedbackMessage.classList.remove('show'); // Remove classe para ocultar com animação
+        }, 3000);
     }
-  }
 
-  if (e.target.classList.contains('btn-editar')) {
-    alert('🔧 Função de edição ainda será implementada.'); // Aqui você pode abrir um modal de edição
-  }
-});
-// painel.js
+    /**
+     * Adiciona um preview das imagens selecionadas.
+     * @param {FileList} files - Lista de arquivos de imagem.
+     */
+    function handleImagePreview(files) {
+        imagePreview.innerHTML = ''; // Limpa previews anteriores
+        Array.from(files).slice(0, 5).forEach(file => { // Limita a 5 imagens
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = 'Prévia da imagem';
+                    imagePreview.appendChild(img);
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    }
 
-let produtos = [];
+    /**
+     * Abre um modal com animação.
+     * @param {HTMLElement} modalElement - O elemento modal a ser exibido.
+     */
+    function openModal(modalElement) {
+        modalElement.classList.add('show');
+    }
 
-// Buscar produtos do banco e renderizar
-async function carregarProdutos() {
-  const res = await fetch('/produtos');
-  produtos = await res.json();
-  renderizarLista(produtos);
-}
+    /**
+     * Fecha um modal com animação.
+     * @param {HTMLElement} modalElement - O elemento modal a ser ocultado.
+     */
+    function closeModal(modalElement) {
+        modalElement.classList.remove('show');
+    }
 
-// Renderizar lista de produtos no painel
-function renderizarLista(produtosFiltrados) {
-  const container = document.getElementById('produtos-lista');
-  container.innerHTML = '';
+    // --- Lógica do Formulário de Adição de Produto ---
 
-  produtosFiltrados.forEach(prod => {
-    const card = document.createElement('div');
-    card.className = 'produto-card';
+    // Alternar entre modo "Produto único" e "Múltiplos produtos"
+    tipoCardRadios.forEach(radio => {
+        radio.addEventListener('change', () => {
+            const modo = radio.value;
 
-    const imagem = prod.imagens?.[0] || prod.variacoes?.[0]?.imagem || '/assets/images/alimentos/sem-imagem.jpg';
-    const nome = prod.nome || prod.variacoes?.[0]?.nome || 'Sem nome';
-    const preco = prod.preco || prod.variacoes?.[0]?.preco || '0.00';
-
-    card.innerHTML = `
-      <img src="${imagem}" alt="${nome}" class="produto-img">
-      <h4>${nome}</h4>
-      <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
-      <button class="editar-btn" onclick="abrirModalEditar('${prod._id}')">Editar</button>
-      <button class="excluir-btn" onclick="abrirModalExcluir('${prod._id}')">Excluir</button>
-    `;
-
-    container.appendChild(card);
-  });
-
-  document.getElementById('no-products-message').style.display = produtosFiltrados.length ? 'none' : 'block';
-}
-
-// Filtro por categoria
-function filtrarCategoriaPainel(cat) {
-  const filtrado = cat === 'todos' ? produtos : produtos.filter(p => p.categoria === cat);
-  renderizarLista(filtrado);
-}
-
-// Filtro por nome
-function pesquisarNomePainel() {
-  const termo = document.getElementById('barra-pesquisa').value.toLowerCase(); // Corrigido ID
-  const resultado = produtos.filter(p => {
-    const nome = p.nome || p.variacoes?.[0]?.nome || '';
-    return nome.toLowerCase().includes(termo);
-  });
-  renderizarLista(resultado);
-}
-
-// Abrir modal de edição
-function abrirModalEditar(id) {
-  const produto = produtos.find(p => p._id === id);
-  if (!produto) return;
-
-  const nome = produto.nome || produto.variacoes?.[0]?.nome || '';
-  const preco = produto.preco || produto.variacoes?.[0]?.preco || '';
-
-  document.getElementById('edit-id').value = id;
-  document.getElementById('edit-nome').value = nome;
-  document.getElementById('edit-preco').value = preco;
-
-  document.getElementById('modal-editar').style.display = 'flex';
-}
-
-// Confirmar edição
-async function salvarEdicao() {
-  const id = document.getElementById('edit-id').value;
-  const nome = document.getElementById('edit-nome').value;
-  const preco = document.getElementById('edit-preco').value;
-  const imagem = document.getElementById('edit-imagem').files[0];
-
-  const formData = new FormData();
-  formData.append('nome', nome);
-  formData.append('preco', preco);
-  if (imagem) formData.append('imagem', imagem);
-
-  const res = await fetch(`/produtos/${id}`, {
-    method: 'PUT',
-    body: formData
-  });
-
-  const json = await res.json();
-  alert(json.mensagem);
-  document.getElementById('modal-editar').style.display = 'none';
-  carregarProdutos();
-}
-// Abrir modal de confirmação de exclusão
-function abrirModalExcluir(id) {
-  // Ajuste: O ID do produto a ser excluído deve ser armazenado para uso posterior
-  // Você pode criar um input hidden no modal de exclusão para isso
-  const modalConfirmarExclusao = document.getElementById('modal-confirmar-exclusao');
-  modalConfirmarExclusao.dataset.productId = id; // Armazena o ID no dataset do modal
-  modalConfirmarExclusao.style.display = 'flex';
-}
-
-// Confirmar exclusão
-async function confirmarExclusao() {
-  const modalConfirmarExclusao = document.getElementById('modal-confirmar-exclusao');
-  const id = modalConfirmarExclusao.dataset.productId; // Recupera o ID do dataset
-
-  const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
-  const json = await res.json();
-  alert(json.mensagem);
-  modalConfirmarExclusao.style.display = 'none';
-  carregarProdutos();
-}
-// Fechar modais
-function fecharModais() {
-  document.getElementById('modal-editar').style.display = 'none';
-  document.getElementById('modal-confirmar-exclusao').style.display = 'none'; // Corrigido ID do modal
-}
-
-// Event Listeners para botões dos modais
-document.getElementById('cancelar-edicao').addEventListener('click', fecharModais);
-document.getElementById('cancelar-exclusao').addEventListener('click', fecharModais);
-document.getElementById('confirmar-exclusao').addEventListener('click', confirmarExclusao);
-document.getElementById('form-editar-produto').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    salvarEdicao();
-});
-
-// Event listeners para os botões de filtro de categoria
-document.querySelectorAll('.filtro-btn').forEach(button => {
-    button.addEventListener('click', function() {
-        document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-        filtrarCategoriaPainel(this.dataset.categoria);
+            if (modo === 'variacoes' && radio.checked) {
+                blocoUnico.style.display = 'none';
+                seletorQtd.style.display = 'block';
+                imageUploadArea.style.display = 'none';
+                imagePreview.innerHTML = ''; // Limpa previews
+                // Remove required de campos do bloco único quando não está ativo
+                document.getElementById('nome-produto').removeAttribute('required');
+                document.getElementById('preco-produto').removeAttribute('required');
+                document.getElementById('imagens-produto').removeAttribute('required');
+            } else {
+                blocoUnico.style.display = 'block';
+                seletorQtd.style.display = 'none';
+                blocoVariacoes.innerHTML = ''; // Limpa as variações se voltar para único
+                imageUploadArea.style.display = 'block';
+                // Adiciona required de volta
+                document.getElementById('nome-produto').setAttribute('required', true);
+                document.getElementById('preco-produto').setAttribute('required', true);
+                // A validação de imagem no modo único será feita com JS ou via `required` se necessário
+            }
+        });
     });
+
+    // Gerar campos para variações de produto dinamicamente
+    document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+            const qtd = parseInt(radio.value);
+            blocoVariacoes.innerHTML = ''; // Limpa campos anteriores
+            for (let i = 0; i < qtd; i++) {
+                const div = document.createElement('div');
+                div.classList.add('form-group');
+                // Revertido o atributo 'name' para o formato original 'v_nome[${i}]', 'v_preco[${i}]', 'v_imagens'
+                div.innerHTML = `
+                    <h4>Produto ${i + 1}</h4>
+                    <label>Nome:</label>
+                    <input type="text" name="v_nome[${i}]" placeholder="Nome da variação" required>
+                    <label>Preço:</label>
+                    <input type="text" name="v_preco[${i}]" placeholder="Preço da variação" step="0.01" required>
+                    <label>Imagem:</label>
+                    <input type="file" name="v_imagens" accept="image/*" required>
+                `;
+                blocoVariacoes.appendChild(div);
+            }
+        });
+    });
+
+    // Pré-visualização de imagens para o modo único
+    document.getElementById('imagens-produto').addEventListener('change', (e) => {
+        handleImagePreview(e.target.files);
+    });
+
+    // Lidar com o drag and drop de imagens
+    imageUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        imageUploadArea.classList.add('drag-over');
+    });
+
+    imageUploadArea.addEventListener('dragleave', () => {
+        imageUploadArea.classList.remove('drag-over');
+    });
+
+    imageUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        imageUploadArea.classList.remove('drag-over');
+        const files = e.dataTransfer.files;
+        document.getElementById('imagens-produto').files = files; // Atribui os arquivos ao input
+        handleImagePreview(files);
+    });
+
+    // Envio do formulário de adição
+    formProduto.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Validação básica do lado do cliente (melhora a UX)
+        if (!formProduto.checkValidity()) {
+            showFeedback('Preencha todos os campos obrigatórios!', false);
+            formProduto.reportValidity(); // Mostra as mensagens de erro padrão do navegador
+            return;
+        }
+
+        const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
+        const formData = new FormData(formProduto);
+        formData.append('modo', tipoCard);
+
+        try {
+            const res = await fetch('/produtos', {
+                method: 'POST',
+                body: formData
+            });
+
+            const json = await res.json();
+
+            if (res.ok) {
+                showFeedback(json.mensagem || 'Produto adicionado com sucesso!', true);
+                formProduto.reset();
+                blocoVariacoes.innerHTML = '';
+                imagePreview.innerHTML = '';
+                // Restaura o estado inicial do rádio "Produto único"
+                document.querySelector('input[name="tipoCard"][value="unico"]').checked = true;
+                blocoUnico.style.display = 'block';
+                seletorQtd.style.display = 'none';
+                imageUploadArea.style.display = 'block';
+                document.getElementById('nome-produto').setAttribute('required', true);
+                document.getElementById('preco-produto').setAttribute('required', true);
+                document.getElementById('categoria-produto').value = ''; // Limpa select
+                carregarProdutos(); // Recarrega a lista de produtos
+            } else {
+                showFeedback(json.mensagem || 'Erro ao adicionar produto.', false);
+            }
+        } catch (error) {
+            console.error('Erro na requisição:', error);
+            showFeedback('Erro de conexão ou servidor.', false);
+        }
+    });
+
+    // --- Lógica da Lista de Produtos e Modais ---
+
+    /**
+     * Carrega os produtos da API e renderiza a lista.
+     */
+    async function carregarProdutos() {
+        try {
+            const res = await fetch('/produtos');
+            produtos = await res.json();
+            renderizarLista(produtos);
+        } catch (error) {
+            console.error('Erro ao carregar produtos:', error);
+            showFeedback('Não foi possível carregar os produtos.', false);
+        }
+    }
+
+    /**
+     * Renderiza a lista de produtos no painel.
+     * @param {Array} produtosFiltrados - Array de produtos a serem renderizados.
+     */
+    function renderizarLista(produtosFiltrados) {
+        produtosLista.innerHTML = ''; // Limpa lista anterior
+
+        if (produtosFiltrados.length === 0) {
+            noProductsMessage.style.display = 'block';
+            return;
+        } else {
+            noProductsMessage.style.display = 'none';
+        }
+
+        produtosFiltrados.forEach((prod, index) => {
+            const card = document.createElement('div');
+            card.className = 'produto-card fade-in'; // Adiciona classe para animação
+            // Adiciona um pequeno atraso para animação sequencial
+            card.style.animationDelay = `${index * 0.05}s`;
+
+            // Lógica para determinar a imagem, nome e preço com base no tipo de card
+            let imagem;
+            let nome;
+            let preco;
+
+            if (prod.tipoCard === 'unico') {
+                imagem = prod.imagens?.[0] || '/assets/images/alimentos/sem-imagem.jpg';
+                nome = prod.nome || 'Sem nome';
+                preco = prod.preco || '0.00';
+            } else if (prod.tipoCard === 'variacoes' && prod.variacoes && prod.variacoes.length > 0) {
+                // Para cards de variação, mostra o nome/preço da primeira variação e uma imagem genérica ou da primeira variação
+                imagem = prod.variacoes[0].imagem || '/assets/images/alimentos/sem-imagem.jpg';
+                nome = prod.variacoes[0].nome || 'Variações'; // Nome genérico para o card de variações
+                preco = prod.variacoes[0].preco || '0.00'; // Preço da primeira variação
+                // Você pode ajustar isso para mostrar "A partir de R$ X.XX" se desejar
+            } else {
+                // Fallback para casos onde não há imagem ou tipo de card não definido
+                imagem = '/assets/images/alimentos/sem-imagem.jpg';
+                nome = 'Produto Desconhecido';
+                preco = '0.00';
+            }
+            
+            card.innerHTML = `
+                <img src="${imagem}" alt="${nome}" class="produto-img">
+                <h4>${nome}</h4>
+                <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
+                <div class="botoes-acao">
+                    <button class="editar-btn" data-id="${prod._id}"><i class="fas fa-edit"></i> Editar</button>
+                    <button class="excluir-btn" data-id="${prod._id}"><i class="fas fa-trash-alt"></i> Excluir</button>
+                </div>
+            `;
+            produtosLista.appendChild(card);
+        });
+    }
+
+    // Filtro por categoria
+    filtroBtns.forEach(button => {
+        button.addEventListener('click', function() {
+            filtroBtns.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            const categoria = this.dataset.categoria;
+            const filtrado = categoria === 'todos' ? produtos : produtos.filter(p => p.categoria === categoria);
+            renderizarLista(filtrado);
+        });
+    });
+
+    // Filtro por nome
+    barraPesquisa.addEventListener('input', () => {
+        const termo = barraPesquisa.value.toLowerCase();
+        const resultado = produtos.filter(p => {
+            // Ajusta a busca para considerar o nome do produto único ou da primeira variação
+            const nomeProduto = p.nome?.toLowerCase() || (p.variacoes && p.variacoes.length > 0 ? p.variacoes[0].nome?.toLowerCase() : '');
+            return nomeProduto.includes(termo);
+        });
+        renderizarLista(resultado);
+    });
+
+    // Lidar com cliques nos botões de Editar e Excluir
+    produtosLista.addEventListener('click', (e) => {
+        const target = e.target;
+        const productId = target.dataset.id || target.closest('button')?.dataset.id; // Pega o ID do botão ou do card pai
+
+        if (!productId) return;
+
+        if (target.classList.contains('excluir-btn') || target.closest('.excluir-btn')) {
+            openModal(modalConfirmarExclusao);
+            modalConfirmarExclusao.dataset.productId = productId; // Armazena o ID para exclusão
+        }
+
+        if (target.classList.contains('editar-btn') || target.closest('.editar-btn')) {
+            abrirModalEditar(productId);
+        }
+    });
+
+    // --- Modal de Confirmação de Exclusão ---
+    document.getElementById('confirmar-exclusao').addEventListener('click', async () => {
+        const id = modalConfirmarExclusao.dataset.productId;
+        try {
+            const res = await fetch(`/produtos/${id}`, { method: 'DELETE' });
+            const json = await res.json();
+            if (res.ok) {
+                showFeedback(json.mensagem || 'Produto excluído com sucesso!', true);
+                carregarProdutos(); // Recarrega a lista
+            } else {
+                showFeedback(json.mensagem || 'Erro ao excluir produto.', false);
+            }
+            closeModal(modalConfirmarExclusao);
+        } catch (error) {
+            console.error('Erro ao excluir produto:', error);
+            showFeedback('Erro de conexão ao excluir produto.', false);
+            closeModal(modalConfirmarExclusao);
+        }
+    });
+
+    document.getElementById('cancelar-exclusao').addEventListener('click', () => {
+        closeModal(modalConfirmarExclusao);
+    });
+
+    // --- Modal de Edição de Produto ---
+    function abrirModalEditar(id) {
+        const produto = produtos.find(p => p._id === id);
+        if (!produto) {
+            showFeedback('Produto não encontrado para edição.', false);
+            return;
+        }
+
+        // Popula o formulário do modal de edição
+        document.getElementById('edit-id').value = id;
+        // Popula com nome/preço do produto único ou da primeira variação
+        document.getElementById('edit-nome').value = produto.nome || (produto.variacoes && produto.variacoes.length > 0 ? produto.variacoes[0].nome : '');
+        document.getElementById('edit-preco').value = produto.preco || (produto.variacoes && produto.variacoes.length > 0 ? produto.variacoes[0].preco : '');
+
+        openModal(modalEditar);
+    }
+
+    // Submissão do formulário de edição
+    formEditarProduto.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        if (!formEditarProduto.checkValidity()) {
+            showFeedback('Preencha todos os campos de edição obrigatórios!', false);
+            formEditarProduto.reportValidity();
+            return;
+        }
+
+        const id = document.getElementById('edit-id').value;
+        const formData = new FormData(formEditarProduto); // Pega os dados do formulário de edição
+
+        try {
+            const res = await fetch(`/produtos/${id}`, {
+                method: 'PUT',
+                body: formData
+            });
+            const json = await res.json();
+            if (res.ok) {
+                showFeedback(json.mensagem || 'Produto atualizado com sucesso!', true);
+                carregarProdutos(); // Recarrega a lista
+            } else {
+                showFeedback(json.mensagem || 'Erro ao atualizar produto.', false);
+            }
+            closeModal(modalEditar);
+        } catch (error) {
+            console.error('Erro ao atualizar produto:', error);
+            showFeedback('Erro de conexão ao atualizar produto.', false);
+            closeModal(modalEditar);
+        }
+    });
+
+    document.getElementById('cancelar-edicao').addEventListener('click', () => {
+        closeModal(modalEditar);
+    });
+
+    // Fechar modais ao clicar fora (overlay)
+    modalConfirmarExclusao.addEventListener('click', (e) => {
+        if (e.target === modalConfirmarExclusao) {
+            closeModal(modalConfirmarExclusao);
+        }
+    });
+
+    modalEditar.addEventListener('click', (e) => {
+        if (e.target === modalEditar) {
+            closeModal(modalEditar);
+        }
+    });
+
+    // --- Inicialização ---
+    // Ativa o rádio "Produto único" no carregamento para garantir o estado inicial correto
+    document.querySelector('input[name="tipoCard"][value="unico"]').checked = true;
+    document.querySelector('input[name="tipoCard"][value="unico"]').dispatchEvent(new Event('change'));
+
+    // Carrega os produtos quando a página é carregada
+    carregarProdutos();
 });
-
-// Event listener para a barra de pesquisa
-document.getElementById('barra-pesquisa').addEventListener('input', pesquisarNomePainel);
-
-window.addEventListener('DOMContentLoaded', carregarProdutos);
   </script>
 </body>
 </html>
