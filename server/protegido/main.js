@@ -653,3 +653,12 @@ const btnMenu = document.getElementById('btnMenu');
       menuLateral.classList.remove('aberto');
     }
   });
+
+
+
+
+
+  window.addEventListener('load', () => {
+  inicializarCarrosseisManuais();
+});
+
