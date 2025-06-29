@@ -12,23 +12,6 @@ async function carregarProdutos() {
 }
 
 
-async function carregarProdutos() {
-  try {
-    const res = await fetch('/produtos');
-    produtos = await res.json();
-
-    renderizarProdutos(produtos);          // ✅ Renderiza os produtos do banco
-    inicializarCarrosseisManuais();        // ✅ Ativa o carrossel logo depois
-
-    filtrarCategoria('mercearia');         // (Opcional: ativa filtro inicial)
-  } catch (err) {
-    console.error('Erro ao carregar produtos do servidor', err);
-  }
-}
-
-
-
-
 /*========== Configurações do menu ==========*/
 const nav = document.querySelector('#header nav')
 const toggle = document.querySelectorAll('nav .toggle')
@@ -519,11 +502,7 @@ function inicializarCarrosseisManuais() {
 }
 
 
-// ⬇️ Chamamos essa função DEPOIS que o DOM estiver carregado
-document.addEventListener('DOMContentLoaded', () => {
-  carregarProdutos();               // produtos do backend
-  inicializarCarrosseisManuais();   // produtos fixos no HTML (ex: Treloso)
-});
+
 
 
 
@@ -670,10 +649,15 @@ const btnMenu = document.getElementById('btnMenu');
 
 
 
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res = await fetch('/produtos');
+    produtos = await res.json();
 
-
-document.addEventListener('DOMContentLoaded', () => {
-  carregarProdutos(); // Agora ele já chama o carrossel no momento certo
+    renderizarProdutos(produtos);
+    inicializarCarrosseisManuais();
+    filtrarCategoria('mercearia'); // opcional
+  } catch (err) {
+    console.error('Erro ao carregar produtos do servidor', err);
+  }
 });
-
-
