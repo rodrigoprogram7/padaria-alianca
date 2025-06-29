@@ -27,7 +27,7 @@
             font-family: 'Poppins', sans-serif;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* Centraliza verticalmente por padrão */
             min-height: 100vh;
             background: var(--background-light);
             color: var(--text-color);
@@ -126,15 +126,27 @@
 
         /* Responsividade para Mobile */
         @media (max-width: 768px) {
+            body {
+                /* Desativa o alinhamento vertical para o container poder se mover */
+                align-items: flex-start;
+                /* Adiciona uma margem superior para empurrar o container para baixo */
+                padding-top: 10vh; /* 10% da altura da viewport no topo */
+            }
+
             .login-container {
-                margin: 20px; /* Margem para não "colar" nas bordas em telas menores */
+                margin: 20px auto; /* Margem horizontal automática para centralizar, e vertical de 20px */
                 padding: 30px;
+                box-shadow: 0 5px 15px var(--shadow-light); /* Sombra um pouco mais suave no mobile */
             }
         }
 
         @media (max-width: 480px) {
+            body {
+                padding-top: 8vh; /* Ajuste para telas ainda menores, se necessário */
+            }
+
             .login-container {
-                margin: 15px;
+                margin: 15px auto;
                 padding: 25px;
                 border-radius: 10px;
             }
