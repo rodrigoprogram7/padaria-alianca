@@ -445,7 +445,7 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     if (thumbsContainer) {
         variacoes.forEach((variacao, index) => {
             const thumb = document.createElement('img')
-            thumb.src = variacao.imagem
+            thumb.src = variacao.img
             thumb.alt = variacao.nome
             thumb.addEventListener('click', () => {
                 current = index
@@ -457,7 +457,7 @@ document.querySelectorAll('.produto.carrossel').forEach(produto => {
     }
 
     const updateProduto = () => {
-        imgGrande.src = variacoes[current].imagem
+        imgGrande.src = variacoes[current].img
         nomeProduto.textContent = variacoes[current].nome
         precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`
         // Atualiza os atributos data-nome e data-preco do elemento principal do produto
