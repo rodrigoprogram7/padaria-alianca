@@ -143,7 +143,7 @@ body {
 }
 
 h1, h2, h3 {
-    color: var(--primary-color);
+    color: var(--base-color);
     margin-bottom: var(--spacing-lg);
     display: flex;
     align-items: center;
@@ -729,8 +729,8 @@ input:focus:invalid {
 <body>
   <div class="container">
         <div class="form-section dashboard-section">
-            <h1 ><i style="background-color: var(--base-color);" class="fas fa-cubes"></i> Painel de Administração</h1>
-            <h2 ><i style="background-color: var(--base-color);" class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
+            <h1 ><i class="fas fa-cubes"></i> Painel de Administração</h1>
+            <h2 ><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
             <form id="form-produto" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
                     <label>Tipo de Card:</label>
@@ -819,7 +819,7 @@ input:focus:invalid {
         </div>
 
         <div class="list-section dashboard-section">
-            <h2 ><i style="background-color: var(--base-color);" class="fas fa-boxes"></i> Produtos Cadastrados</h2>
+            <h2 ><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
             <div class="produto-lista grid-mobile" id="produtos-lista"></div>
             <div id="no-products-message" style="text-align:center; color: var(--light-text-color); margin-top: 30px; display: none;">
                 <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
