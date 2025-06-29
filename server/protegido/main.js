@@ -17,6 +17,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const res = await fetch('/produtos');
+    produtos = await res.json();
+
+    renderizarProdutos(produtos);
+    inicializarCarrosseisManuais();
+    filtrarCategoria('mercearia');
+
+    atualizarCarrinho(); // ✅ Mostra o carrinho com dados salvos do localStorage
+  } catch (err) {
+    console.error('Erro ao carregar produtos do servidor', err);
+  }
+});
+
+
+
 
 /*========== Configurações do menu ==========*/
 const nav = document.querySelector('#header nav')
