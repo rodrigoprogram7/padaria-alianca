@@ -444,6 +444,7 @@ function inicializarCarrosseisManuais() {
     let current = 0;
     const thumbs = [];
 
+    thumbsContainer.innerHTML = ''; // Garante que não haja duplicatas
 
     variacoes.forEach((variacao, index) => {
       const thumb = document.createElement('img');
