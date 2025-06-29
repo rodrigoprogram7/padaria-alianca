@@ -12,6 +12,8 @@ async function carregarProdutos() {
 }
 
 
+
+
 /*========== Configurações do menu ==========*/
 const nav = document.querySelector('#header nav')
 const toggle = document.querySelectorAll('nav .toggle')
