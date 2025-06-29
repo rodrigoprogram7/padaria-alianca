@@ -145,7 +145,7 @@ function renderizarCardUnico(prod) {
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
-      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
     </div>
   `;
 
@@ -185,7 +185,7 @@ card.setAttribute('data-nome', primeira.nome); // ✅ ESSA LINHA RESOLVE O NULL!
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
-      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
     </div>
   `;
 
