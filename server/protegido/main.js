@@ -12,10 +12,20 @@ async function carregarProdutos() {
 }
 
 
-document.addEventListener('DOMContentLoaded', () => {
-  carregarProdutos();
-  inicializarCarrosseisManuais();
-});
+async function carregarProdutos() {
+  try {
+    const res = await fetch('/produtos');
+    produtos = await res.json();
+
+    renderizarProdutos(produtos);          // ✅ Renderiza os produtos do banco
+    inicializarCarrosseisManuais();        // ✅ Ativa o carrossel logo depois
+
+    filtrarCategoria('mercearia');         // (Opcional: ativa filtro inicial)
+  } catch (err) {
+    console.error('Erro ao carregar produtos do servidor', err);
+  }
+}
+
 
 
 
@@ -662,7 +672,8 @@ const btnMenu = document.getElementById('btnMenu');
 
 
 
-  window.addEventListener('load', () => {
-  inicializarCarrosseisManuais();
+document.addEventListener('DOMContentLoaded', () => {
+  carregarProdutos(); // Agora ele já chama o carrossel no momento certo
 });
+
 
