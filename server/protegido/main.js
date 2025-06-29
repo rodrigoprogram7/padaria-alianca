@@ -14,6 +14,7 @@ async function carregarProdutos() {
 
 document.addEventListener('DOMContentLoaded', () => {
   carregarProdutos();
+  inicializarCarrosseisManuais();
 });
 
 
@@ -443,21 +444,19 @@ function inicializarCarrosseisManuais() {
     let current = 0;
     const thumbs = [];
 
-    if (thumbsContainer && thumbsContainer.children.length === 0) {
-      variacoes.forEach((variacao, index) => {
-        const thumb = document.createElement('img');
-        thumb.src = variacao.img;
-        thumb.alt = variacao.nome;
-        thumb.addEventListener('click', () => {
-          current = index;
-          updateProduto();
-        });
-        thumbsContainer.appendChild(thumb);
-        thumbs.push(thumb);
+    thumbsContainer.innerHTML = ''; // Garante que não haja duplicatas
+
+    variacoes.forEach((variacao, index) => {
+      const thumb = document.createElement('img');
+      thumb.src = variacao.img;
+      thumb.alt = variacao.nome;
+      thumb.addEventListener('click', () => {
+        current = index;
+        updateProduto();
       });
-    } else {
-      thumbs.push(...thumbsContainer.querySelectorAll('img'));
-    }
+      thumbsContainer.appendChild(thumb);
+      thumbs.push(thumb);
+    });
 
     function updateProduto() {
       const v = variacoes[current];
@@ -504,6 +503,7 @@ function inicializarCarrosseisManuais() {
     updateProduto();
   });
 }
+
 
 // ⬇️ Chamamos essa função DEPOIS que o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
