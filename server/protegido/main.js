@@ -446,9 +446,11 @@ function inicializarCarrosseisManuais() {
 
     thumbsContainer.innerHTML = ''; // Garante que não haja duplicatas
 
+    // ... (resto da função)
+
     variacoes.forEach((variacao, index) => {
       const thumb = document.createElement('img');
-      thumb.src = variacao.img;
+      thumb.src = variacao.imagem; // Alterado de variacao.img para variacao.imagem
       thumb.alt = variacao.nome;
       thumb.addEventListener('click', () => {
         current = index;
@@ -460,7 +462,7 @@ function inicializarCarrosseisManuais() {
 
     function updateProduto() {
       const v = variacoes[current];
-      imgGrande.src = v.img;
+      imgGrande.src = v.imagem; // Alterado de v.img para v.imagem
       nomeProduto.textContent = v.nome;
       precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2)}`;
       produto.setAttribute('data-nome', v.nome);
@@ -485,6 +487,8 @@ function inicializarCarrosseisManuais() {
         });
       }
     }
+
+// ... (resto da função)
 
     if (prevBtn) {
       prevBtn.addEventListener('click', () => {
