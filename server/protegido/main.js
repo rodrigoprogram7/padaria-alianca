@@ -14,6 +14,7 @@ async function carregarProdutos() {
 
 document.addEventListener('DOMContentLoaded', () => {
   carregarProdutos();
+  inicializarCarrosseisManuais();
 });
 
 
@@ -650,3 +651,85 @@ document.addEventListener('click', function(event) {
         nav.classList.remove('show');
     }
 });
+
+
+
+
+
+function inicializarCarrosseisManuais() {
+  document.querySelectorAll('.produto.carrossel').forEach(produto => {
+    const variacoes = JSON.parse(produto.getAttribute('data-variacoes') || '[]');
+    if (!variacoes.length) return;
+
+    const imgGrande = produto.querySelector('.imagem-grande-wrapper img');
+    const nomeProduto = produto.querySelector('h3');
+    const precoProduto = produto.querySelector('p');
+    const thumbsContainer = produto.querySelector('.carousel-thumbs');
+    const prevBtn = produto.querySelector('.carousel-prev');
+    const nextBtn = produto.querySelector('.carousel-next');
+
+    let current = 0;
+    const thumbs = [];
+
+    // Cria miniaturas se ainda não existirem
+    if (thumbsContainer && thumbsContainer.children.length === 0) {
+      variacoes.forEach((variacao, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = variacao.img;
+        thumb.alt = variacao.nome;
+        thumb.addEventListener('click', () => {
+          current = index;
+          updateProduto();
+        });
+        thumbsContainer.appendChild(thumb);
+        thumbs.push(thumb);
+      });
+    } else {
+      thumbs.push(...thumbsContainer.querySelectorAll('img'));
+    }
+
+    function updateProduto() {
+      const v = variacoes[current];
+      imgGrande.src = v.img;
+      nomeProduto.textContent = v.nome;
+      precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2)}`;
+      produto.setAttribute('data-nome', v.nome);
+      produto.setAttribute('data-preco', v.preco);
+
+      const tipo = produto.getAttribute('data-tipo') || 'unidade';
+      const inputQuantidade = produto.querySelector('.quantidade');
+      if (inputQuantidade) inputQuantidade.value = tipo === 'peso' ? 100 : 1;
+
+      const subtotalEl = produto.querySelector('.subtotal-preview');
+      if (subtotalEl) subtotalEl.textContent = '';
+
+      thumbs.forEach((img, index) => {
+        img.classList.toggle('ativo', index === current);
+      });
+
+      if (thumbs[current]) {
+        thumbs[current].scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        current = (current - 1 + variacoes.length) % variacoes.length;
+        updateProduto();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        current = (current + 1) % variacoes.length;
+        updateProduto();
+      });
+    }
+
+    updateProduto();
+  });
+}
