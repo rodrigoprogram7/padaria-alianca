@@ -225,6 +225,7 @@ function filtrarCategoria(categoriaSelecionada) {
     : produtos.filter(prod => prod.categoria === categoriaSelecionada);
 
   renderizarProdutos(produtosFiltrados); // Recria os cards na tela
+  inicializarCarrosseisManuais(); // 🔧 Adicione isso aqui!
 
   // Scroll suave
   const areaProdutos = document.querySelector('.pp');
