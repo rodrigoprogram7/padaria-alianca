@@ -640,57 +640,16 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.addEventListener('click', function(event) {
-    const nav = document.querySelector('nav.container');
-    const toggle = document.querySelector('.toggle.icon-menu');
+const btnMenu = document.getElementById('btnMenu');
+  const menuLateral = document.getElementById('menuLateral');
 
-    const isClickInsideNav = nav.contains(event.target);
-    const isClickOnToggle = event.target.closest('.toggle');
+  btnMenu.addEventListener('click', () => {
+    menuLateral.classList.toggle('aberto');
+  });
 
-    // Se o menu estiver aberto e o clique for fora do nav e fora do toggle, fecha o menu
-    if (nav.classList.contains('show') && !isClickInsideNav && !isClickOnToggle) {
-        nav.classList.remove('show');
+  // (Opcional) fechar ao clicar fora
+  document.addEventListener('click', function(e) {
+    if (!menuLateral.contains(e.target) && e.target !== btnMenu) {
+      menuLateral.classList.remove('aberto');
     }
-});
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function() {
-  const menuToggle = document.querySelector('.menu-toggle');
-  const menuLateral = document.querySelector('.menu-lateral');
-  const body = document.body; // Para o overlay
-
-  if (menuToggle && menuLateral) { // Verifica se os elementos existem
-    menuToggle.addEventListener('click', function() {
-      menuLateral.classList.toggle('active');
-      menuToggle.classList.toggle('active'); // Para animar o ícone hambúrguer
-      body.classList.toggle('menu-open'); // Adiciona classe ao body para o overlay
-    });
-
-    // Fecha o menu se clicar fora dele ou em um link do menu
-    document.addEventListener('click', function(event) {
-      const isClickInsideMenu = menuLateral.contains(event.target);
-      const isClickOnToggle = menuToggle.contains(event.target);
-      const isLinkClick = event.target.tagName === 'A' && menuLateral.contains(event.target);
-
-      if (!isClickInsideMenu && !isClickOnToggle && menuLateral.classList.contains('active')) {
-        menuLateral.classList.remove('active');
-        menuToggle.classList.remove('active');
-        body.classList.remove('menu-open');
-      } else if (isLinkClick) {
-        // Fecha o menu ao clicar em um link dentro dele
-        menuLateral.classList.remove('active');
-        menuToggle.classList.remove('active');
-        body.classList.remove('menu-open');
-      }
-    });
-  }
-});
-
-
-
-
+  });

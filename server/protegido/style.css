@@ -1993,37 +1993,30 @@ body.dark-mode .dark-mode-toggle span {
 
 
 
-
-
-
-
-
-
-
-
-
-/* Estilos Gerais do Menu Lateral */
+/* Menu Lateral */
 .menu-lateral {
-  position: fixed; /* Fixa o menu na tela */
+  position: fixed;
   top: 0;
-  left: -250px; /* Esconde o menu fora da tela */
-  width: 250px; /* Largura do menu */
+  right: -260px;
+  width: 240px;
   height: 100%;
-  background-color: #333; /* Cor de fundo do menu */
-  color: #fff;
-  padding-top: 60px; /* Espaço para o cabeçalho, se houver */
-  transition: left 0.3s ease-in-out; /* Animação suave */
-  z-index: 1000; /* Garante que o menu fique acima de outros elementos */
+  background-color: #1f1f1f;
+  color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Empurra o rodapé para baixo */
+  justify-content: space-between;
+  padding: 30px 20px;
+  transition: right 0.3s ease-in-out;
+  z-index: 1000;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.3);
 }
 
-.menu-lateral.active {
-  left: 0; /* Mostra o menu quando ativo */
+/* Ativo (quando aberto) */
+.menu-lateral.aberto {
+  right: 0;
 }
 
-/* Estilos dos Atalhos (links principais) */
+/* Links */
 .menu-lateral .atalhos {
   list-style: none;
   padding: 0;
@@ -2031,91 +2024,39 @@ body.dark-mode .dark-mode-toggle span {
 }
 
 .menu-lateral .atalhos li {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.menu-lateral .atalhos li a {
-  display: block;
-  padding: 15px 20px;
-  color: #fff;
+.menu-lateral .atalhos a {
+  color: white;
   text-decoration: none;
-  transition: background-color 0.2s ease;
+  font-size: 18px;
+  display: block;
+  padding: 10px;
+  border-radius: 6px;
+  transition: background 0.2s;
 }
 
-.menu-lateral .atalhos li a:hover {
-  background-color: #555; /* Efeito hover nos links */
+.menu-lateral .atalhos a:hover {
+  background-color: #333;
 }
 
-/* Estilos do Rodapé do Menu */
-.menu-lateral .menu-rodape {
-  padding: 20px;
-  border-top: 1px solid #555;
+/* Rodapé do menu */
+.menu-rodape {
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding-top: 10px;
+  border-top: 1px solid #444;
 }
 
-.menu-lateral .menu-rodape img {
-  width: 30px; /* Tamanho dos ícones no rodapé */
-  height: 30px;
+.menu-rodape a img {
+  width: 26px;
+  height: 26px;
+  filter: brightness(0.9);
+  transition: transform 0.2s;
 }
 
-/* Botão de Toggle (Hambúrguer) */
-.menu-toggle {
-  display: none; /* Esconde o botão por padrão */
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 15px;
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  z-index: 1001; /* Garante que o botão fique acima do menu */
-}
-
-.menu-toggle .hamburger {
-  display: block;
-  width: 25px;
-  height: 3px;
-  background-color: #333; /* Cor das barras do hambúrguer */
-  margin: 5px 0;
-  transition: all 0.3s ease-in-out;
-}
-
-/* Animação do botão hambúrguer ao ser clicado */
-.menu-toggle.active .hamburger:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.menu-toggle.active .hamburger:nth-child(2) {
-  opacity: 0;
-}
-
-.menu-toggle.active .hamburger:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Media Queries para Responsividade */
-@media (max-width: 768px) {
-  .menu-toggle {
-    display: block; /* Mostra o botão hambúrguer em telas menores */
-  }
-
-  .menu-lateral {
-    /* Em mobile, o menu já está escondido por 'left: -250px;' */
-    /* Nenhuma mudança aqui, apenas garantia que o display seja flex */
-  }
-
-  /* Opcional: Escurece o conteúdo principal quando o menu está aberto */
-  body.menu-open::after {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Overlay escuro */
-    z-index: 999;
-    transition: opacity 0.3s ease-in-out;
-  }
+.menu-rodape a img:hover {
+  transform: scale(1.1);
 }
