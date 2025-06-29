@@ -12,6 +12,10 @@ async function carregarProdutos() {
 }
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  carregarProdutos();
+});
+
 
 
 /*========== Configurações do menu ==========*/
@@ -141,13 +145,12 @@ function renderizarCardUnico(prod) {
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
-      <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
     </div>
   `;
 
   return card;
 }
-
 
 function renderizarCardComVariacoes(prod) {
   const primeira = prod.variacoes[0];
@@ -180,13 +183,13 @@ function renderizarCardComVariacoes(prod) {
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
-      <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+      <button type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
     </div>
   `;
 
   return card;
 }
- 
+
 function filtrarCategoria(categoriaSelecionada) {
   // Remove .active de todos os botões
   document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
@@ -424,89 +427,85 @@ function mostrarAlerta(nomeProduto, quantidade) {
 }
 
 /*========== Carrossel de Miniaturas ==========*/
-function inicializarCarrosseisManuais() {
-  document.querySelectorAll('.produto.carrossel').forEach(produto => {
-    const variacoes = JSON.parse(produto.getAttribute('data-variacoes') || '[]');
-    if (!variacoes.length) return;
+document.querySelectorAll('.produto.carrossel').forEach(produto => {
+    const variacoes = JSON.parse(produto.getAttribute('data-variacoes'))
+    const imgGrande = produto.querySelector('.imagem-grande-wrapper img')
+    const nomeProduto = produto.querySelector('h3')
+    const precoProduto = produto.querySelector('p')
+    const thumbsContainer = produto.querySelector('.carousel-thumbs')
 
-    const imgGrande = produto.querySelector('.imagem-grande-wrapper img');
-    const nomeProduto = produto.querySelector('h3');
-    const precoProduto = produto.querySelector('p');
-    const thumbsContainer = produto.querySelector('.carousel-thumbs');
-    const prevBtn = produto.querySelector('.carousel-prev');
-    const nextBtn = produto.querySelector('.carousel-next');
+    const prevBtn = produto.querySelector('.carousel-prev')
+    const nextBtn = produto.querySelector('.carousel-next')
 
-    let current = 0;
-    const thumbs = [];
+    let current = 0
+    const thumbs = []
 
-    thumbsContainer.innerHTML = ''; // Garante que não haja duplicatas
-
-    // ... (resto da função)
-
-    variacoes.forEach((variacao, index) => {
-      const thumb = document.createElement('img');
-      thumb.src = variacao.imagem; // Alterado de variacao.img para variacao.imagem
-      thumb.alt = variacao.nome;
-      thumb.addEventListener('click', () => {
-        current = index;
-        updateProduto();
-      });
-      thumbsContainer.appendChild(thumb);
-      thumbs.push(thumb);
-    });
-
-    function updateProduto() {
-      const v = variacoes[current];
-      imgGrande.src = v.imagem; // Alterado de v.img para v.imagem
-      nomeProduto.textContent = v.nome;
-      precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2)}`;
-      produto.setAttribute('data-nome', v.nome);
-      produto.setAttribute('data-preco', v.preco);
-
-      const tipo = produto.getAttribute('data-tipo') || 'unidade';
-      const inputQuantidade = produto.querySelector('.quantidade');
-      if (inputQuantidade) inputQuantidade.value = tipo === 'peso' ? 100 : 1;
-
-      const subtotalEl = produto.querySelector('.subtotal-preview');
-      if (subtotalEl) subtotalEl.textContent = '';
-
-      thumbs.forEach((img, index) => {
-        img.classList.toggle('ativo', index === current);
-      });
-
-      if (thumbs[current]) {
-        thumbs[current].scrollIntoView({
-          behavior: 'smooth',
-          block: 'nearest',
-          inline: 'center'
-        });
-      }
+    // Criação das miniaturas
+    if (thumbsContainer) {
+        variacoes.forEach((variacao, index) => {
+            const thumb = document.createElement('img')
+            thumb.src = variacao.img
+            thumb.alt = variacao.nome
+            thumb.addEventListener('click', () => {
+                current = index
+                updateProduto()
+            })
+            thumbsContainer.appendChild(thumb)
+            thumbs.push(thumb)
+        })
     }
 
-// ... (resto da função)
+    const updateProduto = () => {
+        imgGrande.src = variacoes[current].img
+        nomeProduto.textContent = variacoes[current].nome
+        precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`
+        // Atualiza os atributos data-nome e data-preco do elemento principal do produto
+        produto.setAttribute('data-nome', variacoes[current].nome);
+        produto.setAttribute('data-preco', variacoes[current].preco);
 
+        const inputQuantidade = produto.querySelector('.quantidade')
+        const tipo = produto.getAttribute('data-tipo') || 'unidade'
+
+        if (inputQuantidade) {
+            inputQuantidade.value = tipo === 'peso' ? 100 : 1
+        }
+
+        const subtotalEl = produto.querySelector('.subtotal-preview')
+        if (subtotalEl) subtotalEl.textContent = ''
+
+        if (thumbs.length > 0) {
+            thumbs.forEach((img, index) => {
+                img.classList.toggle('ativo', index === current)
+            })
+            // NOVO: Faz a miniatura ativa rolar para a visualização
+            if (thumbs[current]) {
+                thumbs[current].scrollIntoView({
+                    behavior: 'smooth', // Rolagem suave
+                    block: 'nearest',   // Garante que o elemento esteja visível no bloco (verticalmente)
+                    inline: 'center'    // Tenta centralizar o elemento horizontalmente
+                });
+            }
+        }
+    }
+
+    // Função das setas
     if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        current = (current - 1 + variacoes.length) % variacoes.length;
-        updateProduto();
-      });
+        prevBtn.addEventListener('click', () => {
+            current = (current - 1 + variacoes.length) % variacoes.length
+            updateProduto()
+        })
     }
 
     if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        current = (current + 1) % variacoes.length;
-        updateProduto();
-      });
+        nextBtn.addEventListener('click', () => {
+            current = (current + 1) % variacoes.length
+            updateProduto()
+        })
     }
 
-    updateProduto();
-  });
-}
-
-
-
-
-
+    // Inicializa o produto com a primeira variação e rola a miniatura
+    updateProduto()
+});
 
 
 
@@ -619,6 +618,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Carrega o estado salvo
     if (localStorage.getItem('modoEscuro') === 'ativado') {
         document.body.classList.add('dark-mode');
+        toggleDarkMode.innerHTML = `☀️ <span class="dark-mode-label">Modo Claro</span>`;
     }
 
     toggleDarkMode.addEventListener('click', function(e) {
@@ -627,39 +627,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (document.body.classList.contains('dark-mode')) {
             document.body.classList.remove('dark-mode');
             localStorage.setItem('modoEscuro', 'desativado');
+            toggleDarkMode.innerHTML = `🌙 <span class="dark-mode-label">Modo Escuro</span>`;
         } else {
             document.body.classList.add('dark-mode');
             localStorage.setItem('modoEscuro', 'ativado');
+            toggleDarkMode.innerHTML = `☀️ <span class="dark-mode-label">Modo Claro</span>`;
         }
     });
 });
 
 
-const btnMenu = document.getElementById('btnMenu');
-  const menuLateral = document.getElementById('menuLateral');
+document.addEventListener('click', function(event) {
+    const nav = document.querySelector('nav.container');
+    const toggle = document.querySelector('.toggle.icon-menu');
 
-  btnMenu.addEventListener('click', () => {
-    menuLateral.classList.toggle('aberto');
-  });
+    const isClickInsideNav = nav.contains(event.target);
+    const isClickOnToggle = event.target.closest('.toggle');
 
-  // (Opcional) fechar ao clicar fora
-  document.addEventListener('click', function(e) {
-    if (!menuLateral.contains(e.target) && e.target !== btnMenu) {
-      menuLateral.classList.remove('aberto');
+    // Se o menu estiver aberto e o clique for fora do nav e fora do toggle, fecha o menu
+    if (nav.classList.contains('show') && !isClickInsideNav && !isClickOnToggle) {
+        nav.classList.remove('show');
     }
-  });
-
-
-
-document.addEventListener('DOMContentLoaded', async () => {
-  try {
-    const res = await fetch('/produtos');
-    produtos = await res.json();
-
-    renderizarProdutos(produtos);
-    inicializarCarrosseisManuais();
-    filtrarCategoria('mercearia'); // opcional
-  } catch (err) {
-    console.error('Erro ao carregar produtos do servidor', err);
-  }
 });
