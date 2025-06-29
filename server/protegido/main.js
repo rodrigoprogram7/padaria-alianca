@@ -428,7 +428,7 @@ function mostrarAlerta(nomeProduto, quantidade) {
 }
 
 /*========== Carrossel de Miniaturas ==========*/
-document.addEventListener('DOMContentLoaded', function () {
+function inicializarCarrosseisManuais() {
   document.querySelectorAll('.produto.carrossel').forEach(produto => {
     const variacoes = JSON.parse(produto.getAttribute('data-variacoes') || '[]');
     if (!variacoes.length) return;
@@ -443,8 +443,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let current = 0;
     const thumbs = [];
 
-    if (thumbsContainer) {
-      thumbsContainer.innerHTML = ''; // Garante que não duplique
+    if (thumbsContainer && thumbsContainer.children.length === 0) {
       variacoes.forEach((variacao, index) => {
         const thumb = document.createElement('img');
         thumb.src = variacao.img;
@@ -456,6 +455,8 @@ document.addEventListener('DOMContentLoaded', function () {
         thumbsContainer.appendChild(thumb);
         thumbs.push(thumb);
       });
+    } else {
+      thumbs.push(...thumbsContainer.querySelectorAll('img'));
     }
 
     function updateProduto() {
@@ -502,7 +503,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
     updateProduto();
   });
+}
+
+// ⬇️ Chamamos essa função DEPOIS que o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', () => {
+  carregarProdutos();               // produtos do backend
+  inicializarCarrosseisManuais();   // produtos fixos no HTML (ex: Treloso)
 });
+
 
 
 
