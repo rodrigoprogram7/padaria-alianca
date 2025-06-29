@@ -158,10 +158,12 @@ function renderizarCardComVariacoes(prod) {
 
   const card = document.createElement('div');
   card.className = 'produto carrossel';
-  card.setAttribute('data-categoria', prod.categoria);
-  card.setAttribute('data-preco', primeira.preco);
-  card.setAttribute('data-tipo', prod.tipo || 'unidade');
-  card.setAttribute('data-variacoes', JSON.stringify(prod.variacoes));
+card.setAttribute('data-categoria', prod.categoria);
+card.setAttribute('data-preco', primeira.preco);
+card.setAttribute('data-tipo', prod.tipo || 'unidade');
+card.setAttribute('data-variacoes', JSON.stringify(prod.variacoes));
+card.setAttribute('data-nome', primeira.nome); // ✅ ESSA LINHA RESOLVE O NULL!
+
 
   card.innerHTML = `
     <div class="produto-img-wrapper">
