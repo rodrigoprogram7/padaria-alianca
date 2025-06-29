@@ -660,3 +660,26 @@ document.addEventListener('click', function(event) {
 
 
 
+
+
+
+const menuLateral = document.querySelector('.menu-lateral');
+
+for (const element of toggle) {
+  element.addEventListener('click', function () {
+    nav.classList.toggle('show');
+    menuLateral.classList.toggle('show');
+  });
+}
+document.querySelectorAll('.menu-lateral a').forEach(link => {
+  link.addEventListener('click', () => {
+    nav.classList.remove('show');
+    menuLateral.classList.remove('show');
+  });
+});
+
+
+
+
+
+

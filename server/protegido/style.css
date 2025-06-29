@@ -1991,3 +1991,75 @@ body.dark-mode .dark-mode-toggle span {
   opacity: 0.8;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100vh;
+  background-color: var(--body-color);
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  transition: left 0.3s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+}
+
+.menu-lateral ul.atalhos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  list-style: none;
+}
+
+.menu-lateral ul.atalhos li a {
+  font-size: 1.2rem;
+  color: var(--title-color);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.menu-lateral ul.atalhos li a:hover {
+  color: var(--base-color);
+}
+
+.menu-lateral .menu-rodape {
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 1rem;
+}
+
+.menu-lateral .menu-rodape img {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.menu-lateral .menu-rodape img:hover {
+  transform: scale(1.1);
+}
+
+/* Menu visível */
+.menu-lateral.show {
+  left: 0;
+}
+
+
