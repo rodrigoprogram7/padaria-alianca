@@ -30,6 +30,26 @@
     --info-color: #3498db; /* Azul informativo */
     --warning-color: #f39c12; /* Amarelo de aviso */
 
+    --header-height: 4.5rem;
+
+    /* Cores */
+    --hue: 46;
+    --base-color: hsl(var(--hue) 100% 57%);
+    --base-color-second: hsl(var(--hue) 65% 88%);
+    --base-color-alt: hsl(var(--hue) 57% 53%);
+    --title-color: hsl(var(--hue) 41% 10%);
+    --text-color: hsl(0 0% 46%);
+    --text-color-light: hsl(0 0% 98%);
+    --body-color: hsl(0 0% 98%);
+    
+    /* Tamanho das fontes*/
+    --title-font-size-base: 1.875rem; /* Renomeado para base */
+    --subtitle-font-size: 1rem;
+    
+    /* Tipo das fontes*/
+    --title-font: "Poppins", sans-serif;
+    --body-font: "DM Sans", sans-serif;
+
     /* Espaçamento e tipografia */
     --spacing-xs: 5px;
     --spacing-sm: 10px;
@@ -47,6 +67,7 @@
     --transition-speed: 0.3s;
     --transition-timing: ease-in-out;
 }
+
 
 * {
     box-sizing: border-box;
@@ -708,8 +729,8 @@ input:focus:invalid {
 <body>
   <div class="container">
         <div class="form-section dashboard-section">
-            <h1><i class="fas fa-cubes"></i> Painel de Administração</h1>
-            <h2><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
+            <h1 style="background-color: var(--base-color);"><i class="fas fa-cubes"></i> Painel de Administração</h1>
+            <h2 style="background-color: var(--base-color);"><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
             <form id="form-produto" enctype="multipart/form-data" method="POST">
                 <div class="form-group">
                     <label>Tipo de Card:</label>
@@ -731,7 +752,7 @@ input:focus:invalid {
                     </div>
 
                     <div class="form-group">
-                        <label>Imagens (até 5):</label>
+                        <label>Imagem:</label>
                         <div class="image-upload-area" id="image-upload-area">
                             <i class="fas fa-cloud-upload-alt upload-icon"></i>
                             <p>Arraste e solte ou clique para selecionar imagens</p>
@@ -776,8 +797,8 @@ input:focus:invalid {
                     </div>
                 </div>
 
-                <button type="submit" class="button-submit">
-                    <i class="fas fa-plus"></i> Adicionar Produto
+                <button style="background-color: var(--base-color);" type="submit" class="button-submit">
+                    <i style="background-color: var(--base-color);" class="fas fa-plus"></i> Adicionar Produto
                 </button>
                 <div id="feedback-message" class="feedback-message"></div>
             </form>
@@ -798,7 +819,7 @@ input:focus:invalid {
         </div>
 
         <div class="list-section dashboard-section">
-            <h2><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
+            <h2 style="background-color: var(--base-color);"><i class="fas fa-boxes"></i> Produtos Cadastrados</h2>
             <div class="produto-lista grid-mobile" id="produtos-lista"></div>
             <div id="no-products-message" style="text-align:center; color: var(--light-text-color); margin-top: 30px; display: none;">
                 <i class="fas fa-box-open" style="font-size: 2em; margin-bottom: 10px;"></i>
