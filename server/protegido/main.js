@@ -428,85 +428,82 @@ function mostrarAlerta(nomeProduto, quantidade) {
 }
 
 /*========== Carrossel de Miniaturas ==========*/
-document.querySelectorAll('.produto.carrossel').forEach(produto => {
-    const variacoes = JSON.parse(produto.getAttribute('data-variacoes'))
-    const imgGrande = produto.querySelector('.imagem-grande-wrapper img')
-    const nomeProduto = produto.querySelector('h3')
-    const precoProduto = produto.querySelector('p')
-    const thumbsContainer = produto.querySelector('.carousel-thumbs')
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.produto.carrossel').forEach(produto => {
+    const variacoes = JSON.parse(produto.getAttribute('data-variacoes') || '[]');
+    if (!variacoes.length) return;
 
-    const prevBtn = produto.querySelector('.carousel-prev')
-    const nextBtn = produto.querySelector('.carousel-next')
+    const imgGrande = produto.querySelector('.imagem-grande-wrapper img');
+    const nomeProduto = produto.querySelector('h3');
+    const precoProduto = produto.querySelector('p');
+    const thumbsContainer = produto.querySelector('.carousel-thumbs');
+    const prevBtn = produto.querySelector('.carousel-prev');
+    const nextBtn = produto.querySelector('.carousel-next');
 
-    let current = 0
-    const thumbs = []
+    let current = 0;
+    const thumbs = [];
 
-    // Criação das miniaturas
     if (thumbsContainer) {
-        variacoes.forEach((variacao, index) => {
-            const thumb = document.createElement('img')
-            thumb.src = variacao.img
-            thumb.alt = variacao.nome
-            thumb.addEventListener('click', () => {
-                current = index
-                updateProduto()
-            })
-            thumbsContainer.appendChild(thumb)
-            thumbs.push(thumb)
-        })
+      thumbsContainer.innerHTML = ''; // Garante que não duplique
+      variacoes.forEach((variacao, index) => {
+        const thumb = document.createElement('img');
+        thumb.src = variacao.img;
+        thumb.alt = variacao.nome;
+        thumb.addEventListener('click', () => {
+          current = index;
+          updateProduto();
+        });
+        thumbsContainer.appendChild(thumb);
+        thumbs.push(thumb);
+      });
     }
 
-    const updateProduto = () => {
-        imgGrande.src = variacoes[current].img
-        nomeProduto.textContent = variacoes[current].nome
-        precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`
-        // Atualiza os atributos data-nome e data-preco do elemento principal do produto
-        produto.setAttribute('data-nome', variacoes[current].nome);
-        produto.setAttribute('data-preco', variacoes[current].preco);
+    function updateProduto() {
+      const v = variacoes[current];
+      imgGrande.src = v.img;
+      nomeProduto.textContent = v.nome;
+      precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2)}`;
+      produto.setAttribute('data-nome', v.nome);
+      produto.setAttribute('data-preco', v.preco);
 
-        const inputQuantidade = produto.querySelector('.quantidade')
-        const tipo = produto.getAttribute('data-tipo') || 'unidade'
+      const tipo = produto.getAttribute('data-tipo') || 'unidade';
+      const inputQuantidade = produto.querySelector('.quantidade');
+      if (inputQuantidade) inputQuantidade.value = tipo === 'peso' ? 100 : 1;
 
-        if (inputQuantidade) {
-            inputQuantidade.value = tipo === 'peso' ? 100 : 1
-        }
+      const subtotalEl = produto.querySelector('.subtotal-preview');
+      if (subtotalEl) subtotalEl.textContent = '';
 
-        const subtotalEl = produto.querySelector('.subtotal-preview')
-        if (subtotalEl) subtotalEl.textContent = ''
+      thumbs.forEach((img, index) => {
+        img.classList.toggle('ativo', index === current);
+      });
 
-        if (thumbs.length > 0) {
-            thumbs.forEach((img, index) => {
-                img.classList.toggle('ativo', index === current)
-            })
-            // NOVO: Faz a miniatura ativa rolar para a visualização
-            if (thumbs[current]) {
-                thumbs[current].scrollIntoView({
-                    behavior: 'smooth', // Rolagem suave
-                    block: 'nearest',   // Garante que o elemento esteja visível no bloco (verticalmente)
-                    inline: 'center'    // Tenta centralizar o elemento horizontalmente
-                });
-            }
-        }
+      if (thumbs[current]) {
+        thumbs[current].scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
+        });
+      }
     }
 
-    // Função das setas
     if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            current = (current - 1 + variacoes.length) % variacoes.length
-            updateProduto()
-        })
+      prevBtn.addEventListener('click', () => {
+        current = (current - 1 + variacoes.length) % variacoes.length;
+        updateProduto();
+      });
     }
 
     if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            current = (current + 1) % variacoes.length
-            updateProduto()
-        })
+      nextBtn.addEventListener('click', () => {
+        current = (current + 1) % variacoes.length;
+        updateProduto();
+      });
     }
 
-    // Inicializa o produto com a primeira variação e rola a miniatura
-    updateProduto()
+    updateProduto();
+  });
 });
+
 
 
 
@@ -655,83 +652,3 @@ document.addEventListener('click', function(event) {
 
 
 
-/*========== Carrossel de Miniaturas ==========*/
-document.querySelectorAll('.produto.carrossel').forEach(produto => {
-    const variacoes = JSON.parse(produto.getAttribute('data-variacoes'))
-    const imgGrande = produto.querySelector('.imagem-grande-wrapper img')
-    const nomeProduto = produto.querySelector('h3')
-    const precoProduto = produto.querySelector('p')
-    const thumbsContainer = produto.querySelector('.carousel-thumbs')
-
-    const prevBtn = produto.querySelector('.carousel-prev')
-    const nextBtn = produto.querySelector('.carousel-next')
-
-    let current = 0
-    const thumbs = []
-
-    // Criação das miniaturas
-    if (thumbsContainer) {
-        variacoes.forEach((variacao, index) => {
-            const thumb = document.createElement('img')
-            thumb.src = variacao.img
-            thumb.alt = variacao.nome
-            thumb.addEventListener('click', () => {
-                current = index
-                updateProduto()
-            })
-            thumbsContainer.appendChild(thumb)
-            thumbs.push(thumb)
-        })
-    }
-
-    const updateProduto = () => {
-        imgGrande.src = variacoes[current].img
-        nomeProduto.textContent = variacoes[current].nome
-        precoProduto.textContent = `R$ ${variacoes[current].preco.toFixed(2)}`
-        // Atualiza os atributos data-nome e data-preco do elemento principal do produto
-        produto.setAttribute('data-nome', variacoes[current].nome);
-        produto.setAttribute('data-preco', variacoes[current].preco);
-
-        const inputQuantidade = produto.querySelector('.quantidade')
-        const tipo = produto.getAttribute('data-tipo') || 'unidade'
-
-        if (inputQuantidade) {
-            inputQuantidade.value = tipo === 'peso' ? 100 : 1
-        }
-
-        const subtotalEl = produto.querySelector('.subtotal-preview')
-        if (subtotalEl) subtotalEl.textContent = ''
-
-        if (thumbs.length > 0) {
-            thumbs.forEach((img, index) => {
-                img.classList.toggle('ativo', index === current)
-            })
-            // NOVO: Faz a miniatura ativa rolar para a visualização
-            if (thumbs[current]) {
-                thumbs[current].scrollIntoView({
-                    behavior: 'smooth', // Rolagem suave
-                    block: 'nearest',   // Garante que o elemento esteja visível no bloco (verticalmente)
-                    inline: 'center'    // Tenta centralizar o elemento horizontalmente
-                });
-            }
-        }
-    }
-
-    // Função das setas
-    if (prevBtn) {
-        prevBtn.addEventListener('click', () => {
-            current = (current - 1 + variacoes.length) % variacoes.length
-            updateProduto()
-        })
-    }
-
-    if (nextBtn) {
-        nextBtn.addEventListener('click', () => {
-            current = (current + 1) % variacoes.length
-            updateProduto()
-        })
-    }
-
-    // Inicializa o produto com a primeira variação e rola a miniatura
-    updateProduto()
-});
