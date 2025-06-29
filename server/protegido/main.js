@@ -659,23 +659,36 @@ document.addEventListener('click', function(event) {
 
 
 
+document.addEventListener('DOMContentLoaded', function() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const menuLateral = document.querySelector('.menu-lateral');
+  const body = document.body;
 
-const menuLateral = document.querySelector('.menu-lateral');
-
-for (const element of toggle) {
-  element.addEventListener('click', function () {
-    nav.classList.toggle('show');
-    menuLateral.classList.toggle('show');
+  menuToggle.addEventListener('click', function() {
+    menuLateral.classList.toggle('active');
+    menuToggle.classList.toggle('active'); // Para animar o botão hambúrguer
+    body.classList.toggle('menu-open'); // Adiciona classe ao body para overlay
   });
-}
-document.querySelectorAll('.menu-lateral a').forEach(link => {
-  link.addEventListener('click', () => {
-    nav.classList.remove('show');
-    menuLateral.classList.remove('show');
+
+  // Fecha o menu se clicar fora dele (apenas para desktop, se o menu for ocultável)
+  // Ou se clicar em um link do menu
+  document.addEventListener('click', function(event) {
+    const isClickInsideMenu = menuLateral.contains(event.target);
+    const isClickOnToggle = menuToggle.contains(event.target);
+    const isLinkClick = event.target.tagName === 'A' && menuLateral.contains(event.target);
+
+    if (!isClickInsideMenu && !isClickOnToggle && menuLateral.classList.contains('active')) {
+      menuLateral.classList.remove('active');
+      menuToggle.classList.remove('active');
+      body.classList.remove('menu-open');
+    } else if (isLinkClick) {
+      // Fecha o menu ao clicar em um link dentro dele
+      menuLateral.classList.remove('active');
+      menuToggle.classList.remove('active');
+      body.classList.remove('menu-open');
+    }
   });
 });
-
-
 
 
 
