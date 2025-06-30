@@ -1691,7 +1691,9 @@ nav {
         background-color: #0056b3;
     }
 
-    /* --- Carrossel de produto no mobile (DENTRO DO PRODUTO) --- */
+
+    
+/*//////////////////////////////////////////////////////  NAVBAR SUPERIOR  ////////////////////////////////////////////////////////////////////*/
     .produto.carrossel {
         flex-direction: column;
         align-items: center;
@@ -1871,7 +1873,9 @@ nav {
   width: 100%;
 }
 
- /* Modo Escuro */
+
+
+/*//////////////////////////////////////////////////////  MODO ESCURO  ///////////////////////////////////////////////////////////////////*/
 body.dark-mode {
   --body-color: #121212;
   --text-color: #e0e0e0;
@@ -1993,7 +1997,7 @@ body.dark-mode .dark-mode-toggle span {
 
 
 
-/* Estilos para o menu lateral */
+/*//////////////////////////////////////////////////////  NAVBAR LATERAL  ////////////////////////////////////////////////////////////////////*/
 .menu-lateral {
     width: 250px; /* Adapte conforme seu design */
     background-color: #f0f0f0; /* Adapte conforme seu design */
