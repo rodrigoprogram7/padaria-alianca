@@ -263,6 +263,75 @@ function inicializarCarrosseisManuais() {
   });
 }
 
+function alterarQuantidade(botao, delta) {
+  const input = botao.parentElement.querySelector('.quantidade');
+  let valor = parseInt(input.value) || 1;
+  valor += delta;
+  if (valor < 1) valor = 1;
+  input.value = valor;
+}
+
+let carrinho = [];
+
+function adicionarAoCarrinho(botao) {
+  const card = botao.closest('.produto');
+  const nome = card.getAttribute('data-nome');
+  const preco = parseFloat(card.getAttribute('data-preco'));
+  const tipo = card.getAttribute('data-tipo');
+  const quantidade = parseInt(card.querySelector('.quantidade').value) || 1;
+  const imagem = card.querySelector('img')?.src || '';
+
+  const itemExistente = carrinho.find(item => item.nome === nome);
+
+  if (itemExistente) {
+    itemExistente.quantidade += quantidade;
+  } else {
+    carrinho.push({ nome, preco, quantidade, tipo, imagem });
+  }
+
+  atualizarCarrinho();
+  mostrarAlerta('Produto adicionado ao carrinho!');
+}
+
+function atualizarCarrinho() {
+  const container = document.getElementById('itens-carrinho');
+  const totalEl = document.getElementById('total');
+  container.innerHTML = '';
+
+  let total = 0;
+
+  carrinho.forEach(item => {
+    const subtotal = item.preco * item.quantidade;
+    total += subtotal;
+
+    const div = document.createElement('div');
+    div.className = 'carrinho-item';
+    div.innerHTML = `
+      <div class="carrinho-nome">
+        <img class="carrinho-miniatura" src="${item.imagem}" alt="${item.nome}">
+        ${item.nome} (${item.tipo})
+      </div>
+      <div class="carrinho-quantidade">${item.quantidade}x</div>
+      <div class="carrinho-subtotal">R$ ${subtotal.toFixed(2)}</div>
+    `;
+    container.appendChild(div);
+  });
+
+  totalEl.textContent = total.toFixed(2);
+}
+
+function mostrarAlerta(mensagem) {
+  const alerta = document.getElementById('alerta');
+  alerta.textContent = mensagem;
+  alerta.classList.add('show');
+  setTimeout(() => alerta.classList.add('hide'), 500);
+  setTimeout(() => {
+    alerta.classList.remove('show', 'hide');
+  }, 2500);
+}
+
+
+
 
 
 document.addEventListener('DOMContentLoaded', () => {
