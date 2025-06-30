@@ -299,7 +299,18 @@ function alterarQuantidade(botao, delta) {
   }
 }
 
-let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+let carrinho = [];
+try {
+  const data = JSON.parse(localStorage.getItem('carrinho'));
+  if (Array.isArray(data)) {
+    carrinho = data;
+  } else {
+    localStorage.removeItem('carrinho'); // limpa objeto corrompido
+  }
+} catch (e) {
+  localStorage.removeItem('carrinho'); // limpa JSON inválido
+}
+
 
 
 function adicionarAoCarrinho(botao) {
