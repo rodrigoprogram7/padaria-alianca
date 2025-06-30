@@ -233,14 +233,30 @@ function inicializarCarrosseisManuais() {
     const thumbs = Array.from(thumbsContainer.children);
 
     function updateProduto() {
-      const v = variacoes[current];
-      imgGrande.src = v.imagem;
-      nomeProduto.textContent = v.nome;
-      precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2)}`;
-      produto.setAttribute('data-nome', v.nome);
-      produto.setAttribute('data-preco', v.preco);
-      thumbs.forEach((img, i) => img.classList.toggle('ativo', i === current));
-    }
+  const v = variacoes[current];
+  imgGrande.src = v.imagem;
+  nomeProduto.textContent = v.nome;
+  precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2).replace('.', ',')}`;
+  produto.setAttribute('data-nome', v.nome);
+  produto.setAttribute('data-preco', v.preco);
+
+  // Resetar quantidade ao trocar variação
+  const inputQuantidade = produto.querySelector('.quantidade');
+  if (inputQuantidade) {
+    inputQuantidade.value = 1;
+  }
+
+  // Ocultar subtotal ao trocar variação
+  const subtotalBox = produto.querySelector('.subtotal-preview');
+  if (subtotalBox) {
+    subtotalBox.textContent = '';
+    subtotalBox.style.display = 'none';
+  }
+
+  // Atualizar destaque da miniatura
+  thumbs.forEach((img, i) => img.classList.toggle('ativo', i === current));
+}
+
 
     prevBtn.addEventListener('click', () => {
       current = (current - 1 + variacoes.length) % variacoes.length;
@@ -265,11 +281,24 @@ function inicializarCarrosseisManuais() {
 
 function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
+  const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
   let valor = parseInt(input.value) || 1;
   valor += delta;
   if (valor < 1) valor = 1;
   input.value = valor;
+
+  const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
+
+  if (valor > 1) {
+    const subtotal = (valor * preco).toFixed(2).replace('.', ',');
+    subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
+    subtotalBox.style.display = 'block';
+  } else {
+    subtotalBox.textContent = '';
+    subtotalBox.style.display = 'none';
+  }
 }
+
 
 let carrinho = [];
 
@@ -291,7 +320,17 @@ function adicionarAoCarrinho(botao) {
 
   atualizarCarrinho();
   mostrarAlerta('Produto adicionado ao carrinho!');
+
+  // Resetar quantidade e subtotal após adicionar
+  const input = card.querySelector('.quantidade');
+  input.value = 1;
+  const subtotalBox = card.querySelector('.subtotal-preview');
+  if (subtotalBox) {
+    subtotalBox.textContent = '';
+    subtotalBox.style.display = 'none';
+  }
 }
+
 
 function atualizarCarrinho() {
   const container = document.getElementById('itens-carrinho');
