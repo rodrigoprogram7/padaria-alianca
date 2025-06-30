@@ -78,36 +78,6 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 });
 
-scrollReveal.reveal(
-    `#home .image, #home .text, #about .title, #about .pp,
-    #about .container, #about .carrinho,
-    #contact .text, #contact .links,
-    footer .brand, footer .social`,
-    { interval: 100 }
-)
-
-/*========== Botão ir para o carrinho ==========*/
-document.addEventListener('DOMContentLoaded', function() {
-    const backToTopButton = document.querySelector('.carrinho');
-    const carrinho = document.getElementById('carrinho');
-
-    if (backToTopButton && carrinho) {
-        backToTopButton.addEventListener('click', function(e) {
-            e.preventDefault();
-            carrinho.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-
-        window.addEventListener('scroll', function() {
-            if (window.scrollY >= 560) {
-                backToTopButton.classList.add('show');
-            } else {
-                backToTopButton.classList.remove('show');
-            }
-            ActivateMenuAtCurrentSection();
-        });
-    }
-});
-
 function renderizarProdutos(produtos) {
   const lista = document.getElementById('lista-produtos');
   lista.innerHTML = '';
@@ -465,6 +435,4 @@ document.addEventListener('DOMContentLoaded', () => {
     checkMediaQuery();
     window.addEventListener('resize', checkMediaQuery);
 });
-
-
 
