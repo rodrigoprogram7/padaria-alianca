@@ -299,8 +299,8 @@ function alterarQuantidade(botao, delta) {
   }
 }
 
+let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
 
-let carrinho = [];
 
 function adicionarAoCarrinho(botao) {
   const card = botao.closest('.produto');
@@ -335,9 +335,9 @@ function adicionarAoCarrinho(botao) {
 
 function atualizarCarrinho() {
   const container = document.getElementById('itens-carrinho');
-  const totalEl = document.getElementById('total');
-  container.innerHTML = '';
+  if (!container) return;
 
+  container.innerHTML = '';
   let total = 0;
 
   carrinho.forEach(item => {
@@ -348,17 +348,71 @@ function atualizarCarrinho() {
     div.className = 'carrinho-item';
     div.innerHTML = `
       <div class="carrinho-nome">
-        <img class="carrinho-miniatura" src="${item.imagem}" alt="${item.nome}">
-        ${item.nome} (${item.tipo})
+        <img src="${item.imagem}" alt="${item.nome}" class="carrinho-miniatura">
+        <span>${item.nome}</span>
       </div>
-      <div class="carrinho-quantidade">${item.quantidade}x</div>
-      <div class="carrinho-subtotal">R$ ${subtotal.toFixed(2)}</div>
+      <div class="carrinho-quantidade">
+        <button class="btt" onclick="diminuirQuantidade('${item.nome}')">−</button>
+        <span>${item.quantidade}</span>
+        <button class="btt" onclick="aumentarQuantidade('${item.nome}')">+</button>
+      </div>
+      <center>
+        <div class="carrinho-subtotal">R$ ${subtotal.toFixed(2)}</div>
+      </center>
+      <div class="carrinho-acoes">
+        <button onclick="removerDoCarrinho('${item.nome}')">
+          <img id="imgg" src="assets/images/sistema/excluir.png" alt="">
+        </button>
+      </div>
     `;
     container.appendChild(div);
   });
 
-  totalEl.textContent = total.toFixed(2);
+  const totalEl = document.getElementById('total');
+  if (totalEl) {
+    totalEl.textContent = total.toFixed(2);
+  }
 }
+
+
+function aumentarQuantidade(nome) {
+  const item = carrinho.find(item => item.nome === nome);
+  if (item) {
+    item.quantidade += 1;
+    salvarCarrinho();
+    atualizarCarrinho();
+  }
+}
+
+function diminuirQuantidade(nome) {
+  const item = carrinho.find(item => item.nome === nome);
+  if (item) {
+    if (item.quantidade > 1) {
+      item.quantidade -= 1;
+    } else {
+      carrinho = carrinho.filter(p => p.nome !== nome);
+    }
+    salvarCarrinho();
+    atualizarCarrinho();
+  }
+}
+
+
+function removerDoCarrinho(nome) {
+  carrinho = carrinho.filter(item => item.nome !== nome);
+  salvarCarrinho();
+  atualizarCarrinho();
+}
+
+
+function salvarCarrinho() {
+  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+}
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarCarrinho(); // Exibe os itens do carrinho salvos no localStorage
+});
+
+
 
 function mostrarAlerta(mensagem) {
   const alerta = document.getElementById('alerta');
