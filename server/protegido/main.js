@@ -332,10 +332,11 @@ function adicionarAoCarrinho(botao) {
   const card = botao.closest('.produto');
   const nome = card.getAttribute('data-nome');
   const preco = parseFloat(card.getAttribute('data-preco'));
-  const tipo = card.getAttribute('data-tipo');
+  const tipo = card.getAttribute('data-tipo') || 'unidade';
   const quantidade = parseInt(card.querySelector('.quantidade').value) || 1;
   const imagem = card.querySelector('img')?.src || '';
 
+  // Verifica se o item já está no carrinho
   const itemExistente = carrinho.find(item => item.nome === nome);
 
   if (itemExistente) {
@@ -344,9 +345,11 @@ function adicionarAoCarrinho(botao) {
     carrinho.push({ nome, preco, quantidade, tipo, imagem });
   }
 
+  // ✅ Salva o carrinho no localStorage
+  salvarCarrinho();
+
   atualizarCarrinho();
   mostrarAlerta(nome, quantidade);
-
 
   // Resetar quantidade e subtotal após adicionar
   const input = card.querySelector('.quantidade');
@@ -437,6 +440,12 @@ function salvarCarrinho() {
 document.addEventListener('DOMContentLoaded', () => {
   atualizarCarrinho(); // Exibe os itens do carrinho salvos no localStorage
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  atualizarCarrinho();      // Carrega carrinho salvo
+  toggleHeaderScroll();     // Aplica navbar correto
+});
+
 
 
 
