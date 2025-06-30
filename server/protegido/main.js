@@ -195,6 +195,10 @@ function filtrarCategoria(categoriaSelecionada) {
   }
 }
 
+
+
+
+
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
@@ -214,20 +218,33 @@ if (inputPesquisa) {
 
     if (encontrados.length > 0) {
       resultadosPesquisa.style.display = 'block';
+
       encontrados.forEach(prod => {
         const li = document.createElement('li');
         li.textContent = prod.nome;
+
         li.addEventListener('click', () => {
           inputPesquisa.value = '';
           resultadosPesquisa.style.display = 'none';
+
           const prodEl = [...document.querySelectorAll('.produto')]
             .find(el => el.getAttribute('data-nome')?.toLowerCase() === prod.nome.toLowerCase());
+
           if (prodEl) {
-            prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            prodEl.classList.add('highlight');
-            setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+            const categoria = prodEl.getAttribute('data-categoria');
+
+            // ✅ Aciona a função que seu botão já usa
+            filtrarCategoria(categoria);
+
+            // Aguarda o filtro aplicar antes de rolar até o produto
+            setTimeout(() => {
+              prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              prodEl.classList.add('highlight');
+              setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+            }, 300);
           }
         });
+
         resultadosPesquisa.appendChild(li);
       });
     } else {
@@ -235,6 +252,10 @@ if (inputPesquisa) {
     }
   });
 }
+
+
+
+
 
 function inicializarCarrosseisManuais() {
   document.querySelectorAll('.produto.carrossel').forEach(produto => {
@@ -295,6 +316,29 @@ function inicializarCarrosseisManuais() {
     updateProduto();
   });
 }
+
+function selecionarProduto(nomeProduto) {
+  const produto = document.querySelector(`.produto[data-nome="${nomeProduto.toLowerCase()}"]`);
+  if (!produto) return;
+
+  const categoria = produto.getAttribute('data-categoria');
+  const categoriaLink = document.querySelector(`[data-categoria-nav="${categoria}"]`);
+
+  // Clica na aba/menu que ativa a categoria correta (ajuste conforme seu sistema)
+  if (categoriaLink) {
+    categoriaLink.click();
+  }
+
+  // Espera a categoria carregar para rolar até o produto
+  setTimeout(() => {
+    produto.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    produto.classList.add('destacado');
+    setTimeout(() => produto.classList.remove('destacado'), 1500);
+  }, 300);
+}
+
+
+
 
 function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
