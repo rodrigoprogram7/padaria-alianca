@@ -43,13 +43,12 @@ function toggleHeaderScroll() {
   const carrinhoTop = carrinho.getBoundingClientRect().top;
 
   if (headerBottom >= carrinhoTop) {
-    // Navbar passou por cima do carrinho → ativar modo compacto
     header.classList.add('scroll');
   } else {
-    // Navbar ainda não chegou na área do carrinho → modo original
     header.classList.remove('scroll');
   }
 }
+
 
 
 function ActivateMenuAtCurrentSection() {
