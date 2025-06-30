@@ -262,3 +262,68 @@ function inicializarCarrosseisManuais() {
     updateProduto();
   });
 }
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const menuLateral = document.querySelector('.menu-lateral');
+    const body = document.body;
+
+    // 1. Criar o botão de hambúrguer dinamicamente
+    const menuToggle = document.createElement('button');
+    menuToggle.classList.add('menu-toggle');
+    menuToggle.setAttribute('aria-label', 'Abrir Menu');
+    menuToggle.innerHTML = `
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+        <span class="hamburger"></span>
+    `;
+    document.body.appendChild(menuToggle); // Adiciona o botão ao body
+
+    // 2. Criar o overlay dinamicamente
+    const overlay = document.createElement('div');
+    overlay.classList.add('overlay');
+    document.body.appendChild(overlay); // Adiciona o overlay ao body
+
+    // 3. Adicionar event listeners
+    menuToggle.addEventListener('click', () => {
+        menuLateral.classList.toggle('open');
+        menuToggle.classList.toggle('open');
+        overlay.classList.toggle('active');
+        body.classList.toggle('no-scroll'); // Previne scroll do corpo
+    });
+
+    overlay.addEventListener('click', () => {
+        menuLateral.classList.remove('open');
+        menuToggle.classList.remove('open');
+        overlay.classList.remove('active');
+        body.classList.remove('no-scroll');
+    });
+
+    // Fechar o menu ao clicar em um item (opcional)
+    const atalhos = document.querySelectorAll('.menu-lateral .atalhos a');
+    atalhos.forEach(link => {
+        link.addEventListener('click', () => {
+            // Verificar se estamos em uma tela pequena (mobile)
+            if (window.matchMedia('(max-width: 768px)').matches) {
+                menuLateral.classList.remove('open');
+                menuToggle.classList.remove('open');
+                overlay.classList.remove('active');
+                body.classList.remove('no-scroll');
+            }
+        });
+    });
+
+    // Ocultar o botão de hambúrguer em telas maiores, caso o JS seja carregado antes do CSS
+    const checkMediaQuery = () => {
+        if (window.matchMedia('(min-width: 769px)').matches) {
+            menuToggle.style.display = 'none';
+        } else {
+            menuToggle.style.display = 'flex'; // ou 'block' dependendo de como você quer o display
+        }
+    };
+
+    // Executar ao carregar e ao redimensionar
+    checkMediaQuery();
+    window.addEventListener('resize', checkMediaQuery);
+});
