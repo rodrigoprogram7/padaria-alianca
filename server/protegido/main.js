@@ -34,16 +34,27 @@ for (const link of links) {
 
 function toggleHeaderScroll() {
   const header = document.querySelector('#header');
+  const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
-  if (!header || !carrinho) return;
 
-  const carrinhoTop = carrinho.getBoundingClientRect().top + window.scrollY;
-  const headerBottom = header.offsetHeight + window.scrollY;
+  if (!header || !divider || !carrinho) return;
 
-  if (window.scrollY >= carrinhoTop - header.offsetHeight) {
-    header.classList.add('scroll');
-  } else {
-    header.classList.remove('scroll');
+  const scrollY = window.scrollY;
+  const dividerTop = divider.offsetTop;
+  const carrinhoTop = carrinho.offsetTop;
+
+  /*
+    Lógica:
+    - scroll < dividerTop            → navbar pequeno
+    - entre dividerTop e carrinhoTop → navbar grande
+    - scroll >= carrinhoTop          → navbar pequeno
+  */
+  if (scrollY < dividerTop) {
+    header.classList.remove('scroll'); // pequeno
+  } else if (scrollY >= dividerTop && scrollY < carrinhoTop) {
+    header.classList.add('scroll'); // grande
+  } else if (scrollY >= carrinhoTop) {
+    header.classList.remove('scroll'); // pequeno
   }
 }
 
@@ -610,10 +621,10 @@ function mostrarAlerta(nomeProduto, quantidade) {
 
 window.addEventListener('scroll', () => {
   toggleHeaderScroll();
-  ActivateMenuAtCurrentSection();
+  ActivateMenuAtCurrentSection(); // se você usa isso para navbar ativa
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  toggleHeaderScroll();
-  atualizarCarrinho();
+  toggleHeaderScroll(); // aplica o estado correto ao carregar a página
+  atualizarCarrinho();  // opcional: preenche carrinho salvo
 });

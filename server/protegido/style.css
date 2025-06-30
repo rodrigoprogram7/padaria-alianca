@@ -2133,3 +2133,18 @@ body.dark-mode .dark-mode-toggle span {
         overflow: hidden;
     }
 }
+
+
+
+#header {
+  height: 50px;
+  transition: all 0.3s ease;
+  /* outros estilos... */
+}
+
+#header.scroll {
+  height: auto;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+}
