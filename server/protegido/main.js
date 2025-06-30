@@ -35,7 +35,7 @@ for (const link of links) {
 function toggleHeaderScroll() {
   const header = document.querySelector('#header');
   const divider = document.querySelector('.divider-1');
-  const carrinho = document.querySelector('.carrinho');
+  const carrinho = document.querySelector('.fecha-nav');
 
   if (!header || !divider || !carrinho) return;
 
