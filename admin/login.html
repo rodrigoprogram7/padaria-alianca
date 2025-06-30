@@ -15,6 +15,25 @@
             --card-background: #ffffff;
             --border-color: #ddd;
             --shadow-light: rgba(0, 0, 0, 0.1);
+            --header-height: 4.5rem;
+
+            /* Cores */
+            --hue: 46;
+            --base-color: hsl(var(--hue) 100% 57%);
+            --base-color-second: hsl(var(--hue) 65% 88%);
+            --base-color-alt: hsl(var(--hue) 57% 53%);
+            --title-color: hsl(var(--hue) 41% 10%);
+            --text-color: hsl(0 0% 46%);
+            --text-color-light: hsl(0 0% 98%);
+            --body-color: hsl(0 0% 98%);
+            
+            /* Tamanho das fontes*/
+            --title-font-size-base: 1.875rem; /* Renomeado para base */
+            --subtitle-font-size: 1rem;
+            
+            /* Tipo das fontes*/
+            --title-font: "Poppins", sans-serif;
+            --body-font: "DM Sans", sans-serif;
         }
 
         * {
@@ -31,7 +50,7 @@
             min-height: 100vh;
             background: var(--background-light);
             color: var(--text-color);
-            background: linear-gradient(135deg, #e0f2f7 0%, #c1e7f0 100%); /* Gradiente suave */
+            background: linear-gradient(135deg, #e0f2f7 0%, #e9f0c1 100%); /* Gradiente suave */
         }
 
         /* Container Principal do Login */
@@ -59,7 +78,7 @@
 
         .login-container h1 {
             margin-bottom: 30px;
-            color: var(--primary-color);
+            color: var(--base-color);
             font-weight: 600; /* Mais destaque para o título */
             font-size: 2em;
         }
@@ -104,7 +123,7 @@
         .btn {
             width: 100%;
             padding: 15px;
-            background-color: var(--primary-color);
+            background-color: var(--base-color);
             color: white;
             border: none;
             border-radius: 8px; /* Bordas suaves */
