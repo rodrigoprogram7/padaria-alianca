@@ -68,7 +68,7 @@ window.addEventListener('scroll', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-  const backToTopButton = document.querySelector('.carrinhoButton');
+  const backToTopButton = document.querySelector('.back-to-top');
   const carrinho = document.getElementById('carrinho');
   if (backToTopButton && carrinho) {
     backToTopButton.addEventListener('click', function (e) {
