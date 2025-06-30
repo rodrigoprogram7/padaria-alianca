@@ -2000,7 +2000,7 @@ body.dark-mode .dark-mode-toggle span {
 /*//////////////////////////////////////////////////////  NAVBAR LATERAL  ////////////////////////////////////////////////////////////////////*/
 .menu-lateral {
     width: 250px; /* Adapte conforme seu design */
-    background-color: #f0f0f0; /* Adapte conforme seu design */
+    background: linear-gradient(135deg, #f5f3ec 0%, #e9f0c1 100%); /* Gradiente suave */
     position: fixed;
     height: 100%;
     top: 0;
