@@ -34,15 +34,23 @@ for (const link of links) {
 
 const header = document.querySelector('#header');
 function toggleHeaderScroll() {
-  const divider = document.querySelector('.divider-1');
-  if (!divider) return;
-  const dividerPosition = divider.offsetTop;
-  if (window.scrollY >= dividerPosition) {
+  const header = document.querySelector('#header');
+  const carrinho = document.getElementById('carrinho');
+
+  if (!header || !carrinho) return;
+
+  const headerBottom = header.getBoundingClientRect().bottom;
+  const carrinhoTop = carrinho.getBoundingClientRect().top;
+
+  if (headerBottom >= carrinhoTop) {
+    // Navbar passou por cima do carrinho → ativar modo compacto
     header.classList.add('scroll');
   } else {
+    // Navbar ainda não chegou na área do carrinho → modo original
     header.classList.remove('scroll');
   }
 }
+
 
 function ActivateMenuAtCurrentSection() {
   const sections = document.querySelectorAll('section[id]');
