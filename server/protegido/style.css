@@ -2136,22 +2136,15 @@ body.dark-mode .dark-mode-toggle span {
 
 
 
-/* Navbar padrão (pequeno) */
 #header {
   height: 50px;
-  padding: 0.3rem 0;
   transition: all 0.3s ease;
-  box-shadow: none;
+  /* outros estilos... */
 }
 
-/* Sombra */
 #header.scroll {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  height: auto;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
 }
-
-/* Tamanho grande */
-#header.tamanho-grande {
-  height: 64px;
-  padding: 0.7rem 0;
-}
-
