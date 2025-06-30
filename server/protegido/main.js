@@ -32,17 +32,21 @@ for (const link of links) {
   });
 }
 
-const header = document.querySelector('#header');
 function toggleHeaderScroll() {
-  const divider = document.querySelector('.divider-1');
-  if (!divider) return;
-  const dividerPosition = divider.offsetTop;
-  if (window.scrollY >= dividerPosition) {
+  const header = document.querySelector('#header');
+  const carrinho = document.querySelector('.carrinho');
+  if (!header || !carrinho) return;
+
+  const carrinhoTop = carrinho.getBoundingClientRect().top + window.scrollY;
+  const headerBottom = header.offsetHeight + window.scrollY;
+
+  if (window.scrollY >= carrinhoTop - header.offsetHeight) {
     header.classList.add('scroll');
   } else {
     header.classList.remove('scroll');
   }
 }
+
 
 function ActivateMenuAtCurrentSection() {
   const sections = document.querySelectorAll('section[id]');
@@ -604,3 +608,12 @@ function mostrarAlerta(nomeProduto, quantidade) {
 }
 
 
+window.addEventListener('scroll', () => {
+  toggleHeaderScroll();
+  ActivateMenuAtCurrentSection();
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  toggleHeaderScroll();
+  atualizarCarrinho();
+});
