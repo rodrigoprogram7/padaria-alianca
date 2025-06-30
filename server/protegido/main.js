@@ -319,7 +319,8 @@ function adicionarAoCarrinho(botao) {
   }
 
   atualizarCarrinho();
-  mostrarAlerta('Produto adicionado ao carrinho!');
+  mostrarAlerta(nome, quantidade);
+
 
   // Resetar quantidade e subtotal após adicionar
   const input = card.querySelector('.quantidade');
@@ -489,46 +490,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 function enviarWhatsApp() {
-    const erroEl = document.getElementById('erro-pedido')
-    let total = 0
-    let mensagem = "*Olá! Esse é o meu pedido para entrega:*\n\n"
+  const erroEl = document.getElementById('erro-pedido');
+  let total = 0;
+  let mensagem = "*Olá! Esse é o meu pedido para entrega:*\n\n";
 
-    for (const nome in carrinho) {
-        const item = carrinho[nome]
-        const subtotal = item.tipo === 'peso'
-            ? item.preco * (item.quantidade / 100)
-            : item.preco * item.quantidade
-        mensagem += item.tipo === 'peso'
-            ? `• ${item.quantidade}g de ${nome} - R$ ${subtotal.toFixed(2)}\n`
-            : `${item.quantidade}x ${nome} - R$ ${subtotal.toFixed(2)}\n`
-        total += subtotal
-    }
+  carrinho.forEach(item => {
+    const subtotal = item.tipo === 'peso'
+      ? item.preco * (item.quantidade / 100)
+      : item.preco * item.quantidade;
 
-    if (total < 20) {
-        erroEl.textContent = "O valor mínimo para pedido é R$ 20,00."
-        erroEl.classList.add("show")
-        erroEl.classList.remove("tremer")
-        void erroEl.offsetWidth // Reinicia a animação
-        erroEl.classList.add("tremer")
-        return
-    }
+    mensagem += item.tipo === 'peso'
+      ? `• ${item.quantidade}g de ${item.nome} - R$ ${subtotal.toFixed(2)}\n`
+      : `${item.quantidade}x ${item.nome} - R$ ${subtotal.toFixed(2)}\n`;
 
-    erroEl.classList.remove("show")
-    erroEl.textContent = ""
+    total += subtotal;
+  });
 
-    mensagem += `\n*Total: R$ ${total.toFixed(2)}*`
+  if (total < 20) {
+    erroEl.textContent = "O valor mínimo para pedido é R$ 20,00.";
+    erroEl.classList.add("show");
+    erroEl.classList.remove("tremer");
+    void erroEl.offsetWidth; // Reinicia a animação
+    erroEl.classList.add("tremer");
+    return;
+  }
 
-    const link = `https://wa.me/558488692337?text=${encodeURIComponent(mensagem)}`
-    window.open(link, '_blank')
+  erroEl.classList.remove("show");
+  erroEl.textContent = "";
+
+  mensagem += `\n*Total: R$ ${total.toFixed(2)}*`;
+
+  const link = `https://wa.me/558488692337?text=${encodeURIComponent(mensagem)}`;
+  window.open(link, '_blank');
 }
+
 
 function mostrarAlerta(nomeProduto, quantidade) {
-    const alerta = document.getElementById("alerta")
-    alerta.innerHTML = `<strong>${quantidade}x ${nomeProduto}</strong> adicionado ao carrinho!`
-    alerta.style.opacity = 1
-    alerta.style.transform = "translateY(0)"
-    setTimeout(() => {
-        alerta.style.opacity = 0
-        alerta.style.transform = "translateY(-20px)"
-    }, 2000)
+  const alerta = document.getElementById("alerta");
+  alerta.innerHTML = `<strong>${quantidade}x ${nomeProduto}</strong> adicionado ao carrinho!`;
+  alerta.classList.add("show");
+  alerta.classList.remove("hide");
+  setTimeout(() => {
+    alerta.classList.add("hide");
+  }, 500);
+  setTimeout(() => {
+    alerta.classList.remove("show", "hide");
+  }, 2500);
 }
+
+
