@@ -43,26 +43,31 @@ function toggleHeaderScroll() {
   const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
 
-  if (!header || !divider || !carrinho) return;
+  if (!header) return;
 
   const scrollY = window.scrollY;
-  const dividerTop = divider.offsetTop;
-  const carrinhoTop = carrinho.offsetTop;
+  const navHeight = header.offsetHeight;
 
-  /*
-    Lógica:
-    - scroll < dividerTop            → navbar pequeno
-    - entre dividerTop e carrinhoTop → navbar grande
-    - scroll >= carrinhoTop          → navbar pequeno
-  */
-  if (scrollY < dividerTop) {
-    header.classList.remove('scroll'); // pequeno
-  } else if (scrollY >= dividerTop && scrollY < carrinhoTop) {
-    header.classList.add('scroll'); // grande
-  } else if (scrollY >= carrinhoTop) {
-    header.classList.remove('scroll'); // pequeno
+  // ✅ Parte 1: sombra (ao ultrapassar altura do header)
+  if (scrollY >= navHeight) {
+    header.classList.add('scroll'); // sombra ativada
+  } else {
+    header.classList.remove('scroll');
+  }
+
+  // ✅ Parte 2: tamanho do navbar (grande entre divider e carrinho)
+  if (divider && carrinho) {
+    const dividerTop = divider.offsetTop;
+    const carrinhoTop = carrinho.offsetTop;
+
+    if (scrollY < dividerTop || scrollY >= carrinhoTop) {
+      header.classList.remove('tamanho-grande'); // pequeno
+    } else {
+      header.classList.add('tamanho-grande'); // grande
+    }
   }
 }
+
 
 
 function ActivateMenuAtCurrentSection() {
