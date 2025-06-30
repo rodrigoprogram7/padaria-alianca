@@ -748,7 +748,7 @@ input:focus:invalid {
 
                     <div class="form-group">
                         <label for="preco-produto">Preço:</label>
-                        <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
+                        <input type="text" id="preco-produto" name="preco" placeholder="0.00" step="0.01" required oninput="formatarValor(this)">
                     </div>
                     
 
@@ -1226,6 +1226,7 @@ input:focus:invalid {
         closeModal(modalEditar);
     });
 
+
     // Fechar modais ao clicar fora (overlay)
     modalConfirmarExclusao.addEventListener('click', (e) => {
         if (e.target === modalConfirmarExclusao) {
@@ -1238,6 +1239,43 @@ input:focus:invalid {
             closeModal(modalEditar);
         }
     });
+    
+
+
+
+
+
+
+
+        function formatarValor(input) {
+  // Remove tudo que não for número do valor
+  let valor = input.value.replace(/\D/g, "");
+
+  // Garante que o valor não seja vazio antes de formatar
+  if (valor === "") {
+    input.value = "";
+    return;
+  }
+
+  // Divide por 100 para obter o valor em reais e formata para 2 casas decimais
+  valor = (parseInt(valor, 10) / 100).toFixed(2);
+
+  // Substitui o ponto decimal por vírgula
+  valor = valor.replace(".", ".");
+
+  // Adiciona a formatação de milhar (opcional, mas recomendado para valores maiores)
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  
+  // Atualiza o valor no input com a formatação
+  input.value = valor;
+}
+
+
+
+
+
+
+
 
     // --- Inicialização ---
     // Ativa o rádio "Produto único" no carregamento para garantir o estado inicial correto
@@ -1248,12 +1286,6 @@ input:focus:invalid {
     carregarProdutos();
 });
   </script>
-    <script>
-        $(document).ready(function(){
-            $('#preco-produto').mask('0.00', {reverse: true, selectOnFocus: true});
-        });
-    </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
 </body>
 </html>
