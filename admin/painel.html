@@ -750,6 +750,7 @@ input:focus:invalid {
                         <label for="preco-produto">Preço:</label>
                         <input type="text" id="preco-produto" name="preco" placeholder="Ex: 12.50" step="0.01" required>
                     </div>
+                    
 
                     <div class="form-group">
                         <label>Imagem:</label>
@@ -1247,5 +1248,12 @@ input:focus:invalid {
     carregarProdutos();
 });
   </script>
+    <script>
+        $(document).ready(function(){
+            $('#preco-produto').mask('0.00', {reverse: true, selectOnFocus: true});
+        });
+    </script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 </body>
 </html>
