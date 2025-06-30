@@ -34,22 +34,15 @@ for (const link of links) {
 
 const header = document.querySelector('#header');
 function toggleHeaderScroll() {
-  const header = document.querySelector('#header');
-  const carrinho = document.getElementById('carrinho');
-
-  if (!header || !carrinho) return;
-
-  const headerBottom = header.getBoundingClientRect().bottom;
-  const carrinhoTop = carrinho.getBoundingClientRect().top;
-
-  if (headerBottom >= carrinhoTop) {
+  const divider = document.querySelector('.divider-1');
+  if (!divider) return;
+  const dividerPosition = divider.offsetTop;
+  if (window.scrollY >= dividerPosition) {
     header.classList.add('scroll');
   } else {
     header.classList.remove('scroll');
   }
 }
-
-
 
 function ActivateMenuAtCurrentSection() {
   const sections = document.querySelectorAll('section[id]');
