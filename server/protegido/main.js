@@ -227,21 +227,32 @@ if (inputPesquisa) {
           inputPesquisa.value = '';
           resultadosPesquisa.style.display = 'none';
 
-          const prodEl = [...document.querySelectorAll('.produto')]
-            .find(el => el.getAttribute('data-nome')?.toLowerCase() === prod.nome.toLowerCase());
+          const nomeBuscado = prod.nome.toLowerCase();
 
-          if (prodEl) {
-            const categoria = prodEl.getAttribute('data-categoria');
+          const aplicarScroll = () => {
+            const prodEl = [...document.querySelectorAll('.produto')]
+              .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
 
-            // ✅ Aciona a função que seu botão já usa
+            if (!prodEl) return;
+
+            prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            prodEl.classList.add('highlight');
+            setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+          };
+
+          const categoria = prod.categoria?.toLowerCase();
+          if (categoria) {
+            // ✅ Chama o filtro da categoria
             filtrarCategoria(categoria);
 
-            // Aguarda o filtro aplicar antes de rolar até o produto
-            setTimeout(() => {
-              prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              prodEl.classList.add('highlight');
-              setTimeout(() => prodEl.classList.remove('highlight'), 2000);
-            }, 300);
+            // ✅ Espera o DOM renderizar antes de fazer scroll
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                aplicarScroll();
+              });
+            });
+          } else {
+            aplicarScroll(); // sem categoria definida
           }
         });
 
@@ -252,6 +263,13 @@ if (inputPesquisa) {
     }
   });
 }
+
+
+
+
+
+
+
 
 
 
