@@ -2032,14 +2032,21 @@ body.dark-mode .dark-mode-toggle span {
 .menu-lateral .menu-rodape {
     padding: 20px;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    /* Ajustes para centralizar e espaçar */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;    /* Centraliza verticalmente */
+    gap: 25px;              /* Adiciona um espaço de 25px entre os itens */
     border-top: 1px solid #ccc;
 }
 
 .menu-lateral .menu-rodape img {
-    width: 24px; /* Tamanho dos ícones */
-    height: 24px;
+    width: 32px; /* Aumenta o tamanho da imagem para 32px (era 24px) */
+    height: 32px;
+    transition: transform 0.2s ease-in-out; /* Adiciona uma transição para um efeito hover suave */
+}
+
+.menu-lateral .menu-rodape img:hover {
+    transform: scale(1.1); /* Um pequeno zoom ao passar o mouse */
 }
 
 /* Estilos para o overlay */
