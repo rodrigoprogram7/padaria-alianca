@@ -370,7 +370,27 @@ function mostrarAlerta(mensagem) {
 }
 
 
+/*========== Botão ir para o carrinho ==========*/
+document.addEventListener('DOMContentLoaded', function() {
+    const backToTopButton = document.querySelector('.back-to-top');
+    const carrinho = document.getElementById('carrinho');
 
+    if (backToTopButton && carrinho) {
+        backToTopButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            carrinho.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY >= 560) {
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+            ActivateMenuAtCurrentSection();
+        });
+    }
+});
 
 
 document.addEventListener('DOMContentLoaded', () => {
