@@ -2046,3 +2046,22 @@ nav {
 }
 
 
+
+#header {
+  transition: all 0.3s ease;
+  height: 50px;
+  padding: 0.3rem 0;
+  box-shadow: none;
+}
+
+#header.scroll {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+#header.tamanho-grande {
+  height: 64px;
+  padding: 0.7rem 0;
+}
+
+
+

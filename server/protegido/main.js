@@ -34,31 +34,47 @@ for (const link of links) {
   });
 }
 
+let jaRolouParaProdutos = false;
+
 function toggleHeaderScroll() {
   const header = document.querySelector('#header');
   const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
+  const listaProdutos = document.getElementById('lista-produtos');
 
   if (!header || !divider || !carrinho) return;
 
   const scrollY = window.scrollY;
   const dividerTop = divider.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
+  const navHeight = header.offsetHeight;
+  const margem = 100; // pode ajustar esse valor
 
-  /*
-    Lógica:
-    - scroll < dividerTop            → navbar pequeno
-    - entre dividerTop e carrinhoTop → navbar grande
-    - scroll >= carrinhoTop          → navbar pequeno
-  */
-  if (scrollY < dividerTop) {
-    header.classList.remove('scroll'); // pequeno
-  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 200) {
-    header.classList.add('scroll'); // grande
-  } else if (scrollY >= carrinhoTop - 200) {
-    header.classList.remove('scroll'); // pequeno
+  // ✅ Parte 1: sombra no header ao rolar
+  if (scrollY >= navHeight) {
+    header.classList.add('scroll');
+  } else {
+    header.classList.remove('scroll');
+  }
+
+  // ✅ Parte 2: controlar tamanho grande com margem
+  if (scrollY < dividerTop - margem) {
+    header.classList.remove('tamanho-grande'); // pequeno
+    jaRolouParaProdutos = false; // reseta ao voltar
+  } else if (scrollY >= dividerTop - margem && scrollY < carrinhoTop - margem) {
+    header.classList.add('tamanho-grande'); // grande
+
+    // ✅ Scroll automático até os produtos (uma vez)
+    if (!jaRolouParaProdutos && listaProdutos) {
+      listaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      jaRolouParaProdutos = true;
+    }
+  } else if (scrollY >= carrinhoTop - margem) {
+    header.classList.remove('tamanho-grande'); // pequeno
+    jaRolouParaProdutos = false;
   }
 }
+
 
 
 function ActivateMenuAtCurrentSection() {
