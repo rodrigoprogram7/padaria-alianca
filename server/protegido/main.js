@@ -34,31 +34,37 @@ for (const link of links) {
   });
 }
 
+
+
 function toggleHeaderScroll() {
   const header = document.querySelector('#header');
   const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
+  const listaProdutos = document.getElementById('lista-produtos');
 
-  if (!header || !divider || !carrinho) return;
+  if (!header || !divider || !carrinho || !listaProdutos) return;
 
   const scrollY = window.scrollY;
   const dividerTop = divider.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
 
-  /*
-    Lógica:
-    - scroll < dividerTop            → navbar pequeno
-    - entre dividerTop e carrinhoTop → navbar grande
-    - scroll >= carrinhoTop          → navbar pequeno
-  */
-  if (scrollY < dividerTop -100) {
+  if (scrollY < dividerTop - 100) {
     header.classList.remove('scroll'); // pequeno
+    jaRolouParaProdutos = false; // reseta controle ao voltar para o topo
   } else if (scrollY >= dividerTop - 100 && scrollY < carrinhoTop - 200) {
     header.classList.add('scroll'); // grande
+
+    // ✅ Scroll automático para os produtos (só uma vez)
+    if (!jaRolouParaProdutos) {
+      listaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      jaRolouParaProdutos = true;
+    }
   } else if (scrollY >= carrinhoTop - 200) {
-    header.classList.remove('scroll'); // pequeno
+    header.classList.remove('scroll'); // pequeno novamente
+    jaRolouParaProdutos = false; // permite novo scroll na próxima descida
   }
 }
+
 
 
 function ActivateMenuAtCurrentSection() {
