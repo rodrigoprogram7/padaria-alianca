@@ -1891,7 +1891,7 @@ nav {
 /*//////////////////////////////////////////////////////  NAVBAR LATERAL  ////////////////////////////////////////////////////////////////////*/
 .menu-lateral {
     width: 250px; /* Adapte conforme seu design */
-    background: var(--base-color-second);;
+    background: var(--base-color);
     position: fixed;
     height: 100%;
     top: 0;
