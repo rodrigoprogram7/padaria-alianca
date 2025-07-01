@@ -53,9 +53,9 @@ function toggleHeaderScroll() {
   */
   if (scrollY < dividerTop) {
     header.classList.remove('scroll'); // pequeno
-  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 400) {
+  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 200) {
     header.classList.add('scroll'); // grande
-  } else if (scrollY >= carrinhoTop - 400) {
+  } else if (scrollY >= carrinhoTop - 200) {
     header.classList.remove('scroll'); // pequeno
   }
 }
