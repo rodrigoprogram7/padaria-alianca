@@ -1962,7 +1962,7 @@ nav {
     justify-content: center; /* Centraliza horizontalmente */
     align-items: center;    /* Centraliza verticalmente */
     gap: 55px;              /* Adiciona um espaço de 25px entre os itens */
-    border-top: 1px solid #ccc;
+    border-top: 1px solid #ffffff;
 }
 
 .menu-lateral .menu-rodape img {
