@@ -2013,7 +2013,7 @@ body.dark-mode .dark-mode-toggle span {
 /*//////////////////////////////////////////////////////  NAVBAR LATERAL  ////////////////////////////////////////////////////////////////////*/
 .menu-lateral {
     width: 250px; /* Adapte conforme seu design */
-    background: linear-gradient(135deg, #f5f3ec 0%, #e9f0c1 100%); /* Gradiente suave */
+    background: var(--base-color);
     position: fixed;
     height: 100%;
     top: 0;
@@ -2037,7 +2037,7 @@ body.dark-mode .dark-mode-toggle span {
 .menu-lateral .atalhos li a {
     display: block;
     padding: 15px 20px;
-    color: #333;
+    color: #ffffff;
     text-decoration: none;
     transition: background-color 0.2s ease;
 }
