@@ -2053,7 +2053,7 @@ body.dark-mode .dark-mode-toggle span {
     /* Ajustes para centralizar e espaçar */
     justify-content: center; /* Centraliza horizontalmente */
     align-items: center;    /* Centraliza verticalmente */
-    gap: 35px;              /* Adiciona um espaço de 25px entre os itens */
+    gap: 55px;              /* Adiciona um espaço de 25px entre os itens */
     border-top: 1px solid #ccc;
 }
 
