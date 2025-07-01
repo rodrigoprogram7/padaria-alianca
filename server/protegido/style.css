@@ -267,10 +267,14 @@ body {
 }
 
 #header.scroll .nav-central {
-    margin-top: 1rem;
+    gap: 4px;
+  padding-bottom: 4px;
+  margin-top: 0.5rem; /* reduzir também esse */
+  max-height: 240px;  /* se quiser limitar mais */
     max-width: 100%;
     overflow-x: hidden;
 }
+
 
 
 #header.scroll .nav-central {
@@ -383,14 +387,15 @@ body {
 
 .cat-btn {
     flex: 0 0 auto;
-    padding: 8px 16px;
+    padding: 6px 10px; /* antes: 8px 16px */
+  font-size: 0.85rem; /* um pouco menor */
     border: none;
     background-color: #e0e0e0;
     border-radius: 20px;
     color: var(--title-color);
     cursor: pointer;
     transition: background-color 0.3s;
-    font-size: 0.9rem;
+
 }
 
 .cat-btn:hover {
@@ -479,6 +484,8 @@ nav.show .toggle.icon-close::before {
   #header.scroll .nav-top .logo {
     margin: 0 auto;
     text-align: center;
+  font-size: 1.1rem; /* Reduz um pouco o tamanho da fonte */
+  padding-top: 0.2rem;
   }
 
   #header.scroll .toggle {
@@ -2144,8 +2151,8 @@ body.dark-mode .dark-mode-toggle span {
 
 #header.scroll {
   height: auto;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 0.5rem; /* antes: var(--header-scrolled-padding-top-desktop); */
+  padding-bottom: 0.5rem; /* antes: var(--header-scrolled-padding-bottom-desktop); */
   box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
 }
 
