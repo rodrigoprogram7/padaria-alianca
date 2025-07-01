@@ -1889,6 +1889,39 @@ nav {
 
 
 /*//////////////////////////////////////////////////////  NAVBAR LATERAL  ////////////////////////////////////////////////////////////////////*/
+.menu-lateral .atalhos li a {
+  position: relative;
+  display: block;
+  font-size: 18px;
+  padding: 12px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Linha branca animada */
+.menu-lateral .atalhos li a::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  bottom: 8px;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+/* Ao passar o mouse */
+.menu-lateral .atalhos li a:hover::after {
+  width: calc(100% - 40px); /* 100% menos os paddings laterais */
+}
+
+/* Link ativo (selecionado) */
+.menu-lateral .atalhos li a.active::after {
+  width: calc(100% - 40px);
+}
+
+
 .menu-lateral {
     width: 250px; /* Adapte conforme seu design */
     background: var(--base-color);
