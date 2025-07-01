@@ -2036,6 +2036,7 @@ body.dark-mode .dark-mode-toggle span {
 
 .menu-lateral .atalhos li a {
     display: block;
+    font-size: 30px;
     padding: 15px 20px;
     color: #ffffff;
     text-decoration: none;
