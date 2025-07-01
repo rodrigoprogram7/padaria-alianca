@@ -53,7 +53,7 @@ function toggleHeaderScroll() {
   */
   if (scrollY < dividerTop) {
     header.classList.remove('scroll'); // pequeno
-  } else if (scrollY >= dividerTop - 200 && scrollY < carrinhoTop - 200) {
+  } else if (scrollY >= dividerTop + 250 && scrollY < carrinhoTop - 200) {
     header.classList.add('scroll'); // grande
   } else if (scrollY >= carrinhoTop - 200) {
     header.classList.remove('scroll'); // pequeno
