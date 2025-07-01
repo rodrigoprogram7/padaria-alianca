@@ -1933,8 +1933,8 @@ nav {
 }
 
 .menu-lateral .menu-rodape img {
-    width: 32px; /* Aumenta o tamanho da imagem para 32px (era 24px) */
-    height: 32px;
+    width: 52px; /* Aumenta o tamanho da imagem para 32px (era 24px) */
+    height: 52px;
     transition: transform 0.2s ease-in-out; /* Adiciona uma transição para um efeito hover suave */
 }
 
