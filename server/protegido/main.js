@@ -195,6 +195,12 @@ function filtrarCategoria(categoriaSelecionada) {
     ? produtos
     : produtos.filter(prod => prod.categoria === categoriaSelecionada);
 
+        produtos.sort((a, b) => {
+    const nomeA = (a.nome || a.variacoes?.[0]?.nome || '').toLowerCase();
+    const nomeB = (b.nome || b.variacoes?.[0]?.nome || '').toLowerCase();
+    return nomeA.localeCompare(nomeB);
+  });
+
   renderizarProdutos(produtosFiltrados);
 
   const areaProdutos = document.querySelector('.pp');
