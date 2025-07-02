@@ -534,7 +534,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function mostrarAlerta(mensagem) {
   const alerta = document.getElementById('alerta');
-  alerta.textContent = mensagem;
+ alerta.innerHTML = `
+  <div class="alerta-nome">${mensagem}</div>
+  <hr class="alerta-linha">
+  <div class="alerta-sucesso">Adicionado ao carrinho!</div>
+`;
   alerta.classList.add('show');
   setTimeout(() => alerta.classList.add('hide'), 500);
   setTimeout(() => {
