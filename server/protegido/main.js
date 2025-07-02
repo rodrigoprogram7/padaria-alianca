@@ -670,40 +670,6 @@ const sections = document.querySelectorAll("section[id]");
 
 
 
-/*========== Scroll Reveal ==========*/
-const scrollReveal = ScrollReveal({
-  origin: 'top',
-  distance: '15px',
-  duration: 500,
-  reset: true
-});
-
-scrollReveal.reveal(
-  `#home .image, #home .text, #about .title, #about .pp,
-   #about .container, #about .carrinho,
-   #contact .text, #contact .links,
-   footer .brand, footer .social`,
-  { interval: 100 }
-);
-
-// ✅ NÃO adicione outro scroll aqui
-// window.addEventListener('scroll', ActivateMenuAtCurrentSection); ❌ NÃO PRECISA
-
-// Já está sendo chamado corretamente dentro de:
-window.addEventListener('scroll', function () {
-  toggleHeaderScroll();
-  ActivateMenuAtCurrentSection();
-});
-
-
-
-
-
-
-
-
-
-
 
 
 
