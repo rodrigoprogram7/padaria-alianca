@@ -99,6 +99,12 @@ function renderizarProdutos(produtos) {
   const lista = document.getElementById('lista-produtos');
   lista.innerHTML = '';
 
+    produtos.sort((a, b) => {
+    const nomeA = (a.nome || a.variacoes?.[0]?.nome || '').toLowerCase();
+    const nomeB = (b.nome || b.variacoes?.[0]?.nome || '').toLowerCase();
+    return nomeA.localeCompare(nomeB);
+  });
+
   produtos.forEach(prod => {
     if (prod.variacoes && prod.variacoes.length > 0) {
       lista.appendChild(renderizarCardComVariacoes(prod));
