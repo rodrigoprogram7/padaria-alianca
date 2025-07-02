@@ -1289,35 +1289,49 @@ footer .social a:hover {
 
 /* Alerta */
 .alerta {
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%) translateY(-20px);
-    background-color: #28a745;
-    color: white;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: bold;
-    opacity: 0;
-    transition: all 0.3s ease;
-    z-index: 9999;
-    pointer-events: none;
-}
-
-@keyframes fadeOut {
-    0% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    80% { opacity: 1; transform: translateX(-50%) translateY(0); }
-    100% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background-color: #28a745;
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+  opacity: 0;
+  transition: all 0.3s ease;
+  z-index: 9999;
+  pointer-events: none;
+  transform: translateY(-20px);
+  max-width: 250px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  text-align: center;
 }
 
 .alerta.show {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .alerta.hide {
-    animation: fadeOut 2s forwards;
+  animation: fadeOut 2s forwards;
 }
+
+.alerta-nome {
+  font-size: 1rem;
+}
+
+.alerta-sucesso {
+  font-size: 0.9rem;
+  color: #fff;
+  margin-top: 6px;
+}
+
+.alerta-linha {
+  border: 0;
+  border-top: 1px solid rgba(255,255,255,0.5);
+  margin: 6px 0;
+}
+
 
 /*======================================== Carrossel ========================================*/
 #nextBtn {
