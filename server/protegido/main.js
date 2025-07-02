@@ -84,16 +84,6 @@ window.addEventListener('scroll', function () {
   ActivateMenuAtCurrentSection();
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-  const backToTopButton = document.querySelector('.back-to-top');
-  const carrinho = document.getElementById('carrinho');
-  if (backToTopButton && carrinho) {
-    backToTopButton.addEventListener('click', function (e) {
-      e.preventDefault();
-      carrinho.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-});
 
 function renderizarProdutos(produtos) {
   const lista = document.getElementById('lista-produtos');
