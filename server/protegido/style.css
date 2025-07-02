@@ -1,7 +1,4 @@
-
-
-/* ======== Reset e Variáveis ======== */
-
+/*======================================== Resets ========================================*/
 * {
     margin: 0;
     padding: 0;
@@ -28,6 +25,9 @@ img {
     vertical-align: middle;
 }
 
+
+
+/*======================================== Variáveis ========================================*/
 :root {
     --header-height: 4.5rem;
 
@@ -50,9 +50,7 @@ img {
     --body-font: "DM Sans", sans-serif;
 }
 
-
-/* ======== Base ======== */
-
+/*======================================== Base ========================================*/
 html {
     scroll-behavior: smooth;
 }
@@ -102,9 +100,7 @@ body {
     );
 }
 
-
-/* ======== Layout geral e containers ======== */
-
+/*======================================== Layout ========================================*/
 .container {
     margin-left: 1.5rem;
     margin-right: 1.5rem;
@@ -170,9 +166,22 @@ body {
     color: var(--text-color); /* Mantém a cor de texto padrão */
 }
 
+/*======================================== Logo ========================================*/
+.logo {
+    font: 700 1.31rem var(--title-font);
+    color: var(--title-color);
+    margin-top: -2px;
+}
 
-/* ======== Header e Navbar ======== */
+.logo span {
+    color: var(--base-color);
+}
 
+.logo-alt span {
+    color: var(--body-color);
+}
+
+/*======================================== Header Ajustado ========================================*/
 #header {
     width: 100%;
     transition: all 0.4s ease;
@@ -192,6 +201,7 @@ body {
     padding-bottom: var(--header-scrolled-padding-bottom-desktop);
 }
 
+/*======================================== nav-top ========================================*/
 .nav-top {
     width: 100%;
     display: flex;
@@ -233,6 +243,7 @@ body {
     transform: translateY(-50%);
 }
 
+/*======================================== nav-central ========================================*/
 .nav-central {
     display: flex;
     flex-direction: column;
@@ -277,69 +288,7 @@ body {
     max-height: 300px;
 }
 
-@media (max-width: 768px) {
-  .nav-top {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    display: flex;
-    justify-content: space-between; /* ✅ Logo à esquerda, toggle (hamburguer) à direita */
-    align-items: center;
-    height: 50px;                    /* ✅ Mesma altura que o reduzido */
-    padding: 0 1rem;
-    box-sizing: border-box;
-    position: relative;              /* ✅ Importante para posicionar o toggle depois */
-  }
-   #toggle-dark-mode {
-    margin-right: auto; /* ✅ Joga o botão pra esquerda */
-    margin-left: 0.5rem;
-    font-size: 1.4rem;
-  }
-
-  .logo {
-    font-size: 1rem;
-    text-align: left;
-  }
-
-  .toggle {
-    display: block;
-    position: relative; /* Antes do scroll, segue o fluxo normal */
-    font-size: 1.2rem;
-  }
-
-  /* Após o scroll - Centraliza logo e joga o toggle pra direita com position absolute */
-  #header.scroll .nav-top {
-    justify-content: center;
-    height: auto;
-    position: relative;
-  }
-
-  #header.scroll .nav-top .logo {
-    margin: 0 auto;
-    text-align: center;
-  font-size: 1.1rem; /* Reduz um pouco o tamanho da fonte */
-  padding-top: 0.2rem;
-  }
-
-  #header.scroll .toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-  }
-
-  /* Garantindo largura máxima sempre */
-  #header, nav.container, .nav-top, .nav-central {
-    max-width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
-  }
-}
-
-
-/* ======== Barra de Pesquisa ======== */
-
+/*======================================== Barra de pesquisa ========================================*/
 .barra-pesquisa.navbar {
     width: 95%;
     max-width: none;
@@ -361,140 +310,7 @@ body {
     }
 }
 
-/* Nav Container */
-nav.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 10px 16px;
-    height: var(--header-height); /* Usa a variável para altura */
-}
-
-/* Agrupamento logo + pesquisa */
-.navbar-esquerda {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0;
-}
-
-/* Barra de pesquisa */
-.barra-pesquisa {
-    position: relative;
-    flex: 1;
-    max-width: 250px;
-    margin-top: -2px; 
-}
-
-.barra-pesquisa input {
-    width: 100%;
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-.barra-pesquisa input:focus {
-  outline: none;
-  border-color: var(--base-color);
-  box-shadow: 0 0 0 3px rgba(255, 221, 0, 0.2);
-  background-color: #fff;
-}
-
-.barra-pesquisa {
-  position: relative;
-}
-
-#resultados-pesquisa {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 300px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-  display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#resultados-pesquisa li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
-
-#resultados-pesquisa li:hover {
-  background-color: var(--base-color-second);
-}
-nav {
-    transition: all 0.3s ease;
-}
-
-/* Efeito destaque no produto encontrado */
-.produto.highlight {
-    border: 2px solid var(--base-color);
-    box-shadow: 0 0 10px var(--base-color);
-    transition: all 0.3s ease;
-}
-
-.produto.encontrado {
-    animation: destaqueProduto 1s ease;
-    box-shadow: 0 0 0 3px var(--base-color);
-    border-radius: 8px;
-    transition: box-shadow 0.3s ease;
-}
-
-@keyframes destaqueProduto {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.6);
-    }
-    50% {
-        transform: scale(1.02);
-        box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.6);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.4);
-    }
-}
-
-/* Mensagem de Erro */
-.erro-pedido {
-    color: red;
-    font-weight: bold;
-    margin-top: 8px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.erro-pedido.show {
-    opacity: 1;
-}
-
-@keyframes tremer {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-.erro-pedido.tremer {
-    animation: tremer 0.4s;
-}
-
-
-/* ======== Categorias ======== */
-
+/*======================================== Categorias - Scroll horizontal ========================================*/
 .categorias-navbar {
     display: flex;
     flex-wrap: nowrap;
@@ -629,6 +445,271 @@ nav.show .toggle.icon-close::before {
     display: block;
 }
 
+/*======================================== Mobile Nav-top (logo esquerda, ícone direita) ========================================*/
+@media (max-width: 768px) {
+  .nav-top {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: space-between; /* ✅ Logo à esquerda, toggle (hamburguer) à direita */
+    align-items: center;
+    height: 50px;                    /* ✅ Mesma altura que o reduzido */
+    padding: 0 1rem;
+    box-sizing: border-box;
+    position: relative;              /* ✅ Importante para posicionar o toggle depois */
+  }
+   #toggle-dark-mode {
+    margin-right: auto; /* ✅ Joga o botão pra esquerda */
+    margin-left: 0.5rem;
+    font-size: 1.4rem;
+  }
+
+  .logo {
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .toggle {
+    display: block;
+    position: relative; /* Antes do scroll, segue o fluxo normal */
+    font-size: 1.2rem;
+  }
+
+  /* Após o scroll - Centraliza logo e joga o toggle pra direita com position absolute */
+  #header.scroll .nav-top {
+    justify-content: center;
+    height: auto;
+    position: relative;
+  }
+
+  #header.scroll .nav-top .logo {
+    margin: 0 auto;
+    text-align: center;
+  font-size: 1.1rem; /* Reduz um pouco o tamanho da fonte */
+  padding-top: 0.2rem;
+  }
+
+  #header.scroll .toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+  }
+
+  /* Garantindo largura máxima sempre */
+  #header, nav.container, .nav-top, .nav-central {
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+  }
+}
+
+/*======================================== Resultados da pesquisa ========================================*/
+.barra-pesquisa {
+  position: relative;
+}
+
+#resultados-pesquisa {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#resultados-pesquisa li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+#resultados-pesquisa li:hover {
+  background-color: var(--base-color-second);
+}
+
+@media (max-width: 768px) {
+    .menu {
+        display: none;
+        opacity: 0;
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+    }
+
+    nav.show .menu {
+        display: flex;
+        opacity: 1;
+        visibility: visible;
+        height: calc(100vh - var(--header-initial-height));
+        position: fixed;
+        top: var(--header-initial-height);
+        left: 0;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--body-color);
+        z-index: 80;
+    }
+
+    nav.show .menu ul.grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: auto;             /* ✅ Corrigido */
+        margin: 0 auto;          /* ✅ Corrigido */
+        padding: 0;
+        transform: translateX(0); /* ✅ Evita offset lateral */
+    }
+
+    nav.show .menu ul.grid li {
+        width: auto;
+        text-align: center;
+    }
+
+    nav.show .menu ul.grid li a {
+        display: inline-block;
+        text-align: center;
+    }
+
+    /* ✅ Corrigindo o problema de margens laterais herdadas da .container */
+    nav.container,
+    nav.show.container,
+    nav.show .menu,
+    nav.show .menu ul.grid,
+    nav.show .menu ul.grid li,
+    nav.show .menu ul.grid li a {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+}
+
+
+nav ul li a.active,
+nav ul li a:hover {
+    color: var(--base-color);
+    border-bottom: 2px solid var(--base-color);
+    padding-bottom: 4px;
+    transition: all 0.3s ease;
+}
+
+
+@media (max-width: 768px) {
+  #header:not(.scroll) .nav-top {
+    justify-content: center;
+    height: auto;
+    position: relative;
+  }
+
+  #header:not(.scroll) .nav-top .logo {
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1rem;
+  }
+
+  #header:not(.scroll) .toggle {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+/*======================================== Home ========================================*/
+#home {
+    overflow: hidden;
+}
+
+#home .container {
+    margin: 0;
+}
+
+#home .image {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+    animation: slideInLeft 1s ease-out forwards;
+}
+
+#home .image::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: var(--base-color-second);
+    position: absolute;
+    top: -16.8%;
+    left: 16.7%;
+    z-index: 0;
+    border-radius: 0.25px;
+    animation: slideInRight 1s ease-out forwards;
+}
+
+#home .image img {
+    position: relative;
+    right: 2.93rem;
+    border-radius: 0.25px;
+    z-index: 1; /* Garante que a imagem fique acima do pseudo-elemento */
+}
+
+#home .text {
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+    text-align: center;
+}
+
+#home .text h1 {
+    margin-bottom: 1rem;
+}
+
+#home .text p {
+    margin-bottom: 2rem;
+}
+
+#home .text p span {
+    font-style: italic;
+}
+
+/* Animações imagem inicial */
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/*======================================== Categorias (About) ========================================*/
 #about {
     background-color: var(--body-color);
 }
@@ -636,6 +717,272 @@ nav.show .toggle.icon-close::before {
 #about .container {
     margin: 0; /* Ajuste para centralizar no desktop */
 }
+
+/*======================================== Contato ========================================*/
+#contact .grid {
+    gap: 4rem;
+}
+
+#contact .text p {
+    margin-bottom: 2rem;
+}
+
+#contact .button i, 
+#contact ul li i {
+    font-size: 1.5rem;
+    margin-right: 0.625rem;
+}
+
+#contact ul.grid {
+    gap: 2rem;
+}
+
+#contact ul li {
+    display: flex;
+    align-items: center;
+}
+
+#contact ul li i {
+    color: var(--base-color);
+}
+
+/*======================================== Rodapé ========================================*/
+#imgg {
+    width: 30px;
+    height: 30px;
+}
+
+#bt { /* Botão genérico, talvez seja melhor renomear para algo mais específico se for só para o footer */
+    background-color: #007bff;
+    color: white;
+    border: none;
+    width: 110px; 
+    height: 30px; 
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+footer {
+    background: var(--base-color);
+}
+
+footer.section {
+    padding: 4rem 0; 
+}    
+
+footer .logo {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+footer .brand p {
+    color: var(--text-color-light);
+    margin-bottom: 0.75rem;
+}
+
+footer i {
+    font-size: 1.5rem;
+    color: var(--text-color-light);
+}
+
+footer .social {
+    grid-auto-flow: column;
+    width: fit-content;
+}
+
+footer .social a {
+    transition: 0.3s;
+    display: inline-block;
+}
+
+footer .social a:hover {
+    transform: translateY(-8px);
+}
+
+/*======================================== Botão de voltar ao início ========================================*/
+.back-to-top {
+    background: var(--base-color);
+    color: var(--text-color-light);
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    position: fixed;
+    right: 2rem;
+    bottom: 2rem;
+    border-radius: 50%;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s;
+    transform: translateY(100%);
+    z-index: 999;
+}
+
+.back-to-top.show {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/*======================================== Responsividade ========================================*/
+
+/* Dispositivos Largos: 992px > */
+@media (min-width: 992px) {
+    :root {
+        --title-font-size-base: 2.25rem; /* Ajuste para títulos maiores */
+        --subtitle-font-size: 1.125rem;
+    }
+
+    #home .container {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        align-items: center;
+    }
+
+    #home .image {
+        order: 1;
+        max-width: 300px;
+        margin: auto;
+    }
+
+    #home .text {
+        order: 0;
+        max-width: 600px; /* Ajuste para o texto não ficar muito largo */
+    }
+}
+
+/* Dispositivos Extra Largos: 1200px > */
+@media (min-width: 1200px) {
+    /* reusable classes */
+    .container {
+        max-width: 1120px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .section {
+        padding: 10rem 0;
+    }
+    
+    .section header, 
+    #testimonials header { /* Adicionei #testimonials header que estava separado */
+        max-width: 32rem;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .button {
+        height: 3.125rem;
+    }
+
+    /* Nav */
+    nav .menu {
+        opacity: 1;
+        visibility: visible;
+        top: 0;
+        position: static; /* Volta para o fluxo normal */
+        height: auto;
+        width: auto;
+        background: transparent;
+    }
+
+    nav .menu ul {
+        display: flex;
+        gap: 2rem;
+    }
+
+    nav .menu ul li a.title {
+        font: 400 1rem var(--body-font);
+        -webkit-font-smoothing: antialiased;
+    }
+
+    nav .menu ul li a.title.active {
+        font-weight: bold;
+        -webkit-font-smoothing: auto;
+    }
+
+    nav .icon-menu,
+    nav .icon-close { /* Esconde os ícones de toggle no desktop */
+        display: none;
+    }
+
+    /* Layout */
+    main {
+        margin-top: var(--header-height);
+    }
+    
+    /* Home */
+    #home .container {
+        grid-auto-flow: column;
+        width: fit-content;
+        justify-content: space-between;
+        margin: 0 auto;
+    }
+
+    #home .image {
+        order: 1;
+    }
+
+    #home .text {
+        order: 0;
+        max-width: 24rem;
+        text-align: left;
+    }
+
+    /* About */
+    #about .container {
+        margin: 0 auto;
+        grid-auto-flow: column;
+    }
+    
+    /* Services */
+    .cards {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    .card {
+        padding-left: 3rem;
+        padding-right: 3rem;
+    }
+
+    /* Testimonials*/
+    #testimonials .container {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* Contact */
+    #contact .container {
+        grid-auto-flow: column;
+        align-items: center;
+    }
+
+    #contact .text {
+        max-width: 25rem;
+    }
+
+    /* Footer */
+    footer.section {
+        padding: 3.75rem 0;
+    }
+
+    footer .container {
+        grid-auto-flow: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    footer .logo {
+        font-size: 2.25rem;
+    }
+}
+
+/*======================================== Componentes de Produtos e Carrinho ========================================*/
 
 /* Filtro de Categoria */
 #btcategoria {
@@ -946,212 +1293,7 @@ nav.show .toggle.icon-close::before {
     animation: fadeOut 2s forwards;
 }
 
-
-/* ======== Sessões (Home, About, Contact) ======== */
-
-#home {
-    overflow: hidden;
-}
-
-#home .container {
-    margin: 0;
-}
-
-#home .image {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    margin: auto;
-    animation: slideInLeft 1s ease-out forwards;
-}
-
-#home .image::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    background: var(--base-color-second);
-    position: absolute;
-    top: -16.8%;
-    left: 16.7%;
-    z-index: 0;
-    border-radius: 0.25px;
-    animation: slideInRight 1s ease-out forwards;
-}
-
-#home .image img {
-    position: relative;
-    right: 2.93rem;
-    border-radius: 0.25px;
-    z-index: 1; /* Garante que a imagem fique acima do pseudo-elemento */
-}
-
-#home .text {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    text-align: center;
-}
-
-#home .text h1 {
-    margin-bottom: 1rem;
-}
-
-#home .text p {
-    margin-bottom: 2rem;
-}
-
-#home .text p span {
-    font-style: italic;
-}
-
-/* Animações imagem inicial */
-@keyframes slideInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes slideInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-#contact .grid {
-    gap: 4rem;
-}
-
-#contact .text p {
-    margin-bottom: 2rem;
-}
-
-#contact .button i, 
-#contact ul li i {
-    font-size: 1.5rem;
-    margin-right: 0.625rem;
-}
-
-#contact ul.grid {
-    gap: 2rem;
-}
-
-#contact ul li {
-    display: flex;
-    align-items: center;
-}
-
-#contact ul li i {
-    color: var(--base-color);
-}
-
-
-/* ======== Produtos e Carrinho ======== */
-
-
-
-
-/* ======== Footer ======== */
-
-#imgg {
-    width: 30px;
-    height: 30px;
-}
-
-#bt { /* Botão genérico, talvez seja melhor renomear para algo mais específico se for só para o footer */
-    background-color: #007bff;
-    color: white;
-    border: none;
-    width: 110px; 
-    height: 30px; 
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-footer {
-    background: var(--base-color);
-}
-
-footer.section {
-    padding: 4rem 0; 
-}    
-
-footer .logo {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-}
-
-footer .brand p {
-    color: var(--text-color-light);
-    margin-bottom: 0.75rem;
-}
-
-footer i {
-    font-size: 1.5rem;
-    color: var(--text-color-light);
-}
-
-footer .social {
-    grid-auto-flow: column;
-    width: fit-content;
-}
-
-footer .social a {
-    transition: 0.3s;
-    display: inline-block;
-}
-
-footer .social a:hover {
-    transform: translateY(-8px);
-}
-
-
-/* ======== Botão Voltar ao Topo ======== */
-
-.back-to-top {
-    background: var(--base-color);
-    color: var(--text-color-light);
-    font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    border-radius: 50%;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s;
-    transform: translateY(100%);
-    z-index: 999;
-}
-
-.back-to-top.show {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
-}
-
-
-/* ======== Alertas e Feedbacks ======== */
-
-
-
-
-/* ======== Carrossel de Variações ======== */
-
+/*======================================== Carrossel ========================================*/
 #nextBtn {
     right: 10px;
 }
@@ -1285,162 +1427,655 @@ footer .social a:hover {
     text-align: left; /* Garante que o texto fique alinhado à esquerda */
 }
 
+/*======================================== Barra de Pesquisa e Menu Mobile ========================================*/
 
-/* ======== Responsividade ======== */
+/* Nav Container */
+nav.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px 16px;
+    height: var(--header-height); /* Usa a variável para altura */
+}
 
-/* Dispositivos Largos: 992px > */
-@media (min-width: 992px) {
-    :root {
-        --title-font-size-base: 2.25rem; /* Ajuste para títulos maiores */
-        --subtitle-font-size: 1.125rem;
+/* Agrupamento logo + pesquisa */
+.navbar-esquerda {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Barra de pesquisa */
+.barra-pesquisa {
+    position: relative;
+    flex: 1;
+    max-width: 250px;
+    margin-top: -2px; 
+}
+
+.barra-pesquisa input {
+    width: 100%;
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+.barra-pesquisa input:focus {
+  outline: none;
+  border-color: var(--base-color);
+  box-shadow: 0 0 0 3px rgba(255, 221, 0, 0.2);
+  background-color: #fff;
+}
+
+.barra-pesquisa {
+  position: relative;
+}
+
+#resultados-pesquisa {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#resultados-pesquisa li {
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+#resultados-pesquisa li:hover {
+  background-color: var(--base-color-second);
+}
+nav {
+    transition: all 0.3s ease;
+}
+
+/* Efeito destaque no produto encontrado */
+.produto.highlight {
+    border: 2px solid var(--base-color);
+    box-shadow: 0 0 10px var(--base-color);
+    transition: all 0.3s ease;
+}
+
+.produto.encontrado {
+    animation: destaqueProduto 1s ease;
+    box-shadow: 0 0 0 3px var(--base-color);
+    border-radius: 8px;
+    transition: box-shadow 0.3s ease;
+}
+
+@keyframes destaqueProduto {
+    0% {
+        transform: scale(1);
+        box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.6);
     }
-
-    #home .container {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        align-items: center;
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.6);
     }
-
-    #home .image {
-        order: 1;
-        max-width: 300px;
-        margin: auto;
-    }
-
-    #home .text {
-        order: 0;
-        max-width: 600px; /* Ajuste para o texto não ficar muito largo */
+    100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.4);
     }
 }
 
-/* Dispositivos Extra Largos: 1200px > */
-@media (min-width: 1200px) {
-    /* reusable classes */
+/* Mensagem de Erro */
+.erro-pedido {
+    color: red;
+    font-weight: bold;
+    margin-top: 8px;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.erro-pedido.show {
+    opacity: 1;
+}
+
+@keyframes tremer {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.erro-pedido.tremer {
+    animation: tremer 0.4s;
+}
+
+
+/*======================================== Media Queries (Responsividade) ========================================*/
+
+/* Mobile Específico (max-width: 768px) */
+@media (max-width: 768px) {
     .container {
-        max-width: 1120px;
-        margin-left: auto;
-        margin-right: auto;
+        flex-direction: column; /* Produtos e Carrinho em coluna */
+        /* Garante que o container geral não corte nada */
+        overflow: visible;
     }
 
-    .section {
-        padding: 10rem 0;
-    }
-    
-    .section header, 
-    #testimonials header { /* Adicionei #testimonials header que estava separado */
-        max-width: 32rem;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
+    nav.container {
+        flex-wrap: wrap;
+        align-items: flex-start; /* Alinha no topo */
     }
 
-    .button {
-        height: 3.125rem;
+    .navbar-esquerda {
+        width: 100%;
+        justify-content: space-between;
+        margin-bottom: 8px;
     }
 
-    /* Nav */
-    nav .menu {
-        opacity: 1;
-        visibility: visible;
-        top: 0;
+    .barra-pesquisa {
+        flex-grow: 1;
+        max-width: calc(100% - 70px); /* Ajusta para deixar espaço para o toggle */
+    }
+
+    .toggle {
         position: static; /* Volta para o fluxo normal */
-        height: auto;
-        width: auto;
-        background: transparent;
+        margin-left: 10px; /* Espaçamento à direita da barra de pesquisa */
     }
 
-    nav .menu ul {
+    nav.show .icon-close {
+        display: block;
+    }
+    
+    /* Produtos no Mobile: 2 colunas */
+    .produtos {
+        grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
+        gap: 15px; /* Espaçamento entre os produtos */
+        align-items: start; /* Adicionado para alinhar os itens no topo e evitar esticamento */
+        /* Garante que a grade de produtos não corte */
+        overflow: visible;
+    }
+
+    .produto {
+        display: flex; /* Garante flexbox para alinhamento interno */
+        flex-direction: column; /* Imagem e info empilhadas verticalmente */
+        background: white;
+        border-radius: 10px;
+        align-items: center;
+        padding: 10px;
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        transition: transform 0.2s ease, box-shadow 0.3s ease;
+        margin-bottom: 0; 
+        width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
+        height: fit-content; /* CHAVE: A altura do card se ajusta ao conteúdo */
+        /* O produto individual NÃO deve ter overflow: hidden; */
+        overflow: visible; 
+    }
+
+    .produto:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    }
+
+    /* As imagens de produtos padrão devem ser menores no layout de card */
+    .produto:not(.carrossel) img { /* Seleciona apenas imagens de produtos NÃO carrossel */
+        width: 100px; /* Tamanho fixo para imagem no layout de card */
+        height: 100px;
+        border-radius: 8px;
+        margin-bottom: -50px; /* Mantém a imagem "entrando" no texto, se desejado */
+        object-fit: cover;
+    }
+
+    .produto-info {
+        width: 100%; /* Garante que o info block ocupe a largura total */
+        padding-top: 50px; /* Compensação para a imagem */
+        text-align: center; /* Centraliza o texto dentro de cada card */
+    }
+
+    .produto-info h3 {
+        margin: 4px 0;
+        font-size: 0.95rem; /* Ajuste para caber melhor */
+    }
+
+    .produto-info p {
+        margin: 2px 0;
+        color: #555;
+        font-size: 0.85rem; /* Ajuste para caber melhor */
+    }
+
+    .quantidade-box {
         display: flex;
-        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        margin: 6px 0;
+        gap: 5px; /* Espaço entre os botões e input */
     }
 
-    nav .menu ul li a.title {
-        font: 400 1rem var(--body-font);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    nav .menu ul li a.title.active {
+    .quantidade-box button {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
         font-weight: bold;
-        -webkit-font-smoothing: auto;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--base-color-second);
+        cursor: pointer;
+        transition: background-color 0.2s;
     }
 
-    nav .icon-menu,
-    nav .icon-close { /* Esconde os ícones de toggle no desktop */
-        display: none;
+    .quantidade-box button:hover {
+        background-color: var(--base-color);
+        color: rgb(0, 0, 0);
     }
 
-    /* Layout */
-    main {
-        margin-top: var(--header-height);
-    }
-    
-    /* Home */
-    #home .container {
-        grid-auto-flow: column;
-        width: fit-content;
-        justify-content: space-between;
-        margin: 0 auto;
+    .quantidade-box input {
+        width: 40px;
+        height: 28px;
+        text-align: center;
+        font-size: 14px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
     }
 
-    #home .image {
-        order: 1;
-    }
-
-    #home .text {
-        order: 0;
-        max-width: 24rem;
-        text-align: left;
-    }
-
-    /* About */
-    #about .container {
-        margin: 0 auto;
-        grid-auto-flow: column;
-    }
-    
-    /* Services */
-    .cards {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .card {
-        padding-left: 3rem;
-        padding-right: 3rem;
-    }
-
-    /* Testimonials*/
-    #testimonials .container {
+    .produto button.adicionar {
+        margin-top: 8px;
+        width: 100%;
+        max-width: 100px; /* Ajuste o max-width para o botão */
+        height: 28px;
+        display: block;
         margin-left: auto;
         margin-right: auto;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        font-size: 0.8rem;
     }
 
-    /* Contact */
-    #contact .container {
-        grid-auto-flow: column;
+    .produto button.adicionar:hover {
+        background-color: #0056b3;
+    }
+
+
+    
+/*//////////////////////////////////////////////////////  NAVBAR SUPERIOR  ////////////////////////////////////////////////////////////////////*/
+    .produto.carrossel {
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0;
+        padding: 10px; 
+        margin-bottom: 0;
+        min-height: auto; 
+        /* Mantido VISIBLE, mas o corte principal vem do .imagem-grande-wrapper no seu HTML */
+        overflow: visible; 
+        max-width: 100%; 
+        width: 100%; 
+        height: fit-content;
+    }
+
+    .produto.carrossel .produto-img-wrapper {
+        width: 100%; 
+        max-width: 100px; /* Mantém a imagem grande (e seu wrapper) com 100px de largura */
+        margin-bottom: 0; 
+        position: relative; 
+        flex-shrink: 0; 
+        /* MUITO IMPORTANTE: Este deve ser VISIBLE, pois é o pai dos botões */
+        overflow: visible; 
+    }
+
+    .imagem-grande-wrapper {
+        position: relative; /* **ESSENCIAL** para as setas se posicionarem */
+        width: 100px; /* Continua sendo o tamanho da imagem */
+        height: 100px; 
+        /* IMPORTANTE: Mantido HIDDEN aqui porque as setas estão DENTRO dele no HTML.
+           Isso fará com que as setas fiquem sobre a imagem, e não fora. */
+        overflow: hidden; 
+        border-radius: 6px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        margin: 0 auto; 
+    }
+
+    .imagem-grande-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain; 
+        margin-bottom: 0; 
+    }
+
+    /* Setas de navegação do carrossel de produto (Mobile) */
+    .carousel-btn {
+        position: absolute;
+        top: 33%;
+        transform: translateY(-50%);
+        background: var(--base-color); /* Fundo mais escuro para mobile */
+        border: none;
+        color: white;
+        font-size: 1.2rem; /* Tamanho da seta no mobile */
+        padding: 0;
+        border-radius: 50%;
+        cursor: pointer;
+        opacity: 1; /* Garante visibilidade */
+        transition: background-color 0.3s, opacity 0.3s;
+        z-index: 999; /* Z-index MUITO ALTO para garantir visibilidade máxima */
+        width: 30px; 
+        height: 30px; 
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
 
-    #contact .text {
-        max-width: 25rem;
+    /* POSICIONAMENTO DAS SETAS NO MOBILE (DENTRO DO .imagem-grande-wrapper) */
+    /* Como os botões estão DENTRO do .imagem-grande-wrapper no HTML, eles devem estar posicionados DENTRO dele */
+    .carousel-btn.carousel-prev {
+        left: -30px; /* Deixa 5px da borda esquerda da IMAGEM */
+    }
+    
+    .carousel-btn.carousel-next {
+        right: -30px; /* Deixa 5px da borda direita da IMAGEM */
     }
 
-    /* Footer */
-    footer.section {
-        padding: 3.75rem 0;
+    /* Miniaturas (Mobile) */
+    .carousel-thumbs {
+        display: flex;
+        flex-direction: row; 
+        flex-wrap: nowrap; 
+        max-width: 100%; 
+        overflow-x: auto; /* Permite o scroll horizontal */
+        overflow-y: hidden;
+        padding: 4px;
+        gap: 4px; 
+        -webkit-overflow-scrolling: touch; 
+        min-height: 40px; 
+        justify-content: center; 
+        margin-top: 8px; 
+        scroll-behavior: smooth; /* Para um scroll suave via JavaScript */
     }
 
-    footer .container {
-        grid-auto-flow: column;
-        justify-content: space-between;
-        align-items: center;
+    /* Esconder a barra de rolagem para alguns navegadores */
+    .carousel-thumbs::-webkit-scrollbar {
+        height: 0px; 
+        background: transparent; 
     }
 
-    footer .logo {
-        font-size: 2.25rem;
+    .carousel-thumbs::-webkit-scrollbar-thumb {
+        background: transparent; 
+    }
+
+    .carousel-thumbs img {
+        /* Miniaturas acompanham o tamanho da imagem grande (33% de 100px) */
+        width: 33px; 
+        height: 33px; 
+        object-fit: cover;
+        opacity: 0.7;
+        cursor: pointer;
+        border-radius: 5px;
+        border: 2px solid transparent;
+        transition: opacity 0.3s, border-color 0.3s;
+        flex-shrink: 0; /* Impede que as imagens se "espremam" */
+    }
+
+    .carousel-thumbs img:hover {
+        opacity: 1;
+    }
+
+    .carousel-thumbs img.ativo { 
+        border-color: var(--base-color);
+        opacity: 1;
+    }
+    
+    .produto.carrossel .produto-info {
+        text-align: center; 
+        margin-top: 10px; 
+        padding-top: 0; 
+        flex-grow: 0; 
+        flex-shrink: 0; 
+    }
+    
+    .produto.carrossel .produto-info h3 {
+        margin-top: 0; 
+    }
+}
+
+#header.hidden-navbar {
+  height: 50px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+#header.hidden-navbar .nav-central {
+  display: none;
+}
+
+#header.hidden-navbar .nav-top {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;           /* ✅ Faz o nav-top ocupar 100% da largura */
+  padding: 0 15px;        /* ✅ Espaçamento lateral opcional */
+  box-sizing: border-box; /* ✅ Garante que o padding não atrapalhe o layout */
+}
+
+#header.hidden-navbar .logo {
+  font-size: 1rem;
+  text-align: left;
+}
+
+#header.hidden-navbar .toggle.icon-menu,
+#header.hidden-navbar .toggle.icon-close {
+  display: block;
+  margin-left: auto;       /* ✅ Empurra o toggle para a direita */
+  font-size: 1.2rem;
+}
+#header.hidden-navbar nav {
+  max-width: 100%;
+  width: 100%;
+  padding: 0;
+}
+#header.hidden-navbar {
+  max-width: 100%;
+  width: 100%;
+}
+
+
+
+/*//////////////////////////////////////////////////////  NAVBAR LATERAL  ////////////////////////////////////////////////////////////////////*/
+.menu-lateral .atalhos li a {
+  position: relative;
+  display: block;
+  font-size: 18px;
+  padding: 12px 20px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+/* Linha branca animada */
+.menu-lateral .atalhos li a::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  bottom: 8px;
+  width: 0;
+  height: 2px;
+  background-color: #ffffff;
+  transition: width 0.3s ease;
+}
+
+/* Ao passar o mouse */
+.menu-lateral .atalhos li a:hover::after {
+  width: calc(100% - 40px); /* 100% menos os paddings laterais */
+}
+
+/* Link ativo (selecionado) */
+.menu-lateral .atalhos li a.active::after {
+  width: calc(100% - 40px);
+}
+
+
+.menu-lateral {
+    width: 250px; /* Adapte conforme seu design */
+    background: var(--base-color);
+    position: fixed;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transform: translateX(0); /* Visível por padrão em desktop */
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    padding-top: 20px; /* Espaço para o cabeçalho/botão se necessário */
+    display: flex; /* Para organizar o conteúdo */
+    flex-direction: column;
+    justify-content: space-between; /* Empurra o rodapé para baixo */
+}
+
+.menu-lateral .atalhos {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-lateral .atalhos li a {
+    display: block;
+    font-size: 20px;
+    padding: 15px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+
+.menu-lateral .menu-rodape {
+    padding: 20px;
+    display: flex;
+    /* Ajustes para centralizar e espaçar */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center;    /* Centraliza verticalmente */
+    gap: 55px;              /* Adiciona um espaço de 25px entre os itens */
+    border-top: 1px solid #ffffff;
+}
+
+.menu-lateral .menu-rodape img {
+    width: 52px; /* Aumenta o tamanho da imagem para 32px (era 24px) */
+    height: 52px;
+    transition: transform 0.2s ease-in-out; /* Adiciona uma transição para um efeito hover suave */
+}
+
+.menu-lateral .menu-rodape img:hover {
+    transform: scale(1.1); /* Um pequeno zoom ao passar o mouse */
+}
+
+/* Estilos para o overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilos para o botão de hambúrguer (criado via JS) */
+.menu-toggle {
+    display: none; /* Ocultar por padrão em desktop */
+    position: fixed; /* Fixar no topo para mobile */
+    top: 15px; /* Ajuste a posição conforme necessário */
+    right: 20px; /* Ajuste a posição conforme necessário */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 30px;
+    height: 25px;
+    z-index: 1001; /* Acima do menu e do overlay */
+}
+
+.menu-toggle .hamburger {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--base-color); /* Cor do hambúrguer */
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+/* Animação do hambúrguer para um 'X' */
+.menu-toggle.open .hamburger:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.menu-toggle.open .hamburger:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-toggle.open .hamburger:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+/* Regras para mobile */
+@media (max-width: 768px) {
+    .menu-lateral {
+        transform: translateX(-100%); /* Ocultar menu por padrão em mobile */
+        box-shadow: none; /* Remover sombra quando oculto */
+    }
+
+    .menu-lateral.open {
+        transform: translateX(0); /* Mostrar menu quando 'open' */
+        box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* Adicionar sombra quando visível */
+    }
+
+    .menu-toggle {
+        display: flex; /* Mostrar o botão de hambúrguer em mobile */
+    }
+
+    /* Ocultar o scroll do corpo quando o menu está aberto */
+    body.no-scroll {
+        overflow: hidden;
     }
 }
 
 
-/* ======== Animações e Efeitos Visuais ======== */
+
+#header {
+  height: 50px;
+  transition: all 0.3s ease;
+  /* outros estilos... */
+}
+
+#header.scroll {
+  height: auto;
+  padding-top: 0.5rem; /* antes: var(--header-scrolled-padding-top-desktop); */
+  padding-bottom: 0.5rem; /* antes: var(--header-scrolled-padding-bottom-desktop); */
+  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
+}
 
 
+.produto.highlight {
+  outline: 3px solid #ff6600;
+  border-radius: 6px;
+  transition: outline 0.3s ease;
+}
