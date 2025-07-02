@@ -530,6 +530,21 @@ function mostrarAlerta(mensagem) {
   }, 2500);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  const animarTituloCarrinho = document.querySelector('.titulo-carrinho');
+
+  if (animarTituloCarrinho) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          animarTituloCarrinho.classList.add('scroll-visivel');
+        }
+      });
+    }, { threshold: 0.5 });
+
+    observer.observe(animarTituloCarrinho);
+  }
+});
 
 
 

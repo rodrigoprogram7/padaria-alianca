@@ -1189,6 +1189,26 @@ footer .social a:hover {
   display: none; /* já está assim por padrão */
 }
 
+.titulo-carrinho {
+  background-color: var(--base-color);
+  color: white;
+  text-align: center;
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.titulo-carrinho.scroll-visivel {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 .carrinho-acoes {
     display: flex;
     gap: 5px;
