@@ -84,7 +84,6 @@ body {
     background-color: var(--base-color-alt);
 }
 
-.divider-1,
 .divider-2 {
     height: 1px;
     background: linear-gradient(270deg, 
@@ -99,6 +98,37 @@ body {
         hsla(var(--hue), 36%, 57%, 1)
     );
 }
+
+.divider-wrapper {
+  position: relative;
+  height: 20px; /* altura suficiente para caber a imagem */
+  margin: 20px 0; /* espaço externo opcional */
+}
+
+.divider-1 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(270deg, 
+    hsla(var(--hue), 36%, 57%, 1), 
+    hsla(var(--hue), 65%, 88%, 0.34)
+  );
+  transform: translateY(-50%);
+}
+
+.divider-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white; /* para "apagar" o fundo da linha atrás da imagem */
+  padding: 2px;
+  z-index: 1;
+  height: 24px; /* ou o tamanho que quiser */
+}
+
 
 /*======================================== Layout ========================================*/
 .container {
