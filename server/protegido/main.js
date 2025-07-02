@@ -672,41 +672,29 @@ const sections = document.querySelectorAll("section[id]");
 
 /*========== Scroll Reveal ==========*/
 const scrollReveal = ScrollReveal({
-    origin: 'top',
-    distance: '15px',
-    duration: 500,
-    reset: true
-})
+  origin: 'top',
+  distance: '15px',
+  duration: 500,
+  reset: true
+});
 
 scrollReveal.reveal(
-    `#home .image, #home .text, #about .title, #about .pp,
-    #about .container, #about .carrinho,
-    #contact .text, #contact .links,
-    footer .brand, footer .social`,
-    { interval: 100 }
-)
+  `#home .image, #home .text, #about .title, #about .pp,
+   #about .container, #about .carrinho,
+   #contact .text, #contact .links,
+   footer .brand, footer .social`,
+  { interval: 100 }
+);
 
-/*========== Menu ativo na rolagem ==========*/
-function ActivateMenuAtCurrentSection() {
-    const sections = document.querySelectorAll('section[id]')
-    const scrollY = window.scrollY
+// ✅ NÃO adicione outro scroll aqui
+// window.addEventListener('scroll', ActivateMenuAtCurrentSection); ❌ NÃO PRECISA
 
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100
-        const sectionHeight = section.offsetHeight
-        const sectionId = section.getAttribute('id')
-        const link = document.querySelector(`nav a[href="#${sectionId}"]`)
+// Já está sendo chamado corretamente dentro de:
+window.addEventListener('scroll', function () {
+  toggleHeaderScroll();
+  ActivateMenuAtCurrentSection();
+});
 
-        if (link) {
-            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-                link.classList.add('active')
-            } else {
-                link.classList.remove('active')
-            }
-        }
-    })
-}
-window.addEventListener('scroll', ActivateMenuAtCurrentSection)
 
 
 
