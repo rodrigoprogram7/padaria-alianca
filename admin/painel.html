@@ -30,6 +30,27 @@
     --info-color: #3498db; /* Azul informativo */
     --warning-color: #f39c12; /* Amarelo de aviso */
 
+
+     --header-height: 4.5rem;
+
+    /* Cores */
+    --hue: 46;
+    --base-color: hsl(var(--hue) 100% 57%);
+    --base-color-second: hsl(var(--hue) 65% 88%);
+    --base-color-alt: hsl(var(--hue) 57% 53%);
+    --title-color: hsl(var(--hue) 41% 10%);
+    --text-color: hsl(0 0% 46%);
+    --text-color-light: hsl(0 0% 98%);
+    --body-color: hsl(0 0% 98%);
+    
+    /* Tamanho das fontes*/
+    --title-font-size-base: 1.875rem; /* Renomeado para base */
+    --subtitle-font-size: 1rem;
+    
+    /* Tipo das fontes*/
+    --title-font: "Poppins", sans-serif;
+    --body-font: "DM Sans", sans-serif;
+
     --header-height: 4.5rem;
 
     /* Cores */
@@ -143,7 +164,7 @@ body {
 }
 
 h1, h2, h3 {
-    color: var(--primary-color);
+    color: var(--base-color);
     margin-bottom: var(--spacing-lg);
     display: flex;
     align-items: center;
@@ -200,7 +221,7 @@ h1 .fas, h2 .fas {
 .form-group select:focus {
     border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 0 0 3px rgba(92, 184, 92, 0.2); /* Sombra de foco mais suave */
+    box-shadow: 0 6px 12px rgba(238, 215, 174, 0.3); /* Sombra de foco mais suave */
 }
 
 .form-group input[type="radio"] {
@@ -217,7 +238,7 @@ h1 .fas, h2 .fas {
 }
 
 .button-submit {
-    background-color: var(--primary-color);
+    background-color: var(--base-color);
     color: white;
     padding: var(--spacing-sm) var(--spacing-xl); /* Mais padding para botões maiores */
     border: none;
@@ -233,18 +254,18 @@ h1 .fas, h2 .fas {
     justify-content: center; /* Centraliza o conteúdo do botão */
     gap: var(--spacing-sm);
     margin-top: var(--spacing-lg);
-    box-shadow: 0 4px 10px rgba(92, 184, 92, 0.2); /* Sombra para botões */
+    box-shadow: 0 6px 12px rgba(238, 215, 174, 0.3); /* Sombra para botões */
 }
 
 .button-submit:hover {
     background-color: var(--primary-dark-color);
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(92, 184, 92, 0.3);
+    box-shadow: 0 6px 12px rgba(238, 215, 174, 0.3);
 }
 
 .button-submit:active {
     transform: translateY(0);
-    box-shadow: 0 2px 5px rgba(92, 184, 92, 0.2);
+    box-shadow: 0 6px 12px rgba(238, 215, 174, 0.3);
 }
 
 .feedback-message {
@@ -373,13 +394,13 @@ h1 .fas, h2 .fas {
     background-color: var(--secondary-color);
     color: white;
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(91, 192, 222, 0.2);
+    box-shadow: 0 6px 12px rgba(238, 215, 174, 0.3);
 }
 
 .filtro-btn.active {
-    background-color: var(--primary-color);
+    background-color: var(--base-color);
     color: white;
-    box-shadow: 0 4px 8px rgba(92, 184, 92, 0.2);
+    box-shadow: 0 6px 12px rgba(238, 215, 174, 0.3);
     transform: translateY(-1px); /* Mantém uma leve elevação */
 }
 
