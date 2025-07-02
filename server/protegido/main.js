@@ -647,25 +647,7 @@ const sections = document.querySelectorAll("section[id]");
 
 
 
-const scrollReveal = ScrollReveal({
-    origin: 'top',
-    distance: '30px',
-    duration: 800,
-    easing: 'ease-out',
-    reset: true
-  });
 
-  scrollReveal.reveal(
-    `#home .image, #home .text, 
-     #about .title, #about .pp, 
-     #about .container, #about .carrinho,
-     #contact .text, #contact .links,
-     footer .brand, footer .social`,
-    {
-      interval: 100,
-      beforeReveal: el => el.classList.add('reveal')
-    }
-  );
 
 
 
