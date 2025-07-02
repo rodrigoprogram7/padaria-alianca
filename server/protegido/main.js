@@ -195,6 +195,11 @@ function filtrarCategoria(categoriaSelecionada) {
   if (areaProdutos) {
     areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
+    const titulo = document.getElementById('titulo-categoria');
+  if (titulo) {
+    const categoriaNome = categoriaSelecionada.charAt(0).toUpperCase() + categoriaSelecionada.slice(1);
+    titulo.textContent = categoriaNome;
+}
 }
 
 

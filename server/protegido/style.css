@@ -1706,6 +1706,23 @@ nav {
         background-color: #0056b3;
     }
 
+    .categoria-destaque {
+        background-color: var(--base-color);
+        color: white;
+        text-align: center;
+        padding: 2rem 1rem 3rem;
+        position: relative;
+        margin-bottom: -2rem;
+        clip-path: ellipse(100% 100% at 50% 0%);
+        }
+
+        .categoria-destaque h2 {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0;
+        }
+
+
 
     
 /*//////////////////////////////////////////////////////  NAVBAR SUPERIOR  ////////////////////////////////////////////////////////////////////*/
