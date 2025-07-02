@@ -1182,6 +1182,12 @@ footer .social a:hover {
     text-align: right; /* Alinha o subtotal à direita */
     font-weight: bold;
 }
+.subtotal-preview {
+  color: #28a745; /* verde estilo sucesso */
+  font-weight: bold;
+  margin-top: 6px;
+  display: none; /* já está assim por padrão */
+}
 
 .carrinho-acoes {
     display: flex;
