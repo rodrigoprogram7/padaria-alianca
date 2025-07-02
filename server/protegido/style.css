@@ -25,6 +25,13 @@ img {
     vertical-align: middle;
 }
 
+.reveal {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+
 /*======================================== Variáveis ========================================*/
 :root {
     --header-height: 4.5rem;
