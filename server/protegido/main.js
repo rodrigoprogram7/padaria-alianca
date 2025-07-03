@@ -136,7 +136,7 @@ function renderizarCardUnico(prod) {
       <p>R$ ${precoFormatado}</p>
       <div class="quantidade-box">
         <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
-        <input type="number" min="1" value="1" class="quantidade">
+        <input type="number" min="1" value="1" step="1" class="quantidade" data-tipo="${prod.tipo}">
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
@@ -381,9 +381,41 @@ function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
   const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
   let valor = parseInt(input.value) || 1;
-  valor += delta;
-  if (valor < 1) valor = 1;
-  input.value = valor;
+valor += delta;
+if (valor < 1) valor = 1;
+
+input.value = valor;
+
+const tipo = input.getAttribute('data-tipo');
+let subtotal;
+
+if (tipo === 'peso') {
+  const precoPorKg = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
+  const preco100g = precoPorKg / 10;
+  subtotal = preco100g * valor;
+
+  const label = botao.parentElement.querySelector('.quantidade-label');
+  if (label) {
+    label.textContent = `${valor * 100}g`;
+  } else {
+    const span = document.createElement('span');
+    span.classList.add('quantidade-label');
+    span.textContent = `${valor * 100}g`;
+    botao.parentElement.appendChild(span);
+  }
+
+} else {
+  subtotal = parseFloat(botao.closest('.produto').getAttribute('data-preco')) * valor;
+}
+
+if (valor > 1 || tipo === 'peso') {
+  subtotalBox.textContent = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+  subtotalBox.style.display = 'block';
+} else {
+  subtotalBox.textContent = '';
+  subtotalBox.style.display = 'none';
+}
+
 
   const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
 
@@ -414,10 +446,16 @@ try {
 function adicionarAoCarrinho(botao) {
   const card = botao.closest('.produto');
   const nome = card.getAttribute('data-nome');
-  const preco = parseFloat(card.getAttribute('data-preco'));
   const tipo = card.getAttribute('data-tipo') || 'unidade';
-  const quantidade = parseInt(card.querySelector('.quantidade').value) || 1;
   const imagem = card.querySelector('img')?.src || '';
+  const inputQuantidade = card.querySelector('.quantidade');
+  let quantidade = parseInt(inputQuantidade.value) || 1;
+  let preco = parseFloat(card.getAttribute('data-preco'));
+
+  // Ajusta o preço para produtos por peso (100g)
+  if (tipo === 'peso') {
+    preco = preco / 10; // converte de R$/kg para R$/100g
+  }
 
   // Verifica se o item já está no carrinho
   const itemExistente = carrinho.find(item => item.nome === nome);
@@ -428,21 +466,27 @@ function adicionarAoCarrinho(botao) {
     carrinho.push({ nome, preco, quantidade, tipo, imagem });
   }
 
-  // ✅ Salva o carrinho no localStorage
   salvarCarrinho();
-
   atualizarCarrinho();
-  mostrarAlerta(nome, quantidade);
 
-  // Resetar quantidade e subtotal após adicionar
-  const input = card.querySelector('.quantidade');
-  input.value = 1;
+  // Alerta com unidade ou peso
+  const mensagem = tipo === 'peso' 
+    ? `${quantidade * 100}g de ${nome}` 
+    : `${quantidade}x ${nome}`;
+  mostrarAlerta(mensagem);
+
+  // Resetar input e subtotal
+  inputQuantidade.value = 1;
+  const label = card.querySelector('.quantidade-label');
+  if (label) label.textContent = '100g';
+  
   const subtotalBox = card.querySelector('.subtotal-preview');
   if (subtotalBox) {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
   }
 }
+
 
 
 function atualizarCarrinho() {
