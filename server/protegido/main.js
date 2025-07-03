@@ -572,7 +572,8 @@ const scrollReveal = ScrollReveal({
 })
 
 scrollReveal.reveal(
-    `#about .title, #about .pp,
+    `#home .image, #home .text,
+    #about .title, #about .pp,
     #contact .text, #contact .links,
     footer .brand, footer .social`,
     { interval: 100 }
