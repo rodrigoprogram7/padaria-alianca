@@ -136,7 +136,8 @@ function renderizarCardUnico(prod) {
       <p>R$ ${precoFormatado}</p>
       <div class="quantidade-box">
         <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
-        <input type="number" min="1" value="1" class="quantidade">
+        <input type="number" min="1" value="1" class="quantidade" data-tipo="${prod.tipo}">
+
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
@@ -379,23 +380,50 @@ function selecionarProduto(nomeProduto) {
 
 function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
-  const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
-  let valor = parseInt(input.value) || 1;
-  valor += delta;
-  if (valor < 1) valor = 1;
-  input.value = valor;
+  const tipo = input.getAttribute('data-tipo') || 'unidade';
+  const card = botao.closest('.produto');
+  const precoPorKg = parseFloat(card.getAttribute('data-preco'));
+  const subtotalBox = card.querySelector('.subtotal-preview');
 
-  const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
+  let quantidade = parseInt(input.value) || 1;
+  quantidade += delta;
+  if (quantidade < 1) quantidade = 1;
+  input.value = quantidade;
 
-  if (valor > 1) {
-    const subtotal = (valor * preco).toFixed(2).replace('.', ',');
-    subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
+  let subtotal = 0;
+  let quantidadeTexto = `${quantidade} un`;
+
+  if (tipo === 'peso') {
+    const preco100g = precoPorKg / 10; // ✅ divide o preço por 10
+    subtotal = preco100g * quantidade;
+    quantidadeTexto = `${quantidade * 100}g`;
+
+    // Adiciona ou atualiza rótulo de gramas
+    let label = botao.parentElement.querySelector('.quantidade-label');
+    if (!label) {
+      label = document.createElement('span');
+      label.className = 'quantidade-label';
+      botao.parentElement.appendChild(label);
+    }
+    label.textContent = quantidadeTexto;
+
+  } else {
+    subtotal = precoPorKg * quantidade;
+
+    // Remove rótulo se não for peso
+    const label = botao.parentElement.querySelector('.quantidade-label');
+    if (label) label.remove();
+  }
+
+  if (quantidade > 1 || tipo === 'peso') {
+    subtotalBox.textContent = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
     subtotalBox.style.display = 'block';
   } else {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
   }
 }
+
 
 let carrinho = [];
 try {
