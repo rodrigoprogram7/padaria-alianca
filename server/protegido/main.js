@@ -310,21 +310,18 @@ if (inputPesquisa) {
             nomeBuscado = variacao?.nome?.toLowerCase() || prod.variacoes[0]?.nome?.toLowerCase();
           }
 
-          const aplicarScroll = (tentativas = 10) => {
-            if (tentativas <= 0) return;
+         const aplicarScroll = (tentativas = 20) => {
+          const prodEl = [...document.querySelectorAll('.produto')]
+            .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
 
-            const prodEl = [...document.querySelectorAll('.produto')]
-              .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
-
-            if (prodEl) {
-              prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              prodEl.classList.add('highlight');
-              setTimeout(() => prodEl.classList.remove('highlight'), 2000);
-            } else {
-              // tenta novamente após um pequeno atraso
-              setTimeout(() => aplicarScroll(tentativas - 1), 200);
-            }
-          };
+          if (prodEl) {
+            prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            prodEl.classList.add('highlight');
+            setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+          } else if (tentativas > 0) {
+            setTimeout(() => aplicarScroll(tentativas - 1), 100); // tenta de novo em 100ms
+          }
+        };
 
 
           const categoria = prod.categoria?.toLowerCase();
