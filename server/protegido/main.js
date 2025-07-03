@@ -311,24 +311,24 @@ if (inputPesquisa) {
           }
 
          const aplicarScroll = () => {
-          const observer = new MutationObserver(() => {
-            const prodEl = [...document.querySelectorAll('.produto')]
-              .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
+            let tentativas = 20;
 
-            if (prodEl) {
-              observer.disconnect(); // para de observar quando encontrar
-              prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              prodEl.classList.add('highlight');
-              setTimeout(() => prodEl.classList.remove('highlight'), 2000);
-            }
-          });
+            const intervalo = setInterval(() => {
+              const prodEl = [...document.querySelectorAll('.produto')]
+                .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
 
-          // observa mudanças dentro da lista de produtos
-          const lista = document.getElementById('lista-produtos');
-          if (lista) {
-            observer.observe(lista, { childList: true, subtree: true });
-          }
-        };
+              if (prodEl) {
+                clearInterval(intervalo);
+                prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                prodEl.classList.add('highlight');
+                setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+              } else {
+                tentativas--;
+                if (tentativas <= 0) clearInterval(intervalo);
+              }
+            }, 200); // tenta a cada 200ms
+          };
+
 
 
 
