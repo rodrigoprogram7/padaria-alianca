@@ -269,30 +269,46 @@ if (inputPesquisa) {
     }
 
     const encontrados = produtos.filter(prod => {
-      if (prod.nome && prod.nome.toLowerCase().includes(termo)) return true;
+      const nomeProduto = prod.nome?.toLowerCase() || '';
+      if (nomeProduto.includes(termo)) return true;
+
       if (Array.isArray(prod.variacoes)) {
         return prod.variacoes.some(v => v.nome?.toLowerCase().includes(termo));
       }
+
       return false;
     });
-
 
     if (encontrados.length > 0) {
       resultadosPesquisa.style.display = 'block';
 
       encontrados.forEach(prod => {
+        // 🟨 Nome que será exibido na sugestão
+        let nomeExibido = prod.nome;
+        if (!nomeExibido && Array.isArray(prod.variacoes)) {
+          const variacao = prod.variacoes.find(v =>
+            v.nome?.toLowerCase().includes(termo)
+          );
+          nomeExibido = variacao?.nome || prod.variacoes[0]?.nome || 'Produto';
+        }
+
         const li = document.createElement('li');
-        li.textContent = prod.nome;
+        li.textContent = nomeExibido;
 
         li.addEventListener('click', () => {
           inputPesquisa.value = '';
           resultadosPesquisa.style.display = 'none';
 
-          let nomeBuscado = prod.nome?.toLowerCase();
-          if (!nomeBuscado && Array.isArray(prod.variacoes)) {
-            nomeBuscado = prod.variacoes[0]?.nome?.toLowerCase();
+          // 🟨 Nome real para buscar no DOM
+          let nomeBuscado = '';
+          if (prod.nome) {
+            nomeBuscado = prod.nome.toLowerCase();
+          } else if (Array.isArray(prod.variacoes)) {
+            const variacao = prod.variacoes.find(v =>
+              v.nome?.toLowerCase().includes(termo)
+            );
+            nomeBuscado = variacao?.nome?.toLowerCase() || prod.variacoes[0]?.nome?.toLowerCase();
           }
-
 
           const aplicarScroll = () => {
             setTimeout(() => {
@@ -306,9 +322,8 @@ if (inputPesquisa) {
                 prodEl.classList.add('highlight');
                 setTimeout(() => prodEl.classList.remove('highlight'), 2000);
               });
-            }, 300); // Tempo para renderizar os produtos após filtro
+            }, 300);
           };
-
 
           const categoria = prod.categoria?.toLowerCase();
           if (categoria) {
@@ -318,7 +333,7 @@ if (inputPesquisa) {
               requestAnimationFrame(() => {
                 aplicarScroll();
 
-                // 🟨 Scroll da barra de categorias até o botão da categoria
+                // Scroll horizontal da barra de categorias
                 const btnCategoria = document.querySelector(`.filtro-btn[data-categoria="${categoria}"]`);
                 const barraCategorias = document.querySelector('.categorias-navbar');
 
@@ -339,7 +354,6 @@ if (inputPesquisa) {
           } else {
             aplicarScroll();
           }
-
         });
 
         resultadosPesquisa.appendChild(li);
@@ -349,6 +363,7 @@ if (inputPesquisa) {
     }
   });
 }
+
 
 
 
