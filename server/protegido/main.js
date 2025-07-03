@@ -136,7 +136,7 @@ function renderizarCardUnico(prod) {
       <p>R$ ${precoFormatado}</p>
       <div class="quantidade-box">
         <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
-        <input type="number" min="1" value="1" step="1" class="quantidade" data-tipo="${prod.tipo}">
+        <input type="number" min="1" value="1" class="quantidade" data-tipo="${prod.tipo}">
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
@@ -379,42 +379,44 @@ function selecionarProduto(nomeProduto) {
 
 function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
+  const tipo = input.getAttribute('data-tipo') || 'unidade';
   const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
+  const card = botao.closest('.produto');
+  const precoPorKg = parseFloat(card.getAttribute('data-preco'));
+
   let valor = parseInt(input.value) || 1;
-valor += delta;
-if (valor < 1) valor = 1;
+  valor += delta;
+  if (valor < 1) valor = 1;
+  input.value = valor;
 
-input.value = valor;
+  let subtotal = 0;
 
-const tipo = input.getAttribute('data-tipo');
-let subtotal;
+  if (tipo === 'peso') {
+    const preco100g = precoPorKg / 10;
+    subtotal = preco100g * valor;
 
-if (tipo === 'peso') {
-  const precoPorKg = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
-  const preco100g = precoPorKg / 10;
-  subtotal = preco100g * valor;
-
-  const label = botao.parentElement.querySelector('.quantidade-label');
-  if (label) {
+    // Mostra 100g, 200g, 300g...
+    let label = botao.parentElement.querySelector('.quantidade-label');
+    if (!label) {
+      label = document.createElement('span');
+      label.classList.add('quantidade-label');
+      botao.parentElement.appendChild(label);
+    }
     label.textContent = `${valor * 100}g`;
+
   } else {
-    const span = document.createElement('span');
-    span.classList.add('quantidade-label');
-    span.textContent = `${valor * 100}g`;
-    botao.parentElement.appendChild(span);
+    subtotal = precoPorKg * valor;
+    const label = botao.parentElement.querySelector('.quantidade-label');
+    if (label) label.remove(); // remove se existir
   }
 
-} else {
-  subtotal = parseFloat(botao.closest('.produto').getAttribute('data-preco')) * valor;
-}
-
-if (valor > 1 || tipo === 'peso') {
-  subtotalBox.textContent = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-  subtotalBox.style.display = 'block';
-} else {
-  subtotalBox.textContent = '';
-  subtotalBox.style.display = 'none';
-}
+  if (valor > 1 || tipo === 'peso') {
+    subtotalBox.textContent = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+    subtotalBox.style.display = 'block';
+  } else {
+    subtotalBox.textContent = '';
+    subtotalBox.style.display = 'none';
+  }
 
 
   const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
