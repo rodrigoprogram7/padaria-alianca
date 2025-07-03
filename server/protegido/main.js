@@ -60,6 +60,43 @@ function toggleHeaderScroll() {
   }
 }
 
+let jaDeslizouCategorias = false;
+
+function toggleHeaderScroll() {
+  const header = document.querySelector('#header');
+  const divider = document.querySelector('.divider-1');
+  const carrinho = document.querySelector('.carrinho');
+  const categoriasBar = document.querySelector('.categorias-navbar');
+
+  if (!header || !divider || !carrinho || !categoriasBar) return;
+
+  const scrollY = window.scrollY;
+  const dividerTop = divider.offsetTop;
+  const carrinhoTop = carrinho.offsetTop;
+
+  if (scrollY < dividerTop) {
+    header.classList.remove('scroll');
+  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 200) {
+    header.classList.add('scroll');
+
+    if (!jaDeslizouCategorias) {
+      jaDeslizouCategorias = true;
+
+      setTimeout(() => {
+        categoriasBar.scrollTo({ left: categoriasBar.scrollWidth, behavior: 'smooth' });
+
+        setTimeout(() => {
+          categoriasBar.scrollTo({ left: 0, behavior: 'smooth' });
+        }, 500); // Espera meio segundo antes de voltar
+      }, 300); // Espera navbar terminar de expandir
+    }
+
+  } else if (scrollY >= carrinhoTop - 200) {
+    header.classList.remove('scroll');
+  }
+}
+
+
 
 function ActivateMenuAtCurrentSection() {
   const sections = document.querySelectorAll('section[id]');
