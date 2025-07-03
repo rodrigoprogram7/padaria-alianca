@@ -378,51 +378,49 @@ function selecionarProduto(nomeProduto) {
 
 
 
-function alterarQuantidade(botao, delta) {
-  const input = botao.parentElement.querySelector('.quantidade');
-  const tipo = input.getAttribute('data-tipo') || 'unidade';
+function adicionarAoCarrinho(botao) {
   const card = botao.closest('.produto');
-  const precoPorKg = parseFloat(card.getAttribute('data-preco'));
-  const subtotalBox = card.querySelector('.subtotal-preview');
+  const nome = card.getAttribute('data-nome');
+  const tipo = card.getAttribute('data-tipo') || 'unidade';
+  const imagem = card.querySelector('img')?.src || '';
+  const inputQuantidade = card.querySelector('.quantidade');
+  let quantidade = parseInt(inputQuantidade.value) || 1;
+  let preco = parseFloat(card.getAttribute('data-preco'));
 
-  let quantidade = parseInt(input.value) || 1;
-  quantidade += delta;
-  if (quantidade < 1) quantidade = 1;
-  input.value = quantidade;
-
-  let subtotal = 0;
-  let quantidadeTexto = `${quantidade} un`;
-
+  // ✅ Se for tipo "peso", ajusta o preço unitário para 100g
   if (tipo === 'peso') {
-    const preco100g = precoPorKg / 10; // ✅ divide o preço por 10
-    subtotal = preco100g * quantidade;
-    quantidadeTexto = `${quantidade * 100}g`;
-
-    // Adiciona ou atualiza rótulo de gramas
-    let label = botao.parentElement.querySelector('.quantidade-label');
-    if (!label) {
-      label = document.createElement('span');
-      label.className = 'quantidade-label';
-      botao.parentElement.appendChild(label);
-    }
-    label.textContent = quantidadeTexto;
-
-  } else {
-    subtotal = precoPorKg * quantidade;
-
-    // Remove rótulo se não for peso
-    const label = botao.parentElement.querySelector('.quantidade-label');
-    if (label) label.remove();
+    preco = preco / 10; // converte R$/kg para R$/100g
   }
 
-  if (quantidade > 1 || tipo === 'peso') {
-    subtotalBox.textContent = `Subtotal: R$ ${subtotal.toFixed(2).replace('.', ',')}`;
-    subtotalBox.style.display = 'block';
+  // Verifica se o item já está no carrinho
+  const itemExistente = carrinho.find(item => item.nome === nome);
+
+  if (itemExistente) {
+    itemExistente.quantidade += quantidade;
   } else {
+    carrinho.push({ nome, preco, quantidade, tipo, imagem });
+  }
+
+  salvarCarrinho();
+  atualizarCarrinho();
+
+  const mensagem = tipo === 'peso'
+    ? `${quantidade * 100}g de ${nome}`
+    : `${quantidade}x ${nome}`;
+  mostrarAlerta(mensagem);
+
+  // Resetar input e subtotal
+  inputQuantidade.value = 1;
+  const label = card.querySelector('.quantidade-label');
+  if (label) label.textContent = '100g';
+
+  const subtotalBox = card.querySelector('.subtotal-preview');
+  if (subtotalBox) {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
   }
 }
+
 
 
 let carrinho = [];
