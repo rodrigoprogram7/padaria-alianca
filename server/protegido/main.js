@@ -136,8 +136,7 @@ function renderizarCardUnico(prod) {
       <p>R$ ${precoFormatado}</p>
       <div class="quantidade-box">
         <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
-        <input type="number" min="1" value="1" class="quantidade" data-tipo="${prod.tipo}">
-
+        <input type="number" min="1" value="1" class="quantidade">
         <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
       </div>
       <div class="subtotal-preview"></div>
@@ -378,50 +377,25 @@ function selecionarProduto(nomeProduto) {
 
 
 
-function adicionarAoCarrinho(botao) {
-  const card = botao.closest('.produto');
-  const nome = card.getAttribute('data-nome');
-  const tipo = card.getAttribute('data-tipo') || 'unidade';
-  const imagem = card.querySelector('img')?.src || '';
-  const inputQuantidade = card.querySelector('.quantidade');
-  let quantidade = parseInt(inputQuantidade.value) || 1;
-  let preco = parseFloat(card.getAttribute('data-preco'));
+function alterarQuantidade(botao, delta) {
+  const input = botao.parentElement.querySelector('.quantidade');
+  const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
+  let valor = parseInt(input.value) || 1;
+  valor += delta;
+  if (valor < 1) valor = 1;
+  input.value = valor;
 
-  // ✅ Se for tipo "peso", ajusta o preço unitário para 100g
-  if (tipo === 'peso') {
-    preco = preco / 10; // converte R$/kg para R$/100g
-  }
+  const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
 
-  // Verifica se o item já está no carrinho
-  const itemExistente = carrinho.find(item => item.nome === nome);
-
-  if (itemExistente) {
-    itemExistente.quantidade += quantidade;
+  if (valor > 1) {
+    const subtotal = (valor * preco).toFixed(2).replace('.', ',');
+    subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
+    subtotalBox.style.display = 'block';
   } else {
-    carrinho.push({ nome, preco, quantidade, tipo, imagem });
-  }
-
-  salvarCarrinho();
-  atualizarCarrinho();
-
-  const mensagem = tipo === 'peso'
-    ? `${quantidade * 100}g de ${nome}`
-    : `${quantidade}x ${nome}`;
-  mostrarAlerta(mensagem);
-
-  // Resetar input e subtotal
-  inputQuantidade.value = 1;
-  const label = card.querySelector('.quantidade-label');
-  if (label) label.textContent = '100g';
-
-  const subtotalBox = card.querySelector('.subtotal-preview');
-  if (subtotalBox) {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
   }
 }
-
-
 
 let carrinho = [];
 try {
