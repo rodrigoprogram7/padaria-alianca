@@ -268,9 +268,14 @@ if (inputPesquisa) {
       return;
     }
 
-    const encontrados = produtos.filter(prod =>
-      (prod.nome || '').toLowerCase().includes(termo)
-    );
+    const encontrados = produtos.filter(prod => {
+      if (prod.nome && prod.nome.toLowerCase().includes(termo)) return true;
+      if (Array.isArray(prod.variacoes)) {
+        return prod.variacoes.some(v => v.nome?.toLowerCase().includes(termo));
+      }
+      return false;
+    });
+
 
     if (encontrados.length > 0) {
       resultadosPesquisa.style.display = 'block';
@@ -283,7 +288,11 @@ if (inputPesquisa) {
           inputPesquisa.value = '';
           resultadosPesquisa.style.display = 'none';
 
-          const nomeBuscado = prod.nome.toLowerCase();
+          let nomeBuscado = prod.nome?.toLowerCase();
+          if (!nomeBuscado && Array.isArray(prod.variacoes)) {
+            nomeBuscado = prod.variacoes[0]?.nome?.toLowerCase();
+          }
+
 
           const aplicarScroll = () => {
             setTimeout(() => {
