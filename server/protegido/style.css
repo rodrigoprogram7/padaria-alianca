@@ -54,6 +54,10 @@ img {
 html {
     scroll-behavior: smooth;
 }
+html, body {
+  height: auto;
+  overflow: auto;
+}
 
 body {
     font: 400 1rem var(--body-font);

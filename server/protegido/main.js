@@ -311,23 +311,33 @@ if (inputPesquisa) {
           }
 
          const aplicarScroll = () => {
-            let tentativas = 20;
+          const tentarScroll = () => {
+            const produtosDOM = document.querySelectorAll('.produto');
+            const alvo = [...produtosDOM].find(el =>
+              el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
+            );
 
-            const intervalo = setInterval(() => {
-              const prodEl = [...document.querySelectorAll('.produto')]
-                .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
+            if (alvo) {
+              const y = alvo.getBoundingClientRect().top + window.scrollY - 100; // -100 para deixar com margem no topo
+              window.scrollTo({ top: y, behavior: 'smooth' });
 
-              if (prodEl) {
-                clearInterval(intervalo);
-                prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                prodEl.classList.add('highlight');
-                setTimeout(() => prodEl.classList.remove('highlight'), 2000);
-              } else {
-                tentativas--;
-                if (tentativas <= 0) clearInterval(intervalo);
-              }
-            }, 200); // tenta a cada 200ms
+              alvo.classList.add('highlight');
+              setTimeout(() => alvo.classList.remove('highlight'), 2000);
+              return true;
+            }
+            return false;
           };
+
+          let tentativas = 0;
+          const intervalo = setInterval(() => {
+            tentativas++;
+            const encontrou = tentarScroll();
+            if (encontrou || tentativas >= 20) {
+              clearInterval(intervalo);
+            }
+          }, 200); // tenta 20x em até 4 segundos
+        };
+
 
 
 
