@@ -310,18 +310,26 @@ if (inputPesquisa) {
             nomeBuscado = variacao?.nome?.toLowerCase() || prod.variacoes[0]?.nome?.toLowerCase();
           }
 
-         const aplicarScroll = (tentativas = 20) => {
-          const prodEl = [...document.querySelectorAll('.produto')]
-            .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
+         const aplicarScroll = () => {
+          const observer = new MutationObserver(() => {
+            const prodEl = [...document.querySelectorAll('.produto')]
+              .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
 
-          if (prodEl) {
-            prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            prodEl.classList.add('highlight');
-            setTimeout(() => prodEl.classList.remove('highlight'), 2000);
-          } else if (tentativas > 0) {
-            setTimeout(() => aplicarScroll(tentativas - 1), 100); // tenta de novo em 100ms
+            if (prodEl) {
+              observer.disconnect(); // para de observar quando encontrar
+              prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              prodEl.classList.add('highlight');
+              setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+            }
+          });
+
+          // observa mudanças dentro da lista de produtos
+          const lista = document.getElementById('lista-produtos');
+          if (lista) {
+            observer.observe(lista, { childList: true, subtree: true });
           }
         };
+
 
 
           const categoria = prod.categoria?.toLowerCase();
