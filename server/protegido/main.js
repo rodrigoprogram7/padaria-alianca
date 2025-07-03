@@ -318,7 +318,7 @@ if (inputPesquisa) {
             );
 
             if (alvo) {
-              const y = alvo.getBoundingClientRect().top + window.scrollY - 100; // -100 para deixar com margem no topo
+              const y = alvo.getBoundingClientRect().top + window.scrollY - 250; // -250 para deixar com margem no topo
               window.scrollTo({ top: y, behavior: 'smooth' });
 
               alvo.classList.add('highlight');

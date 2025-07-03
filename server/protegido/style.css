@@ -2146,7 +2146,7 @@ nav {
 
 
 .produto.highlight {
-  outline: 3px solid #ff6600;
+  outline: 3px solid var(--base-color);
   border-radius: 6px;
   transition: outline 0.3s ease;
 }
