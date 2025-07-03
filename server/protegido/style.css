@@ -1252,6 +1252,9 @@ footer .social a:hover {
     font-weight: bold; /* Para os ícones de + e - */
     color: #555;
 }
+.bbb{
+    color: #e6e6e6;
+}
 
 .btt {
     width: 20px;
