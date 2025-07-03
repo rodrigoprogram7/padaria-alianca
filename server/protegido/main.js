@@ -310,20 +310,22 @@ if (inputPesquisa) {
             nomeBuscado = variacao?.nome?.toLowerCase() || prod.variacoes[0]?.nome?.toLowerCase();
           }
 
-          const aplicarScroll = () => {
-            setTimeout(() => {
-              requestAnimationFrame(() => {
-                const prodEl = [...document.querySelectorAll('.produto')]
-                  .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
+          const aplicarScroll = (tentativas = 10) => {
+            if (tentativas <= 0) return;
 
-                if (!prodEl) return;
+            const prodEl = [...document.querySelectorAll('.produto')]
+              .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
 
-                prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                prodEl.classList.add('highlight');
-                setTimeout(() => prodEl.classList.remove('highlight'), 2000);
-              });
-            }, 300);
+            if (prodEl) {
+              prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              prodEl.classList.add('highlight');
+              setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+            } else {
+              // tenta novamente após um pequeno atraso
+              setTimeout(() => aplicarScroll(tentativas - 1), 200);
+            }
           };
+
 
           const categoria = prod.categoria?.toLowerCase();
           if (categoria) {
