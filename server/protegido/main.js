@@ -303,18 +303,34 @@ if (inputPesquisa) {
 
           const categoria = prod.categoria?.toLowerCase();
           if (categoria) {
-            // ✅ Chama o filtro da categoria
             filtrarCategoria(categoria);
 
-            // ✅ Espera o DOM renderizar antes de fazer scroll
-            requestAnimationFrame(() => {
+            setTimeout(() => {
               requestAnimationFrame(() => {
                 aplicarScroll();
+
+                // 🟨 Scroll da barra de categorias até o botão da categoria
+                const btnCategoria = document.querySelector(`.filtro-btn[data-categoria="${categoria}"]`);
+                const barraCategorias = document.querySelector('.categorias-navbar');
+
+                if (btnCategoria && barraCategorias) {
+                  const btnLeft = btnCategoria.offsetLeft;
+                  const btnWidth = btnCategoria.offsetWidth;
+                  const barraWidth = barraCategorias.offsetWidth;
+
+                  const scrollTo = btnLeft - (barraWidth / 2) + (btnWidth / 2);
+
+                  barraCategorias.scrollTo({
+                    left: scrollTo,
+                    behavior: 'smooth'
+                  });
+                }
               });
-            });
+            }, 300);
           } else {
-            aplicarScroll(); // sem categoria definida
+            aplicarScroll();
           }
+
         });
 
         resultadosPesquisa.appendChild(li);
