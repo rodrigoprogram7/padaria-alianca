@@ -537,7 +537,7 @@ function mostrarAlerta(mensagem) {
  alerta.innerHTML = `
   <div class="alerta-nome">${mensagem}</div>
   <hr class="alerta-linha">
-  <div class="alerta-sucesso">Adicionado ao carrinho!</div>
+  <div class="alerta-sucesso">Adicionado ao carrinho!✅</div>
 `;
   alerta.classList.add('show');
   setTimeout(() => alerta.classList.add('hide'), 500);
