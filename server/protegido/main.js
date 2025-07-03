@@ -286,15 +286,20 @@ if (inputPesquisa) {
           const nomeBuscado = prod.nome.toLowerCase();
 
           const aplicarScroll = () => {
-            const prodEl = [...document.querySelectorAll('.produto')]
-              .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
+            setTimeout(() => {
+              requestAnimationFrame(() => {
+                const prodEl = [...document.querySelectorAll('.produto')]
+                  .find(el => el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado);
 
-            if (!prodEl) return;
+                if (!prodEl) return;
 
-            prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            prodEl.classList.add('highlight');
-            setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+                prodEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                prodEl.classList.add('highlight');
+                setTimeout(() => prodEl.classList.remove('highlight'), 2000);
+              });
+            }, 300); // Tempo para renderizar os produtos após filtro
           };
+
 
           const categoria = prod.categoria?.toLowerCase();
           if (categoria) {
@@ -765,51 +770,6 @@ const sections = document.querySelectorAll("section[id]");
       this.classList.add("active");
     });
   });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
