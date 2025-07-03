@@ -130,19 +130,19 @@ function renderizarCardUnico(prod) {
   card.setAttribute('data-tipo', prod.tipo || 'unidade');
 
   card.innerHTML = `
-    <img src="${imagem}" alt="${prod.nome}">
-    <div class="produto-info">
-      <h3>${prod.nome}</h3>
-      <p>R$ ${precoFormatado}</p>
-      <div class="quantidade-box">
-        <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
-        <input type="number" min="1" value="1" class="quantidade" data-tipo="${prod.tipo}">
-        <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
-      </div>
-      <div class="subtotal-preview"></div>
-      <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+  <img src="${imagem}" alt="${prod.nome}">
+  <div class="produto-info">
+    <h3>${prod.nome}</h3>
+    <p>R$ ${precoFormatado}</p>
+    <div class="quantidade-box">
+      <button class="btt2" onclick="alterarQuantidade(this, -1)">−</button>
+      <input type="number" min="1" value="1" class="quantidade" data-tipo="${prod.tipo}">
+      <button class="btt2" onclick="alterarQuantidade(this, 1)">+</button>
     </div>
-  `;
+    <div class="subtotal-preview"></div>
+    <button id="bt" type="button" class="btn btn-primary" onclick="adicionarAoCarrinho(this)">Adicionar</button>
+  </div>
+`;
 
   return card;
 }
@@ -380,9 +380,9 @@ function selecionarProduto(nomeProduto) {
 function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
   const tipo = input.getAttribute('data-tipo') || 'unidade';
-  const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
   const card = botao.closest('.produto');
   const precoPorKg = parseFloat(card.getAttribute('data-preco'));
+  const subtotalBox = card.querySelector('.subtotal-preview');
 
   let valor = parseInt(input.value) || 1;
   valor += delta;
@@ -395,7 +395,7 @@ function alterarQuantidade(botao, delta) {
     const preco100g = precoPorKg / 10;
     subtotal = preco100g * valor;
 
-    // Mostra 100g, 200g, 300g...
+    // Mostrar "100g", "200g", etc
     let label = botao.parentElement.querySelector('.quantidade-label');
     if (!label) {
       label = document.createElement('span');
@@ -407,7 +407,7 @@ function alterarQuantidade(botao, delta) {
   } else {
     subtotal = precoPorKg * valor;
     const label = botao.parentElement.querySelector('.quantidade-label');
-    if (label) label.remove(); // remove se existir
+    if (label) label.remove(); // limpa rótulo se não for peso
   }
 
   if (valor > 1 || tipo === 'peso') {
@@ -417,6 +417,8 @@ function alterarQuantidade(botao, delta) {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
   }
+
+
 
 
   const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
