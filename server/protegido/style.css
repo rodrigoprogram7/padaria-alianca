@@ -2183,13 +2183,19 @@ nav {
       }
     }
 
-    #contact {
-  margin-top: -80px; /* Ajuste o valor conforme o quanto deseja sobrepor */
+#contact {
+  margin-top: -60px; /* padrão para desktop */
   position: relative;
-  z-index: 1; /* Garante que fique acima das imagens */
+  z-index: 1;
 }
+.image-row {
+  margin-bottom: -20px; /* opcional se precisar aproximar ainda mais */
+}
+
+
 @media (max-width: 768px) {
   #contact {
-    margin-top: -40px;
+    margin-top: -120px; /* sobe mais no mobile */
   }
 }
+
