@@ -2219,6 +2219,7 @@ nav {
 @media (max-width: 768px) {
   .imagem-final-decorativa {
     height: auto; /* deixa a altura natural no mobile */
+    max-height: 250px;
   }
 
   .imagem-final-decorativa img {
