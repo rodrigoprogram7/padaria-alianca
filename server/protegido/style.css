@@ -2157,16 +2157,28 @@ nav {
       justify-content: space-between;
       align-items: center;
       margin-top: 5px;
-      gap: 10px;
+      gap: 10px; /* espaçamento padrão */
       flex-wrap: nowrap; /* não deixa quebrar linha */
       overflow-x: auto; /* permite rolagem horizontal se necessário */
     }
 
     .image-row img {
-      width: 440px; /* largura menor */
+      width: 140px;
       height: auto;
-      max-height: 250px; /* limita altura para não ficar gigante */
+      max-height: 250px;
       border-radius: 4px;
-      flex-shrink: 0; /* impede encolher demais */
+      flex-shrink: 0;
       background-color: transparent;
+    }
+
+    /* Mobile: gap menor e largura menor para as imagens */
+    @media (max-width: 600px) {
+      .image-row {
+        gap: 4px; /* quase encostadas */
+      }
+
+      .image-row img {
+        width: 48vw; /* cada imagem ocupa quase metade da tela */
+        max-height: none; /* deixa altura automática */
+      }
     }
