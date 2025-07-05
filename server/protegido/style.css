@@ -2216,12 +2216,12 @@ nav {
 
 @media (max-width: 768px) {
   .imagem-final-decorativa {
-    height: auto; /* deixa a altura natural no mobile */
+    height: 200px; /* deixa a altura natural no mobile */
   }
 
   .imagem-final-decorativa img {
     width: 100%;
-    height: auto;
+    height: 200px;
     object-fit: contain; /* mostra toda a imagem */
   }
 }
