@@ -2163,7 +2163,7 @@ nav {
     .image-row img {
       width: 300px;
       height: 500px;
-      background-color: #f0f0f0;
+    background-color: var(--body-color);
       object-fit: cover;
       border-radius: 4px;
     }
