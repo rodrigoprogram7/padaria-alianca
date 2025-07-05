@@ -2180,6 +2180,7 @@ nav {
       .image-row img {
         width: 48vw; /* cada imagem ocupa quase metade da tela */
         max-height: none; /* deixa altura automática */
+        opacity: 0.4; /* 🔧 valor entre 0 (invisível) e 1 (totalmente visível) */
       }
     }
 
@@ -2211,6 +2212,7 @@ nav {
   display: block;
   object-fit: contain;
   max-height: 80px; /* Altura controlada para desktop e tablets */
+  opacity: 0.4; /* 🔧 valor entre 0 (invisível) e 1 (totalmente visível) */
 }
 
 /* ✅ Ajuste ainda mais fino para mobile */
