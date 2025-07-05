@@ -2195,7 +2195,28 @@ nav {
 
 @media (max-width: 768px) {
   #contact {
-    margin-top: -200px; /* sobe mais no mobile */
+    margin-top: -160px; /* sobe mais no mobile */
   }
 }
+
+.imagem-final-decorativa {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0; /* remove espaço branco abaixo da imagem */
+}
+
+.imagem-final-decorativa img {
+  width: 100%;
+  height: auto;
+  max-height: 100px; /* altura controlada */
+  object-fit: cover;
+  display: block;
+  background-color: transparent;
+}
+@media (max-width: 768px) {
+  .imagem-final-decorativa img {
+    max-height: 70px;
+  }
+}
+
 
