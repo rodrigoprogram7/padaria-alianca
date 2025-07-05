@@ -2163,7 +2163,7 @@ nav {
 }
 
 .image-row img {
-  width: 45vw; /* cada imagem ocupa 45% da largura da tela */
+  width: 40px; /* cada imagem ocupa 45% da largura da tela */
   height: auto;
   max-width: 300px; /* limite máximo para desktop */
   border-radius: 4px;
