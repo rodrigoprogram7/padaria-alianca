@@ -2163,7 +2163,7 @@ nav {
     }
 
     .image-row img {
-      width: 140px; /* largura menor */
+      width: 240px; /* largura menor */
       height: auto;
       max-height: 250px; /* limita altura para não ficar gigante */
       border-radius: 4px;
