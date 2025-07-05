@@ -2195,7 +2195,7 @@ nav {
 
 @media (max-width: 768px) {
   #contact {
-    margin-top: -160px; /* sobe mais no mobile */
+    margin-top: -200px; /* sobe mais no mobile */
   }
 }
 
