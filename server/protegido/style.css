@@ -2154,8 +2154,6 @@ nav {
 
 .image-row {
       display: flex;
-      position: relative; /* contexto para z-index */
-      z-index: 1; 
       justify-content: space-between;
       align-items: center;
       margin-top: 5px;
@@ -2172,14 +2170,6 @@ nav {
       flex-shrink: 0;
       background-color: transparent;
     }
-    #contact {
-        position: relative;  /* permite z-index funcionar */
-        z-index: 10;         /* fica na frente da image-row */
-        margin-top: -120px;  /* sobe para sobrepor a image-row, ajuste conforme quiser */
-        background-color: rgba(255, 255, 255, 0.95); /* opcional: fundo semitransparente para destacar */
-        padding: 2rem;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1); /* deixa mais visível que está sobreposto */
-}
 
     /* Mobile: gap menor e largura menor para as imagens */
     @media (max-width: 600px) {
