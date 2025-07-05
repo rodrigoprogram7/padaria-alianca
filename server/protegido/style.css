@@ -2165,7 +2165,7 @@ nav {
     .image-row img {
       width: 140px;
       height: auto;
-      max-height: 250px;
+      max-height: 400px;
       border-radius: 4px;
       flex-shrink: 0;
       background-color: transparent;
