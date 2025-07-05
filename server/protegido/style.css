@@ -2218,7 +2218,7 @@ nav {
 /* ✅ Ajuste ainda mais fino para mobile */
 @media (max-width: 768px) {
   .imagem-final-decorativa img {
-    max-height: 20px; /* Menor ainda no mobile */
+    max-height: 40px; /* Menor ainda no mobile */
   }
 }
 
