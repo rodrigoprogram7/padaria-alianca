@@ -2150,3 +2150,34 @@ nav {
   border-radius: 6px;
   transition: outline 0.3s ease;
 }
+
+
+.image-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 5px; /* distância abaixo do divider */
+      gap: 10px; /* espaçamento entre imagens */
+    }
+
+    .image-row img {
+      width: 300px;
+      height: 500px;
+      background-color: #f0f0f0;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    /* Media query para telas pequenas (mobile) */
+    @media (max-width: 600px) {
+      .image-row {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .image-row img {
+        width: 90vw; /* ocupa 90% da largura da tela */
+        height: auto; /* altura automática para manter proporção */
+        margin-bottom: 15px;
+      }
+    }
