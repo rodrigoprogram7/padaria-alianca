@@ -262,9 +262,7 @@ body {
     padding-top: 0;
     padding-bottom: 0;
     max-height: 0;
-     overflow: visible; /* antes era hidden */
     overflow: hidden;
-     
 }
 
 .nav-central {
@@ -515,13 +513,10 @@ nav.show .toggle.icon-close::before {
 /*======================================== Resultados da pesquisa ========================================*/
 .barra-pesquisa {
   position: relative;
-  z-index: 1001; /* para garantir que fique acima do nav */
 }
-
 
 #resultados-pesquisa {
   position: absolute;
-    z-index: 1100;
   top: 100%;
   left: 0;
   width: 100%;
@@ -531,7 +526,7 @@ nav.show .toggle.icon-close::before {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-
+  z-index: 1000;
   display: none;
   list-style: none;
   margin: 0;
@@ -2187,3 +2182,40 @@ nav {
 
 
 
+
+/* ======== Correção para permitir sugestões fora do navbar ======== */
+
+#header,
+nav.container,
+.nav-central,
+.barra-pesquisa {
+  overflow: visible !important;
+}
+
+.nav-central {
+  max-height: none !important;
+  overflow: visible !important;
+}
+
+.barra-pesquisa {
+  position: relative;
+  z-index: 1001;
+}
+
+#resultados-pesquisa {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 9999;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
