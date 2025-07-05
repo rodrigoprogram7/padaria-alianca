@@ -2152,34 +2152,21 @@ nav {
 }
 
 
-      .image-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 5px;
-  flex-wrap: nowrap; /* evita quebra de linha */
-  gap: 10px;
-  overflow-x: auto; /* permite rolar horizontalmente se não couber */
-}
+.image-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 5px;
+      gap: 10px;
+      flex-wrap: nowrap; /* não deixa quebrar linha */
+      overflow-x: auto; /* permite rolagem horizontal se necessário */
+    }
 
-.image-row img {
-  width: 40px; /* cada imagem ocupa 45% da largura da tela */
-  height: 40px;
-  max-width: 300px; /* limite máximo para desktop */
-  border-radius: 4px;
-}
-
-
-    /* Media query para telas pequenas (mobile) */
-    @media (max-width: 600px) {
-      .image-row {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .image-row img {
-        width: 40px; /* ocupa 90% da largura da tela */
-        height: 40px; /* altura automática para manter proporção */
-        margin-bottom: 15px;
-      }
+    .image-row img {
+      width: 140px; /* largura menor */
+      height: auto;
+      max-height: 250px; /* limita altura para não ficar gigante */
+      border-radius: 4px;
+      flex-shrink: 0; /* impede encolher demais */
+      background-color: transparent;
     }
