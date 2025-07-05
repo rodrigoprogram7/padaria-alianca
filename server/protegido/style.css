@@ -2152,21 +2152,23 @@ nav {
 }
 
 
-.image-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 5px; /* distância abaixo do divider */
-      gap: 10px; /* espaçamento entre imagens */
-    }
+      .image-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5px;
+  flex-wrap: nowrap; /* evita quebra de linha */
+  gap: 10px;
+  overflow-x: auto; /* permite rolar horizontalmente se não couber */
+}
 
-    .image-row img {
-      width: 300px;
-      height: 500px;
-    background-color: var(--body-color);
-      object-fit: cover;
-      border-radius: 4px;
-    }
+.image-row img {
+  width: 45vw; /* cada imagem ocupa 45% da largura da tela */
+  height: auto;
+  max-width: 300px; /* limite máximo para desktop */
+  border-radius: 4px;
+}
+
 
     /* Media query para telas pequenas (mobile) */
     @media (max-width: 600px) {
