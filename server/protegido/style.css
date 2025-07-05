@@ -2182,3 +2182,14 @@ nav {
         max-height: none; /* deixa altura automática */
       }
     }
+
+    #contact {
+  margin-top: -80px; /* Ajuste o valor conforme o quanto deseja sobrepor */
+  position: relative;
+  z-index: 1; /* Garante que fique acima das imagens */
+}
+@media (max-width: 768px) {
+  #contact {
+    margin-top: -40px;
+  }
+}
