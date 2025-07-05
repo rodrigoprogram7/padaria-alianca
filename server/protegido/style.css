@@ -2182,4 +2182,16 @@ nav {
 
 
 
+.nav-central {
+  overflow: visible; /* antes era hidden */
+}
+
+.barra-pesquisa {
+  position: relative;
+  z-index: 1001; /* para garantir que fique acima do nav */
+}
+
+#resultados-pesquisa {
+  z-index: 1100; /* garantir prioridade */
+}
 
