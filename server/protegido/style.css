@@ -2208,11 +2208,13 @@ nav {
 .imagem-final-decorativa img {
   width: 100%;
   height: auto;
-  max-height: 100px; /* altura controlada */
-  object-fit: cover;
+  max-height: 120px;
+  object-fit: contain; /* ✅ mostra a imagem por completo */
   display: block;
   background-color: transparent;
+  margin-top: -4px; /* remove possível espaçamento indesejado */
 }
+
 @media (max-width: 768px) {
   .imagem-final-decorativa img {
     max-height: 70px;
