@@ -2183,39 +2183,160 @@ nav {
 
 
 
-/* ======== Correção para permitir sugestões fora do navbar ======== */
 
-#header,
-nav.container,
-.nav-central,
-.barra-pesquisa {
-  overflow: visible !important;
-}
 
-.nav-central {
-  max-height: none !important;
-  overflow: visible !important;
-}
 
-.barra-pesquisa {
-  position: relative;
-  z-index: 1001;
-}
 
-#resultados-pesquisa {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 300px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 9999;
-  display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
+
+
+
+        :root {
+            --hue: 35; /* Tom quente para padaria */
+            --base-color-alt: hsl(var(--hue) 57% 53%); /* Cor principal para a linha */
+            --base-color-second: hsl(var(--hue) 65% 88%); /* Cor mais clara para o gradiente da linha */
+        }
+
+
+        /* Contêiner auxiliar para posicionar a linha e as imagens */
+        .decorative-element-wrapper {
+            position: relative; /* **Essencial** para posicionar a linha e as imagens */
+            width: 100%;
+            height: 100px; /* Altura do espaço ocupado pela linha e imagens */
+            margin: 60px 0; /* Margem acima e abaixo do grupo de elementos */
+            overflow: hidden; /* Garante que elementos fora da área não apareçam */
+        }
+
+        /* Estilo da Linha Central */
+        .divider-1 { 
+            position: absolute;
+            top: 50%; /* Centraliza verticalmente */
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(
+                270deg, 
+                hsla(var(--hue), 36%, 57%, 1), /* Cor mais forte */
+                hsla(var(--hue), 65%, 88%, 0.34) /* Cor mais clara com transparência */
+            );
+            z-index: 1; /* Fica abaixo das imagens */
+            transform: translateY(-50%); /* Ajuste para centralização perfeita */
+        }
+
+        /* Estilo base dos ícones decorativos */
+        .divider-icon {
+            position: absolute;
+            z-index: 2; /* Fica acima da linha */
+            opacity: 0.9;
+            pointer-events: none; /* Não interfere com cliques */
+            object-fit: contain;
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        /* Classes para Tamanhos dos Ícones */
+        .tiny { width: 20px; height: 20px; } 
+        .small { width: 30px; height: 30px; }
+        .medium { width: 40px; height: 40px; }
+        .large { width: 50px; height: 50px; }
+
+        /* Classes para Rotações (Inclinações) dos Ícones */
+        .rotate-5 { transform: rotate(5deg); }
+        .rotate-10 { transform: rotate(10deg); }
+        .rotate-15 { transform: rotate(15deg); }
+        .rotate-20 { transform: rotate(20deg); }
+        .rotate-25 { transform: rotate(25deg); }
+        .rotate--5 { transform: rotate(-5deg); }
+        .rotate--10 { transform: rotate(-10deg); }
+        .rotate--15 { transform: rotate(-15deg); }
+        .rotate--20 { transform: rotate(-20deg); }
+
+        /* Posições dos Ícones (Desktop First) */
+        /* Mantemos as posições originais para desktop */
+        .icon-pos-1 { top: 15px; left: 2%; }
+        .icon-pos-2 { top: 25px; left: 12%; }
+        .icon-pos-3 { bottom: 15px; left: 22%; }
+        .icon-pos-4 { top: 35px; left: 32%; }
+        .icon-pos-5 { bottom: 20px; left: 42%; }
+        .icon-pos-6 { top: 18px; left: 52%; transform: translateX(-50%) rotate(5deg); } 
+        .icon-pos-7 { bottom: 18px; left: 62%; }
+        .icon-pos-8 { top: 30px; left: 72%; }
+        .icon-pos-9 { bottom: 12px; left: 82%; }
+        .icon-pos-10 { top: 22px; left: 92%; }
+
+        /* Responsividade para Telas Menores (Mobile) */
+        @media (max-width: 768px) { 
+            .decorative-element-wrapper {
+                height: 80px; /* Reduz a altura do espaço do divisor em mobile */
+                margin: 40px 0; 
+            }
+
+            .divider-icon {
+                /* Reduz o tamanho padrão de todos os ícones em mobile */
+                transform: scale(0.6); 
+                opacity: 0.7; 
+            }
+
+            /* Reposicionamento e ajuste de escala mais alternados para o mobile */
+            /* Cada imagem agora tem sua posição e escala ajustadas individualmente para evitar aglomeração */
+
+            .icon-pos-1 { 
+                top: 5px; 
+                left: 2%; 
+                transform: scale(0.5) rotate(var(--rotate-angle, -10deg)); 
+            }
+            .icon-pos-2 { 
+                top: 25px; 
+                left: 14%; 
+                transform: scale(0.6) rotate(var(--rotate-angle, 15deg)); 
+            }
+            .icon-pos-3 { 
+                bottom: 5px; 
+                left: 28%; 
+                transform: scale(0.55) rotate(var(--rotate-angle, -5deg)); 
+            }
+            .icon-pos-4 { 
+                top: 15px; 
+                left: 40%; 
+                transform: scale(0.6) rotate(var(--rotate-angle, 20deg)); 
+            }
+            .icon-pos-5 { 
+                bottom: 15px; 
+                left: 50%; /* Próximo ao centro, mas em baixo */
+                transform: translateX(-50%) scale(0.7) rotate(var(--rotate-angle, -15deg)); 
+            }
+            .icon-pos-6 { 
+                top: 5px; 
+                left: 65%; 
+                transform: scale(0.6) rotate(var(--rotate-angle, 5deg)); 
+            }
+            .icon-pos-7 { 
+                bottom: 10px; 
+                left: 80%; 
+                transform: scale(0.55) rotate(var(--rotate-angle, -20deg)); 
+            }
+            .icon-pos-8 { 
+                top: 25px; 
+                left: 90%; 
+                transform: scale(0.5) rotate(var(--rotate-angle, 10deg)); 
+            }
+            .icon-pos-9 { 
+                display: none; /* Oculta este para dar mais espaço, se houver muitos */
+            }
+            .icon-pos-10 { 
+                display: none; /* Oculta este para dar mais espaço, se houver muitos */
+            }
+
+            /* Caso queira testar com MAIS imagens visíveis no mobile, remova os 'display: none'
+               acima e ajuste as posições para evitar colisões. É um balanceamento. */
+        }
+
+        /* Helper para rotações que você está usando - mantém as rotações originais */
+        .icon-pos-1.rotate--10 { --rotate-angle: -10deg; }
+        .icon-pos-2.rotate-15 { --rotate-angle: 15deg; }
+        .icon-pos-3.rotate--5 { --rotate-angle: -5deg; }
+        .icon-pos-4.rotate-20 { --rotate-angle: 20deg; }
+        .icon-pos-5.rotate--15 { --rotate-angle: -15deg; }
+        .icon-pos-6.rotate-5 { --rotate-angle: 5deg; }
+        .icon-pos-7.rotate--20 { --rotate-angle: -20deg; }
+        .icon-pos-8.rotate-10 { --rotate-angle: 10deg; }
+        .icon-pos-9.rotate--10 { --rotate-angle: -10deg; }
+        .icon-pos-10.rotate-25 { --rotate-angle: 25deg; }
