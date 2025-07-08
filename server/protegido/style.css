@@ -1700,11 +1700,17 @@ nav {
         font-size: 0.95rem; /* Ajuste para caber melhor */
     }
 
-    .produto-info p {
-        margin: 2px 0;
-        color: #555;
-        font-size: 0.85rem; /* Ajuste para caber melhor */
-    }
+        .produto-info p {
+        margin: 4px 0;
+        font-weight: bold;
+        color: #e67e22; /* um laranja suave, mais visível que #555 */
+        font-size: 1.05rem; /* levemente maior que o padrão */
+        }
+        .produto:hover .produto-info p {
+        color: #d35400;
+        }
+
+
 
     .quantidade-box {
         display: flex;
