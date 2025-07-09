@@ -263,6 +263,7 @@ body {
     padding-bottom: 0;
     max-height: 0;
     overflow: hidden;
+    z-index: 10;
 }
 
 .nav-central {
