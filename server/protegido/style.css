@@ -2204,46 +2204,64 @@ nav {
 
 
 
-.delivery-info {
+.delivery-motoboy {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  background-color: white;
-  border: 2px solid var(--base-color);
-  border-radius: 12px;
-  padding: 2rem 1.5rem;
+  justify-content: center;
+  gap: 2rem;
+  background-color: #fff9e6;
+  border-radius: 16px;
+  padding: 2rem 1rem;
   margin: 2rem auto;
-  max-width: 600px;
+  max-width: 900px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-  position: relative;
-  z-index: 1;
+  flex-wrap: wrap;
 }
 
-.delivery-info .icon-box {
-  font-size: 2.5rem;
-  background-color: var(--base-color);
-  color: white;
-  padding: 1rem;
-  border-radius: 12px;
-  margin-bottom: 1rem;
+.motoboy-img {
+  width: 180px;
+  height: auto;
+  animation: float 2s ease-in-out infinite;
 }
 
-.delivery-info .text-box h2 {
-  font-size: 1.5rem;
+.delivery-text {
+  text-align: left;
+  max-width: 500px;
+}
+
+.delivery-text h2 {
+  font-size: 1.7rem;
   color: var(--title-color);
   margin-bottom: 0.5rem;
 }
 
-.delivery-info .text-box p {
-  font-size: 1.05rem;
+.delivery-text p {
+  font-size: 1.1rem;
   color: var(--text-color);
   margin-bottom: 0.5rem;
 }
 
-.delivery-info .valor-minimo {
+.valor-minimo {
   font-size: 1rem;
-  font-weight: bold;
   color: var(--base-color);
+  font-weight: bold;
 }
 
+/* Animação sutil do motoboy */
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0); }
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .delivery-motoboy {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .delivery-text {
+    text-align: center;
+  }
+}
