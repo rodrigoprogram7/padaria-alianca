@@ -522,19 +522,22 @@ nav.show .toggle.icon-close::before {
 }
 
 #resultados-pesquisa {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
+  position: fixed;
+  top: 80px; /* ajuste conforme necessário */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
   max-height: 300px;
   overflow-y: auto;
   background: white;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 9999; /* ✅ ALTO o bastante para aparecer sobre tudo */
+  z-index: 9999;
   display: none;
 }
+
 
 
 

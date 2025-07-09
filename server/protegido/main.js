@@ -879,6 +879,25 @@ function mostrarAlerta(nomeProduto, quantidade) {
   }, 2500);
 }
 
+function alinharSugestoes() {
+  const input = document.getElementById('pesquisa');
+  const resultados = document.getElementById('resultados-pesquisa');
+
+  if (!input || !resultados) return;
+
+  const rect = input.getBoundingClientRect();
+
+  resultados.style.position = 'fixed';
+  resultados.style.top = `${rect.bottom + 4}px`;
+  resultados.style.left = `${rect.left}px`;
+  resultados.style.width = `${rect.width}px`;
+}
+
+document.getElementById('pesquisa').addEventListener('input', () => {
+  alinharSugestoes(); // sempre reposiciona
+});
+
+
 
 window.addEventListener('scroll', () => {
   toggleHeaderScroll();
