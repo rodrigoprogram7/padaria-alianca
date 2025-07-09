@@ -279,7 +279,9 @@ body {
   margin-top: 0.5rem; /* reduzir também esse */
   max-height: 240px;  /* se quiser limitar mais */
     max-width: 100%;
-    overflow-x: hidden;
+    overflow: visible; /* Liberado! */
+    position: relative; /* Necessário para que elementos filhos absolutos (como a lista) se posicionem corretamente */
+
 }
 
 
@@ -533,6 +535,12 @@ nav.show .toggle.icon-close::before {
   margin: 0;
   padding: 0;
 }
+#resultados-pesquisa {
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 2000; /* mais alto que qualquer dropdown de menu */
+}
+
 
 #resultados-pesquisa li {
   padding: 10px;
