@@ -2204,64 +2204,46 @@ nav {
 
 
 
-.delivery-motoboy {
+.delivery-info {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  background-color: #fff9e6;
-  border-radius: 16px;
-  padding: 2rem 1rem;
+  text-align: center;
+  background-color: white;
+  border: 2px solid var(--base-color);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
   margin: 2rem auto;
-  max-width: 900px;
+  max-width: 600px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
-.motoboy-img {
-  width: 180px;
-  height: auto;
-  animation: float 2s ease-in-out infinite;
+.delivery-info .icon-box {
+  font-size: 2.5rem;
+  background-color: var(--base-color);
+  color: white;
+  padding: 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
 }
 
-.delivery-text {
-  text-align: left;
-  max-width: 500px;
-}
-
-.delivery-text h2 {
-  font-size: 1.7rem;
+.delivery-info .text-box h2 {
+  font-size: 1.5rem;
   color: var(--title-color);
   margin-bottom: 0.5rem;
 }
 
-.delivery-text p {
-  font-size: 1.1rem;
+.delivery-info .text-box p {
+  font-size: 1.05rem;
   color: var(--text-color);
   margin-bottom: 0.5rem;
 }
 
-.valor-minimo {
+.delivery-info .valor-minimo {
   font-size: 1rem;
-  color: var(--base-color);
   font-weight: bold;
+  color: var(--base-color);
 }
 
-/* Animação sutil do motoboy */
-@keyframes float {
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-}
-
-/* Responsivo */
-@media (max-width: 768px) {
-  .delivery-motoboy {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .delivery-text {
-    text-align: center;
-  }
-}
