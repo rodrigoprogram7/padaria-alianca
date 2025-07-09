@@ -515,6 +515,19 @@ nav.show .toggle.icon-close::before {
   position: relative;
 }
 
+/* Permite que o conteúdo do nav-central transborde quando a pesquisa está ativa */
+.nav-central.is-search-active {
+    overflow: visible; /* Garante que o conteúdo não seja cortado */
+    max-height: none; /* Remove o limite de altura, permitindo que as sugestões se expandam */
+}
+
+/* (Opcional, mas recomendado) Garante que a barra de pesquisa também não tenha overflow escondido */
+.barra-pesquisa {
+    overflow: visible; /* Permite que o conteúdo interno transborde */
+}
+
+
+
 #resultados-pesquisa {
     position: absolute;
     top: 100%; /* Posiciona a lista abaixo do input */
