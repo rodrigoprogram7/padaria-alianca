@@ -534,6 +534,16 @@ nav.show .toggle.icon-close::before {
   z-index: 3000;
 }
 
+#header.scroll .nav-central {
+    gap: 4px;
+    padding-bottom: 10px;
+    margin-top: 1rem;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
+    position: static; /* <=== IMPORTANTE */
+    overflow: visible; /* <=== LIBERA A LISTA */
+}
 
 
 
