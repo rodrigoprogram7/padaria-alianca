@@ -277,7 +277,7 @@ body {
     gap: 4px;
   padding-bottom: 4px;
   margin-top: 0.5rem; /* reduzir também esse */
-  max-height: 240px;  /* se quiser limitar mais */
+  max-height: 200px;  /* se quiser limitar mais */
     max-width: 100%;
     overflow-x: hidden;
 }
