@@ -518,31 +518,22 @@ nav.show .toggle.icon-close::before {
   position: relative;
 }
 
-
-
 #resultados-pesquisa {
-  position: fixed !important;
-  top: calc(50px + 45px); /* altura do header + altura do input */
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 600px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
   background: white;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  z-index: 3000;
-}
-
-#header.scroll .nav-central {
-    gap: 4px;
-    padding-bottom: 10px;
-    margin-top: 1rem;
-    opacity: 1;
-    pointer-events: all;
-    transform: translateY(0);
-    position: static; /* <=== IMPORTANTE */
-    overflow: visible; /* <=== LIBERA A LISTA */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  z-index: 1000;
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 
