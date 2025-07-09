@@ -518,28 +518,23 @@ nav.show .toggle.icon-close::before {
   position: relative;
 }
 
+
+
 #resultados-pesquisa {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 300px;
-  overflow-y: auto;
+  position: fixed !important;
+  top: calc(50px + 45px); /* altura do header + altura do input */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 600px;
   background: white;
   border: 1px solid #ccc;
   border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-  display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  z-index: 3000;
 }
-#resultados-pesquisa {
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 2000; /* mais alto que qualquer dropdown de menu */
-}
+
+
 
 
 #resultados-pesquisa li {
