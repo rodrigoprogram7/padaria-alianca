@@ -1666,7 +1666,7 @@ nav {
         border-radius: 10px;
         align-items: center;
         padding: 10px;
-        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); 
         transition: transform 0.2s ease, box-shadow 0.3s ease;
         margin-bottom: 0; 
         width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
@@ -1676,8 +1676,8 @@ nav {
     }
 
     .produto:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+       transform: translateY(-5px);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
     }
 
     /* As imagens de produtos padrão devem ser menores no layout de card */
@@ -1700,11 +1700,17 @@ nav {
         font-size: 0.95rem; /* Ajuste para caber melhor */
     }
 
-    .produto-info p {
-        margin: 2px 0;
-        color: #555;
-        font-size: 0.85rem; /* Ajuste para caber melhor */
-    }
+        .produto-info p {
+        margin: 4px 0;
+        font-weight: bold;
+        color: #e67e22; /* um laranja suave, mais visível que #555 */
+        font-size: 0.98rem; /* levemente maior que o padrão */
+        }
+        .produto:hover .produto-info p {
+        color: #d35400;
+        }
+
+
 
     .quantidade-box {
         display: flex;
@@ -2179,4 +2185,3 @@ nav {
     object-fit: contain; /* mostra toda a imagem */
   }
 }
-
