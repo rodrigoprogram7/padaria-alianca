@@ -268,7 +268,7 @@ body {
 .nav-central {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: visible;
     box-sizing: border-box;
 }
 
@@ -278,7 +278,7 @@ body {
   margin-top: 0.5rem; /* reduzir também esse */
   max-height: 240px;  /* se quiser limitar mais */
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: visible;
 }
 
 
