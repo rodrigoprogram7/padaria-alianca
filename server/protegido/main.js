@@ -58,6 +58,8 @@ function toggleHeaderScroll() {
 
 
 let jaDeslizouCategorias = false;
+let estadoNavbar = 'pequeno'; // controla se está grande ou pequeno
+
 
 function toggleHeaderScrollCategoria() {
   const header = document.querySelector('#header');
@@ -70,28 +72,36 @@ function toggleHeaderScrollCategoria() {
   const scrollY = window.scrollY;
   const categoriaTop = categoria.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
-  const delayY = 80;
 
-  if (scrollY < categoriaTop - delayY) {
-    header.classList.remove('scroll');
-  } else if (scrollY >= categoriaTop - delayY && scrollY < carrinhoTop - 200) {
-    header.classList.add('scroll');
+  const ativarGrande = categoriaTop - 80;
+  const desativarGrande = categoriaTop - 120; // zona de histerese (menor que o ativar)
 
-    if (!jaDeslizouCategorias) {
-      jaDeslizouCategorias = true;
+  if (scrollY >= ativarGrande && scrollY < carrinhoTop - 100) {
+    if (estadoNavbar !== 'grande') {
+      header.classList.add('scroll');
+      estadoNavbar = 'grande';
 
-      setTimeout(() => {
-        categoriasBar.scrollTo({ left: categoriasBar.scrollWidth, behavior: 'smooth' });
+      if (!jaDeslizouCategorias) {
+        jaDeslizouCategorias = true;
+
         setTimeout(() => {
-          categoriasBar.scrollTo({ left: 0, behavior: 'smooth' });
-        }, 500);
-      }, 300);
+          categoriasBar.scrollTo({ left: categoriasBar.scrollWidth, behavior: 'smooth' });
+
+          setTimeout(() => {
+            categoriasBar.scrollTo({ left: 0, behavior: 'smooth' });
+          }, 500);
+        }, 300);
+      }
     }
 
-  } else if (scrollY >= carrinhoTop - 200) {
-    header.classList.remove('scroll');
+  } else if (scrollY < desativarGrande || scrollY >= carrinhoTop - 100) {
+    if (estadoNavbar !== 'pequeno') {
+      header.classList.remove('scroll');
+      estadoNavbar = 'pequeno';
+    }
   }
 }
+
 
 
 
