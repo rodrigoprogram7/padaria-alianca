@@ -26,6 +26,128 @@ img {
 }
 
 
+/* Seção Home Aprimorada */
+#home {
+    overflow: hidden;
+    position: relative; /* Necessário para posicionamento absoluto de fundos ou overlays */
+    min-height: 80vh; /* Garante que a seção ocupe boa parte da tela inicial */
+    display: flex; /* Usa flexbox para centralizar o conteúdo verticalmente */
+    align-items: center; /* Centraliza itens verticalmente */
+    justify-content: center; /* Centraliza itens horizontalmente */
+    /* Exemplo de fundo: você pode usar uma imagem sutil de padaria ou um gradiente */
+    background: linear-gradient(rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), url('assets/images/sistema/hero-background.jpg') no-repeat center center/cover;
+    /* Altere 'hero-background.jpg' para o caminho da sua imagem de fundo ou use um padrão/cor sólida */
+}
+
+/* Container da seção Home */
+#home .container.hero-container {
+    padding: 3rem 1.5rem; /* Adiciona espaçamento interno */
+    gap: 3rem; /* Aumenta o espaçamento entre os elementos no layout grid */
+    z-index: 2; /* Garante que o conteúdo fique acima do fundo */
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo semi-transparente para melhor legibilidade */
+    border-radius: 1rem; /* Cantos mais arredondados para um visual moderno */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* Sombra sutil para profundidade */
+    backdrop-filter: blur(5px); /* Efeito de desfoque moderno (compatibilidade varia) */
+}
+
+/* Melhorias na Imagem */
+#home .image.hero-image {
+    max-width: 400px; /* Aumenta a largura máxima da imagem para destaque */
+    margin: 0; /* Reseta as margens existentes */
+    animation: none; /* Remove animações iniciais se não se adequarem ao novo design */
+    position: relative;
+}
+
+/* Remove ou simplifica o pseudo-elemento da imagem se desejar um visual mais limpo */
+#home .image.hero-image::before {
+    content: none; /* Removido para um visual mais limpo e moderno */
+}
+
+#home .image.hero-image img {
+    border-radius: 0.5rem; /* Cantos levemente arredondados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Adiciona uma sombra sutil */
+    transition: transform 0.3s ease; /* Transição suave para o efeito de hover */
+    right: auto; /* Remove o posicionamento "right" problemático */
+}
+
+#home .image.hero-image img:hover {
+    transform: translateY(-5px); /* Efeito de "levantar" no hover */
+}
+
+/* Melhorias no Texto */
+#home .text.hero-text {
+    text-align: center; /* Alinhamento centralizado para dispositivos móveis */
+    margin: 0; /* Reseta as margens */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Centraliza os itens para dispositivos móveis */
+}
+
+#home .title.hero-title {
+    font-size: 2.5rem; /* Título maior e mais impactante */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--title-color); /* Mantém a cor de título existente */
+}
+
+#home .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+#home .hero-call-to-action {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem; /* Mais espaço antes do botão */
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Melhorias no Botão */
+#home .button.hero-button {
+    padding: 1rem 2.5rem; /* Aumenta o padding para um botão mais proeminente */
+    font-size: 1.1rem; /* Texto do botão ligeiramente maior */
+    border-radius: 0.5rem; /* Cantos mais arredondados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Transições suaves */
+}
+
+#home .button.hero-button:hover {
+    transform: translateY(-3px); /* Efeito de "levantar" no hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Sombra mais proeminente no hover */
+    background-color: var(--base-color-alt); /* Cor alternativa no hover */
+}
+
+/* Ajustes de Responsividade para Telas Maiores */
+@media (min-width: 992px) {
+    #home .container.hero-container {
+        grid-template-columns: 1fr 1.5fr; /* Ajusta o grid para um melhor equilíbrio entre texto e imagem */
+        max-width: 1000px; /* Limita a largura máxima para desktop */
+    }
+
+    #home .text.hero-text {
+        text-align: left; /* Alinha o texto à esquerda no desktop */
+        align-items: flex-start; /* Alinha os itens ao início para texto alinhado à esquerda */
+    }
+
+    #home .title.hero-title {
+        font-size: 3rem; /* Título ainda maior para desktop */
+    }
+
+    #home .image.hero-image {
+        max-width: 500px; /* Imagem maior no desktop */
+    }
+}
+
+@media (min-width: 1200px) {
+    #home .container.hero-container {
+        max-width: 1120px; /* Usa a largura máxima do container existente */
+        grid-template-columns: 1fr 1fr; /* Colunas iguais, ou ajuste conforme preferir */
+    }
+}
+
+
 
 /*======================================== Variáveis ========================================*/
 :root {
