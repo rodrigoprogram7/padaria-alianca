@@ -2509,15 +2509,7 @@ nav {
         }
     }
     /* Animações personalizadas */
-        .slide-from-right {
-        opacity: 0;
-        transform: translateX(100px);
-        }
 
-        .slide-from-left {
-        opacity: 0;
-        transform: translateX(-100px);
-        }
 
         /* ScrollReveal aplica visível */
         .sr .banner-container {

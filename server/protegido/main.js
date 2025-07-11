@@ -96,23 +96,26 @@ function toggleHeaderScroll() {
   }
 }
 
+// Banner normal da direita para esquerda
 ScrollReveal().reveal('.whatsapp-banner:not(.entrega-banner)', {
   origin: 'right',
   distance: '80px',
   duration: 800,
   easing: 'ease-out',
-  reset: true,
-  opacity: 0
+  opacity: 0,
+  reset: true
 });
 
+// Banner de entrega da esquerda para direita
 ScrollReveal().reveal('.whatsapp-banner.entrega-banner', {
   origin: 'left',
   distance: '80px',
   duration: 800,
   easing: 'ease-out',
-  reset: true,
-  opacity: 0
+  opacity: 0,
+  reset: true
 });
+
 
 
 
