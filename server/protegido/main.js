@@ -96,6 +96,21 @@ function toggleHeaderScroll() {
   }
 }
 
+    ScrollReveal().reveal('.slide-from-right', {
+      origin: 'right',
+      distance: '100px',
+      duration: 1000,
+      easing: 'ease-out',
+      reset: true
+    });
+
+    ScrollReveal().reveal('.slide-from-left', {
+      origin: 'left',
+      distance: '100px',
+      duration: 1000,
+      easing: 'ease-out',
+      reset: true
+    });
 
 
 function ActivateMenuAtCurrentSection() {
