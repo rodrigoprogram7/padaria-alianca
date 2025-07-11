@@ -96,21 +96,24 @@ function toggleHeaderScroll() {
   }
 }
 
-    ScrollReveal().reveal('.slide-from-right', {
-      origin: 'right',
-      distance: '100px',
-      duration: 1000,
-      easing: 'ease-out',
-      reset: true
-    });
+ScrollReveal().reveal('.whatsapp-banner:not(.entrega-banner)', {
+  origin: 'right',
+  distance: '80px',
+  duration: 800,
+  easing: 'ease-out',
+  reset: true,
+  opacity: 0
+});
 
-    ScrollReveal().reveal('.slide-from-left', {
-      origin: 'left',
-      distance: '100px',
-      duration: 1000,
-      easing: 'ease-out',
-      reset: true
-    });
+ScrollReveal().reveal('.whatsapp-banner.entrega-banner', {
+  origin: 'left',
+  distance: '80px',
+  duration: 800,
+  easing: 'ease-out',
+  reset: true,
+  opacity: 0
+});
+
 
 
 function ActivateMenuAtCurrentSection() {
