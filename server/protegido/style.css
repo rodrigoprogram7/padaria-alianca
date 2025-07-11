@@ -2520,12 +2520,21 @@ nav {
 
 
         .button.fake-info {
-        pointer-events: none;
-        cursor: default;
-        margin-bottom: 2rem; /* Aumenta o espaço abaixo */
-        display: inline-block;
-        text-align: center;
-}
+
+            background-color: var(--base-color);
+            color: var(--text-color-light);
+            padding: 1rem 2rem; /* antes era só lateral; agora vertical também */
+            border-radius: 0.25rem;
+            font: 500 1rem var(--body-font);
+            transition: background 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: auto; /* importante: remove a altura fixa */
+            text-align: center;
+            line-height: 1.4;
+
+            }
             .fake-info {
             margin-left: auto;
             margin-right: auto;
