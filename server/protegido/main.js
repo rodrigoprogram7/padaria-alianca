@@ -251,7 +251,7 @@ function filtrarCategoria(categoriaSelecionada) {
 
 const destinoCategoria = document.getElementById('categoria-destaque');
 if (destinoCategoria) {
-  const y = destinoCategoria.getBoundingClientRect().top + window.scrollY - 70; // ajuste do topo (70px de margem)
+  const y = destinoCategoria.getBoundingClientRect().top + window.scrollY - 150; // ajuste do topo (70px de margem)
   window.scrollTo({ top: y, behavior: 'smooth' });
 }
 
