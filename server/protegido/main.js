@@ -59,21 +59,22 @@ function toggleHeaderScroll() {
 
 let jaDeslizouCategorias = false;
 
-function toggleHeaderScroll() {
+function toggleHeaderScrollCategoria() {
   const header = document.querySelector('#header');
-  const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
+  const categoria = document.getElementById('categoria-destaque');
   const categoriasBar = document.querySelector('.categorias-navbar');
 
-  if (!header || !divider || !carrinho || !categoriasBar) return;
+  if (!header || !carrinho || !categoria || !categoriasBar) return;
 
   const scrollY = window.scrollY;
-  const dividerTop = divider.offsetTop;
+  const categoriaTop = categoria.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
+  const delayY = 80;
 
-  if (scrollY < dividerTop) {
+  if (scrollY < categoriaTop - delayY) {
     header.classList.remove('scroll');
-  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 200) {
+  } else if (scrollY >= categoriaTop - delayY && scrollY < carrinhoTop - 200) {
     header.classList.add('scroll');
 
     if (!jaDeslizouCategorias) {
@@ -81,17 +82,17 @@ function toggleHeaderScroll() {
 
       setTimeout(() => {
         categoriasBar.scrollTo({ left: categoriasBar.scrollWidth, behavior: 'smooth' });
-
         setTimeout(() => {
           categoriasBar.scrollTo({ left: 0, behavior: 'smooth' });
-        }, 500); // Espera meio segundo antes de voltar
-      }, 300); // Espera navbar terminar de expandir
+        }, 500);
+      }, 300);
     }
 
   } else if (scrollY >= carrinhoTop - 200) {
     header.classList.remove('scroll');
   }
 }
+
 
 
 
@@ -114,9 +115,10 @@ function ActivateMenuAtCurrentSection() {
 }
 
 window.addEventListener('scroll', function () {
-  toggleHeaderScroll();
+  toggleHeaderScrollCategoria(); // agora chamando a sua nova lógica
   ActivateMenuAtCurrentSection();
 });
+
 
 document.addEventListener('DOMContentLoaded', function () {
   const backToTopButton = document.querySelector('.back-to-top');
