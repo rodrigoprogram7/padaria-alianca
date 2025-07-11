@@ -45,7 +45,7 @@ function toggleHeaderScroll() {
   const categoriaTop = categoria.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
 
-  const offsetAtivarNavbarGrande = 100; // ajuste para ativar antes ou depois da div
+  const offsetAtivarNavbarGrande = 300; // ajuste para ativar antes ou depois da div
 
   if (scrollY < categoriaTop - offsetAtivarNavbarGrande) {
     header.classList.remove('scroll'); // navbar pequeno
