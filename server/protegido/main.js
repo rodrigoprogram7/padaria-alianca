@@ -249,10 +249,12 @@ function filtrarCategoria(categoriaSelecionada) {
 
   renderizarProdutos(produtosFiltrados);
 
-  const areaProdutos = document.querySelector('.pp');
-  if (areaProdutos) {
-    areaProdutos.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+const destinoCategoria = document.getElementById('categoria-destaque');
+if (destinoCategoria) {
+  const y = destinoCategoria.getBoundingClientRect().top + window.scrollY - 70; // ajuste do topo (70px de margem)
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
     const titulo = document.getElementById('titulo-categoria');
   if (titulo) {
     const categoriaNome = categoriaSelecionada.charAt(0).toUpperCase() + categoriaSelecionada.slice(1);
