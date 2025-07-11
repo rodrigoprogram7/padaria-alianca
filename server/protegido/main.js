@@ -51,9 +51,9 @@ function toggleHeaderScroll() {
     - entre dividerTop e carrinhoTop → navbar grande
     - scroll >= carrinhoTop          → navbar pequeno
   */
-  if (scrollY < dividerTop) {
+  if (scrollY < dividerTop - 300) {
     header.classList.remove('scroll'); // pequeno
-  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 200) {
+  } else if (scrollY >= dividerTop - 300 && scrollY < carrinhoTop - 200) {
     header.classList.add('scroll'); // grande
   } else if (scrollY >= carrinhoTop - 200) {
     header.classList.remove('scroll'); // pequeno
