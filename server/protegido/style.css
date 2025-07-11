@@ -2384,6 +2384,10 @@ nav {
       text-decoration: none;
       transition: background-color 0.3s ease, transform 0.2s ease;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+        padding: 1rem 2rem;
+        height: auto;
+        line-height: 1.4;
     }
 
     .texto-banner .button:hover {
@@ -2520,21 +2524,12 @@ nav {
 
 
         .button.fake-info {
-
-            background-color: var(--base-color);
-            color: var(--text-color-light);
-            padding: 1rem 2rem; /* antes era só lateral; agora vertical também */
-            border-radius: 0.25rem;
-            font: 500 1rem var(--body-font);
-            transition: background 0.3s;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            height: auto; /* importante: remove a altura fixa */
-            text-align: center;
-            line-height: 1.4;
-
-            }
+        pointer-events: none;
+        cursor: default;
+        margin-bottom: 2rem; /* Aumenta o espaço abaixo */
+        display: inline-block;
+        text-align: center;
+}
             .fake-info {
             margin-left: auto;
             margin-right: auto;
