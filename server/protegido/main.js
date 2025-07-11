@@ -45,11 +45,11 @@ function toggleHeaderScroll() {
   const categoriaTop = categoria.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
 
-  const offsetAtivarNavbarGrande = 100; // ajuste para ativar antes ou depois da div
+  const offsetAtivarNavbarGrande = 300; // ajuste para ativar antes ou depois da div
 
-  if (scrollY < categoriaTop + offsetAtivarNavbarGrande) {
+  if (scrollY < categoriaTop - offsetAtivarNavbarGrande) {
     header.classList.remove('scroll'); // navbar pequeno
-  } else if (scrollY >= categoriaTop + offsetAtivarNavbarGrande && scrollY < carrinhoTop - 200) {
+  } else if (scrollY >= categoriaTop - offsetAtivarNavbarGrande && scrollY < carrinhoTop - 200) {
     header.classList.add('scroll'); // navbar grande
   } else if (scrollY >= carrinhoTop - 200) {
     header.classList.remove('scroll'); // navbar pequeno
