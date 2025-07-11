@@ -2515,3 +2515,18 @@ nav {
         .sr .banner-container {
         transition: all 0.8s ease;
         }
+
+
+
+
+        .button.fake-info {
+        pointer-events: none;
+        cursor: default;
+        margin-bottom: 2rem; /* Aumenta o espaço abaixo */
+        display: inline-block;
+        text-align: center;
+}
+            .fake-info {
+            margin-left: auto;
+            margin-right: auto;
+            }
