@@ -2200,3 +2200,59 @@ nav {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.contador-carrinho {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background-color: red;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: none;
+  transition: transform 0.3s ease;
+}
+
+.contador-carrinho.animar {
+  transform: scale(1.4);
+}
+
+@keyframes pulsar {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}

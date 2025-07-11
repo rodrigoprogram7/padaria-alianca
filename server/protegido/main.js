@@ -880,6 +880,19 @@ function mostrarAlerta(nomeProduto, quantidade) {
 }
 
 
+function atualizarContadorCarrinho() {
+  const contador = document.getElementById('contador-carrinho');
+  const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
+  if (contador) {
+    contador.textContent = totalItens;
+
+    // animação simples ao adicionar
+    contador.classList.add('animar');
+    setTimeout(() => contador.classList.remove('animar'), 200);
+  }
+}
+
+
 
 
 window.addEventListener('scroll', () => {
