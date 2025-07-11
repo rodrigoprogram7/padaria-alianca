@@ -2512,16 +2512,6 @@ nav {
             font-size: 0.8rem;
         }
     }
-    /* Animações personalizadas */
-
-
-        /* ScrollReveal aplica visível */
-        .sr .banner-container {
-        transition: all 0.8s ease;
-        }
-
-
-
 
         .button.fake-info {
         pointer-events: none;

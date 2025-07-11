@@ -36,45 +36,47 @@ for (const link of links) {
 
 function toggleHeaderScroll() {
   const header = document.querySelector('#header');
+  const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
-  const categoria = document.getElementById('categoria-destaque');
 
-  if (!header || !carrinho || !categoria) return;
+  if (!header || !divider || !carrinho) return;
 
   const scrollY = window.scrollY;
-  const categoriaTop = categoria.offsetTop;
+  const dividerTop = divider.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
 
-  const offsetAtivarNavbarGrande = 300; // ajuste para ativar antes ou depois da div
-
-  if (scrollY < categoriaTop - offsetAtivarNavbarGrande) {
-    header.classList.remove('scroll'); // navbar pequeno
-  } else if (scrollY >= categoriaTop - offsetAtivarNavbarGrande && scrollY < carrinhoTop - 200) {
-    header.classList.add('scroll'); // navbar grande
+  /*
+    Lógica:
+    - scroll < dividerTop            → navbar pequeno
+    - entre dividerTop e carrinhoTop → navbar grande
+    - scroll >= carrinhoTop          → navbar pequeno
+  */
+  if (scrollY < dividerTop) {
+    header.classList.remove('scroll'); // pequeno
+  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 200) {
+    header.classList.add('scroll'); // grande
   } else if (scrollY >= carrinhoTop - 200) {
-    header.classList.remove('scroll'); // navbar pequeno
+    header.classList.remove('scroll'); // pequeno
   }
 }
 
-
 let jaDeslizouCategorias = false;
 
-function toggleHeaderScrollCategoria() {
+function toggleHeaderScroll() {
   const header = document.querySelector('#header');
+  const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
-  const categoria = document.getElementById('categoria-destaque');
   const categoriasBar = document.querySelector('.categorias-navbar');
 
-  if (!header || !carrinho || !categoria || !categoriasBar) return;
+  if (!header || !divider || !carrinho || !categoriasBar) return;
 
   const scrollY = window.scrollY;
-  const categoriaTop = categoria.offsetTop;
+  const dividerTop = divider.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
-  const delayY = 80;
 
-  if (scrollY < categoriaTop - delayY) {
+  if (scrollY < dividerTop) {
     header.classList.remove('scroll');
-  } else if (scrollY >= categoriaTop - delayY && scrollY < carrinhoTop - 200) {
+  } else if (scrollY >= dividerTop && scrollY < carrinhoTop - 200) {
     header.classList.add('scroll');
 
     if (!jaDeslizouCategorias) {
@@ -82,38 +84,17 @@ function toggleHeaderScrollCategoria() {
 
       setTimeout(() => {
         categoriasBar.scrollTo({ left: categoriasBar.scrollWidth, behavior: 'smooth' });
+
         setTimeout(() => {
           categoriasBar.scrollTo({ left: 0, behavior: 'smooth' });
-        }, 500);
-      }, 300);
+        }, 500); // Espera meio segundo antes de voltar
+      }, 300); // Espera navbar terminar de expandir
     }
 
   } else if (scrollY >= carrinhoTop - 200) {
     header.classList.remove('scroll');
   }
 }
-
-
-// Banner normal da direita para esquerda
-ScrollReveal().reveal('.whatsapp-banner:not(.entrega-banner)', {
-  origin: 'right',
-  distance: '80px',
-  duration: 800,
-  easing: 'ease-out',
-  opacity: 0,
-  reset: true
-});
-
-// Banner de entrega da esquerda para direita
-ScrollReveal().reveal('.whatsapp-banner.entrega-banner', {
-  origin: 'left',
-  distance: '80px',
-  duration: 800,
-  easing: 'ease-out',
-  opacity: 0,
-  reset: true
-});
-
 
 
 
@@ -136,10 +117,9 @@ function ActivateMenuAtCurrentSection() {
 }
 
 window.addEventListener('scroll', function () {
-  toggleHeaderScrollCategoria(); // agora chamando a sua nova lógica
+  toggleHeaderScroll();
   ActivateMenuAtCurrentSection();
 });
-
 
 document.addEventListener('DOMContentLoaded', function () {
   const backToTopButton = document.querySelector('.back-to-top');
