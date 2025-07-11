@@ -531,6 +531,7 @@ function adicionarAoCarrinho(botao) {
   salvarCarrinho();
 
   atualizarCarrinho();
+  atualizarContadorCarrinho();
   mostrarAlerta(nome, quantidade);
 
   // Resetar quantidade e subtotal após adicionar
@@ -583,6 +584,8 @@ function atualizarCarrinho() {
   if (totalEl) {
     totalEl.textContent = total.toFixed(2);
   }
+  atualizarContadorCarrinho();
+
 }
 
 
@@ -863,6 +866,12 @@ function enviarWhatsApp() {
 
   const link = `https://wa.me/558488692337?text=${encodeURIComponent(mensagem)}`;
   window.open(link, '_blank');
+
+  // Limpa carrinho e contador
+  carrinho = [];
+  salvarCarrinho();
+  atualizarCarrinho();
+  atualizarContadorCarrinho();
 }
 
 
