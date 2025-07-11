@@ -2256,3 +2256,255 @@ nav {
   50%  { transform: scale(1.4); }
   100% { transform: scale(1); }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   :root {
+      --primary-green: #28a745; /* Verde mais vibrante */
+      --secondary-green: #218838; /* Verde escuro para hover */
+      --whatsapp-bg: #e6ffed; /* Fundo claro esverdeado */
+      --whatsapp-text: #0d6efd; /* Azul para o texto principal */
+      --delivery-bg: #fff8e1; /* Fundo amarelo claro */
+      --delivery-button: #ffc107; /* Amarelo para o botão */
+      --delivery-button-hover: #e0a800; /* Amarelo escuro para hover */
+      --text-color: #495057; /* Cor de texto padrão */
+      --heading-color: #343a40; /* Cor para títulos */
+      --shadow-light: rgba(0, 0, 0, 0.08);
+      --border-radius: 12px;
+    }
+
+    .whatsapp-banner, .entrega-banner {
+      padding: 4rem 1.5rem; /* Aumentei o padding vertical */
+      display: flex;
+      justify-content: center;
+      box-shadow: 0 4px 15px var(--shadow-light); /* Sombra suave */
+      margin-bottom: 2rem; /* Espaço entre as seções */
+    }
+
+    .whatsapp-banner {
+      background-color: var(--whatsapp-bg);
+    }
+
+    .entrega-banner {
+      background-color: var(--delivery-bg);
+    }
+
+    .banner-container {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem; /* Aumentei o espaço entre os elementos */
+      flex-wrap: wrap; /* Permite quebrar linha se não couber, mas vamos tentar evitar no mobile */
+      max-width: 1000px; /* Aumentei a largura máxima */
+      width: 100%;
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    }
+
+    .imagem-animada {
+      flex: 1;
+      min-width: 180px; /* Aumentei o tamanho mínimo da imagem */
+      max-width: 250px; /* Aumentei o tamanho máximo da imagem */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .imagem-animada img {
+      width: 100%;
+      max-width: 220px; /* Ajustei o max-width para a imagem em si */
+      animation: flutuar 3s ease-in-out infinite; /* Ajustei a duração da animação */
+      border-radius: var(--border-radius);
+    }
+
+    .texto-banner {
+      flex: 2;
+      min-width: 300px; /* Aumentei o tamanho mínimo do texto */
+      text-align: left;
+    }
+
+    .texto-banner h2 {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 2.2rem; /* Aumentei o tamanho do título */
+      color: var(--heading-color);
+      margin-bottom: 0.8rem;
+      font-weight: 700;
+    }
+
+    .texto-banner p {
+      font-size: 1.15rem; /* Aumentei o tamanho do parágrafo */
+      margin-bottom: 1.5rem;
+      color: var(--text-color);
+    }
+
+    .texto-banner strong {
+        color: var(--heading-color);
+    }
+
+    .texto-banner .button {
+      display: inline-block;
+      background-color: var(--primary-green);
+      color: white;
+      font-weight: bold;
+      padding: 1rem 2rem; /* Aumentei o padding do botão */
+      border-radius: 8px; /* Mais arredondado */
+      text-decoration: none;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .texto-banner .button:hover {
+      background-color: var(--secondary-green);
+      transform: translateY(-2px); /* Efeito de "levantar" no hover */
+    }
+
+    @keyframes flutuar {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); } /* Aumentei o movimento de flutuação */
+    }
+
+    /* === Seção com o motoboy === */
+    .entrega-banner .texto-banner h2 {
+      color: var(--heading-color);
+    }
+
+    .entrega-banner .texto-banner .button {
+      background-color: var(--delivery-button);
+    }
+
+    .entrega-banner .texto-banner .button:hover {
+      background-color: var(--delivery-button-hover);
+    }
+
+    /* Padrão para telas maiores: WhatsApp (imagem direita, texto esquerda) */
+    .whatsapp-banner .banner-container {
+        flex-direction: row;
+    }
+
+    /* Padrão para telas maiores: Entrega (imagem direita, texto esquerda) */
+    .entrega-banner .banner-container {
+      flex-direction: row-reverse; /* Imagem à direita, texto à esquerda */
+    }
+
+
+    /* Ajustes para mobile */
+    @media (max-width: 768px) {
+      .whatsapp-banner, .entrega-banner {
+        padding: 3rem 1rem;
+      }
+
+      .banner-container {
+        flex-wrap: nowrap; /* Tenta manter os elementos na mesma linha */
+        gap: 1rem; /* Reduzi o gap para o mobile */
+        justify-content: center; /* Centraliza o conteúdo */
+      }
+
+      /* PRIMEIRA SEÇÃO: WhatsApp - Texto à esquerda, Imagem à direita */
+      .whatsapp-banner .banner-container {
+        flex-direction: row; /* Mantém a ordem padrão (texto esq, imagem dir) */
+      }
+
+      /* SEGUNDA SEÇÃO: Motoboy - Texto à direita, Imagem à esquerda */
+      .entrega-banner .banner-container {
+        flex-direction: row-reverse; /* Inverte a ordem (texto dir, imagem esq) */
+      }
+
+      .imagem-animada {
+        flex: none; /* Remove a flexibilidade para ter controle total com max-width */
+        min-width: unset; /* Remove o min-width para mobile */
+        max-width: 100px; /* Reduzi o tamanho da imagem no mobile para caber ao lado do texto */
+      }
+
+      .imagem-animada img {
+        max-width: 100px; /* Ajustei o max-width da imagem em si */
+      }
+
+      .texto-banner {
+        min-width: 180px; /* Ajustei o min-width do texto para que ele não fique muito estreito */
+        flex: 1; /* Permite que o texto cresça */
+        text-align: left; /* Mantém o texto alinhado à esquerda */
+      }
+
+      .texto-banner h2 {
+        font-size: 1.6rem; /* Reduzi o tamanho do título */
+        margin-bottom: 0.5rem;
+      }
+
+      .texto-banner p {
+        font-size: 0.95rem; /* Reduzi o tamanho do parágrafo */
+        margin-bottom: 0.8rem;
+      }
+
+      .texto-banner .button {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+        .whatsapp-banner, .entrega-banner {
+            padding: 2rem 0.5rem; /* Reduzi um pouco mais o padding */
+        }
+
+        .banner-container {
+            gap: 0.8rem; /* Espaçamento menor em telas bem pequenas */
+        }
+
+        .imagem-animada {
+            max-width: 80px; /* Imagem menor para telas bem pequenas */
+        }
+
+        .imagem-animada img {
+            max-width: 80px;
+        }
+
+        .texto-banner {
+            min-width: 160px; /* Min-width menor para o texto */
+        }
+
+        .texto-banner h2 {
+            font-size: 1.3rem;
+        }
+
+        .texto-banner p {
+            font-size: 0.85rem;
+        }
+
+        .texto-banner .button {
+            padding: 0.6rem 1rem;
+            font-size: 0.8rem;
+        }
+    }
