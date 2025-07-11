@@ -36,29 +36,26 @@ for (const link of links) {
 
 function toggleHeaderScroll() {
   const header = document.querySelector('#header');
-  const divider = document.querySelector('.divider-1');
   const carrinho = document.querySelector('.carrinho');
+  const categoria = document.getElementById('categoria-destaque');
 
-  if (!header || !divider || !carrinho) return;
+  if (!header || !carrinho || !categoria) return;
 
   const scrollY = window.scrollY;
-  const dividerTop = divider.offsetTop;
+  const categoriaTop = categoria.offsetTop;
   const carrinhoTop = carrinho.offsetTop;
 
-  /*
-    Lógica:
-    - scroll < dividerTop            → navbar pequeno
-    - entre dividerTop e carrinhoTop → navbar grande
-    - scroll >= carrinhoTop          → navbar pequeno
-  */
-  if (scrollY < dividerTop - 300) {
-    header.classList.remove('scroll'); // pequeno
-  } else if (scrollY >= dividerTop - 300 && scrollY < carrinhoTop - 200) {
-    header.classList.add('scroll'); // grande
+  const offsetAtivarNavbarGrande = 100; // ajuste para ativar antes ou depois da div
+
+  if (scrollY < categoriaTop - offsetAtivarNavbarGrande) {
+    header.classList.remove('scroll'); // navbar pequeno
+  } else if (scrollY >= categoriaTop - offsetAtivarNavbarGrande && scrollY < carrinhoTop - 200) {
+    header.classList.add('scroll'); // navbar grande
   } else if (scrollY >= carrinhoTop - 200) {
-    header.classList.remove('scroll'); // pequeno
+    header.classList.remove('scroll'); // navbar pequeno
   }
 }
+
 
 let jaDeslizouCategorias = false;
 
