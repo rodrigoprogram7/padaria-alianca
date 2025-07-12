@@ -103,7 +103,7 @@ body {
         hsla(var(--hue), 36%, 57%, 1)
     );
 }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .divider-1 {
     margin-bottom: 0.5rem;
   }
@@ -114,6 +114,16 @@ body {
   }
 }
 
+@media (max-width: 600px) {
+  #home {
+    padding-bottom: 1.5rem;
+  }
+}
+@media (max-width: 600px) {
+  #home .button {
+    margin-bottom: 0.5rem;
+  }
+}
 
 
 /*======================================== Layout ========================================*/
