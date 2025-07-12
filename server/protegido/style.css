@@ -110,7 +110,7 @@ body {
 
   .whatsapp-banner {
     margin-top: 0;       /* se necessário */
-    padding-top: 1rem;   /* se houver padding */
+    padding-top: 0.5rem;   /* se houver padding */
   }
 }
 
