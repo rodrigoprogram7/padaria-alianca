@@ -103,6 +103,16 @@ body {
         hsla(var(--hue), 36%, 57%, 1)
     );
 }
+@media (max-width: 600px) {
+  .divider-1 {
+    margin-bottom: 1.5rem; /* ou ajuste menor ainda */
+  }
+
+  .whatsapp-banner {
+    margin-top: 0.5rem; /* caso tenha margem superior, você pode reduzir aqui também */
+  }
+}
+
 
 /*======================================== Layout ========================================*/
 .container {
