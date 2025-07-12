@@ -103,7 +103,7 @@ body {
         hsla(var(--hue), 36%, 57%, 1)
     );
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
   .divider-1 {
     margin-bottom: 0.5rem;
   }
