@@ -1779,13 +1779,14 @@ nav {
     }
 
         .categoria-destaque {
-        position: relative;
         background-color: var(--base-color);
         color: white;
         text-align: center;
-        padding: 2rem 1rem 5rem; /* aumente para dar espaço à curva */
-        overflow: hidden;
+        padding: 2rem 1rem 5rem;
+        position: relative;
+        clip-path: ellipse(100% 20% at 50% 100%);
         }
+
 
         .categoria-destaque::after {
         content: "";
