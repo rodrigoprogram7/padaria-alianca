@@ -1782,42 +1782,19 @@ nav {
         background-color: var(--base-color);
         color: white;
         text-align: center;
-        padding: 2rem 1rem 0;
+        padding: 2rem 1rem 3rem;
         position: relative;
-        overflow: hidden;
+        margin-bottom: -2rem;
+        clip-path: ellipse(100% 100% at 50% 100%);
         }
 
-        .categoria-destaque::after {
-        content: "";
-        position: absolute;
-        bottom: -40px; /* posiciona a curva levemente para fora */
-        left: 0;
-        width: 100%;
-        height: 80px; /* altura da curva */
-        background-color: var(--base-color); /* mesma cor da seção */
-        border-top-left-radius: 100% 100%;
-        border-top-right-radius: 100% 100%;
-        z-index: 1;
-        }
+
 
         .categoria-destaque h2 {
         font-size: 2rem;
         font-weight: bold;
         margin: 0;
-        position: relative;
-        z-index: 2;
         }
-        .curva-base {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 80px;
-        display: block;
-        z-index: 1;
-        }
-
-
 
 
 
