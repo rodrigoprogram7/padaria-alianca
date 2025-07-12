@@ -105,12 +105,13 @@ body {
 }
 @media (max-width: 768px) {
   .divider-1 {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0rem;
+    height: 6px; /* se estiver muito alto, ajuste aqui também */
   }
 
   .whatsapp-banner {
-    margin-top: 0;       /* se necessário */
-    padding-top: 0.5rem;   /* se houver padding */
+    margin-top: -1rem; /* força aproximação */
+    padding-top: 1rem; /* reduz espaço interno, se houver */
   }
 }
 
