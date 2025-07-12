@@ -103,17 +103,25 @@ body {
         hsla(var(--hue), 36%, 57%, 1)
     );
 }
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .divider-1 {
-    margin-bottom: 0rem;
-    height: 6px; /* se estiver muito alto, ajuste aqui também */
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+    height: 6px !important;
   }
 
   .whatsapp-banner {
-    margin-top: -1rem; /* força aproximação */
-    padding-top: 1rem; /* reduz espaço interno, se houver */
+    margin-top: -2rem !important;
+    padding-top: 0 !important;
+  }
+
+  /* Zera margens/resets comuns entre as seções */
+  .divider-1 + * {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 }
+
 
 
 
