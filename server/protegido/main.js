@@ -437,26 +437,31 @@ function inicializarCarrosseisManuais() {
       }
 
       // Destacar miniatura e centralizar no scroll
-      thumbs.forEach((img, i) => {
-        img.classList.toggle('ativo', i === current);
-        if (i === current) {
-          img.setAttribute('tabindex', '-1');
-          img.blur();
-        const containerWidth = thumbsContainer.offsetWidth;
-        const scrollOffset = img.offsetLeft - containerWidth / 2 + img.offsetWidth / 2;
+thumbs.forEach((img, i) => {
+  img.classList.toggle('ativo', i === current);
 
-        // Correção fina para a esquerda (primeira miniatura)
-        if (current === 0) {
-          thumbsContainer.scrollTo({ left: img.offsetLeft - 8, behavior: 'smooth' }); // 👈 empurra levemente
-        } else if (current === thumbs.length - 1) {
-          thumbsContainer.scrollTo({ left: thumbsContainer.scrollWidth, behavior: 'smooth' });
-        } else {
-          thumbsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
-        }
+  if (i === current) {
+    img.setAttribute('tabindex', '-1');
+    img.blur();
 
+    // SCROLL CORRIGIDO para o item visível
+    const firstThumb = thumbs[0];
+    const lastThumb = thumbs[thumbs.length - 1];
 
-        }
-      });
+    if (img === firstThumb) {
+      // Força scroll para o início do container
+      thumbsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+    } else if (img === lastThumb) {
+      // Força scroll para o fim
+      thumbsContainer.scrollTo({ left: thumbsContainer.scrollWidth, behavior: 'smooth' });
+    } else {
+      // Centraliza variação ativa
+      const scrollOffset = img.offsetLeft - thumbsContainer.offsetWidth / 2 + img.offsetWidth / 2;
+      thumbsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
+    }
+  }
+});
+
     }
 
     // Bloqueia rolagem indesejada ao clicar nas setas
