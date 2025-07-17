@@ -269,107 +269,127 @@ if (destinoCategoria) {
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
-if (inputPesquisa) {
-  inputPesquisa.addEventListener('input', function () {
-    const termo = inputPesquisa.value.toLowerCase();
-    resultadosPesquisa.innerHTML = '';
+inputPesquisa.addEventListener('input', function () {
+  const termo = inputPesquisa.value.toLowerCase();
+  resultadosPesquisa.innerHTML = '';
 
-    if (termo.length < 2) {
-      resultadosPesquisa.style.display = 'none';
-      return;
+  if (termo.length < 2) {
+    resultadosPesquisa.style.display = 'none';
+    return;
+  }
+
+  const encontrados = [];
+
+  produtos.forEach(prod => {
+    // Produto principal
+    if (prod.nome?.toLowerCase().includes(termo)) {
+      encontrados.push({
+        nomeExibido: prod.nome,
+        nomeBuscado: prod.nome,
+        categoria: prod.categoria,
+        variacao: null
+      });
     }
 
-    const encontrados = [];
-
-    produtos.forEach(prod => {
-      // Nome principal
-      if (prod.nome?.toLowerCase().includes(termo)) {
-        encontrados.push({
-          nome: prod.nome,
-          categoria: prod.categoria,
-          variacao: null
-        });
-      }
-
-      // Variações
-      if (Array.isArray(prod.variacoes)) {
-        prod.variacoes.forEach(v => {
-          if (v.nome?.toLowerCase().includes(termo)) {
-            encontrados.push({
-              nome: v.nome,
-              categoria: prod.categoria,
-              variacao: v.nome,
-              produtoOriginal: prod
-            });
-          }
-        });
-      }
-    });
-
-    if (encontrados.length > 0) {
-      resultadosPesquisa.style.display = 'block';
-
-      encontrados.forEach(item => {
-        const li = document.createElement('li');
-        li.textContent = item.nome;
-
-        li.addEventListener('click', () => {
-          inputPesquisa.value = '';
-          resultadosPesquisa.style.display = 'none';
-
-          const nomeBuscado = item.nome.toLowerCase();
-          const categoria = item.categoria?.toLowerCase();
-
-          filtrarCategoria(categoria);
-
-          setTimeout(() => {
-            const produtosDOM = document.querySelectorAll('.produto');
-
-            const alvo = [...produtosDOM].find(el =>
-              el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
-            );
-
-            if (alvo) {
-              // Scroll para o card
-              const y = alvo.getBoundingClientRect().top + window.scrollY - 250;
-              window.scrollTo({ top: y, behavior: 'smooth' });
-
-              alvo.classList.add('highlight');
-              setTimeout(() => alvo.classList.remove('highlight'), 2000);
-
-              // Se for carrossel, avançar para a variação correta
-              if (alvo.classList.contains('carrossel') && item.variacao) {
-                const variacoes = JSON.parse(alvo.getAttribute('data-variacoes') || '[]');
-                const index = variacoes.findIndex(v => v.nome.toLowerCase() === item.variacao.toLowerCase());
-
-                if (index >= 0) {
-                  const btnNext = alvo.querySelector('.carousel-next');
-                  let tentativas = 0;
-
-                  // simula avanço de carrossel até o item desejado
-                  const avançar = () => {
-                    if (tentativas >= variacoes.length) return;
-                    const nomeAtual = alvo.getAttribute('data-nome').toLowerCase();
-                    if (nomeAtual === item.variacao.toLowerCase()) return;
-                    btnNext?.click();
-                    tentativas++;
-                    setTimeout(avançar, 200);
-                  };
-
-                  avançar();
-                }
-              }
-            }
-          }, 400);
-        });
-
-        resultadosPesquisa.appendChild(li);
+    // Variações
+    if (Array.isArray(prod.variacoes)) {
+      prod.variacoes.forEach(variacao => {
+        if (variacao.nome?.toLowerCase().includes(termo)) {
+          encontrados.push({
+            nomeExibido: `${prod.nome} - ${variacao.nome}`, // exemplo: Bolo - Chocolate
+            nomeBuscado: variacao.nome,
+            categoria: prod.categoria,
+            variacao: variacao.nome
+          });
+        }
       });
-    } else {
-      resultadosPesquisa.style.display = 'none';
     }
   });
-}
+
+  if (encontrados.length > 0) {
+    resultadosPesquisa.style.display = 'block';
+
+    encontrados.forEach(item => {
+      const li = document.createElement('li');
+      li.textContent = item.nomeExibido;
+
+      li.addEventListener('click', () => {
+        inputPesquisa.value = '';
+        resultadosPesquisa.style.display = 'none';
+
+        const categoria = item.categoria?.toLowerCase();
+        const nomeBuscado = item.nomeBuscado.toLowerCase();
+
+        if (!categoria) return;
+
+        filtrarCategoria(categoria);
+
+        setTimeout(() => {
+          const produtosDOM = document.querySelectorAll('.produto');
+
+          const alvo = [...produtosDOM].find(el =>
+            el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
+          );
+
+          if (!alvo) return;
+
+          // Scroll até o card
+          const y = alvo.getBoundingClientRect().top + window.scrollY - 250;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+
+          alvo.classList.add('highlight');
+          setTimeout(() => alvo.classList.remove('highlight'), 2000);
+
+          // ✅ Se for carrossel, ativar a variação correta
+          if (alvo.classList.contains('carrossel') && item.variacao) {
+            const variacoes = JSON.parse(alvo.getAttribute('data-variacoes') || '[]');
+            const imgGrande = alvo.querySelector('.imagem-grande-wrapper img');
+            const nomeProduto = alvo.querySelector('h3');
+            const precoProduto = alvo.querySelector('p');
+
+            const index = variacoes.findIndex(v =>
+              v.nome.toLowerCase() === item.variacao.toLowerCase()
+            );
+
+            if (index >= 0) {
+              // Atualiza manualmente a variação correta (sem clicar)
+              const v = variacoes[index];
+              imgGrande.src = v.imagem;
+              nomeProduto.textContent = v.nome;
+              precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2).replace('.', ',')}`;
+              alvo.setAttribute('data-nome', v.nome);
+              alvo.setAttribute('data-preco', v.preco);
+
+              // Atualiza destaque na miniatura
+              const thumbs = alvo.querySelectorAll('.carousel-thumbs img');
+              thumbs.forEach((img, i) => {
+                img.classList.toggle('ativo', i === index);
+                if (i === index) {
+                  img.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+                }
+              });
+
+              // Resetar quantidade e subtotal
+              const inputQuantidade = alvo.querySelector('.quantidade');
+              if (inputQuantidade) inputQuantidade.value = 1;
+
+              const subtotalBox = alvo.querySelector('.subtotal-preview');
+              if (subtotalBox) {
+                subtotalBox.textContent = '';
+                subtotalBox.style.display = 'none';
+              }
+            }
+          }
+        }, 300);
+      });
+
+      resultadosPesquisa.appendChild(li);
+    });
+  } else {
+    resultadosPesquisa.style.display = 'none';
+  }
+});
+
 
 
 
