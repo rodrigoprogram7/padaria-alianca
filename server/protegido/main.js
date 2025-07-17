@@ -449,15 +449,20 @@ function inicializarCarrosseisManuais() {
 }
 
 
-    prevBtn.addEventListener('click', () => {
-      current = (current - 1 + variacoes.length) % variacoes.length;
-      updateProduto();
-    });
+prevBtn.addEventListener('click', (e) => {
+  e.preventDefault();    // ✅ bloqueia comportamento de clique que causa scroll
+  e.stopPropagation();   // ✅ evita propagação que possa causar foco/scroll
+  current = (current - 1 + variacoes.length) % variacoes.length;
+  updateProduto();
+});
 
-    nextBtn.addEventListener('click', () => {
-      current = (current + 1) % variacoes.length;
-      updateProduto();
-    });
+nextBtn.addEventListener('click', (e) => {
+  e.preventDefault();    // ✅ mesmo aqui
+  e.stopPropagation();
+  current = (current + 1) % variacoes.length;
+  updateProduto();
+});
+
 
     thumbs.forEach((thumb, index) => {
       thumb.addEventListener('click', () => {
