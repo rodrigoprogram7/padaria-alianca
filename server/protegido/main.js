@@ -439,7 +439,13 @@ function inicializarCarrosseisManuais() {
   }
 
   // Atualizar destaque da miniatura
-  thumbs.forEach((img, i) => img.classList.toggle('ativo', i === current));
+  thumbs.forEach((img, i) => {
+  img.classList.toggle('ativo', i === current);
+  if (i === current) {
+    img.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+  }
+});
+
 }
 
 
