@@ -417,60 +417,58 @@ function inicializarCarrosseisManuais() {
     let current = 0;
     const thumbs = Array.from(thumbsContainer.children);
 
-function updateProduto() {
-  const v = variacoes[current];
-  imgGrande.src = v.imagem;
-  nomeProduto.textContent = v.nome;
-  precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2).replace('.', ',')}`;
-  produto.setAttribute('data-nome', v.nome);
-  produto.setAttribute('data-preco', v.preco);
+    function updateProduto() {
+      const v = variacoes[current];
+      imgGrande.src = v.imagem;
+      nomeProduto.textContent = v.nome;
+      precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2).replace('.', ',')}`;
+      produto.setAttribute('data-nome', v.nome);
+      produto.setAttribute('data-preco', v.preco);
 
-  // Resetar quantidade ao trocar variação
-  const inputQuantidade = produto.querySelector('.quantidade');
-  if (inputQuantidade) inputQuantidade.value = 1;
+      // Resetar quantidade
+      const inputQuantidade = produto.querySelector('.quantidade');
+      if (inputQuantidade) inputQuantidade.value = 1;
 
-  // Ocultar subtotal ao trocar variação
-  const subtotalBox = produto.querySelector('.subtotal-preview');
-  if (subtotalBox) {
-    subtotalBox.textContent = '';
-    subtotalBox.style.display = 'none';
-  }
+      // Esconder subtotal
+      const subtotalBox = produto.querySelector('.subtotal-preview');
+      if (subtotalBox) {
+        subtotalBox.textContent = '';
+        subtotalBox.style.display = 'none';
+      }
 
-  // Atualizar destaque da miniatura
-  thumbs.forEach((img, i) => {
-    img.classList.toggle('ativo', i === current);
-    if (i === current) {
-      // Evita foco automático que causa rolagem
-      img.setAttribute('tabindex', '-1');
-      img.blur();
-      // Scroll apenas do container, não da página
-      thumbsContainer.scrollTo({
-        left: img.offsetLeft - thumbsContainer.offsetWidth / 2 + img.offsetWidth / 2,
-        behavior: 'smooth'
+      // Destacar miniatura e centralizar no scroll
+      thumbs.forEach((img, i) => {
+        img.classList.toggle('ativo', i === current);
+        if (i === current) {
+          img.setAttribute('tabindex', '-1');
+          img.blur();
+          thumbsContainer.scrollTo({
+            left: img.offsetLeft - thumbsContainer.offsetWidth / 2 + img.offsetWidth / 2,
+            behavior: 'smooth'
+          });
+        }
       });
     }
-  });
-}
 
+    // Bloqueia rolagem indesejada ao clicar nas setas
+    prevBtn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      current = (current - 1 + variacoes.length) % variacoes.length;
+      updateProduto();
+    });
 
-
-prevBtn.addEventListener('click', (e) => {
-  e.preventDefault();    // ✅ bloqueia comportamento de clique que causa scroll
-  e.stopPropagation();   // ✅ evita propagação que possa causar foco/scroll
-  current = (current - 1 + variacoes.length) % variacoes.length;
-  updateProduto();
-});
-
-nextBtn.addEventListener('click', (e) => {
-  e.preventDefault();    // ✅ mesmo aqui
-  e.stopPropagation();
-  current = (current + 1) % variacoes.length;
-  updateProduto();
-});
-
+    nextBtn.addEventListener('click', e => {
+      e.preventDefault();
+      e.stopPropagation();
+      current = (current + 1) % variacoes.length;
+      updateProduto();
+    });
 
     thumbs.forEach((thumb, index) => {
-      thumb.addEventListener('click', () => {
+      thumb.addEventListener('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
         current = index;
         updateProduto();
       });
@@ -479,6 +477,7 @@ nextBtn.addEventListener('click', (e) => {
     updateProduto();
   });
 }
+
 
 function selecionarProduto(nomeProduto) {
   const produto = document.querySelector(`.produto[data-nome="${nomeProduto.toLowerCase()}"]`);
