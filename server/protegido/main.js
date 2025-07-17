@@ -417,7 +417,7 @@ function inicializarCarrosseisManuais() {
     let current = 0;
     const thumbs = Array.from(thumbsContainer.children);
 
-    function updateProduto() {
+function updateProduto() {
   const v = variacoes[current];
   imgGrande.src = v.imagem;
   nomeProduto.textContent = v.nome;
@@ -427,9 +427,7 @@ function inicializarCarrosseisManuais() {
 
   // Resetar quantidade ao trocar variação
   const inputQuantidade = produto.querySelector('.quantidade');
-  if (inputQuantidade) {
-    inputQuantidade.value = 1;
-  }
+  if (inputQuantidade) inputQuantidade.value = 1;
 
   // Ocultar subtotal ao trocar variação
   const subtotalBox = produto.querySelector('.subtotal-preview');
@@ -440,13 +438,20 @@ function inicializarCarrosseisManuais() {
 
   // Atualizar destaque da miniatura
   thumbs.forEach((img, i) => {
-  img.classList.toggle('ativo', i === current);
-  if (i === current) {
-    img.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-  }
-});
-
+    img.classList.toggle('ativo', i === current);
+    if (i === current) {
+      // Evita foco automático que causa rolagem
+      img.setAttribute('tabindex', '-1');
+      img.blur();
+      // Scroll apenas do container, não da página
+      thumbsContainer.scrollTo({
+        left: img.offsetLeft - thumbsContainer.offsetWidth / 2 + img.offsetWidth / 2,
+        behavior: 'smooth'
+      });
+    }
+  });
 }
+
 
 
 prevBtn.addEventListener('click', (e) => {
