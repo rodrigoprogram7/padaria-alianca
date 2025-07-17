@@ -279,109 +279,88 @@ if (inputPesquisa) {
       return;
     }
 
-    const encontrados = produtos.filter(prod => {
-      const nomeProduto = prod.nome?.toLowerCase() || '';
-      if (nomeProduto.includes(termo)) return true;
+    const encontrados = [];
 
-      if (Array.isArray(prod.variacoes)) {
-        return prod.variacoes.some(v => v.nome?.toLowerCase().includes(termo));
+    produtos.forEach(prod => {
+      // Nome principal
+      if (prod.nome?.toLowerCase().includes(termo)) {
+        encontrados.push({
+          nome: prod.nome,
+          categoria: prod.categoria,
+          variacao: null
+        });
       }
 
-      return false;
+      // Variações
+      if (Array.isArray(prod.variacoes)) {
+        prod.variacoes.forEach(v => {
+          if (v.nome?.toLowerCase().includes(termo)) {
+            encontrados.push({
+              nome: v.nome,
+              categoria: prod.categoria,
+              variacao: v.nome,
+              produtoOriginal: prod
+            });
+          }
+        });
+      }
     });
 
     if (encontrados.length > 0) {
       resultadosPesquisa.style.display = 'block';
 
-      encontrados.forEach(prod => {
-        // 🟨 Nome que será exibido na sugestão
-        let nomeExibido = prod.nome;
-        if (!nomeExibido && Array.isArray(prod.variacoes)) {
-          const variacao = prod.variacoes.find(v =>
-            v.nome?.toLowerCase().includes(termo)
-          );
-          nomeExibido = variacao?.nome || prod.variacoes[0]?.nome || 'Produto';
-        }
-
+      encontrados.forEach(item => {
         const li = document.createElement('li');
-        li.textContent = nomeExibido;
+        li.textContent = item.nome;
 
         li.addEventListener('click', () => {
           inputPesquisa.value = '';
           resultadosPesquisa.style.display = 'none';
 
-          // 🟨 Nome real para buscar no DOM
-          let nomeBuscado = '';
-          if (prod.nome) {
-            nomeBuscado = prod.nome.toLowerCase();
-          } else if (Array.isArray(prod.variacoes)) {
-            const variacao = prod.variacoes.find(v =>
-              v.nome?.toLowerCase().includes(termo)
-            );
-            nomeBuscado = variacao?.nome?.toLowerCase() || prod.variacoes[0]?.nome?.toLowerCase();
-          }
+          const nomeBuscado = item.nome.toLowerCase();
+          const categoria = item.categoria?.toLowerCase();
 
-         const aplicarScroll = () => {
-          const tentarScroll = () => {
+          filtrarCategoria(categoria);
+
+          setTimeout(() => {
             const produtosDOM = document.querySelectorAll('.produto');
+
             const alvo = [...produtosDOM].find(el =>
               el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
             );
 
             if (alvo) {
-              const y = alvo.getBoundingClientRect().top + window.scrollY - 250; // -250 para deixar com margem no topo
+              // Scroll para o card
+              const y = alvo.getBoundingClientRect().top + window.scrollY - 250;
               window.scrollTo({ top: y, behavior: 'smooth' });
 
               alvo.classList.add('highlight');
               setTimeout(() => alvo.classList.remove('highlight'), 2000);
-              return true;
-            }
-            return false;
-          };
 
-          let tentativas = 0;
-          const intervalo = setInterval(() => {
-            tentativas++;
-            const encontrou = tentarScroll();
-            if (encontrou || tentativas >= 20) {
-              clearInterval(intervalo);
-            }
-          }, 200); // tenta 20x em até 4 segundos
-        };
+              // Se for carrossel, avançar para a variação correta
+              if (alvo.classList.contains('carrossel') && item.variacao) {
+                const variacoes = JSON.parse(alvo.getAttribute('data-variacoes') || '[]');
+                const index = variacoes.findIndex(v => v.nome.toLowerCase() === item.variacao.toLowerCase());
 
+                if (index >= 0) {
+                  const btnNext = alvo.querySelector('.carousel-next');
+                  let tentativas = 0;
 
+                  // simula avanço de carrossel até o item desejado
+                  const avançar = () => {
+                    if (tentativas >= variacoes.length) return;
+                    const nomeAtual = alvo.getAttribute('data-nome').toLowerCase();
+                    if (nomeAtual === item.variacao.toLowerCase()) return;
+                    btnNext?.click();
+                    tentativas++;
+                    setTimeout(avançar, 200);
+                  };
 
-
-
-          const categoria = prod.categoria?.toLowerCase();
-          if (categoria) {
-            filtrarCategoria(categoria);
-
-            setTimeout(() => {
-              requestAnimationFrame(() => {
-                aplicarScroll();
-
-                // Scroll horizontal da barra de categorias
-                const btnCategoria = document.querySelector(`.filtro-btn[data-categoria="${categoria}"]`);
-                const barraCategorias = document.querySelector('.categorias-navbar');
-
-                if (btnCategoria && barraCategorias) {
-                  const btnLeft = btnCategoria.offsetLeft;
-                  const btnWidth = btnCategoria.offsetWidth;
-                  const barraWidth = barraCategorias.offsetWidth;
-
-                  const scrollTo = btnLeft - (barraWidth / 2) + (btnWidth / 2);
-
-                  barraCategorias.scrollTo({
-                    left: scrollTo,
-                    behavior: 'smooth'
-                  });
+                  avançar();
                 }
-              });
-            }, 300);
-          } else {
-            aplicarScroll();
-          }
+              }
+            }
+          }, 400);
         });
 
         resultadosPesquisa.appendChild(li);
@@ -391,6 +370,7 @@ if (inputPesquisa) {
     }
   });
 }
+
 
 
 
