@@ -204,6 +204,8 @@ function renderizarCardComVariacoes(prod) {
   card.setAttribute('data-tipo', prod.tipo || 'unidade');
   card.setAttribute('data-variacoes', JSON.stringify(prod.variacoes));
   card.setAttribute('data-nome', primeira.nome);
+  div.setAttribute('data-nome-original', prod.nome);
+
 
   card.innerHTML = `
     <div class="produto-img-wrapper">
@@ -269,128 +271,61 @@ if (destinoCategoria) {
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
-if (inputPesquisa) {
-  inputPesquisa.addEventListener('input', function () {
-    const termo = inputPesquisa.value.toLowerCase();
-    resultadosPesquisa.innerHTML = '';
+li.addEventListener('click', () => {
+  inputPesquisa.value = '';
+  resultadosPesquisa.style.display = 'none';
 
-    if (termo.length < 2) {
-      resultadosPesquisa.style.display = 'none';
-      return;
-    }
+  const categoria = item.categoria?.toLowerCase();
+  const nomeVariacao = item.variacao?.toLowerCase();
+  const nomeProdutoBase = item.produtoOriginal?.nome?.toLowerCase() || item.nomeBuscado.toLowerCase();
 
-    const encontrados = produtos.filter(prod => {
-      const nomeProduto = prod.nome?.toLowerCase() || '';
-      if (nomeProduto.includes(termo)) return true;
+  if (!categoria) return;
 
-      if (Array.isArray(prod.variacoes)) {
-        return prod.variacoes.some(v => v.nome?.toLowerCase().includes(termo));
-      }
+  filtrarCategoria(categoria);
 
-      return false;
-    });
+  // Espera os produtos aparecerem
+  setTimeout(() => {
+    const cards = [...document.querySelectorAll('.produto.carrossel')];
 
-    if (encontrados.length > 0) {
-      resultadosPesquisa.style.display = 'block';
+    const alvo = cards.find(el =>
+      el.getAttribute('data-nome-original')?.toLowerCase() === nomeProdutoBase
+    );
 
-      encontrados.forEach(prod => {
-        // 🟨 Nome que será exibido na sugestão
-        let nomeExibido = prod.nome;
-        if (!nomeExibido && Array.isArray(prod.variacoes)) {
-          const variacao = prod.variacoes.find(v =>
-            v.nome?.toLowerCase().includes(termo)
-          );
-          nomeExibido = variacao?.nome || prod.variacoes[0]?.nome || 'Produto';
-        }
+    if (alvo) {
+      // Scroll até o card
+      const y = alvo.getBoundingClientRect().top + window.scrollY - 250;
+      window.scrollTo({ top: y, behavior: 'smooth' });
 
-        const li = document.createElement('li');
-        li.textContent = nomeExibido;
+      alvo.classList.add('highlight');
+      setTimeout(() => alvo.classList.remove('highlight'), 2000);
 
-        li.addEventListener('click', () => {
-          inputPesquisa.value = '';
-          resultadosPesquisa.style.display = 'none';
+      // Forçar o carrossel até a variação desejada
+      if (nomeVariacao) {
+        const variacoes = JSON.parse(alvo.getAttribute('data-variacoes') || '[]');
+        const index = variacoes.findIndex(v =>
+          v.nome.toLowerCase() === nomeVariacao
+        );
 
-          // 🟨 Nome real para buscar no DOM
-          let nomeBuscado = '';
-          if (prod.nome) {
-            nomeBuscado = prod.nome.toLowerCase();
-          } else if (Array.isArray(prod.variacoes)) {
-            const variacao = prod.variacoes.find(v =>
-              v.nome?.toLowerCase().includes(termo)
-            );
-            nomeBuscado = variacao?.nome?.toLowerCase() || prod.variacoes[0]?.nome?.toLowerCase();
-          }
+        if (index >= 0) {
+          const btnNext = alvo.querySelector('.carousel-next');
+          let tentativas = 0;
 
-         const aplicarScroll = () => {
-          const tentarScroll = () => {
-            const produtosDOM = document.querySelectorAll('.produto');
-            const alvo = [...produtosDOM].find(el =>
-              el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
-            );
-
-            if (alvo) {
-              const y = alvo.getBoundingClientRect().top + window.scrollY - 250; // -250 para deixar com margem no topo
-              window.scrollTo({ top: y, behavior: 'smooth' });
-
-              alvo.classList.add('highlight');
-              setTimeout(() => alvo.classList.remove('highlight'), 2000);
-              return true;
-            }
-            return false;
+          const avançar = () => {
+            if (tentativas >= variacoes.length) return;
+            const nomeAtual = alvo.getAttribute('data-nome')?.toLowerCase();
+            if (nomeAtual === nomeVariacao) return;
+            btnNext?.click();
+            tentativas++;
+            setTimeout(avançar, 200);
           };
 
-          let tentativas = 0;
-          const intervalo = setInterval(() => {
-            tentativas++;
-            const encontrou = tentarScroll();
-            if (encontrou || tentativas >= 20) {
-              clearInterval(intervalo);
-            }
-          }, 200); // tenta 20x em até 4 segundos
-        };
-
-
-
-
-
-          const categoria = prod.categoria?.toLowerCase();
-          if (categoria) {
-            filtrarCategoria(categoria);
-
-            setTimeout(() => {
-              requestAnimationFrame(() => {
-                aplicarScroll();
-
-                // Scroll horizontal da barra de categorias
-                const btnCategoria = document.querySelector(`.filtro-btn[data-categoria="${categoria}"]`);
-                const barraCategorias = document.querySelector('.categorias-navbar');
-
-                if (btnCategoria && barraCategorias) {
-                  const btnLeft = btnCategoria.offsetLeft;
-                  const btnWidth = btnCategoria.offsetWidth;
-                  const barraWidth = barraCategorias.offsetWidth;
-
-                  const scrollTo = btnLeft - (barraWidth / 2) + (btnWidth / 2);
-
-                  barraCategorias.scrollTo({
-                    left: scrollTo,
-                    behavior: 'smooth'
-                  });
-                }
-              });
-            }, 300);
-          } else {
-            aplicarScroll();
-          }
-        });
-
-        resultadosPesquisa.appendChild(li);
-      });
-    } else {
-      resultadosPesquisa.style.display = 'none';
+          avançar();
+        }
+      }
     }
-  });
-}
+  }, 500);
+});
+
 
 
 
