@@ -269,126 +269,87 @@ if (destinoCategoria) {
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
-inputPesquisa.addEventListener('input', function () {
-  const termo = inputPesquisa.value.toLowerCase();
-  resultadosPesquisa.innerHTML = '';
+li.addEventListener('click', () => {
+  inputPesquisa.value = '';
+  resultadosPesquisa.style.display = 'none';
 
-  if (termo.length < 2) {
-    resultadosPesquisa.style.display = 'none';
-    return;
-  }
+  const categoria = item.categoria?.toLowerCase();
+  const nomeBuscado = item.nomeBuscado.toLowerCase();
 
-  const encontrados = [];
+  if (!categoria) return;
 
-  produtos.forEach(prod => {
-    // Produto principal
-    if (prod.nome?.toLowerCase().includes(termo)) {
-      encontrados.push({
-        nomeExibido: prod.nome,
-        nomeBuscado: prod.nome,
-        categoria: prod.categoria,
-        variacao: null
-      });
-    }
+  filtrarCategoria(categoria);
 
-    // Variações
-    if (Array.isArray(prod.variacoes)) {
-      prod.variacoes.forEach(variacao => {
-        if (variacao.nome?.toLowerCase().includes(termo)) {
-          encontrados.push({
-            nomeExibido: `${prod.nome} - ${variacao.nome}`, // exemplo: Bolo - Chocolate
-            nomeBuscado: variacao.nome,
-            categoria: prod.categoria,
-            variacao: variacao.nome
-          });
-        }
-      });
-    }
-  });
+  // Espera até o produto renderizar
+  setTimeout(() => {
+    let tentativas = 0;
+    const maxTentativas = 20;
 
-  if (encontrados.length > 0) {
-    resultadosPesquisa.style.display = 'block';
+    const procurarProduto = setInterval(() => {
+      const produtosDOM = document.querySelectorAll('.produto');
+      const alvo = [...produtosDOM].find(el =>
+        el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
+      );
 
-    encontrados.forEach(item => {
-      const li = document.createElement('li');
-      li.textContent = item.nomeExibido;
+      if (alvo) {
+        clearInterval(procurarProduto);
 
-      li.addEventListener('click', () => {
-        inputPesquisa.value = '';
-        resultadosPesquisa.style.display = 'none';
+        // Scroll até o card
+        const y = alvo.getBoundingClientRect().top + window.scrollY - 250;
+        window.scrollTo({ top: y, behavior: 'smooth' });
 
-        const categoria = item.categoria?.toLowerCase();
-        const nomeBuscado = item.nomeBuscado.toLowerCase();
+        alvo.classList.add('highlight');
+        setTimeout(() => alvo.classList.remove('highlight'), 2000);
 
-        if (!categoria) return;
+        // ✅ Se for carrossel, ativar a variação correta
+        if (alvo.classList.contains('carrossel') && item.variacao) {
+          const variacoes = JSON.parse(alvo.getAttribute('data-variacoes') || '[]');
+          const imgGrande = alvo.querySelector('.imagem-grande-wrapper img');
+          const nomeProduto = alvo.querySelector('h3');
+          const precoProduto = alvo.querySelector('p');
 
-        filtrarCategoria(categoria);
-
-        setTimeout(() => {
-          const produtosDOM = document.querySelectorAll('.produto');
-
-          const alvo = [...produtosDOM].find(el =>
-            el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
+          const index = variacoes.findIndex(v =>
+            v.nome.toLowerCase() === item.variacao.toLowerCase()
           );
 
-          if (!alvo) return;
+          if (index >= 0) {
+            const v = variacoes[index];
+            imgGrande.src = v.imagem;
+            nomeProduto.textContent = v.nome;
+            precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2).replace('.', ',')}`;
+            alvo.setAttribute('data-nome', v.nome);
+            alvo.setAttribute('data-preco', v.preco);
 
-          // Scroll até o card
-          const y = alvo.getBoundingClientRect().top + window.scrollY - 250;
-          window.scrollTo({ top: y, behavior: 'smooth' });
-
-          alvo.classList.add('highlight');
-          setTimeout(() => alvo.classList.remove('highlight'), 2000);
-
-          // ✅ Se for carrossel, ativar a variação correta
-          if (alvo.classList.contains('carrossel') && item.variacao) {
-            const variacoes = JSON.parse(alvo.getAttribute('data-variacoes') || '[]');
-            const imgGrande = alvo.querySelector('.imagem-grande-wrapper img');
-            const nomeProduto = alvo.querySelector('h3');
-            const precoProduto = alvo.querySelector('p');
-
-            const index = variacoes.findIndex(v =>
-              v.nome.toLowerCase() === item.variacao.toLowerCase()
-            );
-
-            if (index >= 0) {
-              // Atualiza manualmente a variação correta (sem clicar)
-              const v = variacoes[index];
-              imgGrande.src = v.imagem;
-              nomeProduto.textContent = v.nome;
-              precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2).replace('.', ',')}`;
-              alvo.setAttribute('data-nome', v.nome);
-              alvo.setAttribute('data-preco', v.preco);
-
-              // Atualiza destaque na miniatura
-              const thumbs = alvo.querySelectorAll('.carousel-thumbs img');
-              thumbs.forEach((img, i) => {
-                img.classList.toggle('ativo', i === index);
-                if (i === index) {
-                  img.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-                }
-              });
-
-              // Resetar quantidade e subtotal
-              const inputQuantidade = alvo.querySelector('.quantidade');
-              if (inputQuantidade) inputQuantidade.value = 1;
-
-              const subtotalBox = alvo.querySelector('.subtotal-preview');
-              if (subtotalBox) {
-                subtotalBox.textContent = '';
-                subtotalBox.style.display = 'none';
+            const thumbs = alvo.querySelectorAll('.carousel-thumbs img');
+            thumbs.forEach((img, i) => {
+              img.classList.toggle('ativo', i === index);
+              if (i === index) {
+                img.scrollIntoView({ behavior: 'smooth', inline: 'center' });
               }
+            });
+
+            // Resetar quantidade e subtotal
+            const inputQuantidade = alvo.querySelector('.quantidade');
+            if (inputQuantidade) inputQuantidade.value = 1;
+
+            const subtotalBox = alvo.querySelector('.subtotal-preview');
+            if (subtotalBox) {
+              subtotalBox.textContent = '';
+              subtotalBox.style.display = 'none';
             }
           }
-        }, 300);
-      });
+        }
 
-      resultadosPesquisa.appendChild(li);
-    });
-  } else {
-    resultadosPesquisa.style.display = 'none';
-  }
+      } else {
+        tentativas++;
+        if (tentativas >= maxTentativas) {
+          clearInterval(procurarProduto);
+        }
+      }
+    }, 200); // tenta por até 4 segundos
+  }, 300); // espera inicial após filtrar categoria
 });
+
 
 
 
