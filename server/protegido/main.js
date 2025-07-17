@@ -442,10 +442,20 @@ function inicializarCarrosseisManuais() {
         if (i === current) {
           img.setAttribute('tabindex', '-1');
           img.blur();
-          thumbsContainer.scrollTo({
-            left: img.offsetLeft - thumbsContainer.offsetWidth / 2 + img.offsetWidth / 2,
-            behavior: 'smooth'
-          });
+         const containerWidth = thumbsContainer.offsetWidth;
+        const scrollOffset = img.offsetLeft - containerWidth / 2 + img.offsetWidth / 2;
+
+        if (current === 0) {
+          // Primeiro item: alinha à esquerda
+          thumbsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+        } else if (current === thumbs.length - 1) {
+          // Último item: alinha à direita total
+          thumbsContainer.scrollTo({ left: thumbsContainer.scrollWidth, behavior: 'smooth' });
+        } else {
+          // Qualquer outro: centraliza
+          thumbsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
+        }
+
         }
       });
     }
