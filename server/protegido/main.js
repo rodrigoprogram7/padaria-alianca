@@ -269,89 +269,128 @@ if (destinoCategoria) {
 const inputPesquisa = document.getElementById('pesquisa');
 const resultadosPesquisa = document.getElementById('resultados-pesquisa');
 
-li.addEventListener('click', () => {
-  inputPesquisa.value = '';
-  resultadosPesquisa.style.display = 'none';
+if (inputPesquisa) {
+  inputPesquisa.addEventListener('input', function () {
+    const termo = inputPesquisa.value.toLowerCase();
+    resultadosPesquisa.innerHTML = '';
 
-  const categoria = item.categoria?.toLowerCase();
-  const nomeBuscado = item.nomeBuscado.toLowerCase();
+    if (termo.length < 2) {
+      resultadosPesquisa.style.display = 'none';
+      return;
+    }
 
-  if (!categoria) return;
+    const encontrados = produtos.filter(prod => {
+      const nomeProduto = prod.nome?.toLowerCase() || '';
+      if (nomeProduto.includes(termo)) return true;
 
-  filtrarCategoria(categoria);
-
-  // Espera até o produto renderizar
-  setTimeout(() => {
-    let tentativas = 0;
-    const maxTentativas = 20;
-
-    const procurarProduto = setInterval(() => {
-      const produtosDOM = document.querySelectorAll('.produto');
-      const alvo = [...produtosDOM].find(el =>
-        el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
-      );
-
-      if (alvo) {
-        clearInterval(procurarProduto);
-
-        // Scroll até o card
-        const y = alvo.getBoundingClientRect().top + window.scrollY - 250;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-
-        alvo.classList.add('highlight');
-        setTimeout(() => alvo.classList.remove('highlight'), 2000);
-
-        // ✅ Se for carrossel, ativar a variação correta
-        if (alvo.classList.contains('carrossel') && item.variacao) {
-          const variacoes = JSON.parse(alvo.getAttribute('data-variacoes') || '[]');
-          const imgGrande = alvo.querySelector('.imagem-grande-wrapper img');
-          const nomeProduto = alvo.querySelector('h3');
-          const precoProduto = alvo.querySelector('p');
-
-          const index = variacoes.findIndex(v =>
-            v.nome.toLowerCase() === item.variacao.toLowerCase()
-          );
-
-          if (index >= 0) {
-            const v = variacoes[index];
-            imgGrande.src = v.imagem;
-            nomeProduto.textContent = v.nome;
-            precoProduto.textContent = `R$ ${parseFloat(v.preco).toFixed(2).replace('.', ',')}`;
-            alvo.setAttribute('data-nome', v.nome);
-            alvo.setAttribute('data-preco', v.preco);
-
-            const thumbs = alvo.querySelectorAll('.carousel-thumbs img');
-            thumbs.forEach((img, i) => {
-              img.classList.toggle('ativo', i === index);
-              if (i === index) {
-                img.scrollIntoView({ behavior: 'smooth', inline: 'center' });
-              }
-            });
-
-            // Resetar quantidade e subtotal
-            const inputQuantidade = alvo.querySelector('.quantidade');
-            if (inputQuantidade) inputQuantidade.value = 1;
-
-            const subtotalBox = alvo.querySelector('.subtotal-preview');
-            if (subtotalBox) {
-              subtotalBox.textContent = '';
-              subtotalBox.style.display = 'none';
-            }
-          }
-        }
-
-      } else {
-        tentativas++;
-        if (tentativas >= maxTentativas) {
-          clearInterval(procurarProduto);
-        }
+      if (Array.isArray(prod.variacoes)) {
+        return prod.variacoes.some(v => v.nome?.toLowerCase().includes(termo));
       }
-    }, 200); // tenta por até 4 segundos
-  }, 300); // espera inicial após filtrar categoria
-});
+
+      return false;
+    });
+
+    if (encontrados.length > 0) {
+      resultadosPesquisa.style.display = 'block';
+
+      encontrados.forEach(prod => {
+        // 🟨 Nome que será exibido na sugestão
+        let nomeExibido = prod.nome;
+        if (!nomeExibido && Array.isArray(prod.variacoes)) {
+          const variacao = prod.variacoes.find(v =>
+            v.nome?.toLowerCase().includes(termo)
+          );
+          nomeExibido = variacao?.nome || prod.variacoes[0]?.nome || 'Produto';
+        }
+
+        const li = document.createElement('li');
+        li.textContent = nomeExibido;
+
+        li.addEventListener('click', () => {
+          inputPesquisa.value = '';
+          resultadosPesquisa.style.display = 'none';
+
+          // 🟨 Nome real para buscar no DOM
+          let nomeBuscado = '';
+          if (prod.nome) {
+            nomeBuscado = prod.nome.toLowerCase();
+          } else if (Array.isArray(prod.variacoes)) {
+            const variacao = prod.variacoes.find(v =>
+              v.nome?.toLowerCase().includes(termo)
+            );
+            nomeBuscado = variacao?.nome?.toLowerCase() || prod.variacoes[0]?.nome?.toLowerCase();
+          }
+
+         const aplicarScroll = () => {
+          const tentarScroll = () => {
+            const produtosDOM = document.querySelectorAll('.produto');
+            const alvo = [...produtosDOM].find(el =>
+              el.getAttribute('data-nome')?.toLowerCase() === nomeBuscado
+            );
+
+            if (alvo) {
+              const y = alvo.getBoundingClientRect().top + window.scrollY - 250; // -250 para deixar com margem no topo
+              window.scrollTo({ top: y, behavior: 'smooth' });
+
+              alvo.classList.add('highlight');
+              setTimeout(() => alvo.classList.remove('highlight'), 2000);
+              return true;
+            }
+            return false;
+          };
+
+          let tentativas = 0;
+          const intervalo = setInterval(() => {
+            tentativas++;
+            const encontrou = tentarScroll();
+            if (encontrou || tentativas >= 20) {
+              clearInterval(intervalo);
+            }
+          }, 200); // tenta 20x em até 4 segundos
+        };
 
 
 
+
+
+          const categoria = prod.categoria?.toLowerCase();
+          if (categoria) {
+            filtrarCategoria(categoria);
+
+            setTimeout(() => {
+              requestAnimationFrame(() => {
+                aplicarScroll();
+
+                // Scroll horizontal da barra de categorias
+                const btnCategoria = document.querySelector(`.filtro-btn[data-categoria="${categoria}"]`);
+                const barraCategorias = document.querySelector('.categorias-navbar');
+
+                if (btnCategoria && barraCategorias) {
+                  const btnLeft = btnCategoria.offsetLeft;
+                  const btnWidth = btnCategoria.offsetWidth;
+                  const barraWidth = barraCategorias.offsetWidth;
+
+                  const scrollTo = btnLeft - (barraWidth / 2) + (btnWidth / 2);
+
+                  barraCategorias.scrollTo({
+                    left: scrollTo,
+                    behavior: 'smooth'
+                  });
+                }
+              });
+            }, 300);
+          } else {
+            aplicarScroll();
+          }
+        });
+
+        resultadosPesquisa.appendChild(li);
+      });
+    } else {
+      resultadosPesquisa.style.display = 'none';
+    }
+  });
+}
 
 
 
