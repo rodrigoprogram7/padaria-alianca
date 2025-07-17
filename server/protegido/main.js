@@ -442,19 +442,18 @@ function inicializarCarrosseisManuais() {
         if (i === current) {
           img.setAttribute('tabindex', '-1');
           img.blur();
-         const containerWidth = thumbsContainer.offsetWidth;
+        const containerWidth = thumbsContainer.offsetWidth;
         const scrollOffset = img.offsetLeft - containerWidth / 2 + img.offsetWidth / 2;
 
+        // Correção fina para a esquerda (primeira miniatura)
         if (current === 0) {
-          // Primeiro item: alinha à esquerda
-          thumbsContainer.scrollTo({ left: 0, behavior: 'smooth' });
+          thumbsContainer.scrollTo({ left: img.offsetLeft - 8, behavior: 'smooth' }); // 👈 empurra levemente
         } else if (current === thumbs.length - 1) {
-          // Último item: alinha à direita total
           thumbsContainer.scrollTo({ left: thumbsContainer.scrollWidth, behavior: 'smooth' });
         } else {
-          // Qualquer outro: centraliza
           thumbsContainer.scrollTo({ left: scrollOffset, behavior: 'smooth' });
         }
+
 
         }
       });
