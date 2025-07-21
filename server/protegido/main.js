@@ -871,6 +871,9 @@ const sections = document.querySelectorAll("section[id]");
     });
   });
 
+function calcularTotalCarrinho() {
+  return carrinho.reduce((total, item) => total + item.preco * item.quantidade, 0);
+}
 
 
 function enviarWhatsApp() {
