@@ -2582,3 +2582,10 @@ nav {
   margin-top: 10px;
   text-align: center;
 }
+.erro-pedido {
+  color: red;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
