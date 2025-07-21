@@ -874,35 +874,38 @@ const sections = document.querySelectorAll("section[id]");
 
 
 function enviarWhatsApp() {
-  const localSelecionado = document.querySelector('input[name="local"]:checked');
   const erro = document.getElementById("erro-pedido");
-  const total = calcularTotalCarrinho();
+  erro.textContent = ""; // limpa erro anterior
 
+  const localSelecionado = document.querySelector('input[name="local"]:checked');
   if (!localSelecionado) {
-    erro.textContent = "Por favor, selecione se você é da cidade ou do interior.";
+    erro.textContent = "❗ Por favor, selecione se você é da cidade ou do interior.";
     return;
   }
 
   const local = localSelecionado.value;
   const limite = local === "cidade" ? 20 : 100;
 
+  const total = calcularTotalCarrinho();
   if (total < limite) {
-    erro.textContent = `Pedidos para o ${local} precisam ser acima de R$ ${limite.toFixed(2).replace(".", ",")}.`;
+    erro.textContent = `❗ Para o ${local}, o valor mínimo é R$ ${limite.toFixed(2).replace(".", ",")}.`;
     return;
   }
 
-  // Monta a mensagem do carrinho
+  if (carrinho.length === 0) {
+    erro.textContent = "❗ Seu carrinho está vazio.";
+    return;
+  }
+
   let mensagem = "*Pedido realizado pelo site:*\n\n";
   carrinho.forEach(item => {
     mensagem += `🛒 ${item.nome} (${item.quantidade}x - R$ ${item.preco.toFixed(2).replace(".", ",")})\n`;
   });
   mensagem += `\n*Total:* R$ ${total.toFixed(2).replace(".", ",")}`;
-  mensagem += `\n📍 *Local*: ${local.toUpperCase()}`;
+  mensagem += `\n📍 *Local:* ${local.toUpperCase()}`;
 
   const url = `https://api.whatsapp.com/send?phone=5584988692337&text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
-
-
 
   // Limpa carrinho e contador
   carrinho = [];
