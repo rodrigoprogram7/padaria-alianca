@@ -874,12 +874,14 @@ const sections = document.querySelectorAll("section[id]");
 
 
 function enviarWhatsApp() {
+  console.log("Função enviarWhatsApp foi chamada");
+
   const erro = document.getElementById("erro-pedido");
-  erro.textContent = ""; // limpa erro anterior
+  if (erro) erro.textContent = "";
 
   const localSelecionado = document.querySelector('input[name="local"]:checked');
   if (!localSelecionado) {
-    erro.textContent = "❗ Por favor, selecione se você é da cidade ou do interior.";
+    if (erro) erro.textContent = "❗ Por favor, selecione se você é da cidade ou do interior.";
     return;
   }
 
@@ -888,12 +890,12 @@ function enviarWhatsApp() {
 
   const total = calcularTotalCarrinho();
   if (total < limite) {
-    erro.textContent = `❗ Para o ${local}, o valor mínimo é R$ ${limite.toFixed(2).replace(".", ",")}.`;
+    if (erro) erro.textContent = `❗ Para o ${local}, o valor mínimo é R$ ${limite.toFixed(2).replace(".", ",")}.`;
     return;
   }
 
   if (carrinho.length === 0) {
-    erro.textContent = "❗ Seu carrinho está vazio.";
+    if (erro) erro.textContent = "❗ Seu carrinho está vazio.";
     return;
   }
 
@@ -913,6 +915,7 @@ function enviarWhatsApp() {
   atualizarCarrinho();
   atualizarContadorCarrinho();
 }
+
 
 
 function mostrarAlerta(nomeProduto, quantidade) {
