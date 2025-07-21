@@ -874,38 +874,35 @@ const sections = document.querySelectorAll("section[id]");
 
 
 function enviarWhatsApp() {
-  const erroEl = document.getElementById('erro-pedido');
-  let total = 0;
-  let mensagem = "*Olá! Esse é o meu pedido para entrega:*\n\n";
+  const localSelecionado = document.querySelector('input[name="local"]:checked');
+  const erro = document.getElementById("erro-pedido");
+  const total = calcularTotalCarrinho();
 
-  carrinho.forEach(item => {
-    const subtotal = item.tipo === 'peso'
-      ? item.preco * (item.quantidade / 100)
-      : item.preco * item.quantidade;
-
-    mensagem += item.tipo === 'peso'
-      ? `• ${item.quantidade}g de ${item.nome} - R$ ${subtotal.toFixed(2)}\n`
-      : `${item.quantidade}x ${item.nome} - R$ ${subtotal.toFixed(2)}\n`;
-
-    total += subtotal;
-  });
-
-  if (total < 20) {
-    erroEl.textContent = "O valor mínimo para pedido é R$ 20,00.";
-    erroEl.classList.add("show");
-    erroEl.classList.remove("tremer");
-    void erroEl.offsetWidth; // Reinicia a animação
-    erroEl.classList.add("tremer");
+  if (!localSelecionado) {
+    erro.textContent = "Por favor, selecione se você é da cidade ou do interior.";
     return;
   }
 
-  erroEl.classList.remove("show");
-  erroEl.textContent = "";
+  const local = localSelecionado.value;
+  const limite = local === "cidade" ? 20 : 100;
 
-  mensagem += `\n*Total: R$ ${total.toFixed(2)}*`;
+  if (total < limite) {
+    erro.textContent = `Pedidos para o ${local} precisam ser acima de R$ ${limite.toFixed(2).replace(".", ",")}.`;
+    return;
+  }
 
-  const link = `https://wa.me/558488692337?text=${encodeURIComponent(mensagem)}`;
-  window.open(link, '_blank');
+  // Monta a mensagem do carrinho
+  let mensagem = "*Pedido realizado pelo site:*\n\n";
+  carrinho.forEach(item => {
+    mensagem += `🛒 ${item.nome} (${item.quantidade}x - R$ ${item.preco.toFixed(2).replace(".", ",")})\n`;
+  });
+  mensagem += `\n*Total:* R$ ${total.toFixed(2).replace(".", ",")}`;
+  mensagem += `\n📍 *Local*: ${local.toUpperCase()}`;
+
+  const url = `https://api.whatsapp.com/send?phone=5584988692337&text=${encodeURIComponent(mensagem)}`;
+  window.open(url, '_blank');
+
+
 
   // Limpa carrinho e contador
   carrinho = [];

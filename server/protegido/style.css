@@ -2564,3 +2564,20 @@ nav {
             margin-left: auto;
             margin-right: auto;
             }
+
+
+            #local-entrega {
+            margin-top: 20px;
+            font-weight: bold;
+            }
+
+            #local-entrega label {
+            margin-right: 20px;
+            font-weight: normal;
+            }
+
+            #erro-pedido {
+            color: red;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            }
