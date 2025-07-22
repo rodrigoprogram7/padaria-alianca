@@ -896,15 +896,19 @@ function enviarWhatsApp() {
   const total = calcularTotalCarrinho();
   if (total < limite) {
     if (erro) erro.textContent = `❗ Para o ${local}, o valor mínimo é R$ ${limite.toFixed(2).replace(".", ",")}.`;
+    erro.classList.add("show", "tremer");
+    setTimeout(() => erro.classList.remove("tremer"), 400);
     return;
   }
 
   if (carrinho.length === 0) {
     if (erro) erro.textContent = "❗ Seu carrinho está vazio.";
+    erro.classList.add("show", "tremer");
+    setTimeout(() => erro.classList.remove("tremer"), 400);
     return;
   }
 
-  let mensagem = "*Pedido realizado pelo site:*\n\n";
+  let mensagem = "*Este é o meu pedido para entrega:*\n\n";
   carrinho.forEach(item => {
     mensagem += `🛒 ${item.nome} (${item.quantidade}x - R$ ${item.preco.toFixed(2).replace(".", ",")})\n`;
   });
