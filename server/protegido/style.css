@@ -2575,17 +2575,3 @@ nav {
 #local-entrega input[type="radio"] {
   margin-right: 5px;
 }
-
-#erro-pedido {
-  color: red;
-  font-weight: bold;
-  margin-top: 10px;
-  text-align: center;
-}
-.erro-pedido {
-  color: red;
-  text-align: center;
-  font-weight: bold;
-  margin-top: 10px;
-  display: block;
-}

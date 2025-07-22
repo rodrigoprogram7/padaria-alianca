@@ -884,9 +884,11 @@ function enviarWhatsApp() {
 
   const localSelecionado = document.querySelector('input[name="local"]:checked');
   if (!localSelecionado) {
-    if (erro) erro.textContent = "❗ Por favor, selecione se você é da cidade ou do interior.";
-    return;
-  }
+  erro.textContent = "❗ Por favor, selecione se você é da cidade ou do interior.";
+  erro.classList.add("show", "tremer");
+  setTimeout(() => erro.classList.remove("tremer"), 400);
+  return;
+}
 
   const local = localSelecionado.value;
   const limite = local === "cidade" ? 20 : 100;
@@ -917,6 +919,9 @@ function enviarWhatsApp() {
   salvarCarrinho();
   atualizarCarrinho();
   atualizarContadorCarrinho();
+  erro.textContent = "";
+  erro.classList.remove("show");
+
 }
 
 
