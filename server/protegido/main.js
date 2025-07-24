@@ -877,32 +877,19 @@ function calcularTotalCarrinho() {
 
 
 function enviarWhatsApp() {
-  console.log("Função enviarWhatsApp foi chamada");
-
   const erro = document.getElementById("erro-pedido");
-  if (erro) erro.textContent = "";
+  erro.textContent = "";
 
-  const localSelecionado = document.querySelector('input[name="local"]:checked');
-  if (!localSelecionado) {
-  erro.textContent = "❗ Por favor, selecione se você é da cidade ou do interior.";
-  erro.classList.add("show", "tremer");
-  setTimeout(() => erro.classList.remove("tremer"), 400);
-  return;
-}
-
-  const local = localSelecionado.value;
-  const limite = local === "cidade" ? 20 : 100;
-
-  const total = calcularTotalCarrinho();
-  if (total < limite) {
-    if (erro) erro.textContent = `❗ Para o ${local}, o valor mínimo é R$ ${limite.toFixed(2).replace(".", ",")}.`;
+  if (carrinho.length === 0) {
+    erro.textContent = "❗ Seu carrinho está vazio.";
     erro.classList.add("show", "tremer");
     setTimeout(() => erro.classList.remove("tremer"), 400);
     return;
   }
 
-  if (carrinho.length === 0) {
-    if (erro) erro.textContent = "❗ Seu carrinho está vazio.";
+  const total = calcularTotalCarrinho();
+  if (total < 20) {
+    erro.textContent = "❗ O valor mínimo para entrega é R$ 20,00.";
     erro.classList.add("show", "tremer");
     setTimeout(() => erro.classList.remove("tremer"), 400);
     return;
@@ -913,7 +900,6 @@ function enviarWhatsApp() {
     mensagem += `🛒 ${item.nome} (${item.quantidade}x - R$ ${item.preco.toFixed(2).replace(".", ",")})\n`;
   });
   mensagem += `\n*Total:* R$ ${total.toFixed(2).replace(".", ",")}`;
-  mensagem += `\n📍 *Local:* ${local.toUpperCase()}`;
 
   const url = `https://api.whatsapp.com/send?phone=5584988692337&text=${encodeURIComponent(mensagem)}`;
   window.open(url, '_blank');
@@ -925,8 +911,8 @@ function enviarWhatsApp() {
   atualizarContadorCarrinho();
   erro.textContent = "";
   erro.classList.remove("show");
-
 }
+
 
 
 
