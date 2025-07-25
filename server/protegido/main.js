@@ -897,8 +897,10 @@ function enviarWhatsApp() {
 
   let mensagem = "*Este é o meu pedido para entrega:*\n\n";
   carrinho.forEach(item => {
-    mensagem += `🛒 ${item.nome} (${item.quantidade}x - R$ ${item.preco.toFixed(2).replace(".", ",")})\n`;
+    const subtotal = item.preco * item.quantidade;
+    mensagem += `🛒 ${item.nome} (${item.quantidade}x - R$ ${item.preco.toFixed(2).replace(".", ",")}) = R$ ${subtotal.toFixed(2).replace(".", ",")}\n`;
   });
+
   mensagem += `\n*Total:* R$ ${total.toFixed(2).replace(".", ",")}`;
 
   const url = `https://api.whatsapp.com/send?phone=5584988692337&text=${encodeURIComponent(mensagem)}`;
@@ -912,6 +914,7 @@ function enviarWhatsApp() {
   erro.textContent = "";
   erro.classList.remove("show");
 }
+
 
 
 
