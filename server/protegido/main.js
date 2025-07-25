@@ -919,6 +919,7 @@ function enviarWhatsApp() {
 
 
 
+
 function mostrarAlerta(nomeProduto, quantidade) {
   const alerta = document.getElementById("alerta");
   alerta.innerHTML = `<strong>${quantidade}x ${nomeProduto}</strong> adicionado ao carrinho!`;
