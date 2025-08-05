@@ -2664,3 +2664,26 @@ nav {
   color: var(--base-color-alt);
   margin-top: 1rem;
 }
+
+
+
+.titulo-com-imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* ou 'flex-start' se quiser alinhar à esquerda */
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.titulo-com-imagem h2 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: var(--title-color);
+}
+
+.logo-whatsapp {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
