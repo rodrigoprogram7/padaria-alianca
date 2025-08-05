@@ -2575,3 +2575,41 @@ nav {
 #local-entrega input[type="radio"] {
   margin-right: 5px;
 }
+
+
+/* Animação para destacar o banner do WhatsApp */
+.whatsapp-banner {
+  position: relative;
+  animation: pulseBorder 2.5s infinite ease-in-out;
+  border-radius: 10px;
+  z-index: 1;
+}
+
+@keyframes pulseBorder {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 12px 6px rgba(37, 211, 102, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+}
+
+/* Estilo adicional para o banner de entrega */
+.whatsapp-banner.entrega-banner {
+  animation: pulseBorderEntrega 2.5s infinite ease-in-out;
+}
+
+@keyframes pulseBorderEntrega {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 12px 6px rgba(255, 204, 0, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 204, 0, 0.4);
+  }
+}
