@@ -2623,3 +2623,44 @@ nav {
     #FFD700, #FFB800, #FFD700, #FFB800);
 }
 
+.texto-banner.organizado {
+  text-align: center;
+  padding: 1rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.texto-banner.organizado h2 {
+  font-size: 2rem;
+  color: var(--base-color);
+  margin-bottom: 0.5rem;
+}
+
+.texto-banner.organizado p {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.info-entrega {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 1rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.info-entrega li {
+  font-size: 1rem;
+  background: #f9f9f9;
+  padding: 0.7rem 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.frase-final {
+  font-weight: bold;
+  color: var(--base-color-alt);
+  margin-top: 1rem;
+}
