@@ -2332,7 +2332,7 @@ nav {
 
 
 
-   /* ======================================== Estilos para Banners (Otimizado e Moderno) ======================================== */
+  /* ======================================== Estilos para Banners (Otimizado e Moderno) ======================================== */
 
 /* Estilos gerais para os banners */
 .whatsapp-banner, .entrega-banner {
@@ -2479,7 +2479,7 @@ nav {
     100% { background-position: 0% 50%; }
 }
 
-/* ======================================== Responsividade para Desktop (a partir de 768px) ======================================== */
+/* ======================================== Responsividade (Ajustes Adicionais) ======================================== */
 
 @media (min-width: 768px) {
     .whatsapp-banner .banner-container {
@@ -2504,5 +2504,21 @@ nav {
 
     .info-entrega {
         text-align: left;
+    }
+}
+
+/* **NOVO AJUSTE para telas bem pequenas (celulares)** */
+@media (max-width: 576px) {
+    .imagem-animada {
+        max-width: 150px; /* Reduzindo o tamanho da imagem */
+    }
+    .texto-banner h2 {
+        font-size: 1.4rem; /* Reduzindo o título para caber melhor */
+    }
+    .texto-banner p {
+        font-size: 0.9rem; /* Reduzindo o texto para melhor legibilidade */
+    }
+    .banner-container {
+        gap: 1rem; /* Diminuindo o espaço entre os elementos */
     }
 }
