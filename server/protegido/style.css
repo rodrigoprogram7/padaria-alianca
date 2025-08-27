@@ -2432,7 +2432,6 @@ nav {
     margin-bottom: 1rem;
 }
 
-/* NOVO ESTILO DO BOTÃO FAKE-INFO */
 .fake-info {
     background-color: var(--base-color-second);
     color: var(--title-color);
@@ -2440,11 +2439,7 @@ nav {
     border-radius: 50px;
     font-size: 0.9rem;
     font-weight: 500;
-    /* Alterado de inline-block para block para permitir quebra de linha */
-    display: block; 
-    margin: 0 auto; /* Centraliza o elemento */
-    max-width: 400px; /* Limita a largura em telas maiores */
-    text-align: center;
+    display: inline-block;
 }
 
 /* Lista de informações de entrega */
@@ -2512,18 +2507,18 @@ nav {
     }
 }
 
-/* Ajuste para telas bem pequenas (celulares) */
+/* **NOVO AJUSTE para telas bem pequenas (celulares)** */
 @media (max-width: 576px) {
     .imagem-animada {
-        max-width: 150px;
+        max-width: 150px; /* Reduzindo o tamanho da imagem */
     }
     .texto-banner h2 {
-        font-size: 1.4rem;
+        font-size: 1.4rem; /* Reduzindo o título para caber melhor */
     }
     .texto-banner p {
-        font-size: 0.9rem;
+        font-size: 0.9rem; /* Reduzindo o texto para melhor legibilidade */
     }
     .banner-container {
-        gap: 1rem;
+        gap: 1rem; /* Diminuindo o espaço entre os elementos */
     }
 }
