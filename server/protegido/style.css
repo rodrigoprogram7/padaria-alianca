@@ -2556,3 +2556,85 @@ nav {
   animation: pulseButton 1s infinite;
   background-color: #ff9800 !important; /* destaque visual */
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#sacolao-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+/* Card especial para sacolões */
+.produto.sacolao {
+  border: 2px solid var(--base-color);
+  padding: 15px;
+  background: #fffdf5;
+}
+
+.produto.sacolao .lista-itens {
+  text-align: left;
+  font-size: 0.9rem;
+  margin: 8px 0;
+  padding-left: 16px;
+}
+
+.produto.sacolao .lista-itens li {
+  margin-bottom: 4px;
+  color: #444;
+}
+
+.produto.sacolao .preco {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+  color: var(--base-color);
+}
+
+.btn-whatsapp {
+  display: inline-block;
+  background-color: #25D366;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1DA851;
+}

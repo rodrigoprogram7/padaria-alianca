@@ -237,30 +237,44 @@ function filtrarCategoria(categoriaSelecionada) {
   const botaoAtivo = document.querySelector(`.filtro-btn[data-categoria="${categoriaSelecionada}"]`);
   if (botaoAtivo) botaoAtivo.classList.add('active');
 
-  const produtosFiltrados = categoriaSelecionada === 'todos'
-    ? produtos
-    : produtos.filter(prod => prod.categoria === categoriaSelecionada);
+  const listaProdutos = document.getElementById('lista-produtos');
+  const sacolaoCards = document.getElementById('sacolao-cards');
 
-        produtos.sort((a, b) => {
-    const nomeA = (a.nome || a.variacoes?.[0]?.nome || '').toLowerCase();
-    const nomeB = (b.nome || b.variacoes?.[0]?.nome || '').toLowerCase();
-    return nomeA.localeCompare(nomeB);
-  });
+  if (categoriaSelecionada === 'sacolões') {
+    // 🔥 Mostra apenas os cards fixos de sacolões
+    if (listaProdutos) listaProdutos.style.display = 'none';
+    if (sacolaoCards) sacolaoCards.style.display = 'grid';
+  } else {
+    // 🔥 Mostra produtos dinâmicos e esconde os sacolões
+    if (listaProdutos) listaProdutos.style.display = 'grid';
+    if (sacolaoCards) sacolaoCards.style.display = 'none';
 
-  renderizarProdutos(produtosFiltrados);
+    const produtosFiltrados = categoriaSelecionada === 'todos'
+      ? produtos
+      : produtos.filter(prod => prod.categoria === categoriaSelecionada);
 
-const destinoCategoria = document.getElementById('categoria-destaque');
-if (destinoCategoria) {
-  const y = destinoCategoria.getBoundingClientRect().top + window.scrollY - 230; // ajuste do topo (70px de margem)
-  window.scrollTo({ top: y, behavior: 'smooth' });
-}
+    produtos.sort((a, b) => {
+      const nomeA = (a.nome || a.variacoes?.[0]?.nome || '').toLowerCase();
+      const nomeB = (b.nome || b.variacoes?.[0]?.nome || '').toLowerCase();
+      return nomeA.localeCompare(nomeB);
+    });
 
-    const titulo = document.getElementById('titulo-categoria');
+    renderizarProdutos(produtosFiltrados);
+  }
+
+  const destinoCategoria = document.getElementById('categoria-destaque');
+  if (destinoCategoria) {
+    const y = destinoCategoria.getBoundingClientRect().top + window.scrollY - 230;
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+
+  const titulo = document.getElementById('titulo-categoria');
   if (titulo) {
     const categoriaNome = categoriaSelecionada.charAt(0).toUpperCase() + categoriaSelecionada.slice(1);
     titulo.textContent = categoriaNome;
+  }
 }
-}
+
 
 
 
