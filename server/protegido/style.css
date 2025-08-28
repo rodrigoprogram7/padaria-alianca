@@ -2522,3 +2522,37 @@ nav {
         gap: 1rem; /* Diminuindo o espaço entre os elementos */
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Animação para chamar atenção no botão */
+@keyframes pulseButton {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+
+.btn-piscar {
+  animation: pulseButton 1s infinite;
+  background-color: #ff9800 !important; /* destaque visual */
+}

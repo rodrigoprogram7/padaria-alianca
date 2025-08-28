@@ -530,11 +530,21 @@ function alterarQuantidade(botao, delta) {
     const subtotal = (valor * preco).toFixed(2).replace('.', ',');
     subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
     subtotalBox.style.display = 'block';
+
+    // 🔥 Ativa animação no botão "Adicionar"
+    const btnAdicionar = botao.closest('.produto-info').querySelector('button.btn');
+    if (btnAdicionar) btnAdicionar.classList.add('btn-piscar');
+
   } else {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
+
+    // 🔥 Remove animação se voltar para 1
+    const btnAdicionar = botao.closest('.produto-info').querySelector('button.btn');
+    if (btnAdicionar) btnAdicionar.classList.remove('btn-piscar');
   }
 }
+
 
 let carrinho = [];
 try {
@@ -582,6 +592,9 @@ function adicionarAoCarrinho(botao) {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
   }
+    // 🔥 Remove a animação depois que o produto for adicionado
+  botao.classList.remove('btn-piscar');
+
 }
 
 
