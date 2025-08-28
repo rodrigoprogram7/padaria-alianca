@@ -237,23 +237,11 @@ function filtrarCategoria(categoriaSelecionada) {
   const botaoAtivo = document.querySelector(`.filtro-btn[data-categoria="${categoriaSelecionada}"]`);
   if (botaoAtivo) botaoAtivo.classList.add('active');
 
-  const listaProdutos = document.getElementById('lista-produtos');
-  const sacolaoCards = document.getElementById('sacolao-cards');
-
-  if (categoriaSelecionada === 'sacolões') {
-    if (listaProdutos) listaProdutos.style.display = 'none';
-    if (sacolaoCards) sacolaoCards.style.display = 'grid';
-    return; // <- impede de renderizar produtos dinâmicos
-  }
-
-  if (listaProdutos) listaProdutos.style.display = 'grid';
-  if (sacolaoCards) sacolaoCards.style.display = 'none';
-
   const produtosFiltrados = categoriaSelecionada === 'todos'
     ? produtos
     : produtos.filter(prod => prod.categoria === categoriaSelecionada);
 
-  produtos.sort((a, b) => {
+        produtos.sort((a, b) => {
     const nomeA = (a.nome || a.variacoes?.[0]?.nome || '').toLowerCase();
     const nomeB = (b.nome || b.variacoes?.[0]?.nome || '').toLowerCase();
     return nomeA.localeCompare(nomeB);
@@ -261,14 +249,18 @@ function filtrarCategoria(categoriaSelecionada) {
 
   renderizarProdutos(produtosFiltrados);
 
-  const titulo = document.getElementById('titulo-categoria');
+const destinoCategoria = document.getElementById('categoria-destaque');
+if (destinoCategoria) {
+  const y = destinoCategoria.getBoundingClientRect().top + window.scrollY - 230; // ajuste do topo (70px de margem)
+  window.scrollTo({ top: y, behavior: 'smooth' });
+}
+
+    const titulo = document.getElementById('titulo-categoria');
   if (titulo) {
     const categoriaNome = categoriaSelecionada.charAt(0).toUpperCase() + categoriaSelecionada.slice(1);
     titulo.textContent = categoriaNome;
-  }
 }
-
-
+}
 
 
 
