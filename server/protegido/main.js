@@ -241,32 +241,25 @@ function filtrarCategoria(categoriaSelecionada) {
   const sacolaoCards = document.getElementById('sacolao-cards');
 
   if (categoriaSelecionada === 'sacolões') {
-    // 🔥 Mostra apenas os cards fixos de sacolões
     if (listaProdutos) listaProdutos.style.display = 'none';
     if (sacolaoCards) sacolaoCards.style.display = 'grid';
-  } else {
-    // 🔥 Mostra produtos dinâmicos e esconde os sacolões
-    if (listaProdutos) listaProdutos.style.display = 'grid';
-    if (sacolaoCards) sacolaoCards.style.display = 'none';
-
-    const produtosFiltrados = categoriaSelecionada === 'todos'
-      ? produtos
-      : produtos.filter(prod => prod.categoria === categoriaSelecionada);
-
-    produtos.sort((a, b) => {
-      const nomeA = (a.nome || a.variacoes?.[0]?.nome || '').toLowerCase();
-      const nomeB = (b.nome || b.variacoes?.[0]?.nome || '').toLowerCase();
-      return nomeA.localeCompare(nomeB);
-    });
-
-    renderizarProdutos(produtosFiltrados);
+    return; // <- impede de renderizar produtos dinâmicos
   }
 
-  const destinoCategoria = document.getElementById('categoria-destaque');
-  if (destinoCategoria) {
-    const y = destinoCategoria.getBoundingClientRect().top + window.scrollY - 230;
-    window.scrollTo({ top: y, behavior: 'smooth' });
-  }
+  if (listaProdutos) listaProdutos.style.display = 'grid';
+  if (sacolaoCards) sacolaoCards.style.display = 'none';
+
+  const produtosFiltrados = categoriaSelecionada === 'todos'
+    ? produtos
+    : produtos.filter(prod => prod.categoria === categoriaSelecionada);
+
+  produtos.sort((a, b) => {
+    const nomeA = (a.nome || a.variacoes?.[0]?.nome || '').toLowerCase();
+    const nomeB = (b.nome || b.variacoes?.[0]?.nome || '').toLowerCase();
+    return nomeA.localeCompare(nomeB);
+  });
+
+  renderizarProdutos(produtosFiltrados);
 
   const titulo = document.getElementById('titulo-categoria');
   if (titulo) {
@@ -274,6 +267,7 @@ function filtrarCategoria(categoriaSelecionada) {
     titulo.textContent = categoriaNome;
   }
 }
+
 
 
 
