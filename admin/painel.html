@@ -731,7 +731,8 @@ input:focus:invalid {
         <div class="form-section dashboard-section">
             <h1 ><i class="fas fa-cubes"></i> Painel de Administração</h1>
             <h2 ><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
-            <form id="form-produto" enctype="multipart/form-data" method="POST">
+            <form id="form-produto" action="/produtos" method="POST" enctype="multipart/form-data">
+
 
   <!-- 🔹 Escolha do tipo -->
   <div class="form-group">
@@ -985,6 +986,75 @@ input:focus:invalid {
   });
 </script>
 
+<script>
+async function carregarProdutos() {
+  try {
+    const res = await fetch('/produtos');
+    const produtos = await res.json();
+
+    const lista = document.getElementById('produtos-lista');
+    const msgVazio = document.getElementById('no-products-message');
+    lista.innerHTML = '';
+
+    if (!produtos.length) {
+      msgVazio.style.display = 'block';
+      return;
+    }
+    msgVazio.style.display = 'none';
+
+    produtos.forEach(prod => {
+      const card = document.createElement('div');
+      card.className = 'produto-card';
+      card.setAttribute('data-categoria', prod.categoria.toLowerCase());
+      card.setAttribute('data-nome', (prod.nome || prod.variacoes?.[0]?.nome || '').toLowerCase());
+
+      let nome = prod.nome || (prod.variacoes?.[0]?.nome ?? 'Produto');
+      let preco = prod.preco || prod.variacoes?.[0]?.preco || 0;
+      let imagem = prod.imagens?.[0] || prod.variacoes?.[0]?.imagem || '/assets/images/alimentos/sem-imagem.jpg';
+
+      card.innerHTML = `
+        <img src="${imagem}" alt="${nome}" class="produto-img">
+        <h4>${nome}</h4>
+        <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
+        <div class="botoes-acao">
+          <button class="editar-btn" data-id="${prod._id}">Editar</button>
+          <button class="excluir-btn" data-id="${prod._id}">Excluir</button>
+        </div>
+      `;
+      lista.appendChild(card);
+    });
+  } catch (err) {
+    console.error('Erro ao carregar produtos:', err);
+  }
+}
+
+// 🔍 Filtro de categorias
+document.querySelectorAll('.filtro-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const categoria = btn.dataset.categoria;
+    document.querySelectorAll('#produtos-lista .produto-card').forEach(card => {
+      if (categoria === 'todos' || card.dataset.categoria === categoria) {
+        card.style.display = '';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+});
+
+// 🔍 Pesquisa por nome
+document.getElementById('barra-pesquisa').addEventListener('input', e => {
+  const termo = e.target.value.toLowerCase();
+  document.querySelectorAll('#produtos-lista .produto-card').forEach(card => {
+    card.style.display = card.dataset.nome.includes(termo) ? '' : 'none';
+  });
+});
+
+document.addEventListener('DOMContentLoaded', carregarProdutos);
+</script>
 
     
     <script>
