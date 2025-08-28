@@ -151,8 +151,8 @@ function renderizarProdutos(produtos) {
     return nomeA.localeCompare(nomeB);
   });
 
-  produtos.forEach(prod => {
-  if (prod.tipo === 'encomenda') {
+produtos.forEach(prod => {
+  if (prod.tipo === "encomenda") {
     lista.appendChild(renderizarCardEncomenda(prod));
   } else if (prod.variacoes && prod.variacoes.length > 0) {
     lista.appendChild(renderizarCardComVariacoes(prod));
@@ -160,6 +160,7 @@ function renderizarProdutos(produtos) {
     lista.appendChild(renderizarCardUnico(prod));
   }
 });
+
 
 
   produtos.forEach(prod => {
@@ -247,23 +248,24 @@ function renderizarCardEncomenda(prod) {
   const precoFormatado = parseFloat(prod.preco).toFixed(2).replace('.', ',');
 
   const card = document.createElement('div');
-  card.className = 'produto encomenda';
+  card.className = 'produto-card';
   card.setAttribute('data-categoria', prod.categoria);
   card.setAttribute('data-tipo', 'encomenda');
   card.setAttribute('data-nome', prod.nome);
 
   card.innerHTML = `
-    <div class="produto-info">
-      <h3>${prod.nome}</h3>
-      <p>R$ ${precoFormatado}</p>
-      <p>${prod.descricao || ''}</p>
-      <a href="https://wa.me/5584999999999?text=Quero encomendar: ${encodeURIComponent(prod.nome)} - R$ ${precoFormatado}" 
-         target="_blank" 
-         class="btn btn-primary">Encomendar produto</a>
+    <img src="${prod.imagens && prod.imagens[0] ? prod.imagens[0] : '/img/default.png'}" class="produto-img">
+    <h4>${prod.nome}</h4>
+    <p>R$ ${precoFormatado}</p>
+    <small>${prod.descricao || ''}</small>
+    <div class="botoes-acao">
+      <button class="editar-btn" data-id="${prod._id}">Editar</button>
+      <button class="excluir-btn" data-id="${prod._id}">Excluir</button>
     </div>
   `;
   return card;
 }
+
 
 
 function filtrarCategoria(categoriaSelecionada) {
