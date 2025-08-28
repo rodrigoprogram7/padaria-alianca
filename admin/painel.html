@@ -804,23 +804,34 @@ input:focus:invalid {
     </div>
   </div>
 
-  <!-- 🔹 Campos específicos de Encomenda -->
-  <div id="campos-encomenda" style="display:none;">
-    <div class="form-group">
-      <label for="nome-encomenda">Nome do Produto:</label>
-      <input type="text" id="nome-encomenda" name="nome" placeholder="Ex: Bolo de aniversário">
-    </div>
-
-    <div class="form-group">
-      <label for="preco-encomenda">Preço:</label>
-      <input type="number" id="preco-encomenda" name="preco" step="0.01" placeholder="0.00">
-    </div>
-
-    <div class="form-group">
-      <label for="descricao-encomenda">Descrição:</label>
-      <textarea id="descricao-encomenda" name="descricao" placeholder="Detalhes do produto"></textarea>
-    </div>
+<!-- 🔹 Campos específicos de Encomenda -->
+<div id="campos-encomenda" style="display:none;">
+  <div class="form-group">
+    <label for="nome-encomenda">Nome do Produto:</label>
+    <input type="text" id="nome-encomenda" name="nome" placeholder="Ex: Bolo de aniversário">
   </div>
+
+  <div class="form-group">
+    <label for="preco-encomenda">Preço:</label>
+    <input type="number" id="preco-encomenda" name="preco" step="0.01" placeholder="0.00">
+  </div>
+
+  <div class="form-group">
+    <label for="descricao-encomenda">Descrição:</label>
+    <textarea id="descricao-encomenda" name="descricao" placeholder="Detalhes do produto"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label>Imagem:</label>
+    <div class="image-upload-area">
+      <i class="fas fa-cloud-upload-alt upload-icon"></i>
+      <p>Arraste e solte ou clique para selecionar imagens</p>
+      <input type="file" name="imagens" accept="image/*">
+    </div>
+    <div class="image-preview"></div>
+  </div>
+</div>
+
 
   <!-- 🔹 Botão de envio -->
   <button type="submit" class="button-submit">

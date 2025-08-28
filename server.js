@@ -118,10 +118,12 @@ app.post('/produtos', upload.fields([
   try {
     // 🔹 Caso "Encomenda"
     if (tipo === 'encomenda') {
-      const novo = new Product({ nome, preco, descricao, tipo, categoria });
+      const imagens = (req.files['imagens'] || []).map(file => file.path);
+      const novo = new Product({ nome, preco, descricao, tipo, categoria, imagens });
       await novo.save();
       return res.status(201).json({ mensagem: 'Produto de encomenda adicionado com sucesso!' });
     }
+
 
     // 🔹 Caso "Unico"
     if (modo === 'unico') {
