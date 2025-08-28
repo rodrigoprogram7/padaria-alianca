@@ -152,6 +152,17 @@ function renderizarProdutos(produtos) {
   });
 
   produtos.forEach(prod => {
+  if (prod.tipo === 'encomenda') {
+    lista.appendChild(renderizarCardEncomenda(prod));
+  } else if (prod.variacoes && prod.variacoes.length > 0) {
+    lista.appendChild(renderizarCardComVariacoes(prod));
+  } else {
+    lista.appendChild(renderizarCardUnico(prod));
+  }
+});
+
+
+  produtos.forEach(prod => {
     if (prod.variacoes && prod.variacoes.length > 0) {
       lista.appendChild(renderizarCardComVariacoes(prod));
     } else {
@@ -231,6 +242,29 @@ function renderizarCardComVariacoes(prod) {
 
   return card;
 }
+
+function renderizarCardEncomenda(prod) {
+  const precoFormatado = parseFloat(prod.preco).toFixed(2).replace('.', ',');
+
+  const card = document.createElement('div');
+  card.className = 'produto encomenda';
+  card.setAttribute('data-categoria', prod.categoria);
+  card.setAttribute('data-tipo', 'encomenda');
+  card.setAttribute('data-nome', prod.nome);
+
+  card.innerHTML = `
+    <div class="produto-info">
+      <h3>${prod.nome}</h3>
+      <p>R$ ${precoFormatado}</p>
+      <p>${prod.descricao || ''}</p>
+      <a href="https://wa.me/5584999999999?text=Quero encomendar: ${encodeURIComponent(prod.nome)} - R$ ${precoFormatado}" 
+         target="_blank" 
+         class="btn btn-primary">Encomendar produto</a>
+    </div>
+  `;
+  return card;
+}
+
 
 function filtrarCategoria(categoriaSelecionada) {
   document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));

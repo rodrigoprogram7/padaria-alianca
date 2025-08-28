@@ -732,77 +732,88 @@ input:focus:invalid {
             <h1 ><i class="fas fa-cubes"></i> Painel de Administração</h1>
             <h2 ><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
             <form id="form-produto" enctype="multipart/form-data" method="POST">
-                <div class="form-group">
-                    <label>Tipo de Card:</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
-                        <label><input type="radio" name="tipoCard" value="variacoes"> Produto Variado</label>
-                    </div>
-                </div>
 
-                <div id="bloco-unico">
-                    <div class="form-group">
-                        <label for="nome-produto">Nome do Produto:</label>
-                        <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
-                    </div>
+  <!-- 🔹 Escolha do tipo -->
+  <div class="form-group">
+    <label>Tipo de Produto:</label>
+    <div class="radio-group">
+      <label><input type="radio" name="tipo" value="unidade"> Unidade</label>
+      <label><input type="radio" name="tipo" value="peso"> Peso</label>
+      <label><input type="radio" name="tipo" value="encomenda"> Encomenda</label>
+    </div>
+  </div>
 
-                    <div class="form-group">
-                        <label for="preco-produto">Preço:</label>
-                        <input type="text" id="preco-produto" name="preco" placeholder="0.00" step="0.01" required>
-                    </div>
-                    
+  <!-- 🔹 Escolha do modo (apenas para Unidade) -->
+  <div id="modo-section" class="form-group" style="display:none;">
+    <label>Tipo do Card:</label>
+    <div class="radio-group">
+      <label><input type="radio" name="modo" value="unico"> Único</label>
+      <label><input type="radio" name="modo" value="variacoes"> Variado</label>
+    </div>
+  </div>
 
-                    <div class="form-group">
-                        <label>Imagem:</label>
-                        <div class="image-upload-area" id="image-upload-area">
-                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
-                            <p>Arraste e solte ou clique para selecionar imagens</p>
-                            <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*">
-                        </div>
-                        <div class="image-preview" id="image-preview"></div>
-                    </div>
-                </div>
+  <!-- 🔹 Campos gerais (para Unidade e Peso) -->
+  <div id="campos-gerais" style="display:none;">
+    <div class="form-group">
+      <label for="nome-produto">Nome do Produto:</label>
+      <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg">
+    </div>
 
-                <div id="seletor-qtd-variacoes" style="display: none;">
-                    <label>Quantos produtos nesse card?</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
-                        <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
-                        <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
-                        <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
-                        <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
-                    </div>
-                </div>
+    <div class="form-group">
+      <label for="preco-produto">Preço:</label>
+      <input type="number" id="preco-produto" name="preco" step="0.01" placeholder="0.00">
+    </div>
 
-                <div id="bloco-variacoes"></div>
+    <div class="form-group">
+      <label for="categoria-produto">Categoria:</label>
+      <select id="categoria-produto" name="categoria">
+        <option value="" disabled selected>Selecione uma categoria</option>
+        <option value="mercearia">Mercearia</option>
+        <option value="padaria">Padaria</option>
+        <option value="sacolões">Sacolões</option>
+        <option value="bazar">Bazar</option>
+        <option value="bebidas">Bebidas</option>
+        <option value="perecíveis">Perecíveis</option>
+        <option value="higiene">Higiene</option>
+      </select>
+    </div>
 
-                <div class="form-group">
-                    <label for="categoria-produto">Categoria:</label>
-                    <select id="categoria-produto" name="categoria" required>
-                        <option value="" disabled selected>Selecione uma categoria</option>
-                        <option value="mercearia">Mercearia</option>
-                        <option value="padaria">Padaria</option>
-                        <option value="sacolões">Sacolões</option>
-                        <option value="bazar">Bazar</option>
-                        <option value="bebidas">Bebidas</option>
-                        <option value="perecíveis">Perecíveis</option>
-                        <option value="higiene">Higiene</option>
-                    </select>
-                </div>
+    <div class="form-group">
+      <label>Imagem:</label>
+      <div class="image-upload-area">
+        <i class="fas fa-cloud-upload-alt upload-icon"></i>
+        <p>Arraste e solte ou clique para selecionar imagens</p>
+        <input type="file" name="imagens" multiple accept="image/*">
+      </div>
+      <div class="image-preview"></div>
+    </div>
+  </div>
 
-                <div class="form-group">
-                    <label>Tipo:</label>
-                    <div class="radio-group">
-                        <label><input type="radio" name="tipo" value="unidade" checked> Unidade</label>
-                        <label><input type="radio" name="tipo" value="peso"> Peso</label>
-                    </div>
-                </div>
+  <!-- 🔹 Campos específicos de Encomenda -->
+  <div id="campos-encomenda" style="display:none;">
+    <div class="form-group">
+      <label for="nome-encomenda">Nome do Produto:</label>
+      <input type="text" id="nome-encomenda" name="nome" placeholder="Ex: Bolo de aniversário">
+    </div>
 
-                <button type="submit" class="button-submit">
-                    <i class="fas fa-plus"></i> Adicionar Produto
-                </button>
-                <div id="feedback-message" class="feedback-message"></div>
-            </form>
+    <div class="form-group">
+      <label for="preco-encomenda">Preço:</label>
+      <input type="number" id="preco-encomenda" name="preco" step="0.01" placeholder="0.00">
+    </div>
+
+    <div class="form-group">
+      <label for="descricao-encomenda">Descrição:</label>
+      <textarea id="descricao-encomenda" name="descricao" placeholder="Detalhes do produto"></textarea>
+    </div>
+  </div>
+
+  <!-- 🔹 Botão de envio -->
+  <button type="submit" class="button-submit">
+    <i class="fas fa-plus"></i> Adicionar Produto
+  </button>
+  <div id="feedback-message" class="feedback-message"></div>
+</form>
+
         </div>
 
         <div class="filter-bar">
@@ -864,7 +875,21 @@ input:focus:invalid {
             </div>
         </div>
 
-    </div> <script>
+    </div>
+    
+    <script>
+document.querySelectorAll('input[name="tipo"]').forEach(radio => {
+  radio.addEventListener('change', e => {
+    const tipo = e.target.value;
+    document.getElementById('modo-section').style.display = (tipo === 'unidade') ? 'block' : 'none';
+    document.getElementById('campos-gerais').style.display = (tipo === 'unidade' || tipo === 'peso') ? 'block' : 'none';
+    document.getElementById('campos-encomenda').style.display = (tipo === 'encomenda') ? 'block' : 'none';
+  });
+});
+</script>
+
+    
+    <script>
     document.addEventListener('DOMContentLoaded', () => {
     // Referências aos elementos DOM
     const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
