@@ -113,29 +113,16 @@ app.post('/produtos', upload.fields([
   { name: 'imagens', maxCount: 5 },
   { name: 'v_imagens', maxCount: 5 }
 ]), async (req, res) => {
-  const { modo, nome, preco, categoria, tipo, descricao, v_nome, v_preco } = req.body;
+  const { modo, nome, preco, categoria, tipo, v_nome, v_preco } = req.body;
 
   try {
-    // 🔹 Caso "Encomenda"
-    if (tipo === 'encomenda') {
-      const imagens = (req.files['imagens'] || []).map(file => file.path);
-      const novo = new Product({ nome, preco, descricao, tipo, categoria, imagens });
-      await novo.save();
-      return res.status(201).json({ mensagem: 'Produto de encomenda adicionado com sucesso!' });
-    }
-
-
-
-    // 🔹 Caso "Unico"
     if (modo === 'unico') {
       const imagens = (req.files['imagens'] || []).map(file => file.path);
       const novo = new Product({ nome, preco, categoria, tipo, imagens });
       await novo.save();
       return res.status(201).json({ mensagem: 'Produto único adicionado com sucesso!' });
-    }
 
-    // 🔹 Caso "Variações"
-    if (modo === 'variacoes') {
+    } else if (modo === 'variacoes') {
       const nomes = Array.isArray(v_nome) ? v_nome : [v_nome];
       const precos = Array.isArray(v_preco) ? v_preco : [v_preco];
       const imagens = req.files['v_imagens'] || [];
@@ -166,7 +153,6 @@ app.post('/produtos', upload.fields([
     res.status(500).json({ mensagem: 'Erro interno ao salvar produto.' });
   }
 });
-
 
 // ✅ Excluir produto com remoção da imagem
 app.delete('/produtos/:id', async (req, res) => {

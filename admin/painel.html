@@ -731,134 +731,78 @@ input:focus:invalid {
         <div class="form-section dashboard-section">
             <h1 ><i class="fas fa-cubes"></i> Painel de Administração</h1>
             <h2 ><i class="fas fa-plus-circle"></i> Adicionar Novo Produto</h2>
-            <form id="form-produto" action="/produtos" method="POST" enctype="multipart/form-data">
+            <form id="form-produto" enctype="multipart/form-data" method="POST">
+                <div class="form-group">
+                    <label>Tipo de Card:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="tipoCard" value="unico" checked> Produto único</label>
+                        <label><input type="radio" name="tipoCard" value="variacoes"> Produto Variado</label>
+                    </div>
+                </div>
 
+                <div id="bloco-unico">
+                    <div class="form-group">
+                        <label for="nome-produto">Nome do Produto:</label>
+                        <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg" required>
+                    </div>
 
-  <!-- 🔹 Escolha do tipo -->
-  <div class="form-group">
-    <label>Tipo de Produto:</label>
-    <div class="radio-group">
-      <label><input type="radio" name="tipo" value="unidade"> Unidade</label>
-      <label><input type="radio" name="tipo" value="peso"> Peso</label>
-      <label><input type="radio" name="tipo" value="encomenda"> Encomenda</label>
-    </div>
-  </div>
+                    <div class="form-group">
+                        <label for="preco-produto">Preço:</label>
+                        <input type="text" id="preco-produto" name="preco" placeholder="0.00" step="0.01" required>
+                    </div>
+                    
 
-  <!-- 🔹 Escolha do modo (apenas para Unidade) -->
-  <div id="modo-section" class="form-group" style="display:none;">
-    <label>Tipo do Card:</label>
-    <div class="radio-group">
-<label><input type="radio" name="modo" value="unico" checked> Único</label>
-<label><input type="radio" name="modo" value="variacoes"> Variado</label>
+                    <div class="form-group">
+                        <label>Imagem:</label>
+                        <div class="image-upload-area" id="image-upload-area">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <p>Arraste e solte ou clique para selecionar imagens</p>
+                            <input type="file" id="imagens-produto" name="imagens" multiple accept="image/*">
+                        </div>
+                        <div class="image-preview" id="image-preview"></div>
+                    </div>
+                </div>
 
-    </div>
-  </div>
+                <div id="seletor-qtd-variacoes" style="display: none;">
+                    <label>Quantos produtos nesse card?</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
+                        <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
+                        <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
+                        <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
+                        <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
+                    </div>
+                </div>
 
-  <!-- 🔹 Seletor de quantidade de variações -->
-  <div id="seletor-qtd-variacoes" style="display:none;">
-    <label>Quantos produtos nesse card?</label>
-    <div class="radio-group">
-      <label><input type="radio" name="qtdVariacoes" value="1"> 1</label>
-      <label><input type="radio" name="qtdVariacoes" value="2"> 2</label>
-      <label><input type="radio" name="qtdVariacoes" value="3"> 3</label>
-      <label><input type="radio" name="qtdVariacoes" value="4"> 4</label>
-      <label><input type="radio" name="qtdVariacoes" value="5"> 5</label>
-    </div>
-  </div>
+                <div id="bloco-variacoes"></div>
 
-  <!-- 🔹 Bloco onde os campos de variações serão adicionados -->
-  <div id="bloco-variacoes"></div>
+                <div class="form-group">
+                    <label for="categoria-produto">Categoria:</label>
+                    <select id="categoria-produto" name="categoria" required>
+                        <option value="" disabled selected>Selecione uma categoria</option>
+                        <option value="mercearia">Mercearia</option>
+                        <option value="padaria">Padaria</option>
+                        <option value="sacolões">Sacolões</option>
+                        <option value="bazar">Bazar</option>
+                        <option value="bebidas">Bebidas</option>
+                        <option value="perecíveis">Perecíveis</option>
+                        <option value="higiene">Higiene</option>
+                    </select>
+                </div>
 
-  <!-- 🔹 Campos gerais (para Unidade e Peso) -->
-  <div id="campos-gerais" style="display:none;">
-    <div class="form-group">
-      <label for="nome-produto">Nome do Produto:</label>
-      <input type="text" id="nome-produto" name="nome" placeholder="Ex: Arroz Integral 1kg">
-    </div>
+                <div class="form-group">
+                    <label>Tipo:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="tipo" value="unidade" checked> Unidade</label>
+                        <label><input type="radio" name="tipo" value="peso"> Peso</label>
+                    </div>
+                </div>
 
-    <div class="form-group">
-      <label for="preco-produto">Preço:</label>
-      <input type="number" id="preco-produto" name="preco" step="0.01" placeholder="0.00">
-    </div>
-
-    <div class="form-group">
-      <label for="categoria-produto">Categoria:</label>
-      <select id="categoria-produto" name="categoria">
-        <option value="" disabled selected>Selecione uma categoria</option>
-        <option value="mercearia">Mercearia</option>
-        <option value="padaria">Padaria</option>
-        <option value="sacolões">Sacolões</option>
-        <option value="bazar">Bazar</option>
-        <option value="bebidas">Bebidas</option>
-        <option value="perecíveis">Perecíveis</option>
-        <option value="higiene">Higiene</option>
-      </select>
-    </div>
-
-    <div class="form-group">
-      <label>Imagem:</label>
-      <div class="image-upload-area">
-        <i class="fas fa-cloud-upload-alt upload-icon"></i>
-        <p>Arraste e solte ou clique para selecionar imagens</p>
-        <input type="file" name="imagens" multiple accept="image/*">
-      </div>
-      <div class="image-preview"></div>
-    </div>
-  </div>
-
-<!-- 🔹 Campos específicos de Encomenda -->
-<div id="campos-encomenda" style="display:none;">
-  <div class="form-group">
-    <label for="nome-encomenda">Nome do Produto:</label>
-    <input type="text" id="nome-encomenda" name="nome" placeholder="Ex: Bolo de aniversário">
-  </div>
-
-  <div class="form-group">
-    <label for="preco-encomenda">Preço:</label>
-    <input type="number" id="preco-encomenda" name="preco" step="0.01" placeholder="0.00">
-  </div>
-
-  <div class="form-group">
-    <label for="descricao-encomenda">Descrição:</label>
-    <textarea id="descricao-encomenda" name="descricao" placeholder="Detalhes do produto"></textarea>
-  </div>
-
-  <!-- 🔹 Categoria também para encomenda -->
-  <div class="form-group">
-    <label for="categoria-encomenda">Categoria:</label>
-    <select id="categoria-encomenda" name="categoria">
-      <option value="" disabled selected>Selecione uma categoria</option>
-      <option value="mercearia">Mercearia</option>
-      <option value="padaria">Padaria</option>
-      <option value="sacolões">Sacolões</option>
-      <option value="bazar">Bazar</option>
-      <option value="bebidas">Bebidas</option>
-      <option value="perecíveis">Perecíveis</option>
-      <option value="higiene">Higiene</option>
-    </select>
-  </div>
-
-  <div class="form-group">
-    <label>Imagem:</label>
-    <div class="image-upload-area">
-      <i class="fas fa-cloud-upload-alt upload-icon"></i>
-      <p>Arraste e solte ou clique para selecionar imagens</p>
-      <input type="file" name="imagens" accept="image/*">
-    </div>
-    <div class="image-preview"></div>
-  </div>
-</div>
-
-
-
-
-  <!-- 🔹 Botão de envio -->
-  <button type="submit" class="button-submit">
-    <i class="fas fa-plus"></i> Adicionar Produto
-  </button>
-  <div id="feedback-message" class="feedback-message"></div>
-</form>
-
+                <button type="submit" class="button-submit">
+                    <i class="fas fa-plus"></i> Adicionar Produto
+                </button>
+                <div id="feedback-message" class="feedback-message"></div>
+            </form>
         </div>
 
         <div class="filter-bar">
@@ -920,147 +864,7 @@ input:focus:invalid {
             </div>
         </div>
 
-    </div>
-    
-<script>
-  // Alternar blocos conforme o tipo selecionado
-  document.querySelectorAll('input[name="tipo"]').forEach(radio => {
-    radio.addEventListener('change', e => {
-      const tipo = e.target.value;
-
-      // Resetar blocos
-      document.getElementById('modo-section').style.display = 'none';
-      document.getElementById('campos-gerais').style.display = 'none';
-      document.getElementById('campos-encomenda').style.display = 'none';
-      document.getElementById('seletor-qtd-variacoes').style.display = 'none';
-      document.getElementById('bloco-variacoes').innerHTML = '';
-
-      if (tipo === 'unidade') {
-        document.getElementById('modo-section').style.display = 'block';
-      } 
-      if (tipo === 'peso') {
-        document.getElementById('campos-gerais').style.display = 'block';
-      }
-      if (tipo === 'encomenda') {
-        document.getElementById('campos-encomenda').style.display = 'block';
-      }
-    });
-  });
-
-  // Mostrar/esconder blocos quando escolher modo (dentro de Unidade)
-  document.querySelectorAll('input[name="modo"]').forEach(radio => {
-    radio.addEventListener('change', e => {
-      if (e.target.value === 'unico') {
-        document.getElementById('campos-gerais').style.display = 'block';
-        document.getElementById('seletor-qtd-variacoes').style.display = 'none';
-        document.getElementById('bloco-variacoes').innerHTML = '';
-      } else if (e.target.value === 'variacoes') {
-        document.getElementById('campos-gerais').style.display = 'none'; // 👈 escondemos os campos de único
-        document.getElementById('seletor-qtd-variacoes').style.display = 'block';
-      }
-    });
-  });
-
-  // Criar campos de variações dinamicamente
-  document.querySelectorAll('input[name="qtdVariacoes"]').forEach(radio => {
-    radio.addEventListener('change', e => {
-      const qtd = parseInt(e.target.value);
-      const bloco = document.getElementById('bloco-variacoes');
-      bloco.innerHTML = '';
-        for (let i = 1; i <= qtd; i++) {
-        bloco.innerHTML += `
-            <div class="form-group">
-            <label>Nome da Variação ${i}:</label>
-            <input type="text" name="v_nome[]" placeholder="Ex: Sabor ${i}">
-            </div>
-            <div class="form-group">
-            <label>Preço da Variação ${i}:</label>
-            <input type="number" step="0.01" name="v_preco[]" placeholder="0.00">
-            </div>
-            <div class="form-group">
-            <label>Imagem da Variação ${i}:</label>
-            <input type="file" name="v_imagens" accept="image/*">
-            </div>
-        `;
-        }
-
-
-    });
-  });
-</script>
-
-<script>
-async function carregarProdutos() {
-  try {
-    const res = await fetch('/produtos');
-    const produtos = await res.json();
-
-    const lista = document.getElementById('produtos-lista');
-    const msgVazio = document.getElementById('no-products-message');
-    lista.innerHTML = '';
-
-    if (!produtos.length) {
-      msgVazio.style.display = 'block';
-      return;
-    }
-    msgVazio.style.display = 'none';
-
-    produtos.forEach(prod => {
-      const card = document.createElement('div');
-      card.className = 'produto-card';
-      card.setAttribute('data-categoria', prod.categoria.toLowerCase());
-      card.setAttribute('data-nome', (prod.nome || prod.variacoes?.[0]?.nome || '').toLowerCase());
-
-      let nome = prod.nome || (prod.variacoes?.[0]?.nome ?? 'Produto');
-      let preco = prod.preco || prod.variacoes?.[0]?.preco || 0;
-      let imagem = prod.imagens?.[0] || prod.variacoes?.[0]?.imagem || '/assets/images/alimentos/sem-imagem.jpg';
-
-      card.innerHTML = `
-        <img src="${imagem}" alt="${nome}" class="produto-img">
-        <h4>${nome}</h4>
-        <p>R$ ${parseFloat(preco).toFixed(2).replace('.', ',')}</p>
-        <div class="botoes-acao">
-          <button class="editar-btn" data-id="${prod._id}">Editar</button>
-          <button class="excluir-btn" data-id="${prod._id}">Excluir</button>
-        </div>
-      `;
-      lista.appendChild(card);
-    });
-  } catch (err) {
-    console.error('Erro ao carregar produtos:', err);
-  }
-}
-
-// 🔍 Filtro de categorias
-document.querySelectorAll('.filtro-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filtro-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    const categoria = btn.dataset.categoria;
-    document.querySelectorAll('#produtos-lista .produto-card').forEach(card => {
-      if (categoria === 'todos' || card.dataset.categoria === categoria) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  });
-});
-
-// 🔍 Pesquisa por nome
-document.getElementById('barra-pesquisa').addEventListener('input', e => {
-  const termo = e.target.value.toLowerCase();
-  document.querySelectorAll('#produtos-lista .produto-card').forEach(card => {
-    card.style.display = card.dataset.nome.includes(termo) ? '' : 'none';
-  });
-});
-
-document.addEventListener('DOMContentLoaded', carregarProdutos);
-</script>
-
-    
-    <script>
+    </div> <script>
     document.addEventListener('DOMContentLoaded', () => {
     // Referências aos elementos DOM
     const tipoCardRadios = document.querySelectorAll('input[name="tipoCard"]');
@@ -1219,10 +1023,9 @@ document.addEventListener('DOMContentLoaded', carregarProdutos);
             return;
         }
 
-            const modo = document.querySelector('input[name="modo"]:checked')?.value || "unico";
-            const formData = new FormData(formProduto);
-            formData.append('modo', modo);
-
+        const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
+        const formData = new FormData(formProduto);
+        formData.append('modo', tipoCard);
 
         try {
             const res = await fetch('/produtos', {

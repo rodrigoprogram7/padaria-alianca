@@ -151,18 +151,6 @@ function renderizarProdutos(produtos) {
     return nomeA.localeCompare(nomeB);
   });
 
-produtos.forEach(prod => {
-  if (prod.tipo === "encomenda") {
-    lista.appendChild(renderizarCardEncomenda(prod));
-  } else if (prod.variacoes && prod.variacoes.length > 0) {
-    lista.appendChild(renderizarCardComVariacoes(prod));
-  } else {
-    lista.appendChild(renderizarCardUnico(prod));
-  }
-});
-
-
-
   produtos.forEach(prod => {
     if (prod.variacoes && prod.variacoes.length > 0) {
       lista.appendChild(renderizarCardComVariacoes(prod));
@@ -243,30 +231,6 @@ function renderizarCardComVariacoes(prod) {
 
   return card;
 }
-
-function renderizarCardEncomenda(prod) {
-  const precoFormatado = parseFloat(prod.preco).toFixed(2).replace('.', ',');
-
-  const card = document.createElement('div');
-  card.className = 'produto-card';
-  card.setAttribute('data-categoria', prod.categoria);
-  card.setAttribute('data-tipo', 'encomenda');
-  card.setAttribute('data-nome', prod.nome);
-
-  card.innerHTML = `
-    <img src="${prod.imagens && prod.imagens[0] ? prod.imagens[0] : '/img/default.png'}" class="produto-img">
-    <h4>${prod.nome}</h4>
-    <p>R$ ${precoFormatado}</p>
-    <small>${prod.descricao || ''}</small>
-    <div class="botoes-acao">
-      <button class="editar-btn" data-id="${prod._id}">Editar</button>
-      <button class="excluir-btn" data-id="${prod._id}">Excluir</button>
-    </div>
-  `;
-  return card;
-}
-
-
 
 function filtrarCategoria(categoriaSelecionada) {
   document.querySelectorAll('.filtro-btn').forEach(btn => btn.classList.remove('active'));
