@@ -748,8 +748,9 @@ input:focus:invalid {
   <div id="modo-section" class="form-group" style="display:none;">
     <label>Tipo do Card:</label>
     <div class="radio-group">
-      <label><input type="radio" name="modo" value="unico"> Único</label>
-      <label><input type="radio" name="modo" value="variacoes"> Variado</label>
+<label><input type="radio" name="modo" value="unico" checked> Único</label>
+<label><input type="radio" name="modo" value="variacoes"> Variado</label>
+
     </div>
   </div>
 
@@ -1218,9 +1219,10 @@ document.addEventListener('DOMContentLoaded', carregarProdutos);
             return;
         }
 
-        const tipoCard = document.querySelector('input[name="tipoCard"]:checked').value;
-        const formData = new FormData(formProduto);
-        formData.append('modo', tipoCard);
+            const modo = document.querySelector('input[name="modo"]:checked')?.value || "unico";
+            const formData = new FormData(formProduto);
+            formData.append('modo', modo);
+
 
         try {
             const res = await fetch('/produtos', {
