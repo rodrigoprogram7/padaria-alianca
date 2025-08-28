@@ -2595,10 +2595,11 @@ nav {
 
 
 #sacolao-cards {
-  display: grid;
+  display: none; /* começa escondido */
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
 }
+
 /* Card especial para sacolões */
 .produto.sacolao {
   border: 2px solid var(--base-color);
