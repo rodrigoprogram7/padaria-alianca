@@ -897,24 +897,36 @@ input:focus:invalid {
   document.querySelectorAll('input[name="tipo"]').forEach(radio => {
     radio.addEventListener('change', e => {
       const tipo = e.target.value;
-      document.getElementById('modo-section').style.display = (tipo === 'unidade') ? 'block' : 'none';
-      document.getElementById('campos-gerais').style.display = (tipo === 'unidade' || tipo === 'peso') ? 'block' : 'none';
-      document.getElementById('campos-encomenda').style.display = (tipo === 'encomenda') ? 'block' : 'none';
 
-      // reset variações ao trocar tipo
+      // Resetar blocos
+      document.getElementById('modo-section').style.display = 'none';
+      document.getElementById('campos-gerais').style.display = 'none';
+      document.getElementById('campos-encomenda').style.display = 'none';
       document.getElementById('seletor-qtd-variacoes').style.display = 'none';
       document.getElementById('bloco-variacoes').innerHTML = '';
+
+      if (tipo === 'unidade') {
+        document.getElementById('modo-section').style.display = 'block';
+      } 
+      if (tipo === 'peso') {
+        document.getElementById('campos-gerais').style.display = 'block';
+      }
+      if (tipo === 'encomenda') {
+        document.getElementById('campos-encomenda').style.display = 'block';
+      }
     });
   });
 
-  // Mostrar seletor de variações quando "variado"
+  // Mostrar/esconder blocos quando escolher modo (dentro de Unidade)
   document.querySelectorAll('input[name="modo"]').forEach(radio => {
     radio.addEventListener('change', e => {
-      if (e.target.value === 'variacoes') {
-        document.getElementById('seletor-qtd-variacoes').style.display = 'block';
-      } else {
+      if (e.target.value === 'unico') {
+        document.getElementById('campos-gerais').style.display = 'block';
         document.getElementById('seletor-qtd-variacoes').style.display = 'none';
         document.getElementById('bloco-variacoes').innerHTML = '';
+      } else if (e.target.value === 'variacoes') {
+        document.getElementById('campos-gerais').style.display = 'none'; // 👈 escondemos os campos de único
+        document.getElementById('seletor-qtd-variacoes').style.display = 'block';
       }
     });
   });
@@ -944,6 +956,7 @@ input:focus:invalid {
     });
   });
 </script>
+
 
     
     <script>
