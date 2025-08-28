@@ -2460,7 +2460,7 @@ nav {
 }
 
 .info-entrega strong {
-    color: var(--base-color-alt);
+    color: rgba(0, 0, 0, 0.597);
     font-weight: 700;
 }
 
