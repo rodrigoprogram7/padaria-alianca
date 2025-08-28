@@ -125,6 +125,7 @@ app.post('/produtos', upload.fields([
     }
 
 
+
     // 🔹 Caso "Unico"
     if (modo === 'unico') {
       const imagens = (req.files['imagens'] || []).map(file => file.path);

@@ -821,6 +821,21 @@ input:focus:invalid {
     <textarea id="descricao-encomenda" name="descricao" placeholder="Detalhes do produto"></textarea>
   </div>
 
+  <!-- 🔹 Categoria também para encomenda -->
+  <div class="form-group">
+    <label for="categoria-encomenda">Categoria:</label>
+    <select id="categoria-encomenda" name="categoria">
+      <option value="" disabled selected>Selecione uma categoria</option>
+      <option value="mercearia">Mercearia</option>
+      <option value="padaria">Padaria</option>
+      <option value="sacolões">Sacolões</option>
+      <option value="bazar">Bazar</option>
+      <option value="bebidas">Bebidas</option>
+      <option value="perecíveis">Perecíveis</option>
+      <option value="higiene">Higiene</option>
+    </select>
+  </div>
+
   <div class="form-group">
     <label>Imagem:</label>
     <div class="image-upload-area">
@@ -831,6 +846,8 @@ input:focus:invalid {
     <div class="image-preview"></div>
   </div>
 </div>
+
+
 
 
   <!-- 🔹 Botão de envio -->
