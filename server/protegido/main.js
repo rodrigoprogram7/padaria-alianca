@@ -260,6 +260,15 @@ if (destinoCategoria) {
     const categoriaNome = categoriaSelecionada.charAt(0).toUpperCase() + categoriaSelecionada.slice(1);
     titulo.textContent = categoriaNome;
 }
+  // 🔹 ADIÇÃO: mostrar/ocultar cards estáticos do sacolão
+  const sacolaoEstaticos = document.getElementById('sacolao-estaticos');
+  if (sacolaoEstaticos) {
+    if (categoriaSelecionada === 'sacolões') {
+      sacolaoEstaticos.style.display = 'grid';
+    } else {
+      sacolaoEstaticos.style.display = 'none';
+    }
+  }
 }
 
 
