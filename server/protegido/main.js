@@ -390,6 +390,18 @@ if (inputPesquisa) {
       resultadosPesquisa.style.display = 'none';
     }
   });
+
+  // Mostrar apenas os cards estáticos de sacolões quando selecionar essa categoria
+const sacolaoEstaticos = document.getElementById('sacolao-estaticos');
+if (sacolaoEstaticos) {
+  if (categoriaSelecionada === 'sacolões') {
+    sacolaoEstaticos.style.display = 'grid'; // segue o estilo dos produtos
+  } else {
+    sacolaoEstaticos.style.display = 'none';
+  }
+}
+
+
 }
 
 
