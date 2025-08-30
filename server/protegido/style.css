@@ -2674,26 +2674,24 @@ nav {
 }
 
 /* 🔥 Ajuste mobile do carrossel para ficar igual ao banner */
+/* Carrossel no mesmo estilo do banner */
 @media (max-width: 768px) {
   .carrossel-container {
-    width: 100%;
-    margin: 1rem auto;
-    padding: 1rem;
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: 100%;              /* ocupa toda a largura, igual o banner */
+    max-width: 1120px;        /* mesmo limite usado no banner */
+    margin: 1rem auto;        /* centralizado com margens iguais */
+    padding: 1rem;            /* mesmo respiro interno */
+    border-radius: 12px;      /* mesma curvatura */
+    background: #fff;         /* fundo branco igual */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* mesma sombra */
   }
 
   .carrossel-item {
     flex: 0 0 100%;
     max-width: 100%;
-    padding: 1rem;
-  }
-
-  .item-imagem {
-    max-height: 160px;
   }
 }
+
 
 
 
