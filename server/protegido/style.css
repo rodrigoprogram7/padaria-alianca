@@ -2537,29 +2537,23 @@ nav {
 
 /* Container externo com o mesmo estilo dos banners */
 .carrossel-container {
+    margin: 2rem auto;
+    padding: 1.5rem; /* Ajuste para ter o mesmo padding interno que os banners */
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Mesma sombra dos banners */
-    margin: 2rem auto;
-    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
     max-width: 1120px;
-}
-
-/* Conteúdo interno do carrossel */
-.carrossel-banner-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-    text-align: center;
+    position: relative; /* Essencial para que as setas fiquem dentro do carrossel */
+    overflow: hidden;
 }
 
 /* Título */
 .carrossel-titulo {
+    text-align: center;
     font-size: 1.6rem;
     font-weight: 700;
     color: var(--title-color);
-    margin-bottom: 0;
+    margin-bottom: 1rem;
 }
 .carrossel-titulo::after {
     content: "";
@@ -2574,7 +2568,6 @@ nav {
 /* Wrapper e trilha */
 .carrossel-wrapper {
     overflow: hidden;
-    width: 100%;
 }
 .carrossel {
     display: flex;
@@ -2584,8 +2577,8 @@ nav {
 
 /* Cada item */
 .carrossel-item {
-    flex: 0 0 100%; /* Mobile: 1 por vez */
-    max-width: 100%;
+    flex: 0 0 calc(100% - 0rem); /* Mobile: 1 por vez */
+    max-width: calc(100% - 0rem);
     background: #fff;
     border-radius: 10px;
     padding: 1rem;
@@ -2663,6 +2656,7 @@ nav {
     justify-content: space-between;
     transform: translateY(-50%);
     pointer-events: none;
+    padding: 0 1.5rem; /* Adiciona padding para alinhar com o conteúdo */
 }
 .navegacao-btn {
     pointer-events: all;
@@ -2695,7 +2689,6 @@ nav {
         max-width: calc(33.333% - 0.666rem);
     }
 }
-
 
 
 
