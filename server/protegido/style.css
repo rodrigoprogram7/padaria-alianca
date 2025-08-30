@@ -2649,31 +2649,29 @@ nav {
 
 /* Botões navegação */
 .carrossel-navegacao {
-  position: absolute;
-  top: 50%;
-  width: 100%;
   display: flex;
-  justify-content: space-between;
-  transform: translateY(-50%);
-  pointer-events: none;
+  justify-content: center;   /* centraliza horizontalmente */
+  align-items: center;
+  gap: 1rem;                 /* espaço entre as setas */
+  margin-top: 1rem;          /* afasta do carrossel */
 }
+
 .navegacao-btn {
-  pointer-events: all;
-  background: white;
-  border: 2px solid var(--base-color);
-  color: var(--base-color);
-  font-size: 1.5rem;
-  border-radius: 50%;
-  width: 36px;
-  height: 36px;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transition: all 0.3s ease;
-}
-.navegacao-btn:hover {
-  background: var(--base-color);
+  background-color: var(--base-color);
   color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
+
+.navegacao-btn:hover {
+  background-color: var(--base-color-alt);
+}
+
 
 /* Responsivo */
 @media (min-width: 768px) {
