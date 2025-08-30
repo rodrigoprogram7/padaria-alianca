@@ -2567,20 +2567,18 @@ nav {
 
 /* Wrapper e trilha */
 .carrossel-wrapper {
-  display: flex;
-  justify-content: center; /* Centraliza o carrossel no espaço */
-  overflow: hidden;        /* Mantém o efeito de deslizar */
+  overflow: hidden;
 }
 .carrossel {
   display: flex;
-  justify-content: center; /* Centraliza os itens dentro */
-  gap: 1rem;               /* Espaço entre os produtos */
+  gap: 1rem;
+  transition: transform 0.3s ease;
 }
+
 /* Cada item */
 .carrossel-item {
- flex: 0 0 auto;           /* Mantém tamanho fixo sem esticar */
-  margin: 0 auto;           /* Garante que fiquem centralizados */
-  max-width: 280px;         /* Limita a largura no mobile */
+  flex: 0 0 calc(100% / 1); /* Mobile: 1 por vez */
+  max-width: calc(100% / 1);
   background: #fff;
   border-radius: 10px;
   padding: 1rem;
@@ -2588,7 +2586,6 @@ nav {
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
   transition: transform 0.3s;
 }
-
 .carrossel-item:hover {
   transform: translateY(-4px);
 }
