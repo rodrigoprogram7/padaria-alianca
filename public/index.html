@@ -276,38 +276,31 @@
   <span id="contador-carrinho" class="contador-carrinho">0</span>
 </a>
 
-<script> const produtos = [
+<script>
+    const produtosDestaque = [
         {
             titulo: "Cesta Básica de 4kg",
             descricao: "4 Arroz, 4 Feijões, 4 Fubas, 4 Açúcares, 1 óleo, 1 refrigerante, 1 macarrão, 1 café grande, 2 bolachas, 1 sal ",
             preco: "R$ 109,90",
-            imagem: "./th.jfif",
+            imagem: "./assets/images/destaques/10kg.jpg",
             whatsapp: "5511999998888",
-            mensagem: "Olá, tenho interesse no Fone de Ouvido Sem Fio. Poderia me dar mais informações?"
+            mensagem: "Olá, tenho interesse na Cesta Básica de 4kg."
         },
         {
-            titulo: "Fone de Ouvido Sem Fio",
-            descricao: "Áudio cristalino e design ergonômico. Cores: Branco, Preto.",
-            preco: "R$ 99,90",
-            imagem: "https://via.placeholder.com/300x200?text=Fone+Sem+Fio",
+            titulo: "Sacolas de Verduras",
+            descricao: "Frescas e selecionadas.",
+            preco: "R$ 49,90",
+            imagem: "./assets/images/destaques/verduras.jpg",
             whatsapp: "5511999998888",
-            mensagem: "Olá, tenho interesse no Fone de Ouvido Sem Fio. Poderia me dar mais informações?"
+            mensagem: "Olá, tenho interesse nas Sacolas de Verduras."
         },
         {
-            titulo: "Smartwatch Ultra",
-            descricao: "Monitora sua saúde e conecta com seu celular. Cor: Prata.",
-            preco: "R$ 349,00",
-            imagem: "https://via.placeholder.com/300x200?text=Smartwatch",
+            titulo: "Pães Caseiros",
+            descricao: "Macios e deliciosos, direto da padaria.",
+            preco: "R$ 12,00",
+            imagem: "./assets/images/destaques/paes.jpg",
             whatsapp: "5511999998888",
-            mensagem: "Olá, tenho interesse no Smartwatch Ultra. Poderia me dar mais informações?"
-        },
-        {
-            titulo: "Teclado Mecânico RGB",
-            descricao: "Switches azuis, ideal para jogos e digitação. Cor: Preto.",
-            preco: "R$ 189,50",
-            imagem: "https://via.placeholder.com/300x200?text=Teclado+Mecanico",
-            whatsapp: "5511999998888",
-            mensagem: "Olá, tenho interesse no Teclado Mecânico RGB. Poderia me dar mais informações?"
+            mensagem: "Olá, tenho interesse nos Pães Caseiros."
         }
     ];
 
@@ -329,7 +322,7 @@
             itemsPerView = 1;
         }
         
-        const maxIndex = produtos.length - itemsPerView;
+        const maxIndex = produtosDestaque.length - itemsPerView;
         if (currentIndex > maxIndex) {
             currentIndex = maxIndex;
         }
@@ -347,7 +340,7 @@
 
     function updateDots() {
         dotsContainer.innerHTML = '';
-        const totalDots = produtos.length - itemsPerView + 1;
+        const totalDots = produtosDestaque.length - itemsPerView + 1;
         for (let i = 0; i < totalDots; i++) {
             const dot = document.createElement('span');
             dot.classList.add('dot');
@@ -363,31 +356,30 @@
         }
     }
 
-    // Lógica para o loop infinito
     btnAnterior.addEventListener('click', () => {
         if (currentIndex > 0) {
             currentIndex--;
         } else {
-            currentIndex = produtos.length - itemsPerView; // Volta para o final
+            currentIndex = produtosDestaque.length - itemsPerView; 
         }
         updateCarrossel();
         updateDots();
     });
 
     btnProximo.addEventListener('click', () => {
-        const maxIndex = produtos.length - itemsPerView;
+        const maxIndex = produtosDestaque.length - itemsPerView;
         if (currentIndex < maxIndex) {
             currentIndex++;
         } else {
-            currentIndex = 0; // Volta para o início
+            currentIndex = 0; 
         }
         updateCarrossel();
         updateDots();
     });
 
-    function renderizarProdutos() {
+    function renderizarProdutosDestaque() {
         carrossel.innerHTML = '';
-        produtos.forEach(produto => {
+        produtosDestaque.forEach(produto => {
             const itemDiv = document.createElement('div');
             itemDiv.classList.add('carrossel-item');
             
@@ -406,11 +398,13 @@
         updateItemsPerView();
     }
 
-    document.addEventListener('DOMContentLoaded', renderizarProdutos);
+    document.addEventListener('DOMContentLoaded', renderizarProdutosDestaque);
     window.addEventListener('resize', () => {
         clearTimeout(window.resizeTimer);
         window.resizeTimer = setTimeout(updateItemsPerView, 250);
-    });</script>
+    });
+</script>
+
 
 
 

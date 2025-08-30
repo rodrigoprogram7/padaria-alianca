@@ -2541,17 +2541,6 @@ nav {
             --sombra: rgba(0, 0, 0, 0.1);
         }
 
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: var(--cor-secundaria);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
         .carrossel-container {
             width: 100%;
             max-width: 900px;
