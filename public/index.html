@@ -183,6 +183,21 @@
       </div>
     </div>
   </section>
+  <div class="carrossel-container">
+    <h2 class="carrossel-titulo">🔥 Produtos em Destaque</h2>
+    
+    <div class="carrossel-wrapper">
+        <div class="carrossel" id="carrossel">
+            </div>
+    </div>
+    
+    <div class="dots-container" id="dots-container"></div>
+    
+    <div class="carrossel-navegacao">
+        <button class="navegacao-btn" id="anterior">❮</button>
+        <button class="navegacao-btn" id="proximo">❯</button>
+    </div>
+</div>
       <br><br>
 
       <div id="alerta" class="alerta">Produto adicionado ao carrinho!</div>
@@ -260,6 +275,142 @@
   <img style="width: 35px;height: 35px;" src="assets/images/sistema/carrinho.png" alt="">
   <span id="contador-carrinho" class="contador-carrinho">0</span>
 </a>
+
+<script> const produtos = [
+        {
+            titulo: "Cesta Básica de 4kg",
+            descricao: "4 Arroz, 4 Feijões, 4 Fubas, 4 Açúcares, 1 óleo, 1 refrigerante, 1 macarrão, 1 café grande, 2 bolachas, 1 sal ",
+            preco: "R$ 109,90",
+            imagem: "./th.jfif",
+            whatsapp: "5511999998888",
+            mensagem: "Olá, tenho interesse no Fone de Ouvido Sem Fio. Poderia me dar mais informações?"
+        },
+        {
+            titulo: "Fone de Ouvido Sem Fio",
+            descricao: "Áudio cristalino e design ergonômico. Cores: Branco, Preto.",
+            preco: "R$ 99,90",
+            imagem: "https://via.placeholder.com/300x200?text=Fone+Sem+Fio",
+            whatsapp: "5511999998888",
+            mensagem: "Olá, tenho interesse no Fone de Ouvido Sem Fio. Poderia me dar mais informações?"
+        },
+        {
+            titulo: "Smartwatch Ultra",
+            descricao: "Monitora sua saúde e conecta com seu celular. Cor: Prata.",
+            preco: "R$ 349,00",
+            imagem: "https://via.placeholder.com/300x200?text=Smartwatch",
+            whatsapp: "5511999998888",
+            mensagem: "Olá, tenho interesse no Smartwatch Ultra. Poderia me dar mais informações?"
+        },
+        {
+            titulo: "Teclado Mecânico RGB",
+            descricao: "Switches azuis, ideal para jogos e digitação. Cor: Preto.",
+            preco: "R$ 189,50",
+            imagem: "https://via.placeholder.com/300x200?text=Teclado+Mecanico",
+            whatsapp: "5511999998888",
+            mensagem: "Olá, tenho interesse no Teclado Mecânico RGB. Poderia me dar mais informações?"
+        }
+    ];
+
+    const carrossel = document.getElementById('carrossel');
+    const btnAnterior = document.getElementById('anterior');
+    const btnProximo = document.getElementById('proximo');
+    const dotsContainer = document.getElementById('dots-container');
+
+    let currentIndex = 0;
+    let itemsPerView = 1;
+
+    function updateItemsPerView() {
+        const width = window.innerWidth;
+        if (width >= 992) {
+            itemsPerView = 3;
+        } else if (width >= 768) {
+            itemsPerView = 2;
+        } else {
+            itemsPerView = 1;
+        }
+        
+        const maxIndex = produtos.length - itemsPerView;
+        if (currentIndex > maxIndex) {
+            currentIndex = maxIndex;
+        }
+
+        updateCarrossel();
+        updateDots();
+    }
+    
+    function updateCarrossel() {
+        if (!carrossel.firstElementChild) return;
+        const itemWidth = carrossel.firstElementChild.offsetWidth;
+        const offset = -currentIndex * itemWidth;
+        carrossel.style.transform = `translateX(${offset}px)`;
+    }
+
+    function updateDots() {
+        dotsContainer.innerHTML = '';
+        const totalDots = produtos.length - itemsPerView + 1;
+        for (let i = 0; i < totalDots; i++) {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (i === currentIndex) {
+                dot.classList.add('active');
+            }
+            dot.addEventListener('click', () => {
+                currentIndex = i;
+                updateCarrossel();
+                updateDots();
+            });
+            dotsContainer.appendChild(dot);
+        }
+    }
+
+    // Lógica para o loop infinito
+    btnAnterior.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            currentIndex--;
+        } else {
+            currentIndex = produtos.length - itemsPerView; // Volta para o final
+        }
+        updateCarrossel();
+        updateDots();
+    });
+
+    btnProximo.addEventListener('click', () => {
+        const maxIndex = produtos.length - itemsPerView;
+        if (currentIndex < maxIndex) {
+            currentIndex++;
+        } else {
+            currentIndex = 0; // Volta para o início
+        }
+        updateCarrossel();
+        updateDots();
+    });
+
+    function renderizarProdutos() {
+        carrossel.innerHTML = '';
+        produtos.forEach(produto => {
+            const itemDiv = document.createElement('div');
+            itemDiv.classList.add('carrossel-item');
+            
+            itemDiv.innerHTML = `
+                <img src="${produto.imagem}" alt="${produto.titulo}" class="item-imagem">
+                <h3 class="item-titulo">${produto.titulo}</h3>
+                <p class="item-descricao">${produto.descricao}</p>
+                <p class="item-preco">${produto.preco}</p>
+                <a href="https://wa.me/${produto.whatsapp}?text=${encodeURIComponent(produto.mensagem)}" target="_blank" class="whatsapp-btn">
+                    Negociar via WhatsApp
+                </a>
+            `;
+            carrossel.appendChild(itemDiv);
+        });
+        
+        updateItemsPerView();
+    }
+
+    document.addEventListener('DOMContentLoaded', renderizarProdutos);
+    window.addEventListener('resize', () => {
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(updateItemsPerView, 250);
+    });</script>
 
 
 
