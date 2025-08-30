@@ -2533,162 +2533,160 @@ nav {
 
 
 
-/*======================================== Estilo do Carrossel de Destaques ========================================*/
-
-/* Container externo com o mesmo estilo dos banners */
+/* ===== CARROSSEL DESTAQUE ===== */
 .carrossel-container {
-    margin: 2rem auto;
-    padding: 1.5rem; /* Ajuste para ter o mesmo padding interno que os banners */
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    max-width: 1120px;
-    position: relative; /* Essencial para que as setas fiquem dentro do carrossel */
-    overflow: hidden;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 1120px;
+  position: relative;
+  overflow: hidden;
 }
 
 /* Título */
 .carrossel-titulo {
-    text-align: center;
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: var(--title-color);
-    margin-bottom: 1rem;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--title-color);
+  margin-bottom: 1rem;
 }
 .carrossel-titulo::after {
-    content: "";
-    display: block;
-    width: 60px;
-    height: 3px;
-    background: var(--base-color);
-    margin: 0.5rem auto 0;
-    border-radius: 3px;
+  content: "";
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--base-color);
+  margin: 0.5rem auto 0;
+  border-radius: 3px;
 }
 
 /* Wrapper e trilha */
 .carrossel-wrapper {
-    overflow: hidden;
+  overflow: hidden;
 }
 .carrossel {
-    display: flex;
-    gap: 1rem;
-    transition: transform 0.3s ease;
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.3s ease;
 }
 
 /* Cada item */
 .carrossel-item {
-    flex: 0 0 calc(100% - 0rem); /* Mobile: 1 por vez */
-    max-width: calc(100% - 0rem);
-    background: #fff;
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    transition: transform 0.3s;
+  flex: 0 0 calc(100% / 1); /* Mobile: 1 por vez */
+  max-width: calc(100% / 1);
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.3s;
 }
 .carrossel-item:hover {
-    transform: translateY(-4px);
+  transform: translateY(-4px);
 }
 
 /* Conteúdo do item */
 .item-imagem {
-    width: 100%;
-    max-height: 180px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
+  width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
 }
 .item-titulo {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin: 0.5rem 0;
-    color: var(--title-color);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  color: var(--title-color);
 }
 .item-descricao {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
 }
 .item-preco {
-    font-weight: bold;
-    color: var(--base-color);
-    margin-bottom: 0.8rem;
+  font-weight: bold;
+  color: var(--base-color);
+  margin-bottom: 0.8rem;
 }
 .whatsapp-btn {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background: #25D366;
-    color: white;
-    border-radius: 6px;
-    font-size: 0.9rem;
-    transition: background 0.3s;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #25D366;
+  color: white;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: background 0.3s;
 }
 .whatsapp-btn:hover {
-    background: #1DA851;
+  background: #1DA851;
 }
 
 /* Dots */
 .dots-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 0.8rem;
-    gap: 6px;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.8rem;
+  gap: 6px;
 }
 .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: #ccc;
-    cursor: pointer;
-    transition: background 0.3s, transform 0.3s;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
 }
 .dot.active {
-    background: var(--base-color);
-    transform: scale(1.2);
+  background: var(--base-color);
+  transform: scale(1.2);
 }
 
 /* Botões navegação */
 .carrossel-navegacao {
-    position: absolute;
-    top: 50%;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    transform: translateY(-50%);
-    pointer-events: none;
-    padding: 0 1.5rem; /* Adiciona padding para alinhar com o conteúdo */
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
 }
 .navegacao-btn {
-    pointer-events: all;
-    background: white;
-    border: 2px solid var(--base-color);
-    color: var(--base-color);
-    font-size: 1.5rem;
-    border-radius: 50%;
-    width: 36px;
-    height: 36px;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    transition: all 0.3s ease;
+  pointer-events: all;
+  background: white;
+  border: 2px solid var(--base-color);
+  color: var(--base-color);
+  font-size: 1.5rem;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
 }
 .navegacao-btn:hover {
-    background: var(--base-color);
-    color: #fff;
+  background: var(--base-color);
+  color: #fff;
 }
 
-/* Responsividade - Ajustes para desktop */
+/* Responsivo */
 @media (min-width: 768px) {
-    .carrossel-item {
-        flex: 0 0 calc(50% - 0.5rem); /* 2 itens por vez em tablets */
-        max-width: calc(50% - 0.5rem);
-    }
+  .carrossel-item {
+    flex: 0 0 calc(100% / 2);
+    max-width: calc(100% / 2);
+  }
 }
 @media (min-width: 992px) {
-    .carrossel-item {
-        flex: 0 0 calc(33.333% - 0.666rem); /* 3 itens por vez em desktops */
-        max-width: calc(33.333% - 0.666rem);
-    }
+  .carrossel-item {
+    flex: 0 0 calc(100% / 3);
+    max-width: calc(100% / 3);
+  }
 }
+
 
 
 
