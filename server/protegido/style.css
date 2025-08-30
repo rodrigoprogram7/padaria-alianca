@@ -2673,19 +2673,28 @@ nav {
   color: #fff;
 }
 
-/* Responsivo */
-@media (min-width: 768px) {
+/* 🔥 Ajuste mobile do carrossel para ficar igual ao banner */
+@media (max-width: 768px) {
+  .carrossel-container {
+    width: 100%;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
   .carrossel-item {
-    flex: 0 0 calc(100% / 2);
-    max-width: calc(100% / 2);
+    flex: 0 0 100%;
+    max-width: 100%;
+    padding: 1rem;
+  }
+
+  .item-imagem {
+    max-height: 160px;
   }
 }
-@media (min-width: 992px) {
-  .carrossel-item {
-    flex: 0 0 calc(100% / 3);
-    max-width: calc(100% / 3);
-  }
-}
+
 
 
 
