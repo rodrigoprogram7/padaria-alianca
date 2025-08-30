@@ -2543,6 +2543,8 @@ nav {
   max-width: 1120px;
   position: relative;
   overflow: hidden;
+    margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 /* Título */
