@@ -2673,40 +2673,22 @@ nav {
   color: #fff;
 }
 
-/*======================================== Estilo do Carrossel de Destaques ========================================*/
-/* Assegura que o carrossel tenha o mesmo estilo e proporções dos banners */
-
-.carrossel-container {
-  margin: 2rem auto;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08); /* Sombra mais suave, igual aos banners */
-  max-width: 1120px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Ajustes para telas menores */
+/* 🔥 Ajuste mobile do carrossel para ficar igual ao banner */
+/* Carrossel no mesmo estilo do banner */
 @media (max-width: 768px) {
   .carrossel-container {
-    padding: 1.5rem; /* Ajusta o padding para ser igual ao do banner */
-    border-radius: 12px;
+    width: 100%;              /* ocupa toda a largura, igual o banner */
+    max-width: 1120px;        /* mesmo limite usado no banner */
+    margin: 1rem auto;        /* centralizado com margens iguais */
+    padding: 1rem;            /* mesmo respiro interno */
+    border-radius: 12px;      /* mesma curvatura */
+    background: #fff;         /* fundo branco igual */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* mesma sombra */
   }
-}
 
-/* Adapta o número de itens exibidos em diferentes telas */
-@media (min-width: 768px) {
   .carrossel-item {
-    flex: 0 0 calc(50% - 0.5rem); /* 2 itens por vez em tablets */
-    max-width: calc(50% - 0.5rem);
-  }
-}
-
-@media (min-width: 992px) {
-  .carrossel-item {
-    flex: 0 0 calc(33.333% - 0.666rem); /* 3 itens por vez em desktops */
-    max-width: calc(33.333% - 0.666rem);
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 
