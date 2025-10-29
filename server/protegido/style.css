@@ -2719,61 +2719,66 @@ nav {
 
 
 
-/* ===== Banners minimalistas (mobile first) ===== */
-.whatsapp-banner.minimal {
+/* ===== Banners minimalistas e maiores ===== */
+.whatsapp-banner.minimal.grande {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: left;
-  padding: 0.6rem 1rem;
+  padding: 1rem 1.3rem;
   background: #fffbe6;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
-  margin: 0.8rem auto;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  margin: 1.2rem auto;
   max-width: 95%;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.whatsapp-banner.minimal:hover {
+.whatsapp-banner.minimal.grande:hover {
   transform: scale(1.02);
+  box-shadow: 0 5px 12px rgba(0,0,0,0.12);
 }
 
-.whatsapp-banner.minimal .texto-banner h2 {
-  font-size: 1.05rem;
-  color: #222;
+.whatsapp-banner.minimal.grande .texto-banner h2 {
+  font-size: 1.25rem;
+  color: #1e1e1e;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 600;
+  gap: 0.6rem;
+  font-weight: 700;
 }
 
-.whatsapp-banner.minimal p {
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
-  color: #444;
+.whatsapp-banner.minimal.grande p {
+  font-size: 1rem;
+  margin-top: 0.3rem;
+  color: #333;
+  font-weight: 500;
 }
 
 .icon-inline {
-  width: 26px;
-  height: 26px;
+  width: 34px;
+  height: 34px;
   animation: floatIcon 2.2s infinite ease-in-out;
 }
 
 @keyframes floatIcon {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+  50% { transform: translateY(-5px); }
 }
 
-/* Responsividade */
+/* Responsivo (mantém o visual bom no mobile) */
 @media (max-width: 600px) {
-  .whatsapp-banner.minimal {
-    padding: 0.5rem 0.8rem;
+  .whatsapp-banner.minimal.grande {
+    padding: 0.9rem 1.1rem;
   }
-  .whatsapp-banner.minimal h2 {
-    font-size: 1rem;
+  .whatsapp-banner.minimal.grande .texto-banner h2 {
+    font-size: 1.2rem;
   }
-  .whatsapp-banner.minimal p {
-    font-size: 0.85rem;
+  .whatsapp-banner.minimal.grande p {
+    font-size: 0.95rem;
+  }
+  .icon-inline {
+    width: 32px;
+    height: 32px;
   }
 }
-
