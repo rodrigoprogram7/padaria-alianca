@@ -2712,3 +2712,68 @@ nav {
   background-color: #ff9800 !important; /* destaque visual */
 }
 
+
+
+
+
+
+
+
+/* ===== Banners minimalistas (mobile first) ===== */
+.whatsapp-banner.minimal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: left;
+  padding: 0.6rem 1rem;
+  background: #fffbe6;
+  border-radius: 12px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+  margin: 0.8rem auto;
+  max-width: 95%;
+  transition: transform 0.3s ease;
+}
+
+.whatsapp-banner.minimal:hover {
+  transform: scale(1.02);
+}
+
+.whatsapp-banner.minimal .texto-banner h2 {
+  font-size: 1.05rem;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.whatsapp-banner.minimal p {
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
+  color: #444;
+}
+
+.icon-inline {
+  width: 26px;
+  height: 26px;
+  animation: floatIcon 2.2s infinite ease-in-out;
+}
+
+@keyframes floatIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .whatsapp-banner.minimal {
+    padding: 0.5rem 0.8rem;
+  }
+  .whatsapp-banner.minimal h2 {
+    font-size: 1rem;
+  }
+  .whatsapp-banner.minimal p {
+    font-size: 0.85rem;
+  }
+}
+
