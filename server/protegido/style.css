@@ -2388,7 +2388,7 @@ nav {
 
 .imagem-animada {
     width: 80%;
-    max-width: 200px;
+    max-width: 100px;
     display: flex;
     justify-content: center;
 }
