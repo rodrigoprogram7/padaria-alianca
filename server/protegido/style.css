@@ -2869,11 +2869,11 @@ width: auto;
 @media (max-width: 600px) {
   /* Reduz o espaço entre o divisor e o banner do WhatsApp */
   .divider-1 {
-    margin-bottom: 0.3rem !important; /* diminui o espaço logo abaixo do divisor */
+    margin-bottom: 0 !important; /* diminui o espaço logo abaixo do divisor */
   }
 
   .zap-banner {
     margin-top: 0 !important;
-    padding-top: 0.5rem !important; /* mantém um pequeno respiro visual */
+    padding-top: 0.3rem !important; /* mantém um pequeno respiro visual */
   }
 }
