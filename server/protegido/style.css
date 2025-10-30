@@ -2533,158 +2533,107 @@ nav {
 
 
 
-/* ===== CARROSSEL DESTAQUE ===== */
-.carrossel-container {
-  margin: 2rem auto;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 1120px;
-  position: relative;
-  overflow: hidden;
-    margin-left: 1.5rem;
-  margin-right: 1.5rem;
+/* Container Principal (Usando <section> para semântica) */
+.destaques-carrossel {
+    max-width: 100%;
+    margin: 2rem 0; /* Espaçamento vertical */
+    padding: 0 1rem; /* Padding lateral para mobile */
+    overflow: hidden; /* Garante que o carrossel não cause scroll horizontal indesejado */
 }
 
 /* Título */
-.carrossel-titulo {
-  text-align: center;
-  font-size: 1.6rem;
-  font-weight: 700;
-  color: var(--title-color);
-  margin-bottom: 1rem;
-}
-.carrossel-titulo::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  background: var(--base-color);
-  margin: 0.5rem auto 0;
-  border-radius: 3px;
+.destaques-header {
+    display: flex;
+    justify-content: center; /* Centraliza o título */
+    align-items: center;
+    margin-bottom: 1.5rem;
 }
 
-/* Wrapper e trilha */
+.destaques-titulo {
+    font-size: var(--title-font-size-base); /* Ex: 1.875rem */
+    font-weight: 700;
+    color: var(--title-color); /* Ex: hsl(var(--hue) 41% 10%) */
+    position: relative;
+    /* Adiciona o "Fogo" 🔥 como um pseudo-elemento para manter o HTML limpo */
+}
+
+.destaques-titulo::before {
+    content: "🔥";
+    margin-right: 0.5rem;
+}
+
+
+/* Carrossel em si */
 .carrossel-wrapper {
-  overflow: hidden;
-}
-.carrossel {
-  display: flex;
-  gap: 1rem;
-  transition: transform 0.3s ease;
+    /* Sem margin ou padding extra aqui, a rolagem deve vir de dentro */
 }
 
-/* Cada item */
-.carrossel-item {
-  flex: 0 0 calc(100% / 1); /* Mobile: 1 por vez */
-  max-width: calc(100% / 1);
-  background: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  transition: transform 0.3s;
-}
-.carrossel-item:hover {
-  transform: translateY(-4px);
+.carrossel-conteudo {
+    display: flex;
+    /* Ajustes específicos de carrossel (se for feito com flexbox e scroll)
+       Se estiver usando Swiper.js (como sugere o seu index.html),
+       o Swiper se encarrega de grande parte do estilo de rolagem.
+    */
 }
 
-/* Conteúdo do item */
-.item-imagem {
-  width: 100%;
-  max-height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 0.5rem;
-}
-.item-titulo {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin: 0.5rem 0;
-  color: var(--title-color);
-}
-.item-descricao {
-  font-size: 0.9rem;
-  color: var(--text-color);
-  margin-bottom: 0.5rem;
-}
-.item-preco {
-  font-weight: bold;
-  color: var(--base-color);
-  margin-bottom: 0.8rem;
-}
-.whatsapp-btn {
-  display: inline-block;
-  padding: 0.5rem 1rem;
-  background: #25D366;
-  color: white;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  transition: background 0.3s;
-}
-.whatsapp-btn:hover {
-  background: #1DA851;
-}
 
-/* Dots */
-.dots-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.8rem;
-  gap: 6px;
-}
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ccc;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
-}
-.dot.active {
-  background: var(--base-color);
-  transform: scale(1.2);
-}
-
-/* Botões navegação */
-.carrossel-navegacao {
-  display: flex;
-  justify-content: center;   /* centraliza horizontalmente */
-  align-items: center;
-  gap: 1rem;                 /* espaço entre as setas */
-  margin-top: 1rem;          /* afasta do carrossel */
+/* Controles de Navegação (Botões e Dots) */
+.carrossel-controles {
+    display: flex;
+    justify-content: space-between; /* Espaço entre as bordas */
+    align-items: center;
+    margin-top: 1rem; /* Espaçamento do carrossel */
+    padding: 0 0.5rem; /* Um pouco de padding para afastar das bordas em mobile */
 }
 
 .navegacao-btn {
-  background-color: var(--base-color);
-  color: #fff;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    /* Estilo Minimalista para o botão */
+    background: transparent;
+    color: var(--base-color); /* Cor de destaque (ex: amarelo do seu CSS) */
+    border: none;
+    font-size: 1.8rem;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: color 0.2s;
 }
 
 .navegacao-btn:hover {
-  background-color: var(--base-color-alt);
+    color: var(--base-color-alt); /* Cor alternativa de destaque */
+}
+
+/* Ocultar navegação no mobile se o Swiper.js for usado com funcionalidade de arrastar */
+@media (max-width: 768px) {
+    /* Oculta os botões em telas menores, confiando no toque/swipe do usuário */
+    .navegacao-btn {
+        display: none;
+    }
+
+    /* Centraliza apenas os pontos de navegação */
+    .carrossel-controles {
+        justify-content: center;
+    }
 }
 
 
-/* Responsivo */
-@media (min-width: 768px) {
-  .carrossel-item {
-    flex: 0 0 calc(100% / 2);
-    max-width: calc(100% / 2);
-  }
+/* Estilo para os Pontos de Navegação (Dots) */
+.dots-container {
+    display: flex;
+    gap: 0.5rem;
 }
-@media (min-width: 992px) {
-  .carrossel-item {
-    flex: 0 0 calc(100% / 3);
-    max-width: calc(100% / 3);
-  }
+
+.dot { /* Classe para os pontos individuais (injetados pelo JS) */
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--text-color); /* Cor cinza para inativo */
+    opacity: 0.4;
+    cursor: pointer;
+    transition: opacity 0.3s, background-color 0.3s;
+}
+
+.dot.ativo {
+    background-color: var(--base-color); /* Cor de destaque para o ativo */
+    opacity: 1;
 }
 
 
