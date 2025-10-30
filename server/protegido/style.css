@@ -2719,13 +2719,12 @@ nav {
 
 
 
-/* ===== Banner do WhatsApp (verde + branco estilo WhatsApp) ===== */
+/* ===== Banner do WhatsApp com degradê suave ===== */
 .zap-banner {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* faixa verde à esquerda e branco à direita */
-  background: linear-gradient(90deg, #25D366 22%, #ffffff 22%);
+  background: linear-gradient(90deg, #25D366 0%, #25D366 55%, #ffffff 100%);
   border-radius: 16px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.08);
   margin: 1rem auto;
@@ -2736,7 +2735,7 @@ nav {
   border: 1px solid rgba(0,0,0,0.03);
 }
 
-/* ligeiro destaque ao passar o dedo */
+/* leve realce ao passar o dedo/mouse */
 .zap-banner:hover {
   transform: translateY(-3px);
   box-shadow: 0 8px 18px rgba(0,0,0,0.12);
@@ -2750,17 +2749,17 @@ nav {
   width: 100%;
 }
 
-/* título */
+/* título centralizado */
 .zap-texto h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #075e27; /* tom escuro de verde para contraste */
+  color: #075e27;
   text-align: center;
-  margin: 0 0 0.8rem 0; /* espaçamento abaixo do título */
+  margin: 0 0 0.8rem 0;
   line-height: 1.05;
 }
 
-/* linha com imagem à esquerda e texto à direita */
+/* texto + ícone lado a lado */
 .zap-texto p {
   display: flex;
   align-items: center;
@@ -2775,33 +2774,31 @@ nav {
   margin: 0;
 }
 
-/* icone maior, com fundo branco circular para destacar sobre a faixa verde */
+/* ícone circular destacado */
 .zap-icon {
   width: 56px;
   height: 56px;
   object-fit: contain;
   flex-shrink: 0;
   border-radius: 50%;
-  background: #ffffff;         /* círculo branco por trás do ícone */
-  padding: 8px;               /* cria espaço interno ao redor do ícone */
+  background: #ffffff;
+  padding: 8px;
   box-shadow: 0 2px 6px rgba(2, 2, 2, 0.12);
-  transform: translateZ(0);
   animation: zapFloat 2.4s infinite ease-in-out;
-  /* posiciona o ícone mais para a esquerda visualmente (sobre a faixa verde) */
   margin-left: -8px;
 }
 
-/* animação sutil */
+/* animação sutil flutuante */
 @keyframes zapFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
 }
 
-/* Ajustes responsivos */
+/* Responsividade */
 @media (max-width: 600px) {
   .zap-banner {
     padding: 1rem;
-    background: linear-gradient(90deg, #25D366 26%, #ffffff 26%);
+    background: linear-gradient(90deg, #25D366 0%, #25D366 60%, #ffffff 100%);
     border-radius: 14px;
   }
 
