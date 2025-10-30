@@ -143,30 +143,86 @@
 
 
 
-<section class="whatsapp-banner minimal grande">
-  <div class="banner-container">
-    <div class="texto-banner">
-      <h2>Compre com Facilidade</h2>
-      <p>
-        <img src="assets/images/sistema/zap.webp" alt="WhatsApp" class="icon-inline">
-        Monte seu pedido e envie direto pelo WhatsApp! 💬
-      </p>
-    </div>
-  </div>
-</section>
+  <section class="whatsapp-banner">
+    <div class="banner-container">
+      <div class="imagem-animada">
+        <img src="assets/images/sistema/zap.webp" alt="WhatsApp na mão">
+      </div>
+      <div class="texto-banner">
+        <div class="titulo-com-imagem">
+        <h2>Compre com Facilidade</h2>
+        <img src="assets/images/sistema/whatsapp-log.png" alt="WhatsApp Logo" class="logo-whatsapp">
+      </div>
 
-<section class="whatsapp-banner entrega-banner minimal grande">
-  <div class="banner-container">
-    <div class="texto-banner">
-      <h2>Delivery Rápido</h2>
-      <p>
-        <img src="assets/images/sistema/motoboy.png" alt="Entrega" class="icon-inline">
-        Receba em casa com praticidade e agilidade! 🚚
-      </p>
+        <br>
+        <p>Adicione os produtos ao carrinho e envie direto para o WhatsApp. Simples, rápido e eficiente! 🚀</p>
+        <br>
+       <div class="button fake-info">
+        Acertaremos todos os detalhes da compra via WhatsApp.💥
+        <br>
+      </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
+  <section class="whatsapp-banner entrega-banner">
+    <div class="banner-container">
+      <div class="texto-banner organizado">
+  <h2>🚀 Delivery na Área!</h2>
+  <p>
+    Faça seu pedido e receba tudo no conforto da sua casa!
+  </p>
+  <ul class="info-entrega">
+    <li>📦 <strong>Na cidade:</strong> entregas grátis a partir de <strong>R$ 20,00</strong>.</li>
+    <li>🌾 <strong>Para o interior:</strong> taxa de entrega de apenas <strong>R$ 10,00</strong>.</li>
+  </ul>
+</div>
+
+      <div class="imagem-animada">
+        <img src="assets/images/sistema/motoboy.png" alt="Motoboy indo fazer entrega">
+      </div>
+    </div>
+  </section>
+<div class="carrossel-container">
+  <h2 class="carrossel-titulo">🔥 Produtos em Destaque</h2> 
+  <div class="carrossel-wrapper"> <div class="carrossel" id="carrossel">
+     </div>
+     </div> 
+     <div class="dots-container" id="dots-container"></div> 
+    <div class="carrossel-navegacao"> 
+      <button class="navegacao-btn" id="anterior">❮</button> 
+      <button class="navegacao-btn" id="proximo">❯</button> 
+    </div> 
+
+    </div>
+      <br><br>
+
+      <div id="alerta" class="alerta">Produto adicionado ao carrinho!</div>
+
+
+
+      <div class="categoria-destaque" id="categoria-destaque">
+        <h2 id="titulo-categoria">Mercearia</h2>
+
+      </div>
+      <div class="container">
+        <div class="produtos" id="lista-produtos">
+
+        </div>
+        <br><br>
+        <div class="carrinho" id="carrinho">
+          <h2 class="titulo-carrinho animar-scroll">
+            Carrinho
+            <img src="assets/images/sistema/carrinho.png" alt="Carrinho" class="icone-carrinho">
+          </h2>
+          <div id="itens-carrinho"></div>
+          <div class="total">Total: R$ <span id="total">0.00</span></div>
+          <br>
+          <button id="whatsapp" onclick="enviarWhatsApp()">Enviar para WhatsApp</button>
+          <div id="erro-pedido" class="erro-pedido"></div>
+        </div>
+      </div>
+    </section>
     
     <div class="divider-2"></div> <!--Divisor de sessões tipo 2-->
 
