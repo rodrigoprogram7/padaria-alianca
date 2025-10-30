@@ -2719,26 +2719,24 @@ nav {
 
 
 
-/* ===== Banner do WhatsApp com degradê suave ===== */
+/* ===== Banner do WhatsApp (verde sólido) ===== */
 .zap-banner {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, #25D366 0%, #25D366 55%, #ffffff 100%);
+  background: #25D366; /* verde oficial do WhatsApp */
   border-radius: 16px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
   margin: 1rem auto;
   max-width: 95%;
   padding: 1.2rem 1.3rem;
   transition: transform 0.22s ease, box-shadow 0.22s ease;
   overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.03);
 }
 
-/* leve realce ao passar o dedo/mouse */
 .zap-banner:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
 }
 
 .zap-container {
@@ -2753,10 +2751,10 @@ nav {
 .zap-texto h2 {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #075e27;
+  color: #ffffff; /* texto branco sobre o verde */
   text-align: center;
   margin: 0 0 0.8rem 0;
-  line-height: 1.05;
+  line-height: 1.1;
 }
 
 /* texto + ícone lado a lado */
@@ -2767,14 +2765,14 @@ nav {
   gap: 0.9rem;
   font-size: 1rem;
   font-weight: 500;
-  color: #222;
-  line-height: 1.35;
+  color: #ffffff;
+  line-height: 1.4;
   text-align: left;
   max-width: 92%;
   margin: 0;
 }
 
-/* ícone circular destacado */
+/* ícone circular branco para destacar no fundo verde */
 .zap-icon {
   width: 56px;
   height: 56px;
@@ -2785,10 +2783,8 @@ nav {
   padding: 8px;
   box-shadow: 0 2px 6px rgba(2, 2, 2, 0.12);
   animation: zapFloat 2.4s infinite ease-in-out;
-  margin-left: -8px;
 }
 
-/* animação sutil flutuante */
 @keyframes zapFloat {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
@@ -2798,7 +2794,6 @@ nav {
 @media (max-width: 600px) {
   .zap-banner {
     padding: 1rem;
-    background: linear-gradient(90deg, #25D366 0%, #25D366 60%, #ffffff 100%);
     border-radius: 14px;
   }
 
@@ -2817,6 +2812,5 @@ nav {
     width: 48px;
     height: 48px;
     padding: 7px;
-    margin-left: -6px;
   }
 }
