@@ -2719,7 +2719,7 @@ nav {
 
 
 
-/* ===== Banners minimalistas lado a lado (com título centralizado) ===== */
+/* ===== Banners minimalistas com imagem maior ===== */
 .whatsapp-banner.minimal.grande {
   display: flex;
   align-items: center;
@@ -2729,7 +2729,7 @@ nav {
   box-shadow: 0 3px 8px rgba(0,0,0,0.08);
   margin: 1rem auto;
   max-width: 95%;
-  padding: 1rem 1.2rem;
+  padding: 1.2rem 1.3rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -2738,31 +2738,22 @@ nav {
   box-shadow: 0 5px 12px rgba(0,0,0,0.12);
 }
 
-/* container interno */
 .whatsapp-banner.minimal.grande .banner-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
   width: 100%;
-}
-
-.whatsapp-banner.minimal.grande .texto-banner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: center;
 }
 
 /* título centralizado */
 .whatsapp-banner.minimal.grande h2 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #1e1e1e;
   text-align: center;
-  line-height: 1.2;
-  margin-bottom: 0.6rem;
-  word-break: keep-all;
+  margin-bottom: 0.8rem; /* espaço entre título e texto */
 }
 
 /* texto e imagem lado a lado */
@@ -2770,17 +2761,18 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
+  gap: 0.8rem;
   font-size: 1rem;
   font-weight: 500;
   color: #333;
-  line-height: 1.3;
+  line-height: 1.4;
   text-align: left;
   max-width: 90%;
 }
 
+/* imagem maior */
 .whatsapp-banner.minimal.grande .icon-inline {
-  width: 34px;
+  width: 45px;
   height: auto;
   flex-shrink: 0;
   animation: floatIcon 2.2s infinite ease-in-out;
@@ -2795,11 +2787,12 @@ nav {
 /* Responsividade */
 @media (max-width: 600px) {
   .whatsapp-banner.minimal.grande {
-    padding: 0.9rem 1rem;
+    padding: 1rem;
   }
 
   .whatsapp-banner.minimal.grande h2 {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
+    margin-bottom: 0.7rem;
   }
 
   .whatsapp-banner.minimal.grande p {
@@ -2808,6 +2801,6 @@ nav {
   }
 
   .whatsapp-banner.minimal.grande .icon-inline {
-    width: 32px;
+    width: 42px;
   }
 }
