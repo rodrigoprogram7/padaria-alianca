@@ -2510,7 +2510,7 @@ nav {
 /* **NOVO AJUSTE para telas bem pequenas (celulares)** */
 @media (max-width: 576px) {
     .imagem-animada {
-        max-width: 150px; /* Reduzindo o tamanho da imagem */
+        max-width: 100px; /* Reduzindo o tamanho da imagem */
     }
     .texto-banner h2 {
         font-size: 1.4rem; /* Reduzindo o título para caber melhor */
