@@ -176,7 +176,7 @@
       </div>
     </div>
   </section>
-  
+
 <div class="carrossel-container">
   <h2 class="carrossel-titulo">🔥 Produtos em Destaque</h2>
 
@@ -273,133 +273,135 @@
 </a>
 
 <script>
-    const produtosDestaque = [
-        {
-            titulo: "Cesta Básica de 4kg",
-            descricao: "4 Arroz, 4 Feijões, 4 Fubas, 4 Açúcares, 1 óleo, 1 refrigerante, 1 macarrão, 1 café grande, 2 bolachas, 1 sal ",
-            preco: "R$ 109,90",
-            imagem: "assets/images/destaque/10kg.jpg",
-            whatsapp: "5511999998888",
-            mensagem: "Olá, tenho interesse na Cesta Básica de 4kg."
-        },
-        {
-            titulo: "Cesta Básica de 10kg",
-            descricao: "10 Arroz, 10 Feijões, 10 Fubas, 10 Açúcares, 3 óleo, 1 refrigerante, 10 macarrão, 2 café grande, 2 bolachas, 1 sal, 1 tempero completo, 1 farinha, 1 kit de limpeza, 1 biscoito ",
-            preco: "R$ 339,90",
-            imagem: "assets/images/destaque/100.webp",
-            whatsapp: "5511999998888",
-            mensagem: "Olá, tenho interesse nas Sacolas de Verduras."
-        },
-        {
-            titulo: "Fardo de bolacha com 10 pacotes",
-            descricao: "Macias e deliciosos, direto da padaria.",
-            preco: "R$ 9,90",
-            imagem: "assets/images/destaque/Fardo Bolachinha.jpg",
-            whatsapp: "5511999998888",
-            mensagem: "Olá, tenho interesse nos Pães Caseiros."
-        }
-    ];
+  const produtosDestaque = [
+    {
+      titulo: "Cesta Básica de 4kg",
+      descricao: "4 Arroz, 4 Feijões, 4 Fubas, 4 Açúcares, 1 óleo, 1 refrigerante, 1 macarrão, 1 café grande, 2 bolachas, 1 sal",
+      preco: "R$ 109,90",
+      imagem: "assets/images/destaque/10kg.jpg",
+      whatsapp: "5511999998888",
+      mensagem: "Olá, tenho interesse na Cesta Básica de 4kg."
+    },
+    {
+      titulo: "Cesta Básica de 10kg",
+      descricao: "10 Arroz, 10 Feijões, 10 Fubas, 10 Açúcares, 3 óleo, 1 refrigerante, 10 macarrão, 2 café grande, 2 bolachas, 1 sal, 1 tempero completo, 1 farinha, 1 kit de limpeza, 1 biscoito",
+      preco: "R$ 339,90",
+      imagem: "assets/images/destaque/100.webp",
+      whatsapp: "5511999998888",
+      mensagem: "Olá, tenho interesse na Cesta Básica de 10kg."
+    },
+    {
+      titulo: "Fardo de bolacha com 10 pacotes",
+      descricao: "Macias e deliciosas, direto da padaria.",
+      preco: "R$ 9,90",
+      imagem: "assets/images/destaque/Fardo Bolachinha.jpg",
+      whatsapp: "5511999998888",
+      mensagem: "Olá, tenho interesse no Fardo de Bolacha."
+    }
+  ];
 
-    const carrossel = document.getElementById('carrossel');
-    const btnAnterior = document.getElementById('anterior');
-    const btnProximo = document.getElementById('proximo');
-    const dotsContainer = document.getElementById('dots-container');
+  const carrossel = document.getElementById('carrossel');
+  const btnAnterior = document.getElementById('anterior');
+  const btnProximo = document.getElementById('proximo');
+  const dotsContainer = document.getElementById('dots-container');
 
-    let currentIndex = 0;
-    let itemsPerView = 1;
+  let currentIndex = 0;
+  let itemsPerView = 1;
 
-    function updateItemsPerView() {
-        const width = window.innerWidth;
-        if (width >= 992) {
-            itemsPerView = 3;
-        } else if (width >= 768) {
-            itemsPerView = 2;
-        } else {
-            itemsPerView = 1;
-        }
-        
-        const maxIndex = produtosDestaque.length - itemsPerView;
-        if (currentIndex > maxIndex) {
-            currentIndex = maxIndex;
-        }
+  // Define quantos itens aparecem por vez
+  function updateItemsPerView() {
+    const width = window.innerWidth;
 
+    if (width >= 768) {
+      itemsPerView = 2; // máximo de 2 mesmo em telas grandes
+    } else {
+      itemsPerView = 1;
+    }
+
+    const maxIndex = produtosDestaque.length - itemsPerView;
+    if (currentIndex > maxIndex) currentIndex = maxIndex;
+
+    updateCarrossel();
+    updateDots();
+  }
+
+  // Atualiza a posição do carrossel
+  function updateCarrossel() {
+    if (!carrossel.firstElementChild) return;
+    const itemWidth = carrossel.firstElementChild.offsetWidth;
+    const offset = -currentIndex * (itemWidth + 10); // espaçamento entre itens
+    carrossel.style.transform = `translateX(${offset}px)`;
+  }
+
+  // Cria as bolinhas de navegação
+  function updateDots() {
+    dotsContainer.innerHTML = '';
+    const totalDots = produtosDestaque.length - itemsPerView + 1;
+    for (let i = 0; i < totalDots; i++) {
+      const dot = document.createElement('span');
+      dot.classList.add('dot');
+      if (i === currentIndex) dot.classList.add('active');
+      dot.addEventListener('click', () => {
+        currentIndex = i;
         updateCarrossel();
         updateDots();
+      });
+      dotsContainer.appendChild(dot);
     }
-    
-    function updateCarrossel() {
-        if (!carrossel.firstElementChild) return;
-        const itemWidth = carrossel.firstElementChild.offsetWidth;
-        const offset = -currentIndex * itemWidth;
-        carrossel.style.transform = `translateX(${offset}px)`;
-    }
+  }
 
-    function updateDots() {
-        dotsContainer.innerHTML = '';
-        const totalDots = produtosDestaque.length - itemsPerView + 1;
-        for (let i = 0; i < totalDots; i++) {
-            const dot = document.createElement('span');
-            dot.classList.add('dot');
-            if (i === currentIndex) {
-                dot.classList.add('active');
-            }
-            dot.addEventListener('click', () => {
-                currentIndex = i;
-                updateCarrossel();
-                updateDots();
-            });
-            dotsContainer.appendChild(dot);
-        }
+  // Botões de navegação
+  btnAnterior.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = produtosDestaque.length - itemsPerView;
     }
+    updateCarrossel();
+    updateDots();
+  });
 
-    btnAnterior.addEventListener('click', () => {
-        if (currentIndex > 0) {
-            currentIndex--;
-        } else {
-            currentIndex = produtosDestaque.length - itemsPerView; 
-        }
-        updateCarrossel();
-        updateDots();
+  btnProximo.addEventListener('click', () => {
+    const maxIndex = produtosDestaque.length - itemsPerView;
+    if (currentIndex < maxIndex) {
+      currentIndex++;
+    } else {
+      currentIndex = 0;
+    }
+    updateCarrossel();
+    updateDots();
+  });
+
+  // Renderiza os produtos em destaque
+  function renderizarProdutosDestaque() {
+    carrossel.innerHTML = '';
+    produtosDestaque.forEach(produto => {
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('carrossel-item');
+
+      itemDiv.innerHTML = `
+        <img src="${produto.imagem}" alt="${produto.titulo}" class="item-imagem">
+        <h3 class="item-titulo">${produto.titulo}</h3>
+        <p class="item-descricao">${produto.descricao}</p>
+        <p class="item-preco">${produto.preco}</p>
+        <a href="https://wa.me/${produto.whatsapp}?text=${encodeURIComponent(produto.mensagem)}"
+           target="_blank" class="whatsapp-btn">
+           Negociar via WhatsApp
+        </a>
+      `;
+      carrossel.appendChild(itemDiv);
     });
 
-    btnProximo.addEventListener('click', () => {
-        const maxIndex = produtosDestaque.length - itemsPerView;
-        if (currentIndex < maxIndex) {
-            currentIndex++;
-        } else {
-            currentIndex = 0; 
-        }
-        updateCarrossel();
-        updateDots();
-    });
+    updateItemsPerView();
+  }
 
-    function renderizarProdutosDestaque() {
-        carrossel.innerHTML = '';
-        produtosDestaque.forEach(produto => {
-            const itemDiv = document.createElement('div');
-            itemDiv.classList.add('carrossel-item');
-            
-            itemDiv.innerHTML = `
-                <img src="${produto.imagem}" alt="${produto.titulo}" class="item-imagem">
-                <h3 class="item-titulo">${produto.titulo}</h3>
-                <p class="item-descricao">${produto.descricao}</p>
-                <p class="item-preco">${produto.preco}</p>
-                <a href="https://wa.me/${produto.whatsapp}?text=${encodeURIComponent(produto.mensagem)}" target="_blank" class="whatsapp-btn">
-                    Negociar via WhatsApp
-                </a>
-            `;
-            carrossel.appendChild(itemDiv);
-        });
-        
-        updateItemsPerView();
-    }
-
-    document.addEventListener('DOMContentLoaded', renderizarProdutosDestaque);
-    window.addEventListener('resize', () => {
-        clearTimeout(window.resizeTimer);
-        window.resizeTimer = setTimeout(updateItemsPerView, 250);
-    });
+  document.addEventListener('DOMContentLoaded', renderizarProdutosDestaque);
+  window.addEventListener('resize', () => {
+    clearTimeout(window.resizeTimer);
+    window.resizeTimer = setTimeout(updateItemsPerView, 250);
+  });
 </script>
+
 
 
 
