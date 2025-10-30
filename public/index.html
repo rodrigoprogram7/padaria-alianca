@@ -273,49 +273,49 @@
 </a>
 
 <script>
-  const produtosDestaque = [
+const produtosDestaque = [
     {
-      titulo: "Cesta Básica de 4kg",
-      descricao: "4 Arroz, 4 Feijões, 4 Fubas, 4 Açúcares, 1 óleo, 1 refrigerante, 1 macarrão, 1 café grande, 2 bolachas, 1 sal",
-      preco: "R$ 109,90",
-      imagem: "assets/images/destaque/10kg.jpg",
-      whatsapp: "5511999998888",
-      mensagem: "Olá, tenho interesse na Cesta Básica de 4kg."
+        titulo: "Cesta Básica de 4kg",
+        descricao: "4 Arroz, 4 Feijões, 4 Fubas, 4 Açúcares, 1 óleo, 1 refrigerante, 1 macarrão, 1 café grande, 2 bolachas, 1 sal",
+        preco: "R$ 109,90",
+        imagem: "assets/images/destaque/10kg.jpg",
+        whatsapp: "5511999998888",
+        mensagem: "Olá, tenho interesse na Cesta Básica de 4kg."
     },
     {
-      titulo: "Cesta Básica de 10kg",
-      descricao: "10 Arroz, 10 Feijões, 10 Fubas, 10 Açúcares, 3 óleo, 1 refrigerante, 10 macarrão, 2 café grande, 2 bolachas, 1 sal, 1 tempero completo, 1 farinha, 1 kit de limpeza, 1 biscoito",
-      preco: "R$ 339,90",
-      imagem: "assets/images/destaque/100.webp",
-      whatsapp: "5511999998888",
-      mensagem: "Olá, tenho interesse na Cesta Básica de 10kg."
+        titulo: "Cesta Básica de 10kg",
+        descricao: "10 Arroz, 10 Feijões, 10 Fubas, 10 Açúcares, 3 óleo, 1 refrigerante, 10 macarrão, 2 café grande, 2 bolachas, 1 sal, 1 tempero completo, 1 farinha, 1 kit de limpeza, 1 biscoito",
+        preco: "R$ 339,90",
+        imagem: "assets/images/destaque/100.webp",
+        whatsapp: "5511999998888",
+        mensagem: "Olá, tenho interesse na Cesta Básica de 10kg."
     },
     {
-      titulo: "Fardo de bolacha com 10 pacotes",
-      descricao: "Macias e deliciosas, direto da padaria.",
-      preco: "R$ 9,90",
-      imagem: "assets/images/destaque/Fardo Bolachinha.jpg",
-      whatsapp: "5511999998888",
-      mensagem: "Olá, tenho interesse no Fardo de Bolacha."
+        titulo: "Fardo de bolacha com 10 pacotes",
+        descricao: "Macias e deliciosas, direto da padaria.",
+        preco: "R$ 9,90",
+        imagem: "assets/images/destaque/Fardo Bolachinha.jpg",
+        whatsapp: "5511999998888",
+        mensagem: "Olá, tenho interesse no Fardo de Bolacha."
     }
-  ];
+];
 
-  const carrossel = document.getElementById('carrossel');
-  const btnAnterior = document.getElementById('anterior');
-  const btnProximo = document.getElementById('proximo');
-  const dotsContainer = document.getElementById('dots-container');
+const carrossel = document.getElementById('carrossel');
+const btnAnterior = document.getElementById('anterior');
+const btnProximo = document.getElementById('proximo');
+const dotsContainer = document.getElementById('dots-container');
 
-  let currentIndex = 0;
-  let itemsPerView = 1;
+let currentIndex = 0;
+let itemsPerView = 1;
 
-  // Define quantos itens aparecem por vez
-  function updateItemsPerView() {
+// Define quantos itens aparecem por vez
+function updateItemsPerView() {
     const width = window.innerWidth;
 
     if (width >= 768) {
-      itemsPerView = 2; // máximo de 2 mesmo em telas grandes
+        itemsPerView = 2; // máximo de 2 em telas maiores
     } else {
-      itemsPerView = 1;
+        itemsPerView = 1;
     }
 
     const maxIndex = produtosDestaque.length - itemsPerView;
@@ -323,83 +323,96 @@
 
     updateCarrossel();
     updateDots();
-  }
+}
 
-  // Atualiza a posição do carrossel
-  function updateCarrossel() {
-    if (!carrossel.firstElementChild) return;
-    const itemWidth = carrossel.firstElementChild.offsetWidth;
-    const offset = -currentIndex * (itemWidth + 10); // espaçamento entre itens
-    carrossel.style.transform = `translateX(${offset}px)`;
-  }
+// Atualiza a posição do carrossel (Usado apenas quando o `scroll-snap` não está ativo)
+function updateCarrossel() {
+    // Verifica se estamos em desktop e se a navegação por JS é necessária
+    if (window.innerWidth >= 768) {
+        if (!carrossel.firstElementChild) return;
+        // itemWidth é calculado de forma mais precisa no CSS com `calc(50% - 10px)`
+        const itemWidth = carrossel.firstElementChild.offsetWidth;
+        // Espaçamento entre itens é 10px (0.7rem no CSS)
+        const offset = -currentIndex * (itemWidth + 10); 
+        carrossel.style.transform = `translateX(${offset}px)`;
+    } else {
+        // Limpa o transform no mobile para permitir o scroll nativo (swipe)
+        carrossel.style.transform = 'translateX(0)';
+    }
+}
 
-  // Cria as bolinhas de navegação
-  function updateDots() {
+// Cria as bolinhas de navegação
+function updateDots() {
     dotsContainer.innerHTML = '';
+    // A contagem de dots deve ser a mesma da navegação
     const totalDots = produtosDestaque.length - itemsPerView + 1;
     for (let i = 0; i < totalDots; i++) {
-      const dot = document.createElement('span');
-      dot.classList.add('dot');
-      if (i === currentIndex) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        currentIndex = i;
-        updateCarrossel();
-        updateDots();
-      });
-      dotsContainer.appendChild(dot);
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+        if (i === currentIndex) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+            currentIndex = i;
+            updateCarrossel();
+            updateDots();
+        });
+        dotsContainer.appendChild(dot);
     }
-  }
+}
 
-  // Botões de navegação
-  btnAnterior.addEventListener('click', () => {
+// Botões de navegação (Visíveis apenas no Desktop - Ver CSS)
+btnAnterior.addEventListener('click', () => {
     if (currentIndex > 0) {
-      currentIndex--;
+        currentIndex--;
     } else {
-      currentIndex = produtosDestaque.length - itemsPerView;
+        currentIndex = produtosDestaque.length - itemsPerView; // Loop
     }
     updateCarrossel();
     updateDots();
-  });
+});
 
-  btnProximo.addEventListener('click', () => {
+btnProximo.addEventListener('click', () => {
     const maxIndex = produtosDestaque.length - itemsPerView;
     if (currentIndex < maxIndex) {
-      currentIndex++;
+        currentIndex++;
     } else {
-      currentIndex = 0;
+        currentIndex = 0; // Loop
     }
     updateCarrossel();
     updateDots();
-  });
+});
 
-  // Renderiza os produtos em destaque
-  function renderizarProdutosDestaque() {
+// Renderiza os produtos em destaque (COM MODIFICAÇÕES PARA COMPACTAÇÃO)
+function renderizarProdutosDestaque() {
     carrossel.innerHTML = '';
     produtosDestaque.forEach(produto => {
-      const itemDiv = document.createElement('div');
-      itemDiv.classList.add('carrossel-item');
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('carrossel-item');
 
-      itemDiv.innerHTML = `
-        <img src="${produto.imagem}" alt="${produto.titulo}" class="item-imagem">
-        <h3 class="item-titulo">${produto.titulo}</h3>
-        <p class="item-descricao">${produto.descricao}</p>
-        <p class="item-preco">${produto.preco}</p>
-        <a href="https://wa.me/${produto.whatsapp}?text=${encodeURIComponent(produto.mensagem)}"
-           target="_blank" class="whatsapp-btn">
-           Negociar via WhatsApp
-        </a>
-      `;
-      carrossel.appendChild(itemDiv);
+        // Layout mais compacto, focado na imagem, título, preço e botão "Negociar"
+        itemDiv.innerHTML = `
+            <div class="item-media">
+                <img src="${produto.imagem}" alt="${produto.titulo}" class="item-imagem">
+            </div>
+            <div class="item-info">
+                <h3 class="item-titulo">${produto.titulo}</h3>
+                <p class="item-preco">${produto.preco}</p>
+                <a href="https://wa.me/${produto.whatsapp}?text=${encodeURIComponent(produto.mensagem)}"
+                    target="_blank" class="whatsapp-btn">
+                    Negociar
+                </a>
+            </div>
+        `;
+        carrossel.appendChild(itemDiv);
     });
 
     updateItemsPerView();
-  }
+}
 
-  document.addEventListener('DOMContentLoaded', renderizarProdutosDestaque);
-  window.addEventListener('resize', () => {
+document.addEventListener('DOMContentLoaded', renderizarProdutosDestaque);
+window.addEventListener('resize', () => {
     clearTimeout(window.resizeTimer);
     window.resizeTimer = setTimeout(updateItemsPerView, 250);
-  });
+});
 </script>
 
 
