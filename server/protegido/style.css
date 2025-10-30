@@ -2719,18 +2719,16 @@ nav {
 
 
 
-/* ===== Banners minimalistas e maiores (centralizados) ===== */
+/* ===== Banners minimalistas lado a lado ===== */
 .whatsapp-banner.minimal.grande {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center; /* Centraliza o conteúdo */
-  flex-direction: column;
-  padding: 1.1rem 1.3rem;
+  padding: 1rem 1.2rem;
   background: #fffbe6;
   border-radius: 16px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.08);
-  margin: 1.2rem auto;
+  margin: 1rem auto;
   max-width: 95%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -2740,38 +2738,42 @@ nav {
   box-shadow: 0 5px 12px rgba(0,0,0,0.12);
 }
 
-.whatsapp-banner.minimal.grande .texto-banner {
+/* container interno */
+.whatsapp-banner.minimal.grande .banner-container {
   display: flex;
-  flex-direction: column;
-  align-items: center; /* Centraliza horizontalmente */
+  align-items: center;
   justify-content: center;
-  text-align: center;
+  gap: 0.8rem;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
-.whatsapp-banner.minimal.grande .texto-banner h2 {
+/* imagem e texto lado a lado */
+.whatsapp-banner.minimal.grande .icon-inline {
+  width: 22%;
+  max-width: 80px;
+  height: auto;
+  flex-shrink: 0;
+  animation: floatIcon 2.2s infinite ease-in-out;
+}
+
+.whatsapp-banner.minimal.grande .texto-banner {
+  flex: 1;
+  text-align: left;
+}
+
+.whatsapp-banner.minimal.grande h2 {
   font-size: 1.25rem;
-  color: #1e1e1e;
-  display: flex;
-  align-items: center; /* Alinha ícone e texto verticalmente */
-  justify-content: center; /* Centraliza tudo */
-  gap: 0.6rem;
   font-weight: 700;
-  margin-bottom: 0.2rem;
+  color: #1e1e1e;
+  margin-bottom: 0.4rem;
 }
 
 .whatsapp-banner.minimal.grande p {
   font-size: 1rem;
-  margin-top: 0.2rem;
-  color: #333;
   font-weight: 500;
-  text-align: center;
-}
-
-.icon-inline {
-  width: 34px;
-  height: 34px;
-  animation: floatIcon 2.2s infinite ease-in-out;
-  vertical-align: middle;
+  color: #333;
+  line-height: 1.3;
 }
 
 @keyframes floatIcon {
@@ -2779,19 +2781,22 @@ nav {
   50% { transform: translateY(-5px); }
 }
 
-/* Responsivo */
+/* Responsividade */
 @media (max-width: 600px) {
   .whatsapp-banner.minimal.grande {
-    padding: 0.9rem 1.1rem;
+    padding: 0.9rem 1rem;
   }
-  .whatsapp-banner.minimal.grande .texto-banner h2 {
+
+  .whatsapp-banner.minimal.grande .icon-inline {
+    width: 25%;
+    max-width: 70px;
+  }
+
+  .whatsapp-banner.minimal.grande h2 {
     font-size: 1.2rem;
   }
+
   .whatsapp-banner.minimal.grande p {
     font-size: 0.95rem;
-  }
-  .icon-inline {
-    width: 32px;
-    height: 32px;
   }
 }
