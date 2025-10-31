@@ -3051,3 +3051,23 @@ nav {
     margin-bottom: 0.4rem;
   }
 }
+
+
+
+/* Reduz espaçamento entre o divisor e o banner no mobile */
+@media (max-width: 600px) {
+  .divider-1 {
+    margin-bottom: 0.3rem !important;
+  }
+
+  /* Remove espaço extra do about e zap-banner */
+  #about.section {
+    padding-top: 0.5rem !important;
+    margin-top: 0 !important;
+  }
+
+  .zap-banner {
+    margin-top: 0 !important;
+    padding-top: 0.3rem !important;
+  }
+}
