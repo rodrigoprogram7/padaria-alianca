@@ -2655,26 +2655,34 @@ nav {
   transform: scale(1.05);
 }
 
-/* ===== Dots ===== */
+/* ===== Indicadores (dots) do carrossel ===== */
 .dots-container {
   display: flex;
   justify-content: center;
-  gap: 0.4rem;
+  align-items: center;
+  gap: 0.5rem;
   margin-top: 1rem;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
+/* Pontinhos */
+.dots-container .dot {
+  width: 10px;                 /* 🔹 Levemente maior */
+  height: 10px;
   border-radius: 50%;
-  background: #ddd;
-  transition: background 0.3s ease;
+  background: #ccc;            /* Cor neutra dos dots inativos */
+  opacity: 0.6;
+  transition: all 0.3s ease;
   cursor: pointer;
 }
 
-.dot.active {
-  background: #25D366;
+/* Quando o dot está ativo */
+.dots-container .dot.active {
+  background: #25D366;         /* 🔹 Verde WhatsApp — forte e visível */
+  opacity: 1;
+  transform: scale(1.4);       /* 🔹 Aumenta um pouco o tamanho */
+  box-shadow: 0 0 6px rgba(37, 211, 102, 0.5); /* 🔹 Efeito de brilho */
 }
+
 
 /* ===== Desktop ===== */
 @media (min-width: 768px) {
