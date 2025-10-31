@@ -2709,6 +2709,21 @@ nav {
   pointer-events: none;
 }
 
+/* ===== Força ocultar setas do carrossel em TODAS as telas ===== */
+.carrossel-navegacao,
+.carrossel-navegacao .navegacao-btn {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+
 
   .navegacao-btn {
     background: rgba(34, 34, 34, 0.6);
