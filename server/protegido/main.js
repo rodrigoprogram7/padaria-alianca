@@ -530,7 +530,17 @@ function alterarQuantidade(botao, delta) {
 
   if (valor > 1) {
     const subtotal = (valor * preco).toFixed(2).replace('.', ',');
-    subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
+
+    // ✅ Novo formato mais intuitivo
+    subtotalBox.innerHTML = `
+      <span style="font-weight:600; color:#333;">
+        ${valor}× →
+      </span> 
+      <span style="font-weight:700; color:#28a745;">
+        R$ ${subtotal}
+      </span>
+    `;
+
     subtotalBox.style.display = 'block';
 
     // 🔥 Ativa animação no botão "Adicionar"
@@ -545,19 +555,6 @@ function alterarQuantidade(botao, delta) {
     const btnAdicionar = botao.closest('.produto-info').querySelector('button.btn');
     if (btnAdicionar) btnAdicionar.classList.remove('btn-piscar');
   }
-}
-
-
-let carrinho = [];
-try {
-  const data = JSON.parse(localStorage.getItem('carrinho'));
-  if (Array.isArray(data)) {
-    carrinho = data;
-  } else {
-    localStorage.removeItem('carrinho'); // limpa objeto corrompido
-  }
-} catch (e) {
-  localStorage.removeItem('carrinho'); // limpa JSON inválido
 }
 
 
