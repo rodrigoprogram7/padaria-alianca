@@ -420,6 +420,24 @@ window.addEventListener('resize', () => {
 });
 </script>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const setas = document.querySelectorAll(
+    '.carrossel-navegacao, .carrossel-navegacao button, .navegacao-btn, #anterior, #proximo'
+  );
+  setas.forEach(el => {
+    el.style.display = 'none';
+    el.style.visibility = 'hidden';
+    el.style.opacity = '0';
+    el.style.pointerEvents = 'none';
+    el.style.position = 'absolute';
+    el.style.left = '-9999px';
+    el.style.top = '-9999px';
+  });
+});
+</script>
+
+
 
 
 
