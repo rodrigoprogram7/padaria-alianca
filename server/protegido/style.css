@@ -2535,202 +2535,190 @@ nav {
 
 /* ===== Carrossel Minimalista e Compacto (Mobile First) - Versão VS Code Clean V2 ===== */
 
-/* Container Principal - Limpo e com borda sutil */
+/* ====== Carrossel de Destaques (alinhado com banners) ====== */
 .carrossel-container {
-position: relative;
-width: 100%; 
-max-width: 95%; 
-margin: 1rem auto 1.5rem auto;
-padding: 0.8rem 0; 
-border-radius: 0; 
-background: #fff;
-overflow: hidden;
+  position: relative;
+  width: 90%;              /* 🔹 Mesma largura dos banners */
+  max-width: 1100px;       /* 🔹 Mesmo limite do banner de entrega */
+  margin: 1.5rem auto;     /* 🔹 Centralizado com espaçamento suave */
+  padding: 1rem 0;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
 }
 
-/* Título - Mais discreto e com espaçamento otimizado */
+/* Título do Carrossel */
 .carrossel-titulo {
-font-size: 1.1rem;
-font-weight: 600;
-color: #222;
-text-align: center;
-margin-bottom: 0.8rem;
-padding: 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #222;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
-/* Wrapper do Carrossel */
+/* Wrapper e faixa */
 .carrossel-wrapper {
-overflow: hidden;
+  overflow: hidden;
 }
 
-/* Faixa dos Produtos (Habilita o Swipe nativo no mobile) */
 .carrossel {
-display: flex;
-gap: 10px; 
-transition: transform 0.4s ease-in-out;
-padding: 0 1rem 0.5rem 1rem;
-overflow-x: scroll; 
-scroll-snap-type: x mandatory; 
--webkit-overflow-scrolling: touch; 
-scrollbar-width: none; 
+  display: flex;
+  gap: 10px;
+  transition: transform 0.4s ease-in-out;
+  padding: 0 1rem 0.5rem 1rem;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
 }
 
 .carrossel::-webkit-scrollbar {
-display: none; 
+  display: none;
 }
 
-/* Item do Carrossel - Compacto (Mobile) */
-.carrossel .carrossel-item {
-/* 90% da largura, permitindo 'espiada' no próximo item */
-flex: 0 0 90%; 
-flex-shrink: 0; 
-width: 90%; 
-scroll-snap-align: start;
-background: #fafafa;
-border-radius: 8px; 
-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-padding: 0.5rem; 
-text-align: center;
-display: flex;
-flex-direction: column;
-align-items: center;
+/* Itens */
+.carrossel-item {
+  flex: 0 0 90%;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  padding: 0.6rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Área de Mídia (Imagem) */
-.carrossel .item-media {
-width: 100%;
-height: 100px; /* Altura fixa para compactação mobile */
-overflow: hidden;
-border-radius: 6px;
-margin-bottom: 0.4rem;
+/* Imagens */
+.item-media {
+  width: 100%;
+  height: 110px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 0.4rem;
 }
 
-.carrossel .carrossel-item .item-imagem {
-width: 100%;
-height: 100%;
-object-fit: cover; 
-border-radius: 0; 
+.item-imagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* Informações do Item */
-.carrossel .item-info {
-padding: 0 0.2rem;
-width: 100%;
+/* Texto */
+.item-info h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0.3rem 0;
 }
 
-/* Título, Preço */
-.carrossel .carrossel-item h3 {
-font-size: 0.9rem;
-font-weight: 600;
-color: #333;
-margin: 0.1rem 0; 
-line-height: 1.2;
+.item-preco {
+  font-size: 1rem;
+  color: #25D366;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
 }
 
-.carrossel .carrossel-item .item-preco {
-font-size: 0.95rem;
-color: #25D366;
-font-weight: 700;
-margin-bottom: 0.4rem;
-}
-
-/* Botão WhatsApp - Mais estreito (Mobile) */
+/* Botão WhatsApp */
 .whatsapp-btn {
-display: block; 
-width: 100%;
-background: #25D366;
-color: #fff;
-padding: 0.4rem 0.5rem; 
-border-radius: 6px;
-font-size: 0.8rem;
-font-weight: 600;
-text-decoration: none;
-transition: background 0.3s ease;
+  background: #25D366;
+  color: #fff;
+  padding: 0.45rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.3s ease;
 }
 
-/* Navegação (Setas) - OCULTA NO MOBILE */
-.carrossel-navegacao {
-display: none; 
+.whatsapp-btn:hover {
+  background: #20ba57;
 }
 
-/* Bolinhas Indicadoras - Discretas */
+/* Dots */
 .dots-container {
-display: flex;
-justify-content: center;
-gap: 0.3rem;
-margin-top: 0.8rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+  margin-top: 0.8rem;
 }
 
-.dots-container .dot {
-width: 6px;
-height: 6px; 
-border-radius: 50%;
-background: #ddd; 
-transition: background 0.3s ease;
-cursor: pointer;
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #ddd;
+  transition: background 0.3s ease;
+  cursor: pointer;
 }
 
-.dots-container .dot.active {
-background: #25D366;
+.dot.active {
+  background: #25D366;
 }
 
-/* ======================================= */
-/* MEDIA QUERY: Desktop / Telas Maiores (>= 768px) */
-/* ======================================= */
-@media (min-width: 768px) {
-.carrossel-container {
-border-radius: 12px; 
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
-padding: 1rem 0.8rem;
-}
-
-.carrossel {
-overflow-x: hidden; 
-padding: 0.5rem 0.3rem; 
-scroll-snap-type: none; 
-}
-
-.carrossel .carrossel-item {
-flex: 0 0 calc(50% - 5px); 
-width: calc(50% - 5px); 
-padding: 1rem;
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.carrossel .carrossel-item:hover {
-transform: translateY(-3px); 
-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.carrossel .item-media {
-height: 150px; 
-}
-
-/* Seta de Navegação - Visível no Desktop */
+/* Navegação Desktop */
 .carrossel-navegacao {
-display: flex; 
-top: 50%;
-transform: translateY(-50%);
-padding: 0 0.5rem;
+  display: none;
 }
 
-.navegacao-btn {
-background: rgba(34, 34, 34, 0.6); 
-color: #fff;
-width: 38px;
-height: 38px;
-border-radius: 50%;
-transition: background 0.3s ease, transform 0.2s ease;
-}
+/* ===== Desktop ===== */
+@media (min-width: 768px) {
+  .carrossel-container {
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    padding: 1.2rem 0.8rem;
+  }
 
-.navegacao-btn:hover {
-background: rgba(37, 211, 102, 0.9); 
-transform: scale(1.05);
-}
+  .carrossel {
+    overflow-x: hidden;
+    padding: 0.5rem 0.3rem;
+    scroll-snap-type: none;
+  }
 
-.whatsapp-btn {
-display: inline-block; 
-width: auto;
-}
+  .carrossel-item {
+    flex: 0 0 calc(50% - 5px);
+    width: calc(50% - 5px);
+    padding: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .carrossel-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .item-media {
+    height: 160px;
+  }
+
+  .carrossel-navegacao {
+    display: flex;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 0.5rem;
+  }
+
+  .navegacao-btn {
+    background: rgba(34, 34, 34, 0.6);
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .navegacao-btn:hover {
+    background: rgba(37, 211, 102, 0.9);
+    transform: scale(1.05);
+  }
+
+  .whatsapp-btn {
+    display: inline-block;
+    width: auto;
+  }
 }
 
 
