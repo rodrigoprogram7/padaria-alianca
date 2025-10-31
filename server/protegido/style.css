@@ -2701,12 +2701,14 @@ nav {
     height: 160px;
   }
 
-  .carrossel-navegacao {
-    display: flex;
-    top: 50%;
-    transform: translateY(-50%);
-    padding: 0 0.5rem;
-  }
+  /* Oculta completamente as setas de navegação do carrossel */
+.carrossel-navegacao {
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
 
   .navegacao-btn {
     background: rgba(34, 34, 34, 0.6);
