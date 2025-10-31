@@ -363,11 +363,28 @@ function updateDots() {
         const dot = document.createElement('span');
         dot.classList.add('dot');
         if (i === currentIndex) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-            currentIndex = i;
-            updateCarrossel();
-            updateDots();
-        });
+dot.addEventListener('click', () => {
+  currentIndex = i;
+
+  // --- Desktop: usa translateX controlado ---
+  if (window.innerWidth >= 768) {
+    updateCarrossel();
+  } 
+  // --- Mobile: rola suavemente até o item ---
+  else {
+    const itemWidth = carrossel.firstElementChild
+      ? carrossel.firstElementChild.offsetWidth + 10
+      : 0;
+    const targetScroll = currentIndex * itemWidth;
+    carrossel.scrollTo({
+      left: targetScroll,
+      behavior: 'smooth'
+    });
+  }
+
+  updateDots();
+});
+
         dotsContainer.appendChild(dot);
     }
 }
@@ -393,6 +410,20 @@ btnProximo.addEventListener('click', () => {
     updateCarrossel();
     updateDots();
 });
+
+// Sincroniza os dots com o scroll manual (toque)
+carrossel.addEventListener('scroll', () => {
+  const itemWidth = carrossel.firstElementChild
+    ? carrossel.firstElementChild.offsetWidth + 10
+    : 0;
+  const scrollLeft = carrossel.scrollLeft;
+  const index = Math.round(scrollLeft / itemWidth);
+  if (currentIndex !== index) {
+    currentIndex = index;
+    updateDots();
+  }
+});
+
 
 // Renderiza os produtos em destaque (COM MODIFICAÇÕES PARA COMPACTAÇÃO)
 function renderizarProdutosDestaque() {
