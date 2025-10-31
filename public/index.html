@@ -414,6 +414,23 @@ function renderizarProdutosDestaque() {
 }
 
 document.addEventListener('DOMContentLoaded', renderizarProdutosDestaque);
+// === Sincroniza os dots com o scroll (para mobile / toque) ===
+carrossel.addEventListener('scroll', () => {
+  // Largura de um item (inclui gap de 10px do CSS)
+  const itemWidth = carrossel.firstElementChild
+    ? carrossel.firstElementChild.offsetWidth + 10
+    : 0;
+
+  // Índice atual com base na posição de scroll
+  const scrollLeft = carrossel.scrollLeft;
+  const index = Math.round(scrollLeft / itemWidth);
+
+  if (currentIndex !== index) {
+    currentIndex = index;
+    updateDots();
+  }
+});
+
 window.addEventListener('resize', () => {
     clearTimeout(window.resizeTimer);
     window.resizeTimer = setTimeout(updateItemsPerView, 250);
