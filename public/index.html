@@ -474,6 +474,22 @@ window.addEventListener('resize', () => {
     clearTimeout(window.resizeTimer);
     window.resizeTimer = setTimeout(updateItemsPerView, 250);
 });
+// Impede o carrossel de “pular” mais de um item ao rolar rápido
+let isScrolling;
+carrossel.addEventListener('scroll', () => {
+  window.clearTimeout(isScrolling);
+  isScrolling = setTimeout(() => {
+    const itemWidth = carrossel.firstElementChild
+      ? carrossel.firstElementChild.offsetWidth + 10
+      : 0;
+    const index = Math.round(carrossel.scrollLeft / itemWidth);
+    carrossel.scrollTo({
+      left: index * itemWidth,
+      behavior: 'smooth'
+    });
+  }, 100); // executa depois que o usuário termina o toque
+});
+
 </script>
 
 <script>

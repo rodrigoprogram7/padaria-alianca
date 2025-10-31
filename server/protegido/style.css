@@ -2573,13 +2573,25 @@ nav {
 .carrossel {
   display: flex;
   gap: 10px;
-  transition: transform 0.4s ease-in-out;
   padding: 0 1rem 0.5rem 1rem;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;        /* 🔹 “Travamento” automático por item */
+  scroll-behavior: smooth;              /* 🔹 Rolagem suave */
+  -webkit-overflow-scrolling: touch;    /* 🔹 Suavidade nativa no iOS */
+  scroll-padding: 0 1rem;               /* 🔹 Centraliza melhor o snap */
   scrollbar-width: none;
 }
+.carrossel::-webkit-scrollbar {
+  display: none;
+}
+
+/* Cada item “trava” no início da viewport */
+.carrossel-item {
+  flex: 0 0 90%;
+  scroll-snap-align: start;             /* 🔹 O segredo do travamento perfeito */
+  scroll-snap-stop: always;             /* 🔹 Evita pular mais de 1 item */
+}
+
 
 .carrossel::-webkit-scrollbar {
   display: none;
