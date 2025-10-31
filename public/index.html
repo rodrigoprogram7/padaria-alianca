@@ -298,7 +298,7 @@ const produtosDestaque = [
     {
         titulo: "Cesta Básica de 8kg",
         descricao: "Macias e deliciosas, direto da padaria.",
-        preco: "R$ 9,90",
+        preco: "R$ 260,00",
         imagem: "assets/images/destaque/8kg.webp",
         whatsapp: "5584988692337",
         mensagem: "Olá, tenho interesse na Cesta Básica de 8kg. Poderia me dar mais informações sobre ela?"
@@ -411,7 +411,7 @@ function renderizarProdutosDestaque() {
                 <p class="item-preco">${produto.preco}</p>
                 <a href="https://wa.me/${produto.whatsapp}?text=${encodeURIComponent(produto.mensagem)}"
                     target="_blank" class="whatsapp-btn">
-                    Negociar
+                    Mais informações
                 </a>
             </div>
         `;
