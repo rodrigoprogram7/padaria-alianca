@@ -533,10 +533,10 @@ function alterarQuantidade(botao, delta) {
 
     // ✅ Novo formato mais intuitivo
     subtotalBox.innerHTML = `
-      <span style="font-weight:600; color:#333;">
-        ${valor}× →
+      <span style= #28a745;">
+        ${valor} unidades →
       </span> 
-      <span style="font-weight:700; color:#28a745;">
+      <span style=" #28a745;">
         R$ ${subtotal}
       </span>
     `;

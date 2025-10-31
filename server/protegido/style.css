@@ -1227,13 +1227,6 @@ footer .social a:hover {
   margin-top: 6px;
   display: none; /* já está assim por padrão */
 }
-.subtotal-preview {
-  font-size: 0.95rem;
-  margin-top: 6px;
-  display: none;
-  text-align: center;
-}
-
 
 .titulo-carrinho {
   display: flex;
