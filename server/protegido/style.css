@@ -270,11 +270,11 @@ body {
 }
 
 
-/* 🔧 Ajuste fino do navbar pequeno no mobile */
+/* 🔧 Ajuste refinado do navbar pequeno no mobile (altura levemente maior e centrado) */
 @media (max-width: 768px) {
   /* Header antes do scroll */
   #header:not(.scroll) {
-    height: 46px !important; /* reduz a altura total */
+    height: 56px !important; /* antes 46px — aumentamos um pouco */
     padding: 0 !important;
     display: flex;
     align-items: center; /* centraliza verticalmente tudo dentro */
@@ -282,35 +282,36 @@ body {
 
   /* Linha superior com logo e botão */
   #header:not(.scroll) .nav-top {
-    height: 46px !important; /* mesmo valor do header */
+    height: 56px !important;
     display: flex;
-    align-items: center; /* garante centralização vertical */
+    align-items: center; /* centraliza o nome verticalmente */
     justify-content: center !important;
     padding: 0 !important;
     margin: 0 !important;
     position: relative;
   }
 
-  /* Logo centralizada verticalmente */
+  /* Logo centralizada */
   #header:not(.scroll) .nav-top .logo {
-    font-size: 1rem !important; /* mantém seu tamanho atual */
-    line-height: 1 !important;
+    font-size: 1rem !important; /* mantém tamanho atual */
+    line-height: 1.1 !important;
     margin: 0 !important;
     padding: 0 !important;
     text-align: center;
     position: relative;
-    top: 1px; /* pequeno ajuste visual para alinhar perfeitamente com o ícone */
+    top: 0; /* central perfeitamente */
   }
 
-  /* Ícone do menu (hambúrguer) centralizado na mesma linha */
+  /* Ícone hambúrguer alinhado com o texto */
   #header:not(.scroll) .toggle {
     position: absolute !important;
     right: 1rem !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    font-size: 1.5rem !important;
+    font-size: 1.6rem !important;
   }
 }
+
 
 
 
