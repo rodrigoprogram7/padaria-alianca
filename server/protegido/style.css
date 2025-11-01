@@ -3070,3 +3070,30 @@ nav {
     padding-top: 0.5rem !important;
   }
 }
+
+
+
+
+/* 🔧 Ajuste navbar pequeno no mobile */
+@media (max-width: 768px) {
+  /* Navbar pequeno antes do scroll */
+  #header:not(.scroll) {
+    height: auto !important;
+    padding-top: 0.3rem !important;
+    padding-bottom: 0.3rem !important;
+  }
+
+  /* Linha do topo do menu (logo e botão hamburguer) */
+  #header:not(.scroll) .nav-top {
+    height: auto !important;
+    padding-top: 0.2rem !important;
+    padding-bottom: 0.2rem !important;
+  }
+
+  /* Logo (nome do site) - deixa mais compacta no navbar pequeno */
+  #header:not(.scroll) .nav-top .logo {
+    font-size: 1rem !important;
+    line-height: 1.2 !important;
+    margin: 0 !important;
+  }
+}
