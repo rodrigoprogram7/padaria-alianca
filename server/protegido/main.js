@@ -526,38 +526,40 @@ function alterarQuantidade(botao, delta) {
   if (valor < 1) valor = 1;
   input.value = valor;
 
-  const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
+  const produto = botao.closest('.produto');
+  const preco = parseFloat(produto.getAttribute('data-preco'));
+  const tipo = produto.getAttribute('data-tipo') || 'unidade'; // unidade ou peso
 
   if (valor > 1) {
     const subtotal = (valor * preco).toFixed(2).replace('.', ',');
-    subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
+
+    // ✅ Exibição mais intuitiva: quantidade → valor total
+    let textoQuantidade = `${valor} × → R$ ${subtotal}`;
+    if (tipo === 'peso') {
+      // Exemplo: 3 significa 300g
+      const gramas = valor * 100;
+      textoQuantidade = `${gramas}g → R$ ${subtotal}`;
+    }
+
+    subtotalBox.innerHTML = `
+      <span style="font-weight:600; color:#333;">${textoQuantidade}</span>
+    `;
     subtotalBox.style.display = 'block';
 
-    // 🔥 Ativa animação no botão "Adicionar"
-    const btnAdicionar = botao.closest('.produto-info').querySelector('button.btn');
-    if (btnAdicionar) btnAdicionar.classList.add('btn-piscar');
+    // 🔥 Anima o botão de adicionar (sem afetar o clique)
+    const btnAdicionar = botao.closest('.produto-info').querySelector('button');
+    if (btnAdicionar) {
+      btnAdicionar.classList.add('btn-piscar');
+      btnAdicionar.disabled = false; // garante que o botão continua clicável
+    }
 
   } else {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
 
-    // 🔥 Remove animação se voltar para 1
-    const btnAdicionar = botao.closest('.produto-info').querySelector('button.btn');
+    const btnAdicionar = botao.closest('.produto-info').querySelector('button');
     if (btnAdicionar) btnAdicionar.classList.remove('btn-piscar');
   }
-}
-
-
-let carrinho = [];
-try {
-  const data = JSON.parse(localStorage.getItem('carrinho'));
-  if (Array.isArray(data)) {
-    carrinho = data;
-  } else {
-    localStorage.removeItem('carrinho'); // limpa objeto corrompido
-  }
-} catch (e) {
-  localStorage.removeItem('carrinho'); // limpa JSON inválido
 }
 
 
