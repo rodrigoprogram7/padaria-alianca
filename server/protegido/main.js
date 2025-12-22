@@ -570,7 +570,6 @@ function adicionarAoCarrinho(botao) {
   const quantidade = parseInt(card.querySelector('.quantidade').value) || 1;
   const imagem = card.querySelector('img')?.src || '';
 
-  // Verifica se o item já está no carrinho
   const itemExistente = carrinho.find(item => item.nome === nome);
 
   if (itemExistente) {
@@ -579,27 +578,26 @@ function adicionarAoCarrinho(botao) {
     carrinho.push({ nome, preco, quantidade, tipo, imagem });
   }
 
-  // ✅ Salva o carrinho no localStorage
   salvarCarrinho();
-
   atualizarCarrinho();
   atualizarContadorCarrinho();
   mostrarAlerta(nome, quantidade);
 
-  // Resetar quantidade e subtotal após adicionar
   const input = card.querySelector('.quantidade');
   input.value = 1;
+
   const subtotalBox = card.querySelector('.subtotal-preview');
   if (subtotalBox) {
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
   }
-    // 🔥 Remove a animação depois que o produto for adicionado
+
   botao.classList.remove('btn-piscar');
 
-  animarAddParaCarrinho(btn);
-
+  // ✅ chama a animação (do botão até o carrinho)
+  animarAddParaCarrinho(botao);
 }
+
 
 
 function atualizarCarrinho() {
