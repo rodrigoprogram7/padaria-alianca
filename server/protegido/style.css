@@ -3122,3 +3122,83 @@ nav {
 
 
 
+.home {
+  padding: 24px 0;
+}
+
+.home__grid {
+  display: grid;
+  gap: 16px;
+  align-items: center;
+}
+
+/* imagem com visual moderno */
+.home__media {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.home__img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+/* textos */
+.home__title {
+  font-size: 1.35rem;
+  line-height: 1.25;
+  margin: 6px 0 10px;
+}
+
+.home__subtitle {
+  margin-bottom: 10px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  background: rgba(255, 193, 7, 0.18); /* amarelo suave */
+}
+
+.home__hint {
+  margin-bottom: 14px;
+  opacity: 0.85;
+}
+
+/* botão único, grande e fácil de tocar */
+.home__actions {
+  margin-top: 6px;
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 15px 16px;
+  border-radius: 16px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+/* desktop */
+@media (min-width: 900px) {
+  .home__grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 28px;
+  }
+
+  .home__actions .button {
+    width: auto;
+    padding: 14px 28px;
+  }
+
+  .home__title {
+    font-size: 2rem;
+  }
+}
