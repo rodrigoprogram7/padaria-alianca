@@ -3118,6 +3118,41 @@ nav {
   }
 }
 
+/* bolinha/flechinha que voa */
+.fly-dot{
+  position: fixed;
+  z-index: 99999;
+  width: 14px;
+  height: 14px;
+  border-radius: 999px;
+  background: rgba(255, 193, 7, .95);
+  box-shadow: 0 10px 20px rgba(0,0,0,.18);
+  pointer-events: none;
+}
+
+/* efeito no carrinho */
+.cart-bounce{
+  animation: cartBounce 420ms ease-out;
+}
+
+@keyframes cartBounce{
+  0%   { transform: translateY(0) scale(1); }
+  25%  { transform: translateY(-6px) scale(1.04); }
+  55%  { transform: translateY(0) scale(1); }
+  70%  { transform: rotate(-6deg); }
+  85%  { transform: rotate(6deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* pop no contador (opcional, fica lindo) */
+.count-pop{
+  animation: countPop 260ms ease-out;
+}
+@keyframes countPop{
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
 
 
 

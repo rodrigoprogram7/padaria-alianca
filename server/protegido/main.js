@@ -597,6 +597,8 @@ function adicionarAoCarrinho(botao) {
     // 🔥 Remove a animação depois que o produto for adicionado
   botao.classList.remove('btn-piscar');
 
+  animarAddParaCarrinho(btn);
+
 }
 
 
@@ -947,6 +949,57 @@ function mostrarAlerta(nomeProduto, quantidade) {
     alerta.classList.remove("show", "hide");
   }, 2500);
 }
+
+function animarAddParaCarrinho(btn) {
+  const cart = document.getElementById('carrinhoButton');
+  if (!cart) return;
+
+  const from = btn.getBoundingClientRect();
+  const to = cart.getBoundingClientRect();
+
+  const startX = from.left + from.width / 2;
+  const startY = from.top + from.height / 2;
+
+  const endX = to.left + to.width / 2;
+  const endY = to.top + to.height / 2;
+
+  const dot = document.createElement('div');
+  dot.className = 'fly-dot';
+  dot.style.left = `${startX - 7}px`;
+  dot.style.top  = `${startY - 7}px`;
+  document.body.appendChild(dot);
+
+  // faz um arco bonitinho
+  const midX = (startX + endX) / 2;
+  const midY = Math.min(startY, endY) - 120;
+
+  const anim = dot.animate(
+    [
+      { transform: 'translate(0px, 0px) scale(1)', opacity: 1 },
+      { transform: `translate(${midX - startX}px, ${midY - startY}px) scale(1.12)`, opacity: 1, offset: 0.65 },
+      { transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0.7)`, opacity: 0.95 }
+    ],
+    { duration: 650, easing: 'cubic-bezier(.2,.8,.2,1)' }
+  );
+
+  anim.onfinish = () => {
+    dot.remove();
+
+    // bounce no carrinho
+    cart.classList.remove('cart-bounce');
+    void cart.offsetWidth;
+    cart.classList.add('cart-bounce');
+
+    // pop no contador
+    const contador = document.getElementById('contador-carrinho');
+    if (contador) {
+      contador.classList.remove('count-pop');
+      void contador.offsetWidth;
+      contador.classList.add('count-pop');
+    }
+  };
+}
+
 
 
 function atualizarContadorCarrinho() {
