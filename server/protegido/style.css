@@ -3198,3 +3198,22 @@ nav {
     margin: 6px 0;
   }
 }
+
+@media (max-width: 768px) {
+
+  /* remove os <br> apenas no mobile */
+  #home br{
+    display: none;
+  }
+
+  /* cria espaço elegante antes do botão */
+  #home .text .button{
+    margin-top: 18px;   /* espaço acima do botão */
+  }
+
+  /* garante que o texto não fique grudado */
+  #home .text p:last-of-type{
+    margin-bottom: 8px;
+  }
+}
+
