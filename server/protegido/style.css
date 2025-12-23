@@ -3229,8 +3229,8 @@ nav {
 /* input estilo pill */
 #pesquisa{
   width: 100%;
-  padding: 7px 14px;     /* 🔽 bem mais fino */
-  font-size: 0.9rem;
+  padding: 6px 12px;
+  font-size: 0.85rem;
   border-radius: 999px;
   border: 2px solid #4a86e8;
   outline: none;
