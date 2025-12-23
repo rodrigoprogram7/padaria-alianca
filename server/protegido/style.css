@@ -3281,4 +3281,27 @@ nav {
 }
 
 
+@media (max-width: 768px){
+
+  /* navbar principal */
+  .navbar,
+  .nav,
+  .menu,
+  .menu-categorias{
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* lista de categorias */
+  .menu-categorias ul,
+  .menu-categorias li{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* remove borda/linha extra se existir */
+  .navbar{
+    border-bottom: none;
+  }
+}
 
