@@ -3338,3 +3338,48 @@ nav {
   }
 
 }
+
+
+@media (max-width: 768px){
+
+  /* NAVBAR: tira espaço extra no mobile (sem mexer nos links) */
+  .navbar{
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    border-bottom: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* muito comum: o espaço está no container interno */
+  .navbar .container,
+  .navbar .grid,
+  .navbar .menu,
+  .navbar .menu-categorias,
+  .navbar .categorias,
+  .navbar .nav-menu{
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    height: auto !important;
+    min-height: 0 !important;
+  }
+
+  /* muito comum: o espaço vem do UL */
+  .navbar ul{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* às vezes o “vazio” é padding/margin do último item */
+  .navbar ul li:last-child{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* às vezes é uma “linha” criada por pseudo-elemento */
+  .navbar::after,
+  .navbar *::after{
+    border: 0 !important;
+  }
+}
+
