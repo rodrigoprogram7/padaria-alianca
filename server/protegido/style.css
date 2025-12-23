@@ -3340,3 +3340,18 @@ nav {
   /* 5) ✅ Garante que o "nome/logo" do navbar pequeno não seja afetado
         (se ele for um link fora do UL, ele já fica intacto) */
 }
+@media (max-width: 768px){
+
+  /* 🔹 RESTAURA o nome/logo do navbar pequeno */
+  .navbar .logo a,
+  .navbar .brand a,
+  .navbar .navbar-brand,
+  .navbar .navbar-brand a{
+    padding: initial !important;
+    line-height: normal !important;
+    font-size: initial !important;
+    display: inline-flex !important;
+    align-items: center;
+  }
+
+}
