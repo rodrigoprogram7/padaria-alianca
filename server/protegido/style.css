@@ -3283,34 +3283,42 @@ nav {
 
 @media (max-width: 768px){
 
-  /* navbar principal */
-  .navbar,
-  .nav,
-  .menu,
-  .menu-categorias{
+  /* zera espaçamentos padrão que normalmente criam “faixa” embaixo */
+  header, nav, .navbar {
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
+    min-height: 0 !important;
+    height: auto !important;
+    border-bottom: 0 !important;
   }
 
-  /* lista de categorias */
-  .menu-categorias ul,
-  .menu-categorias li{
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+  /* se o menu for UL/LI */
+  header nav ul,
+  nav ul {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* remove borda/linha extra se existir */
-  .navbar{
-    border-bottom: none;
-  }
-}
-@media (max-width: 768px){
-  .menu-categorias{
-    line-height: normal;
+  header nav li,
+  nav li {
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  .menu-categorias a{
-    padding-bottom: 8px; /* controla a altura real */
-    padding-top: 8px;
+  /* o culpado geralmente é o padding/line-height do link */
+  header nav a,
+  nav a {
+    padding-top: 8px !important;
+    padding-bottom: 8px !important; /* controla exatamente a altura */
+    line-height: 1.1 !important;
+  }
+
+  /* se existir algum efeito/linha extra por pseudo-elemento */
+  header nav::after,
+  nav::after,
+  header nav a::after,
+  nav a::after {
+    content: none !important;
+    display: none !important;
   }
 }
