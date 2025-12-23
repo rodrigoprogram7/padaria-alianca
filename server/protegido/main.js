@@ -971,14 +971,18 @@ function animarAddParaCarrinho(btn) {
   const midX = (startX + endX) / 2;
   const midY = Math.min(startY, endY) - 120;
 
-  const anim = dot.animate(
-    [
-      { transform: 'translate(0px, 0px) scale(1)', opacity: 1 },
-      { transform: `translate(${midX - startX}px, ${midY - startY}px) scale(1.12)`, opacity: 1, offset: 0.65 },
-      { transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0.7)`, opacity: 0.95 }
-    ],
-    { duration: 650, easing: 'cubic-bezier(.2,.8,.2,1)' }
-  );
+const anim = dot.animate(
+  [
+    { transform: 'translate(0px, 0px) scale(1)', opacity: 1 },
+    { transform: `translate(${midX - startX}px, ${midY - startY}px) scale(1.1)`, opacity: 1, offset: 0.6 },
+    { transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0.75)`, opacity: 0.95 }
+  ],
+  {
+    duration: 1000, /* 🔥 mais lenta */
+    easing: 'cubic-bezier(.16,1,.3,1)' /* movimento mais elegante */
+  }
+);
+
 
   anim.onfinish = () => {
     dot.remove();
