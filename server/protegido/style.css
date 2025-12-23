@@ -3279,3 +3279,38 @@ nav {
     padding: 14px 16px;
   }
 }
+
+
+@media (max-width: 768px){
+
+  /* navbar principal */
+  .navbar,
+  .nav,
+  .menu,
+  .menu-categorias{
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* lista de categorias */
+  .menu-categorias ul,
+  .menu-categorias li{
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  /* remove borda/linha extra se existir */
+  .navbar{
+    border-bottom: none;
+  }
+}
+@media (max-width: 768px){
+  .menu-categorias{
+    line-height: normal;
+  }
+
+  .menu-categorias a{
+    padding-bottom: 8px; /* controla a altura real */
+    padding-top: 8px;
+  }
+}
