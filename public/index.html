@@ -77,10 +77,26 @@
       <div class="nav-central">
 
 
-        <div class="barra-pesquisa">
-          <input type="text" id="pesquisa" placeholder="Buscar produto...">
-          <ul id="resultados-pesquisa"></ul>
-        </div>
+        <div class="barra-pesquisa search-wrapper">
+  <input
+    type="text"
+    id="pesquisa"
+    class="search-input"
+    placeholder="Buscar produto..."
+    autocomplete="off"
+  >
+
+  <button type="button" class="search-button" aria-label="Buscar">
+    <img
+      src="assets/images/sistema/lupa.png"
+      alt="Buscar"
+      class="search-icon"
+    >
+  </button>
+
+  <ul id="resultados-pesquisa"></ul>
+</div>
+
         
 
 
@@ -152,7 +168,7 @@
       <h2>Compre com Facilidade</h2>
       <p>
         <img src="assets/images/sistema/zap.webp" alt="WhatsApp" class="zap-icon">
-        Monte seu carrinho e envie direto para o WhatsApp! 💬
+        Monte seu carrinho e será enviado direto para o WhatsApp! 💬
       </p>
       <br>
     </div>
@@ -171,8 +187,8 @@
   </p>
   <ul class="info-entrega">
     <li>📦 Valor mínimo para entrega: <strong>R$ 20,00</strong>.</li>
-    <li>🏙️ <strong>Cidade:</strong> envio grátis</li>
-    <li>🌾 <strong>Interior:</strong> taxa de envio fixa de <strong>R$ 10,00</strong></li>
+    <li>🏙️ <strong>Cidade:</strong> envio grátis.</li>
+    <li>🌾 <strong>Interior:</strong> taxa de envio fixa de <strong>R$ 10,00</strong>.</li>
   </ul>
 </div>
 
