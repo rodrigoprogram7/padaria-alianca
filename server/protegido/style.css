@@ -3229,8 +3229,8 @@ nav {
 /* input estilo pill */
 #pesquisa{
   width: 100%;
-  padding: 10px 16px;   /* 🔽 menor altura */
-  font-size: 0.95rem;   /* levemente menor */
+  padding: 7px 14px;     /* 🔽 bem mais fino */
+  font-size: 0.9rem;
   border-radius: 999px;
   border: 2px solid #4a86e8;
   outline: none;
@@ -3238,10 +3238,12 @@ nav {
 }
 
 
+
 /* foco moderno */
 #pesquisa:focus{
-  box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.22);
+  box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.18);
 }
+
 
 
 /* resultados (mantém funcionamento atual) */
