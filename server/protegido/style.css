@@ -3220,3 +3220,58 @@ nav {
 
 
 
+/* container da busca */
+.barra-pesquisa{
+  position: relative;
+  width: 100%;
+}
+
+/* input estilo pill */
+#pesquisa{
+  width: 100%;
+  padding: 14px 44px 14px 16px; /* espaço à direita p/ ícone futuro */
+  font-size: 1rem;
+  border-radius: 999px;
+  border: 2px solid #4a86e8; /* azul suave */
+  outline: none;
+  background: #fff;
+}
+
+/* foco moderno */
+#pesquisa:focus{
+  box-shadow: 0 0 0 3px rgba(74, 134, 232, 0.25);
+}
+
+/* resultados (mantém funcionamento atual) */
+#resultados-pesquisa{
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+  z-index: 999;
+}
+
+/* itens */
+#resultados-pesquisa li{
+  padding: 10px 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+#resultados-pesquisa li:hover{
+  background: rgba(74, 134, 232, 0.08);
+}
+
+/* mobile ajuste fino */
+@media (max-width: 768px){
+  #pesquisa{
+    padding: 14px 16px;
+  }
+}
