@@ -3281,105 +3281,62 @@ nav {
 }
 
 
-/* =================================================
-   AJUSTES GERAIS MOBILE (SEM QUEBRAR LAYOUT)
-   ================================================= */
 @media (max-width: 768px){
 
-  /* ===============================
-     1) NAVBAR — remover espaço extra
-     =============================== */
-
-  /* mexe SOMENTE no container do navbar */
-  .navbar{
+  /* 1) Remove o espaço extra do navbar (funcionou pra você) */
+  header, nav, .navbar{
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
-    border-bottom: none !important;
-    min-height: unset !important;
+    min-height: 0 !important;
+    height: auto !important;
+    border-bottom: 0 !important;
   }
 
-  /* lista de categorias */
-  .navbar ul{
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
+  header nav ul,
+  nav ul{
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  /* IMPORTANTE: NÃO mexemos em .navbar a (links)
-     para não sumir nome nem diminuir fonte */
-
-
-  /* ===============================
-     2) BARRA DE PESQUISA — altura fina
-     =============================== */
-
-  #pesquisa{
-    padding: 7px 14px;        /* barra fina */
-    font-size: 0.9rem;        /* legível no mobile */
-    border-radius: 999px;
-    border: 2px solid #4a86e8;
+  header nav li,
+  nav li{
+    margin: 0 !important;
+    padding: 0 !important;
   }
 
-  #pesquisa:focus{
-    box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.18);
+  /* 2) ✅ IMPORTANTE: NÃO mexe em "nav a" geral.
+        Ajusta SOMENTE os links que estão dentro do UL (categorias) */
+  header nav ul li a,
+  nav ul li a{
+    padding-top: 8px !important;
+    padding-bottom: 8px !important;
+    line-height: 1.1 !important;
   }
 
+  /* 3) Remove linhas/pseudo-elementos só do NAV (sem afetar outras áreas) */
+  header nav::after,
+  nav::after{
+    content: none !important;
+    display: none !important;
+  }
 
-  /* ===============================
-     3) SUGESTÕES DA PESQUISA — tamanho normal
-     =============================== */
+  /* Se algum link de categoria tiver ::after (underline/linha), tira só nele */
+  header nav ul li a::after,
+  nav ul li a::after{
+    content: none !important;
+    display: none !important;
+  }
 
+  /* 4) ✅ Restaura/garante tamanho das sugestões da busca */
   #resultados-pesquisa{
-    font-size: 0.95rem;       /* garante legibilidade */
+    font-size: 0.95rem !important;
   }
 
   #resultados-pesquisa li{
-    padding: 10px 12px;
-    font-size: 0.95rem;
+    padding: 10px 12px !important;
+    font-size: 0.95rem !important;
   }
 
+  /* 5) ✅ Garante que o "nome/logo" do navbar pequeno não seja afetado
+        (se ele for um link fora do UL, ele já fica intacto) */
 }
-
-
-@media (max-width: 768px){
-
-  /* NAVBAR: tira espaço extra no mobile (sem mexer nos links) */
-  .navbar{
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-    border-bottom: 0 !important;
-    height: auto !important;
-    min-height: 0 !important;
-  }
-
-  /* muito comum: o espaço está no container interno */
-  .navbar .container,
-  .navbar .grid,
-  .navbar .menu,
-  .navbar .menu-categorias,
-  .navbar .categorias,
-  .navbar .nav-menu{
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-    height: auto !important;
-    min-height: 0 !important;
-  }
-
-  /* muito comum: o espaço vem do UL */
-  .navbar ul{
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* às vezes o “vazio” é padding/margin do último item */
-  .navbar ul li:last-child{
-    margin-bottom: 0 !important;
-    padding-bottom: 0 !important;
-  }
-
-  /* às vezes é uma “linha” criada por pseudo-elemento */
-  .navbar::after,
-  .navbar *::after{
-    border: 0 !important;
-  }
-}
-
