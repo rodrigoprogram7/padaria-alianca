@@ -3157,74 +3157,44 @@ nav {
 
 
 
-/* HERO ocupa a tela inteira (mobile seguro) */
-.hero{
-  min-height: 100svh;         /* melhor no mobile */
-  min-height: 100vh;          /* fallback */
-  display: flex;
-  align-items: center;
-  padding: 16px 0;
-  overflow: hidden;
-}
 
-/* grid que se adapta */
-.hero__grid{
-  display: grid;
-  gap: 14px;
-  align-items: center;
-}
 
-/* imagem sempre cabendo */
-.hero__image img{
-  width: 100%;
-  height: auto;
-  max-height: 42svh;          /* limita pra não estourar no mobile */
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
 
-/* texto sem exagero */
-.hero__text{
-  text-align: center;
-}
 
-.hero__text .title{
-  margin: 0 0 10px;
-  line-height: 1.15;
-  font-size: clamp(1.2rem, 4.2vw, 2rem);
-}
+/* 🔹 SOMENTE NO MOBILE */
+@media (max-width: 768px) {
 
-.hero__text p{
-  margin: 6px 0;
-}
-
-/* botão grande no mobile */
-.hero .button{
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 12px;
-  padding: 14px 18px;
-  border-radius: 16px;
-}
-
-/* desktop: lado a lado, ainda cabendo na tela */
-@media (min-width: 900px){
-  .hero__grid{
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 28px;
+  /* HOME ocupa 100% da tela */
+  #home.section{
+    min-height: 100svh;   /* altura real no mobile */
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    overflow: hidden;
   }
 
-  .hero__text{
-    text-align: left;
+  /* Mantém seu layout, só centraliza melhor */
+  #home .container.grid{
+    height: 100%;
+    align-items: center;
   }
 
-  .hero__image img{
-    max-height: 70vh;
+  /* Impede a imagem de estourar a tela */
+  #home .image img{
+    max-height: 45svh;
+    width: 100%;
+    object-fit: contain;
+  }
+
+  /* Remove o excesso de espaço criado pelos <br> */
+  #home br{
+    display: none;
+  }
+
+  /* Ajusta espaçamento dos textos */
+  #home .text p{
+    margin: 6px 0;
   }
 }
-
-
-
-
