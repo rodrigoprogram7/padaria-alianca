@@ -3366,3 +3366,28 @@ nav {
   }
 
 }
+
+
+@media (max-width: 768px){
+
+  /* ✅ traz de volta o logo/nome do navbar pequeno */
+  .nav-top{
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .nav-top a.logo{
+    display: inline-flex !important;
+    align-items: center !important;
+    padding: 10px 0 !important;     /* altura boa sem sumir */
+    line-height: 1.2 !important;
+    font-size: 1.05rem !important;  /* garante legibilidade */
+    white-space: nowrap !important; /* evita quebrar feio */
+  }
+
+  .nav-top a.logo span{
+    display: inline !important;
+  }
+}
