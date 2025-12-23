@@ -3281,27 +3281,60 @@ nav {
 }
 
 
+/* =================================================
+   AJUSTES GERAIS MOBILE (SEM QUEBRAR LAYOUT)
+   ================================================= */
 @media (max-width: 768px){
 
-  /* navbar principal */
-  .navbar,
-  .nav,
-  .menu,
-  .menu-categorias{
+  /* ===============================
+     1) NAVBAR — remover espaço extra
+     =============================== */
+
+  /* mexe SOMENTE no container do navbar */
+  .navbar{
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
+    border-bottom: none !important;
+    min-height: unset !important;
   }
 
   /* lista de categorias */
-  .menu-categorias ul,
-  .menu-categorias li{
+  .navbar ul{
     margin-bottom: 0 !important;
     padding-bottom: 0 !important;
   }
 
-  /* remove borda/linha extra se existir */
-  .navbar{
-    border-bottom: none;
-  }
-}
+  /* IMPORTANTE: NÃO mexemos em .navbar a (links)
+     para não sumir nome nem diminuir fonte */
 
+
+  /* ===============================
+     2) BARRA DE PESQUISA — altura fina
+     =============================== */
+
+  #pesquisa{
+    padding: 7px 14px;        /* barra fina */
+    font-size: 0.9rem;        /* legível no mobile */
+    border-radius: 999px;
+    border: 2px solid #4a86e8;
+  }
+
+  #pesquisa:focus{
+    box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.18);
+  }
+
+
+  /* ===============================
+     3) SUGESTÕES DA PESQUISA — tamanho normal
+     =============================== */
+
+  #resultados-pesquisa{
+    font-size: 0.95rem;       /* garante legibilidade */
+  }
+
+  #resultados-pesquisa li{
+    padding: 10px 12px;
+    font-size: 0.95rem;
+  }
+
+}
