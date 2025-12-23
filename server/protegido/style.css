@@ -3327,6 +3327,17 @@ nav {
     display: none !important;
   }
 
+  #pesquisa{
+    padding: 7px 14px;        /* barra fina */
+    font-size: 0.9rem;        /* legível no mobile */
+    border-radius: 999px;
+    border: 2px solid #4a86e8;
+  }
+
+  #pesquisa:focus{
+    box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.18);
+  }
+
   /* 4) ✅ Restaura/garante tamanho das sugestões da busca */
   #resultados-pesquisa{
     font-size: 0.95rem !important;
