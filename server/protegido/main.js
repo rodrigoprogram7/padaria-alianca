@@ -521,29 +521,40 @@ function selecionarProduto(nomeProduto) {
 function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
   const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
+
   let valor = parseInt(input.value) || 1;
   valor += delta;
+
   if (valor < 1) valor = 1;
+
   input.value = valor;
 
   const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
 
   if (valor > 1) {
+
     const subtotal = (valor * preco).toFixed(2).replace('.', ',');
     subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
     subtotalBox.style.display = 'block';
 
-    // 🔥 Ativa animação no botão "Adicionar"
+    // 🔥 muda cor da quantidade
+    input.classList.add('ativo');
+
+    // anima botão adicionar
     const btnAdicionar = botao.closest('.produto-info').querySelector('button.btn');
     if (btnAdicionar) btnAdicionar.classList.add('btn-piscar');
 
   } else {
+
     subtotalBox.textContent = '';
     subtotalBox.style.display = 'none';
 
-    // 🔥 Remove animação se voltar para 1
+    // 🔥 volta cor normal
+    input.classList.remove('ativo');
+
     const btnAdicionar = botao.closest('.produto-info').querySelector('button.btn');
     if (btnAdicionar) btnAdicionar.classList.remove('btn-piscar');
+
   }
 }
 
