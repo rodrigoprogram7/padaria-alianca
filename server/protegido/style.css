@@ -3391,16 +3391,3 @@ nav {
     display: inline !important;
   }
 }
-
-
-/* Quantidade padrão */
-.quantidade {
-  color: #333;
-  font-weight: bold;
-  transition: color 0.2s ease;
-}
-
-/* Quantidade ativa (quando > 1) */
-.quantidade.ativo {
-  color: #ff7a00; /* mesma cor do botão adicionar */
-}
