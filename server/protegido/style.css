@@ -1175,37 +1175,38 @@ display: flex;
 }
 
 .quantidade-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 6px 0;
-    gap: 5px; /* Espaço entre os botões e input */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
 }
 
 .quantidade-box button {
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--base-color-second);
-    cursor: pointer;
-    transition: background-color 0.2s;
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  border: none;
+  background: #f3f4f6;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
 .quantidade-box button:hover {
-    background-color: var(--base-color);
-    color: white;
+  background: #FF7A00;
+  color: white;
 }
 
 .quantidade-box input {
-    width: 40px;
-    height: 28px;
-    text-align: center;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  width: 42px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  font-weight: 600;
+  font-size: 14px;
 }
 
 .produto button.adicionar { /* Mantido para ser específico para o botão de adicionar */
