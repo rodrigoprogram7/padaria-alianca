@@ -428,7 +428,7 @@ body {
     border: 2px solid transparent;
     border-radius: 6px;
     font-weight: bold;
-    color: rgb(255, 255, 255);
+    color: rgba(0, 0, 0, 0.788);
     font-size: 1rem;
     cursor: pointer;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
