@@ -1,622 +1,373 @@
-/*======================================== Resets ========================================*/
+/*========================================================================================
+  01) RESETS / NORMALIZAÇÕES
+========================================================================================*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-a {
-    text-decoration: none;
-}
-
-ul {
-    list-style: none;
-}
+a { text-decoration: none; }
+ul { list-style: none; }
 
 img {
-    width: 100%;
-    height: auto;
-    display: block; /* Garante que a imagem não tenha espaços extras abaixo dela */
-}
-.categoria-icon {
-    width: 22px;
-    height: 22px;
-    margin-right: 8px;
-    vertical-align: middle;
-}
-
-
-
-/*======================================== Variáveis ========================================*/
-:root {
-    --header-height: 4.5rem;
-
-    /* Cores */
-    --hue: 46;
-    --base-color: hsl(var(--hue) 100% 57%);
-    --base-color-second: hsl(var(--hue) 65% 88%);
-    --base-color-alt: hsl(var(--hue) 57% 53%);
-    --title-color: hsl(var(--hue) 41% 10%);
-    --text-color: hsl(0 0% 46%);
-    --text-color-light: hsl(0 0% 98%);
-    --body-color: hsl(0 0% 98%);
-    
-    /* Tamanho das fontes*/
-    --title-font-size-base: 1.875rem; /* Renomeado para base */
-    --subtitle-font-size: 1rem;
-    
-    /* Tipo das fontes*/
-    --title-font: "Poppins", sans-serif;
-    --body-font: "DM Sans", sans-serif;
-}
-
-/*======================================== Base ========================================*/
-html {
-    scroll-behavior: smooth;
-}
-html, body {
+  width: 100%;
   height: auto;
-  overflow: auto;
+  display: block;
 }
+
+/*========================================================================================
+  02) VARIÁVEIS (THEME)
+========================================================================================*/
+:root {
+  --header-height: 4.5rem;
+
+  /* Defaults (estavam sendo usadas sem existir em alguns trechos) */
+  --header-initial-height: 56px;
+  --header-scrolled-padding-top-desktop: 0.5rem;
+  --header-scrolled-padding-bottom-desktop: 0.5rem;
+  --shadow-light: rgba(0, 0, 0, 0.10);
+
+  /* Cores */
+  --hue: 46;
+  --base-color: hsl(var(--hue) 100% 57%);
+  --base-color-second: hsl(var(--hue) 65% 88%);
+  --base-color-alt: hsl(var(--hue) 57% 53%);
+  --title-color: hsl(var(--hue) 41% 10%);
+  --text-color: hsl(0 0% 46%);
+  --text-color-light: hsl(0 0% 98%);
+  --body-color: hsl(0 0% 98%);
+
+  /* Fontes */
+  --title-font-size-base: 1.875rem;
+  --subtitle-font-size: 1rem;
+  --title-font: "Poppins", sans-serif;
+  --body-font: "DM Sans", sans-serif;
+}
+
+/*========================================================================================
+  03) BASE
+========================================================================================*/
+html { scroll-behavior: smooth; }
+html, body { height: auto; overflow: auto; }
 
 body {
-    font: 400 1rem var(--body-font);
-    color: var(--text-color);
-    background-color: var(--body-color);
-    -webkit-font-smoothing: antialiased;
+  font: 400 1rem var(--body-font);
+  color: var(--text-color);
+  background-color: var(--body-color);
+  -webkit-font-smoothing: antialiased;
 }
 
 .title {
-    font: 700 var(--title-font-size-base) var(--title-font); /* Usando a variável base */
-    color: var(--title-color);
-    -webkit-font-smoothing: auto;
+  font: 700 var(--title-font-size-base) var(--title-font);
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
 }
 
 .button {
-    background-color: var(--base-color);
-    color: var(--text-color-light);
-    height: 3.5rem;
-    display: inline-flex;
-    align-items: center;
-    padding: 0 2rem;
-    border-radius: 0.25rem;
-    font: 500 1rem var(--body-font);
-    transition: background 0.3s;
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 1rem var(--body-font);
+  transition: background 0.3s;
 }
+.button:hover { background-color: var(--base-color-alt); }
 
-.button:hover {
-    background-color: var(--base-color-alt);
-}
-
+/*========================================================================================
+  04) UTILITÁRIOS / DIVIDERS / TIPOGRAFIA SIMPLES
+========================================================================================*/
 .divider-1,
 .divider-2 {
-    height: 1px;
-    background: linear-gradient(270deg, 
-        hsla(var(--hue), 36%, 57%, 1), 
-        hsla(var(--hue), 65%, 88%, 0.34)
-    );
+  height: 1px;
+  background: linear-gradient(270deg,
+    hsla(var(--hue), 36%, 57%, 1),
+    hsla(var(--hue), 65%, 88%, 0.34)
+  );
 }
 
 .divider-2 {
-    background: linear-gradient(270deg, 
-        hsla(var(--hue), 65%, 88%, 0.34),
-        hsla(var(--hue), 36%, 57%, 1)
-    );
-}
-@media (max-width: 600px) {
-  .divider-1 {
-    margin-bottom: 0.5rem;
-  }
-
-  .whatsapp-banner {
-    margin-top: 0;       /* se necessário */
-    padding-top: 0.5rem;   /* se houver padding */
-  }
+  background: linear-gradient(270deg,
+    hsla(var(--hue), 65%, 88%, 0.34),
+    hsla(var(--hue), 36%, 57%, 1)
+  );
 }
 
-@media (max-width: 600px) {
-  #home {
-    padding-bottom: 1.3rem;
-  }
+/* Centralizar título e parágrafo genérico (.pp) */
+.title, .pp {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
-@media (max-width: 600px) {
-  #home .button {
-    margin-bottom: 0.5rem;
-  }
+.title {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+.pp {
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  color: var(--text-color);
 }
 
-
-/*======================================== Layout ========================================*/
+/*========================================================================================
+  05) LAYOUT GLOBAL
+========================================================================================*/
 .container {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 
 .grid {
-    display: grid;
-    gap: 2rem;
+  display: grid;
+  gap: 2rem;
 }
 
 .section {
-    padding: calc(5rem + var(--header-height)) 0;
+  padding: calc(5rem + var(--header-height)) 0;
 }
 
-.section .title {
-    margin-bottom: 1rem;
-}
+.section .title { margin-bottom: 1rem; }
+.section .subtitle { font-size: var(--subtitle-font-size); }
+.section header { margin-bottom: 4rem; }
+.section header strong { color: var(--base-color); }
 
-.section .subtitle {
-    font-size: var(--subtitle-font-size);
-}
-
-.section header {
-    margin-bottom: 4rem;
-}
-
-.section header strong {
-    color: var(--base-color);
-}
-
-#header {
-    border-bottom: 1px solid #e4e4e4;
-    display: flex;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    background-color: var(--body-color);
-}
-
-#header.scroll {
-    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-}
-
-/* Centralizar e dar margem ao título e parágrafo da seção "about" (ou qualquer outra que use .title e .pp) */
-.title, .pp {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-}
-
-.title {
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    font-size: 1.8rem; /* Ajuste conforme sua necessidade */
-}
-
-.pp {
-    margin-bottom: 2rem;
-    font-size: 1.1rem; /* Ajuste conforme o estilo que quiser */
-    color: var(--text-color); /* Mantém a cor de texto padrão */
-}
-
-/*======================================== Logo ========================================*/
+/*========================================================================================
+  06) LOGO
+========================================================================================*/
 .logo {
-    font: 700 1.31rem var(--title-font);
-    color: var(--title-color);
-    margin-top: -2px;
+  font: 700 1.31rem var(--title-font);
+  color: var(--title-color);
+  margin-top: -2px;
 }
+.logo span { color: var(--base-color); }
+.logo-alt span { color: var(--body-color); }
 
-.logo span {
-    color: var(--base-color);
-}
-
-.logo-alt span {
-    color: var(--body-color);
-}
-
-/*======================================== Header Ajustado ========================================*/
+/*========================================================================================
+  07) HEADER / NAVBAR (TOPO)
+========================================================================================*/
 #header {
-    width: 100%;
-    transition: all 0.4s ease;
-    height: 50px; /* Navbar compacta antes do scroll */
-    padding: 0.4rem 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 999;
-    background-color: var(--body-color);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  width: 100%;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 999;
+  background-color: var(--body-color);
+  border-bottom: 1px solid #e4e4e4;
+  height: 50px;                 /* compactado */
+  padding: 0.4rem 0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.10);
 }
 
 #header.scroll {
-    height: auto; /* Cresce após passar da divider */
-    padding-top: var(--header-scrolled-padding-top-desktop);
-    padding-bottom: var(--header-scrolled-padding-bottom-desktop);
+  height: auto;
+  padding-top: var(--header-scrolled-padding-top-desktop);
+  padding-bottom: var(--header-scrolled-padding-bottom-desktop);
+  box-shadow: 0px 0px 12px rgba(0,0,0,0.15);
 }
 
-/*======================================== nav-top ========================================*/
+/* Linha superior (logo + toggle) */
 .nav-top {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; /* Logo esquerda, ícone direita (mobile) */
-    align-items: center;
-    padding: 0 1rem;
-    height: var(--header-initial-height);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  height: var(--header-initial-height);
 }
 
-.nav-top .logo {
-    font: 700 1.3rem var(--title-font);
-    color: var(--title-color);
-    transition: all 0.4s ease;
+.nav-top .logo,
+.toggle {
+  transition: all 0.4s ease;
 }
 
-.nav-top .logo, .toggle {
-    transition: all 0.4s ease;
-}
-
-.logo span {
-    color: var(--base-color);
-}
-
-/* Quando o header rolar */
+/* Quando o header rola (logo centraliza e toggle vai pra direita) */
 #header.scroll .nav-top {
-    justify-content: center;
-    position: relative;
-    height: auto;
+  justify-content: center;
+  position: relative;
+  height: auto;
 }
 #header.scroll .nav-top .logo {
-    margin: 0 auto;
-    text-align: center;
+  margin: 0 auto;
+  text-align: center;
 }
-
 #header.scroll .toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-
-/* 🔧 Ajuste refinado do navbar pequeno no mobile (altura levemente maior e centrado) */
-@media (max-width: 768px) {
-  /* Header antes do scroll */
-  #header:not(.scroll) {
-    height: 56px !important; /* antes 46px — aumentamos um pouco */
-    padding: 0 !important;
-    display: flex;
-    align-items: center; /* centraliza verticalmente tudo dentro */
-  }
-
-  /* Linha superior com logo e botão */
-  #header:not(.scroll) .nav-top {
-    height: 56px !important;
-    display: flex;
-    align-items: center; /* centraliza o nome verticalmente */
-    justify-content: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    position: relative;
-  }
-
-  /* Logo centralizada */
-  #header:not(.scroll) .nav-top .logo {
-    font-size: 1rem !important; /* mantém tamanho atual */
-    line-height: 1.1 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    text-align: center;
-    position: relative;
-    top: 0; /* central perfeitamente */
-  }
-
-  /* Ícone hambúrguer alinhado com o texto */
-  #header:not(.scroll) .toggle {
-    position: absolute !important;
-    right: 1rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    font-size: 1.6rem !important;
-  }
-}
-
-
-
-
-
-/*======================================== nav-central ========================================*/
+/* Área central que aparece no scroll (busca + categorias) */
 .nav-central {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-20px);
-    transition: opacity 0.4s ease, transform 0.4s ease, margin-top 0.4s ease, max-height 0.4s ease;
-    width: 100%;
-    margin-top: 0;
-    padding-top: 0;
-    padding-bottom: 0;
-    max-height: 0;
-    overflow: hidden;
-}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 
-.nav-central {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-20px);
+
+  width: 100%;
+  margin-top: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease,
+    margin-top 0.4s ease,
+    max-height 0.4s ease,
+    padding 0.4s ease;
 }
 
 #header.scroll .nav-central {
-    gap: 4px;
-  padding-bottom: 4px;
-  margin-top: 0.5rem; /* reduzir também esse */
-  max-height: 240px;  /* se quiser limitar mais */
-    max-width: 100%;
-    overflow-x: hidden;
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  margin-top: 0.5rem;
+  padding-bottom: 10px;
+  max-height: 300px;
+  gap: 4px;
 }
 
+/*========================================================================================
+  08) MENU MOBILE (TOGGLE ÍCONES)
+========================================================================================*/
+.icon-menu::before { content: none; }
 
-
-#header.scroll .nav-central {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateY(0);
-    margin-top: 1rem;
-    padding-bottom: 10px;
-    max-height: 300px;
-}
-
-/*======================================== Barra de pesquisa ========================================*/
-.barra-pesquisa.navbar {
-    width: 95%;
-    max-width: none;
-    margin: 0 auto;
-    box-sizing: border-box;
-}
-
-.barra-pesquisa.navbar input {
-    width: 100%;
-    padding: 10px 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 1rem;
-}
-
-@media (max-width: 768px) {
-    .barra-pesquisa.navbar {
-        width: 95%;
-    }
-}
-
-/*======================================== Categorias - Scroll horizontal ========================================*/
-.categorias-navbar {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 8px;
-    padding-bottom: 8px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.categorias-navbar::-webkit-scrollbar {
-    height: 6px;
-}
-
-.categorias-navbar::-webkit-scrollbar-thumb {
-    background-color: var(--base-color);
-    border-radius: 4px;
-}
-
-@media (max-width: 768px) {
-  /* Categorias com scroll lateral */
-  .categorias-navbar {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    gap: 0.5rem;
-    padding: 0.5rem 0;
-  }
-
-  /* Estilo geral dos botões de categoria */
-.categorias-navbar button {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 12px 16px;
-    width: 150px;
-    white-space: nowrap;        /* ✅ Mantém texto em uma linha */
-    overflow: hidden;           /* ✅ Evita que texto ultrapasse o botão */
-    text-overflow: ellipsis;    /* ✅ Mostra reticências (...) se o texto for muito longo */
-    background-color: white;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    font-weight: bold;
-    color: rgb(0, 153, 255);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-.categorias-navbar button .categoria-icon {
-    flex-shrink: 0;            /* ✅ Evita que o ícone encolha junto com o texto */
-}
-
-  /* Ícone das categorias dentro dos botões */
-  .categoria-icon {
-    width: 24px;                      /* ✅ Aumenta o tamanho dos ícones */
-    height: 24px;
-    margin-right: 6px;
-    vertical-align: middle;
-  }
-
-  /* Efeito de hover (opcional, para dar feedback visual) */
-  .categorias-navbar button:hover {
-    border-color: #f1ea12b8;            /* Azul ao passar o mouse */
-  }
-
-  /* ✅ Estilo do botão ativo (apenas a borda) */
-  .categorias-navbar button.active {
-    border-color: var(--base-color);;            /* Borda azul quando ativo */
-    box-shadow: 0 0 5px rgba(255, 247, 0, 0.5);
-    background-color: white;          /* ✅ Mantém fundo branco */
-    color: var(--base-color);;                      /* Mantém o texto azul */
-  }
-}
-
-
-.cat-btn {
-    flex: 0 0 auto;
-    padding: 6px 10px; /* antes: 8px 16px */
-  font-size: 0.85rem; /* um pouco menor */
-    border: none;
-    background-color: #e0e0e0;
-    border-radius: 20px;
-    color: var(--title-color);
-    cursor: pointer;
-    transition: background-color 0.3s;
-
-}
-
-.cat-btn:hover {
-    background-color: var(--base-color);
-    color: white;
-}
-
-@media (max-width: 768px) {
-    nav.container {
-        height: var(--header-initial-height);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    #header.scroll nav.container {
-        height: auto;
-        overflow: visible;
-    }
-}
-
-.icon-menu::before {
-    content: none;
-}
 .toggle.icon-menu::before {
-    content: "☰"; /* Ícone do menu hamburger */
-    font-size: 1.8rem;
-    color: var(--base-color);
+  content: "☰";
+  font-size: 1.8rem;
+  color: var(--base-color);
 }
 
 .toggle.icon-close::before {
-    content: "✖"; /* Ícone X */
-    font-size: 1.8rem;
-    color: var(--base-color);
-    display: none; /* Por padrão, o X fica invisível */
+  content: "✖";
+  font-size: 1.8rem;
+  color: var(--base-color);
+  display: none;
 }
 
-/* Quando o menu estiver aberto, esconde o hamburger e mostra o X */
-nav.show .toggle.icon-menu::before {
-    display: none;
-}
+nav.show .toggle.icon-menu::before { display: none; }
+nav.show .toggle.icon-close::before { display: block; }
 
-nav.show .toggle.icon-close::before {
-    display: block;
-}
-
-/*======================================== Mobile Nav-top (logo esquerda, ícone direita) ========================================*/
+/* Menu “popup” (mobile) */
 @media (max-width: 768px) {
-  .nav-top {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
+  .menu {
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
+  }
+
+  nav.show .menu {
     display: flex;
-    justify-content: space-between; /* ✅ Logo à esquerda, toggle (hamburguer) à direita */
-    align-items: center;
-    height: 50px;                    /* ✅ Mesma altura que o reduzido */
-    padding: 0 1rem;
-    box-sizing: border-box;
-    position: relative;              /* ✅ Importante para posicionar o toggle depois */
-  }
-   #toggle-dark-mode {
-    margin-right: auto; /* ✅ Joga o botão pra esquerda */
-    margin-left: 0.5rem;
-    font-size: 1.4rem;
-  }
-
-  .logo {
-    font-size: 1rem;
-    text-align: left;
-  }
-
-  .toggle {
-    display: block;
-    position: relative; /* Antes do scroll, segue o fluxo normal */
-    font-size: 1.2rem;
-  }
-
-  /* Após o scroll - Centraliza logo e joga o toggle pra direita com position absolute */
-  #header.scroll .nav-top {
-    justify-content: center;
-    height: auto;
-    position: relative;
-  }
-
-  #header.scroll .nav-top .logo {
-    margin: 0 auto;
-    text-align: center;
-  font-size: 1.1rem; /* Reduz um pouco o tamanho da fonte */
-  padding-top: 0.2rem;
-  }
-
-  #header.scroll .toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: block;
-  }
-
-  /* Garantindo largura máxima sempre */
-  #header, nav.container, .nav-top, .nav-central {
-    max-width: 100%;
-    overflow-x: hidden;
-    box-sizing: border-box;
-  }
-}
-
-/*======================================== Resultados da pesquisa ========================================*/
-.barra-pesquisa {
-  position: relative;
-}
-
-/* Teste temporário: Forçar overflow visível e altura ilimitada no nav-central */
-.nav-central {
-    overflow: visible !important; /* Força para ser visível */
-    max-height: none !important;   /* Remove qualquer limite de altura */
-}
-
-/* Certifique-se também para o cabeçalho, apenas para o teste */
-#header {
-    overflow: visible !important;
-    height: auto !important; /* Permite que o cabeçalho se expanda */
-}
-
-/* Garante que os resultados da pesquisa fiquem acima de outros elementos */
-#resultados-pesquisa {
-    position: absolute;
-    top: 100%;
+    opacity: 1;
+    visibility: visible;
+    height: calc(100vh - var(--header-initial-height));
+    position: fixed;
+    top: var(--header-initial-height);
     left: 0;
     width: 100%;
-    z-index: 1000;
-    max-height: 300px;
-    overflow-y: auto;
-    background: white;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    display: none;
-    list-style: none;
-    margin: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--body-color);
+    z-index: 80;
+  }
+
+  nav.show .menu ul.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: auto;
+    margin: 0 auto;
     padding: 0;
+    transform: translateX(0);
+  }
+
+  nav.show .menu ul.grid li,
+  nav.show .menu ul.grid li a {
+    width: auto;
+    text-align: center;
+  }
+}
+
+/* Links ativos */
+nav ul li a.active,
+nav ul li a:hover {
+  color: var(--base-color);
+  border-bottom: 2px solid var(--base-color);
+  padding-bottom: 4px;
+  transition: all 0.3s ease;
+}
+
+/*========================================================================================
+  09) BARRA DE PESQUISA + RESULTADOS
+========================================================================================*/
+.barra-pesquisa {
+  position: relative;
+  width: 100%;
+}
+
+.barra-pesquisa.navbar {
+  width: 95%;
+  margin: 0 auto;
+}
+
+.barra-pesquisa input,
+#pesquisa {
+  width: 100%;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  border-radius: 999px;
+  border: 2px solid #4a86e8;
+  outline: none;
+  background: #fff;
+}
+
+.barra-pesquisa input:focus,
+#pesquisa:focus {
+  border-color: var(--base-color);
+  box-shadow: 0 0 0 3px rgba(255, 221, 0, 0.20);
+}
+
+/* Dropdown resultados */
+#resultados-pesquisa {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+
+  max-height: 300px;
+  overflow-y: auto;
+
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+
+  display: none;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
 }
 
 #resultados-pesquisa li {
-  padding: 10px;
+  padding: 10px 12px;
+  border-radius: 12px;
   cursor: pointer;
   border-bottom: 1px solid #eee;
 }
@@ -625,771 +376,438 @@ nav.show .toggle.icon-close::before {
   background-color: var(--base-color-second);
 }
 
+/*========================================================================================
+  10) CATEGORIAS (SCROLL HORIZONTAL)
+========================================================================================*/
+.categoria-icon {
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.categorias-navbar {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  white-space: nowrap;
+  gap: 8px;
+  padding-bottom: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.categorias-navbar::-webkit-scrollbar { height: 6px; }
+.categorias-navbar::-webkit-scrollbar-thumb {
+  background-color: var(--base-color);
+  border-radius: 4px;
+}
+
+.cat-btn {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  font-size: 0.85rem;
+  border: none;
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  color: var(--title-color);
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.cat-btn:hover {
+  background-color: var(--base-color);
+  color: #fff;
+}
+
+/* Botões “grandes” no mobile (se você estiver usando <button>) */
 @media (max-width: 768px) {
-    .menu {
-        display: none;
-        opacity: 0;
-        visibility: hidden;
-        height: 0;
-        overflow: hidden;
-    }
-
-    nav.show .menu {
-        display: flex;
-        opacity: 1;
-        visibility: visible;
-        height: calc(100vh - var(--header-initial-height));
-        position: fixed;
-        top: var(--header-initial-height);
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--body-color);
-        z-index: 80;
-    }
-
-    nav.show .menu ul.grid {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        width: auto;             /* ✅ Corrigido */
-        margin: 0 auto;          /* ✅ Corrigido */
-        padding: 0;
-        transform: translateX(0); /* ✅ Evita offset lateral */
-    }
-
-    nav.show .menu ul.grid li {
-        width: auto;
-        text-align: center;
-    }
-
-    nav.show .menu ul.grid li a {
-        display: inline-block;
-        text-align: center;
-    }
-
-    /* ✅ Corrigindo o problema de margens laterais herdadas da .container */
-    nav.container,
-    nav.show.container,
-    nav.show .menu,
-    nav.show .menu ul.grid,
-    nav.show .menu ul.grid li,
-    nav.show .menu ul.grid li a {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-}
-
-
-nav ul li a.active,
-nav ul li a:hover {
-    color: var(--base-color);
-    border-bottom: 2px solid var(--base-color);
-    padding-bottom: 4px;
-    transition: all 0.3s ease;
-}
-
-
-@media (max-width: 768px) {
-  #header:not(.scroll) .nav-top {
-    justify-content: center;
-    height: auto;
-    position: relative;
-  }
-
-  #header:not(.scroll) .nav-top .logo {
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1rem;
-  }
-
-  #header:not(.scroll) .toggle {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-
-/*======================================== Home ========================================*/
-#home {
+  .categorias-navbar button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 12px 16px;
+    width: 150px;
+    white-space: nowrap;
     overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: #fff;
+    border: 2px solid transparent;
+    border-radius: 6px;
+    font-weight: bold;
+    color: rgb(0, 153, 255);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .categorias-navbar button .categoria-icon { flex-shrink: 0; }
+  .categorias-navbar button:hover { border-color: #f1ea12b8; }
+
+  .categorias-navbar button.active {
+    border-color: var(--base-color);
+    box-shadow: 0 0 5px rgba(255, 247, 0, 0.5);
+    background-color: #fff;
+    color: var(--base-color);
+  }
+
+  .categoria-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 6px;
+  }
 }
 
-#home .container {
-    margin: 0;
-}
+/*========================================================================================
+  11) HOME
+========================================================================================*/
+#home { overflow: hidden; }
+#home .container { margin: 0; }
 
 #home .image {
-    position: relative;
-    width: 100%;
-    max-width: 300px;
-    margin: auto;
-    animation: slideInLeft 1s ease-out forwards;
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: auto;
+  animation: slideInLeft 1s ease-out forwards;
 }
-
 #home .image::before {
-    content: "";
-    height: 100%;
-    width: 100%;
-    background: var(--base-color-second);
-    position: absolute;
-    top: -16.8%;
-    left: 16.7%;
-    z-index: 0;
-    border-radius: 0.25px;
-    animation: slideInRight 1s ease-out forwards;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -16.8%;
+  left: 16.7%;
+  z-index: 0;
+  border-radius: 0.25px;
+  animation: slideInRight 1s ease-out forwards;
 }
-
 #home .image img {
-    position: relative;
-    right: 2.93rem;
-    border-radius: 0.25px;
-    z-index: 1; /* Garante que a imagem fique acima do pseudo-elemento */
+  position: relative;
+  right: 2.93rem;
+  border-radius: 0.25px;
+  z-index: 1;
 }
 
 #home .text {
-    margin-left: 1.5rem;
-    margin-right: 1.5rem;
-    text-align: center;
+  margin: 0 1.5rem;
+  text-align: center;
 }
+#home .text h1 { margin-bottom: 1rem; }
+#home .text p { margin-bottom: 2rem; }
+#home .text p span { font-style: italic; }
 
-#home .text h1 {
-    margin-bottom: 1rem;
-}
+/*========================================================================================
+  12) ABOUT / CONTACT / FOOTER / BACK-TO-TOP
+========================================================================================*/
+#about { background-color: var(--body-color); }
+#about .container { margin: 0; }
 
-#home .text p {
-    margin-bottom: 2rem;
-}
+#contact .grid { gap: 4rem; }
+#contact .text p { margin-bottom: 2rem; }
+#contact .button i,
+#contact ul li i { font-size: 1.5rem; margin-right: 0.625rem; }
+#contact ul.grid { gap: 2rem; }
+#contact ul li { display: flex; align-items: center; }
+#contact ul li i { color: var(--base-color); }
 
-#home .text p span {
-    font-style: italic;
-}
+footer { background: var(--base-color); }
+footer.section { padding: 4rem 0; }
 
-/* Animações imagem inicial */
-@keyframes slideInLeft {
-    0% {
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
+footer .logo { display: inline-block; margin-bottom: 1.5rem; }
+footer .brand p { color: var(--text-color-light); margin-bottom: 0.75rem; }
+footer i { font-size: 1.5rem; color: var(--text-color-light); }
+footer .social { grid-auto-flow: column; width: fit-content; }
+footer .social a { transition: 0.3s; display: inline-block; }
+footer .social a:hover { transform: translateY(-8px); }
 
-@keyframes slideInRight {
-    0% {
-        opacity: 0;
-        transform: translateX(100%);
-    }
-    100% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-/*======================================== Categorias (About) ========================================*/
-#about {
-    background-color: var(--body-color);
-}
-
-#about .container {
-    margin: 0; /* Ajuste para centralizar no desktop */
-}
-
-/*======================================== Contato ========================================*/
-#contact .grid {
-    gap: 4rem;
-}
-
-#contact .text p {
-    margin-bottom: 2rem;
-}
-
-#contact .button i, 
-#contact ul li i {
-    font-size: 1.5rem;
-    margin-right: 0.625rem;
-}
-
-#contact ul.grid {
-    gap: 2rem;
-}
-
-#contact ul li {
-    display: flex;
-    align-items: center;
-}
-
-#contact ul li i {
-    color: var(--base-color);
-}
-
-/*======================================== Rodapé ========================================*/
-#imgg {
-    width: 30px;
-    height: 30px;
-}
-
-#bt { /* Botão genérico, talvez seja melhor renomear para algo mais específico se for só para o footer */
-    background-color: #007bff;
-    color: white;
-    border: none;
-    width: 110px; 
-    height: 30px; 
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-footer {
-    background: var(--base-color);
-}
-
-footer.section {
-    padding: 4rem 0; 
-}    
-
-footer .logo {
-    display: inline-block;
-    margin-bottom: 1.5rem;
-}
-
-footer .brand p {
-    color: var(--text-color-light);
-    margin-bottom: 0.75rem;
-}
-
-footer i {
-    font-size: 1.5rem;
-    color: var(--text-color-light);
-}
-
-footer .social {
-    grid-auto-flow: column;
-    width: fit-content;
-}
-
-footer .social a {
-    transition: 0.3s;
-    display: inline-block;
-}
-
-footer .social a:hover {
-    transform: translateY(-8px);
-}
-
-/*======================================== Botão de voltar ao início ========================================*/
 .back-to-top {
-    background: var(--base-color);
-    color: var(--text-color-light);
-    font-size: 1.8rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 3.5rem;
-    height: 3.5rem;
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    border-radius: 50%;
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.3s;
-    transform: translateY(100%);
-    z-index: 999;
+  background: var(--base-color);
+  color: var(--text-color-light);
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  border-radius: 50%;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.3s;
+  transform: translateY(100%);
+  z-index: 999;
 }
-
 .back-to-top.show {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/*======================================== Responsividade ========================================*/
-
-/* Dispositivos Largos: 992px > */
-@media (min-width: 992px) {
-    :root {
-        --title-font-size-base: 2.25rem; /* Ajuste para títulos maiores */
-        --subtitle-font-size: 1.125rem;
-    }
-
-    #home .container {
-        display: grid;
-        grid-template-columns: 1fr 2fr;
-        align-items: center;
-    }
-
-    #home .image {
-        order: 1;
-        max-width: 300px;
-        margin: auto;
-    }
-
-    #home .text {
-        order: 0;
-        max-width: 600px; /* Ajuste para o texto não ficar muito largo */
-    }
+/*========================================================================================
+  13) SHOP (PRODUTOS + CARRINHO)
+========================================================================================*/
+.container.shop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  overflow: visible;
 }
 
-/* Dispositivos Extra Largos: 1200px > */
-@media (min-width: 1200px) {
-    /* reusable classes */
-    .container {
-        max-width: 1120px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .section {
-        padding: 10rem 0;
-    }
-    
-    .section header, 
-    #testimonials header { /* Adicionei #testimonials header que estava separado */
-        max-width: 32rem;
-        text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .button {
-        height: 3.125rem;
-    }
-
-    /* Nav */
-    nav .menu {
-        opacity: 1;
-        visibility: visible;
-        top: 0;
-        position: static; /* Volta para o fluxo normal */
-        height: auto;
-        width: auto;
-        background: transparent;
-    }
-
-    nav .menu ul {
-        display: flex;
-        gap: 2rem;
-    }
-
-    nav .menu ul li a.title {
-        font: 400 1rem var(--body-font);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    nav .menu ul li a.title.active {
-        font-weight: bold;
-        -webkit-font-smoothing: auto;
-    }
-
-    nav .icon-menu,
-    nav .icon-close { /* Esconde os ícones de toggle no desktop */
-        display: none;
-    }
-
-    /* Layout */
-    main {
-        margin-top: var(--header-height);
-    }
-    
-    /* Home */
-    #home .container {
-        grid-auto-flow: column;
-        width: fit-content;
-        justify-content: space-between;
-        margin: 0 auto;
-    }
-
-    #home .image {
-        order: 1;
-    }
-
-    #home .text {
-        order: 0;
-        max-width: 24rem;
-        text-align: left;
-    }
-
-    /* About */
-    #about .container {
-        margin: 0 auto;
-        grid-auto-flow: column;
-    }
-    
-    /* Services */
-    .cards {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
-
-    .card {
-        padding-left: 3rem;
-        padding-right: 3rem;
-    }
-
-    /* Testimonials*/
-    #testimonials .container {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    /* Contact */
-    #contact .container {
-        grid-auto-flow: column;
-        align-items: center;
-    }
-
-    #contact .text {
-        max-width: 25rem;
-    }
-
-    /* Footer */
-    footer.section {
-        padding: 3.75rem 0;
-    }
-
-    footer .container {
-        grid-auto-flow: column;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    footer .logo {
-        font-size: 2.25rem;
-    }
-}
-
-/*======================================== Componentes de Produtos e Carrinho ========================================*/
-
-/* Filtro de Categoria */
-#btcategoria {
-    margin-top: 5px;
-    width: 100px;
-    height: 50px;
-}
-
-.filtro-btn {
-    background-color: #e0e0e0;
-    color: #333;
-    border: none;
-    width: 80px; 
-    height: 40px; 
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.filtro-btn:hover {
-    background-color: #d5d5d5;
-}
-
-.filtro-btn.active {
-    background-color: var(--base-color);
-    color: white;
-}
-
-/* Layout Geral */
-.container.shop { /* Adicionei uma classe para diferenciar do container global */
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    /* Adicionado para garantir que o container do shop NÃO corte as setas */
-    overflow: visible; 
-}
-
-.produtos, 
+.produtos,
 .carrinho {
-    flex: 1;
-    min-width: 320px;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
-    /* Certifique-se de que estes NÃO tenham overflow: hidden; se forem pais */
-    overflow: visible; 
+  flex: 1;
+  min-width: 320px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+  overflow: visible;
 }
 
-/* Layout dos produtos em 2 colunas */
+/* Grade de produtos */
 .produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Mais flexível */
-    gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
 }
 
-/* Estilo de cada item de produto */
 .produto {
-    display: flex;
-    flex-direction: column;
-    background: white;
-    border-radius: 10px;
-    align-items: center;
-    padding: 10px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease, box-shadow 0.3s ease;
-    /* O produto individual NÃO deve ter overflow: hidden; */
-    overflow: visible; 
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 10px;
+  align-items: center;
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.10);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  overflow: visible;
 }
-
 .produto:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
 .produto img {
-    width: 100px;
-    height: 100px;
-    border-radius: 8px;
-    margin-bottom: -50px; /* Ajuste para o texto sobrepor um pouco */
-    object-fit: cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  margin-bottom: -50px;
+  object-fit: cover;
 }
 
 .produto-info {
-    width: 100%;
-    text-align: center;
-    padding-top: 50px; /* Espaço para a imagem sobreposta */
+  width: 100%;
+  text-align: center;
+  padding-top: 50px;
 }
 
-.produto-info h3 {
-    margin: 4px 0;
-    font-size: 1rem;
-}
-
-.produto-info p {
-    margin: 4px 0;
-    color: #555;
-}
+.produto-info h3 { margin: 4px 0; font-size: 1rem; }
+.produto-info p { margin: 4px 0; color: #555; }
 
 .quantidade-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 6px 0;
-    gap: 5px; /* Espaço entre os botões e input */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 6px 0;
+  gap: 5px;
 }
 
 .quantidade-box button {
-    width: 28px;
-    height: 28px;
-    font-size: 16px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--base-color-second);
-    cursor: pointer;
-    transition: background-color 0.2s;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--base-color-second);
+  cursor: pointer;
+  transition: background-color 0.2s;
 }
-
 .quantidade-box button:hover {
-    background-color: var(--base-color);
-    color: white;
+  background-color: var(--base-color);
+  color: #fff;
 }
 
 .quantidade-box input {
-    width: 40px;
-    height: 28px;
-    text-align: center;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+  width: 40px;
+  height: 28px;
+  text-align: center;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-.produto button.adicionar { /* Mantido para ser específico para o botão de adicionar */
-    margin-top: 8px;
-    width: 100%;
-    max-width: 120px;
-    height: 32px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s ease;
+.produto button.adicionar {
+  margin-top: 8px;
+  width: 100%;
+  max-width: 120px;
+  height: 32px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+.produto button.adicionar:hover { background-color: #0056b3; }
+
+/* Destaques de busca */
+.produto.highlight {
+  outline: 3px solid var(--base-color);
+  border-radius: 6px;
+  transition: outline 0.3s ease;
 }
 
-.produto button.adicionar:hover {
-    background-color: #0056b3;
+.produto.encontrado {
+  animation: destaqueProduto 1s ease;
+  box-shadow: 0 0 0 3px var(--base-color);
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease;
 }
 
-
-/* Itens do Carrinho */
+/* Carrinho */
 .carrinho h2 {
-    border-bottom: 2px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 
 .carrinho-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-    border-bottom: 1px solid #ddd;
-    padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #ddd;
+  padding: 10px 0;
 }
-
-.carrinho-item:last-child {
-    border-bottom: none; /* Remove a borda do último item */
-}
+.carrinho-item:last-child { border-bottom: none; }
 
 .carrinho-nome {
-    flex: 2;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  flex: 2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
-
 .carrinho-miniatura {
-    width: 24px;
-    height: 24px;
-    object-fit: cover;
-    border-radius: 4px;
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
-.carrinho-quantidade {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+.carrinho-quantidade { display: flex; align-items: center; gap: 10px; }
 
 .carrinho-subtotal {
-    flex: 1;
-    text-align: right; /* Alinha o subtotal à direita */
-    font-weight: bold;
-}
-.subtotal-preview {
-  color: #28a745; /* verde estilo sucesso */
+  flex: 1;
+  text-align: right;
   font-weight: bold;
-  margin-top: 6px;
-  display: none; /* já está assim por padrão */
 }
 
+.subtotal-preview {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 6px;
+  display: none;
+}
+
+/* Título do carrinho animado */
 .titulo-carrinho {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px; /* espaço entre imagem e texto */
+  gap: 10px;
   font-size: 2rem;
   padding: 1rem;
   border-radius: 12px;
   margin-bottom: 1rem;
   background-color: var(--base-color);
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s ease-out;
 }
-
 .icone-carrinho {
-  width: 1em;  /* mesmo tamanho da fonte */
+  width: 1em;
   height: 1em;
   object-fit: contain;
 }
-
-
 .titulo-carrinho.scroll-visivel {
   opacity: 1;
   transform: translateY(0);
 }
 
-
-.carrinho-acoes {
-    display: flex;
-    gap: 5px;
-}
-
+.carrinho-acoes { display: flex; gap: 5px; }
 .carrinho-acoes button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #ff5252;
-    padding: 5px; /* Adicionado padding para facilitar o clique */
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #ff5252;
+  padding: 5px;
+}
+.carrinho-acoes button:hover { color: #e04848; }
+
+/* Neumorphism buttons */
+.btt, .btt2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #e6e6e6, #ffffff);
+  box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-weight: bold;
+  color: #555;
+}
+.btt { width: 20px; height: 20px; font-size: 14px; }
+.btt2 { width: 30px; height: 30px; font-size: 18px; }
+
+.btt:active, .btt2:active {
+  box-shadow: inset 2px 2px 5px #b0b0b0, inset -2px -2px 5px #f0f0f0;
 }
 
-.carrinho-acoes button:hover {
-    color: #e04848;
-}
-
-/* Botões com estilo Neumorphism */
-.btt,
-.btt2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    border-radius: 50%;
-    background: linear-gradient(145deg, #e6e6e6, #ffffff);
-    box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    font-weight: bold; /* Para os ícones de + e - */
-    color: #555;
-}
-
-.btt {
-    width: 20px;
-    height: 20px;
-    font-size: 14px;
-}
-
-.btt2 { /* Usado para o botão de "remover" no carrinho */
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-}
-
-.btt:active,
-.btt2:active {
-    box-shadow: inset 2px 2px 5px #b0b0b0, inset -2px -2px 5px #f0f0f0;
-}
-
-/* Total do Carrinho */
+/* Total e WhatsApp */
 .total {
-    margin-top: 20px;
-    font-weight: bold;
-    font-size: 18px;
-    text-align: right; /* Alinha o total à direita */
-    padding-top: 10px;
-    border-top: 1px solid #eee;
+  margin-top: 20px;
+  font-weight: bold;
+  font-size: 18px;
+  text-align: right;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
 }
 
 #whatsapp {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #25D366;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    width: 100%;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
+#whatsapp:hover { background-color: #1DA851; }
 
-#whatsapp:hover {
-    background-color: #1DA851;
-}
-
-/* Alerta */
+/*========================================================================================
+  14) ALERTA
+========================================================================================*/
 .alerta {
   position: fixed;
   top: 1rem;
   right: 1rem;
   background-color: #28a745;
-  color: white;
+  color: #fff;
   padding: 14px 20px;
   border-radius: 8px;
   font-weight: bold;
@@ -1402,925 +820,26 @@ footer .social a:hover {
   box-shadow: 0 4px 12px rgba(0,0,0,0.2);
   text-align: center;
 }
+.alerta.show { opacity: 1; transform: translateY(0); }
+.alerta.hide { animation: fadeOut 2s forwards; }
 
-.alerta.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.alerta.hide {
-  animation: fadeOut 2s forwards;
-}
-
-.alerta-nome {
-  font-size: 1rem;
-}
-
-.alerta-sucesso {
-  font-size: 0.9rem;
-  color: #fff;
-  margin-top: 6px;
-}
-
+.alerta-nome { font-size: 1rem; }
+.alerta-sucesso { font-size: 0.9rem; color: #fff; margin-top: 6px; }
 .alerta-linha {
   border: 0;
   border-top: 1px solid rgba(255,255,255,0.5);
   margin: 6px 0;
 }
 
-
-/*======================================== Carrossel ========================================*/
-#nextBtn {
-    right: 10px;
-}
-
-/* Carrossel de Imagens do Produto (para detalhes) */
-.produto.carrossel {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 40px;
-    flex-wrap: wrap;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-    position: relative; 
-    min-height: 220px; 
-    margin-bottom: 40px; 
-    /* SUPER IMPORTANTE: Este deve estar visível para as setas saírem SE ELAS FOSSEM IRMÃS */
-    /* Mas no seu HTML, as setas estão dentro do .imagem-grande-wrapper */
-    overflow: visible; 
-}
-
-/* Coluna Esquerda: imagem e thumbs */
-.produto.carrossel .produto-img-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 160px; /* Aumentado um pouco */
-    position: relative; /* Para posicionar botões de navegação */
-    z-index: 5; /* Garante que os botões do carrossel fiquem visíveis */
-    /* Mantido Hidden no desktop, para sobreposição interna das setas */
-    overflow: hidden; 
-}
-
-/* Wrapper da imagem grande (no carrossel de produto) */
-.imagem-grande-wrapper {
-    position: relative; /* Essencial para o posicionamento das setas */
-    width: 160px; /* Deve ser igual ao width do pai para alinhar */
-    height: 160px; /* Mantém proporção 1:1 */
-    /* IMPORTANTE: Mantenha HIDDEN aqui, pois as setas estão DENTRO dele no HTML */
-    overflow: hidden; 
-    border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.imagem-grande-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    margin-bottom: 0; /* Remove margin-bottom que estava causando problemas */
-}
-
-/* Botões de navegação do carrossel de produto */
-.carousel-btn {
-    color: rgb(255, 255, 255); 
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgb(255, 255, 255); /* Fundo mais escuro para garantir visibilidade */
-    border: none;
-    font-size: 2.3rem; /* Tamanho da seta */
-    font-weight: bold; /* Garante que o '❮' e '❯' sejam visíveis */
-    cursor: pointer;
-    z-index: 999; /* Z-index MUITO ALTO para garantir visibilidade máxima */
-    opacity: 1; /* Garante que estejam visíveis */
-    transition: opacity 0.3s, background 0.3s;
-    border-radius: 50%; /* Botões redondos */
-    width: 40px; /* Tamanho fixo */
-    height: 40px; /* Tamanho fixo */
-    display: flex; /* Para centralizar o texto/símbolo */
-    justify-content: center;
-    align-items: center;
-}
-
-/* Posicionamento para desktop - Setas DENTRO do imagem-grande-wrapper */
-.carousel-btn.carousel-prev {
-    left: 5px; /* Posição dentro do wrapper */
-}
-
-.carousel-btn.carousel-next {
-    right: 5px; /* Posição dentro do wrapper */
-}
-
-/* Miniaturas */
-.carousel-thumbs {
-    display: flex;
-    gap: 6px;
-    margin-top: 8px;
-    max-width: 100%; /* Ajustado para se adaptar ao container pai */
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 4px 2px;
-    background-color: transparent; /* Não precisa de fundo se estiver dentro de um wrapper */
-    z-index: 10;
-    min-height: 55px; /* Garante espaço */
-    justify-content: center; /* Centraliza miniaturas */
-}
-
-.carousel-thumbs::-webkit-scrollbar {
-    height: 6px;
-}
-
-.carousel-thumbs::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-}
-
-.carousel-thumbs img {
-    flex: 0 0 auto;
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: border-color 0.3s, transform 0.2s;
-}
-
-.carousel-thumbs img.active { /* Mantido active para desktop */
-    border-color: var(--base-color);
-    transform: scale(1.05);
-}
-
-.carousel-thumbs img:hover {
-    border-color: var(--base-color-alt);
-}
-
-/* Coluna Direita (informações do produto no carrossel) */
-.produto.carrossel .produto-info {
-    flex: 1;
-    margin-top: 0; /* Removido o margin-top excessivo */
-    text-align: left; /* Garante que o texto fique alinhado à esquerda */
-}
-
-/*======================================== Barra de Pesquisa e Menu Mobile ========================================*/
-
-/* Nav Container */
-nav.container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 10px 16px;
-    height: var(--header-height); /* Usa a variável para altura */
-}
-
-/* Agrupamento logo + pesquisa */
-.navbar-esquerda {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    flex: 1;
-    min-width: 0;
-}
-
-/* Barra de pesquisa */
-.barra-pesquisa {
-    position: relative;
-    flex: 1;
-    max-width: 250px;
-    margin-top: -2px; 
-}
-
-.barra-pesquisa input {
-    width: 100%;
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-size: 0.9rem;
-}
-.barra-pesquisa input:focus {
-  outline: none;
-  border-color: var(--base-color);
-  box-shadow: 0 0 0 3px rgba(255, 221, 0, 0.2);
-  background-color: #fff;
-}
-
-.barra-pesquisa {
-  position: relative;
-}
-
-#resultados-pesquisa {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  max-height: 300px;
-  overflow-y: auto;
-  background: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  z-index: 1000;
-  display: none;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-#resultados-pesquisa li {
-  padding: 10px;
-  cursor: pointer;
-  border-bottom: 1px solid #eee;
-}
-
-#resultados-pesquisa li:hover {
-  background-color: var(--base-color-second);
-}
-nav {
-    transition: all 0.3s ease;
-}
-
-/* Efeito destaque no produto encontrado */
-.produto.highlight {
-    border: 2px solid var(--base-color);
-    box-shadow: 0 0 10px var(--base-color);
-    transition: all 0.3s ease;
-}
-
-.produto.encontrado {
-    animation: destaqueProduto 1s ease;
-    box-shadow: 0 0 0 3px var(--base-color);
-    border-radius: 8px;
-    transition: box-shadow 0.3s ease;
-}
-
-@keyframes destaqueProduto {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 0 rgba(255, 165, 0, 0.6);
-    }
-    50% {
-        transform: scale(1.02);
-        box-shadow: 0 0 10px 5px rgba(255, 165, 0, 0.6);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 3px rgba(255, 165, 0, 0.4);
-    }
-}
-
-/* Mensagem de Erro */
-.erro-pedido {
-    color: red;
-    font-weight: bold;
-    margin-top: 8px;
-    text-align: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.erro-pedido.show {
-    opacity: 1;
-}
-
-@keyframes tremer {
-    0% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-    100% { transform: translateX(0); }
-}
-
-.erro-pedido.tremer {
-    animation: tremer 0.4s;
-}
-
-
-/*======================================== Media Queries (Responsividade) ========================================*/
-
-/* Mobile Específico (max-width: 768px) */
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column; /* Produtos e Carrinho em coluna */
-        /* Garante que o container geral não corte nada */
-        overflow: visible;
-    }
-
-    nav.container {
-        flex-wrap: wrap;
-        align-items: flex-start; /* Alinha no topo */
-    }
-
-    .navbar-esquerda {
-        width: 100%;
-        justify-content: space-between;
-        margin-bottom: 8px;
-    }
-
-    .barra-pesquisa {
-        flex-grow: 1;
-        max-width: calc(100% - 70px); /* Ajusta para deixar espaço para o toggle */
-    }
-
-    .toggle {
-        position: static; /* Volta para o fluxo normal */
-        margin-left: 10px; /* Espaçamento à direita da barra de pesquisa */
-    }
-
-    nav.show .icon-close {
-        display: block;
-    }
-    
-    /* Produtos no Mobile: 2 colunas */
-    .produtos {
-        grid-template-columns: repeat(2, 1fr); /* DUAS COLUNAS */
-        gap: 15px; /* Espaçamento entre os produtos */
-        align-items: start; /* Adicionado para alinhar os itens no topo e evitar esticamento */
-        /* Garante que a grade de produtos não corte */
-        overflow: visible;
-    }
-
-    .produto {
-        display: flex; /* Garante flexbox para alinhamento interno */
-        flex-direction: column; /* Imagem e info empilhadas verticalmente */
-        background: white;
-        border-radius: 10px;
-        align-items: center;
-        padding: 10px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12); 
-        transition: transform 0.2s ease, box-shadow 0.3s ease;
-        margin-bottom: 0; 
-        width: 100%; /* Garante que o card ocupe o espaço disponível na coluna */
-        height: fit-content; /* CHAVE: A altura do card se ajusta ao conteúdo */
-        /* O produto individual NÃO deve ter overflow: hidden; */
-        overflow: visible; 
-    }
-
-    .produto:hover {
-       transform: translateY(-5px);
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-    }
-
-    /* As imagens de produtos padrão devem ser menores no layout de card */
-    .produto:not(.carrossel) img { /* Seleciona apenas imagens de produtos NÃO carrossel */
-        width: 100px; /* Tamanho fixo para imagem no layout de card */
-        height: 100px;
-        border-radius: 8px;
-        margin-bottom: -50px; /* Mantém a imagem "entrando" no texto, se desejado */
-        object-fit: cover;
-    }
-
-    .produto-info {
-        width: 100%; /* Garante que o info block ocupe a largura total */
-        padding-top: 50px; /* Compensação para a imagem */
-        text-align: center; /* Centraliza o texto dentro de cada card */
-    }
-
-    .produto-info h3 {
-        margin: 4px 0;
-        font-size: 0.95rem; /* Ajuste para caber melhor */
-    }
-
-        .produto-info p {
-        margin: 4px 0;
-        font-weight: bold;
-        color: #e67e22; /* um laranja suave, mais visível que #555 */
-        font-size: 0.98rem; /* levemente maior que o padrão */
-        }
-        .produto:hover .produto-info p {
-        color: #d35400;
-        }
-
-
-
-    .quantidade-box {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 6px 0;
-        gap: 5px; /* Espaço entre os botões e input */
-    }
-
-    .quantidade-box button {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
-        font-weight: bold;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--base-color-second);
-        cursor: pointer;
-        transition: background-color 0.2s;
-    }
-
-    .quantidade-box button:hover {
-        background-color: var(--base-color);
-        color: rgb(0, 0, 0);
-    }
-
-    .quantidade-box input {
-        width: 40px;
-        height: 28px;
-        text-align: center;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-    }
-
-    .produto button.adicionar {
-        margin-top: 8px;
-        width: 100%;
-        max-width: 100px; /* Ajuste o max-width para o botão */
-        height: 28px;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        transition: background-color 0.3s ease;
-        font-size: 0.8rem;
-    }
-
-    .produto button.adicionar:hover {
-        background-color: #0056b3;
-    }
-
-        .categoria-destaque {
-        background-color: var(--base-color);
-        color: white;
-        text-align: center;
-        padding: 2rem 1rem 3rem;
-        position: relative;
-        margin-bottom: -2rem;
-        clip-path: polygon(
-            0% 0%,
-            100% 0%,
-            100% 88%,
-            90% 94%,
-            75% 98%,
-            60% 99.5%,
-            50% 100%,
-            40% 99.5%,
-            25% 98%,
-            10% 94%,
-            0% 88%
-        );
-        }
-
-
-
-
-
-
-
-        .categoria-destaque h2 {
-        font-size: 2rem;
-        font-weight: bold;
-        margin: 0;
-        }
-
-
-
-    
-/*//////////////////////////////////////////////////////  NAVBAR SUPERIOR  ////////////////////////////////////////////////////////////////////*/
-    .produto.carrossel {
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 0;
-        padding: 10px; 
-        margin-bottom: 0;
-        min-height: auto; 
-        /* Mantido VISIBLE, mas o corte principal vem do .imagem-grande-wrapper no seu HTML */
-        overflow: visible; 
-        max-width: 100%; 
-        width: 100%; 
-        height: fit-content;
-    }
-
-    .produto.carrossel .produto-img-wrapper {
-        width: 100%; 
-        max-width: 100px; /* Mantém a imagem grande (e seu wrapper) com 100px de largura */
-        margin-bottom: 0; 
-        position: relative; 
-        flex-shrink: 0; 
-        /* MUITO IMPORTANTE: Este deve ser VISIBLE, pois é o pai dos botões */
-        overflow: visible; 
-    }
-
-    .imagem-grande-wrapper {
-        position: relative; /* **ESSENCIAL** para as setas se posicionarem */
-        width: 100px; /* Continua sendo o tamanho da imagem */
-        height: 100px; 
-        /* IMPORTANTE: Mantido HIDDEN aqui porque as setas estão DENTRO dele no HTML.
-           Isso fará com que as setas fiquem sobre a imagem, e não fora. */
-        overflow: hidden; 
-        border-radius: 6px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        margin: 0 auto; 
-    }
-
-    .imagem-grande-wrapper img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain; 
-        margin-bottom: 0; 
-    }
-
-    /* Setas de navegação do carrossel de produto (Mobile) */
-    .carousel-btn {
-        position: absolute;
-        top: 33%;
-        transform: translateY(-50%);
-        background: var(--base-color); /* Fundo mais escuro para mobile */
-        border: none;
-        color: white;
-        font-size: 1.2rem; /* Tamanho da seta no mobile */
-        padding: 0;
-        border-radius: 50%;
-        cursor: pointer;
-        opacity: 1; /* Garante visibilidade */
-        transition: background-color 0.3s, opacity 0.3s;
-        z-index: 999; /* Z-index MUITO ALTO para garantir visibilidade máxima */
-        width: 30px; 
-        height: 30px; 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    /* POSICIONAMENTO DAS SETAS NO MOBILE (DENTRO DO .imagem-grande-wrapper) */
-    /* Como os botões estão DENTRO do .imagem-grande-wrapper no HTML, eles devem estar posicionados DENTRO dele */
-    .carousel-btn.carousel-prev {
-        left: -30px; /* Deixa 5px da borda esquerda da IMAGEM */
-    }
-    
-    .carousel-btn.carousel-next {
-        right: -30px; /* Deixa 5px da borda direita da IMAGEM */
-    }
-
-    /* Miniaturas (Mobile) */
-    .carousel-thumbs {
-        display: flex;
-        flex-direction: row; 
-        flex-wrap: nowrap; 
-        max-width: 100%; 
-        overflow-x: auto; /* Permite o scroll horizontal */
-        overflow-y: hidden;
-        padding: 4px;
-        gap: 4px; 
-        -webkit-overflow-scrolling: touch; 
-        min-height: 40px; 
-        justify-content: center; 
-        margin-top: 8px; 
-        scroll-behavior: smooth; /* Para um scroll suave via JavaScript */
-    }
-
-    /* Esconder a barra de rolagem para alguns navegadores */
-    .carousel-thumbs::-webkit-scrollbar {
-        height: 0px; 
-        background: transparent; 
-    }
-
-    .carousel-thumbs::-webkit-scrollbar-thumb {
-        background: transparent; 
-    }
-
-    .carousel-thumbs img {
-        /* Miniaturas acompanham o tamanho da imagem grande (33% de 100px) */
-        width: 33px; 
-        height: 33px; 
-        object-fit: cover;
-        opacity: 0.7;
-        cursor: pointer;
-        border-radius: 5px;
-        border: 2px solid transparent;
-        transition: opacity 0.3s, border-color 0.3s;
-        flex-shrink: 0; /* Impede que as imagens se "espremam" */
-    }
-
-    .carousel-thumbs img:hover {
-        opacity: 1;
-    }
-
-    .carousel-thumbs img.ativo { 
-        border-color: var(--base-color);
-        opacity: 1;
-    }
-    
-    .produto.carrossel .produto-info {
-        text-align: center; 
-        margin-top: 10px; 
-        padding-top: 0; 
-        flex-grow: 0; 
-        flex-shrink: 0; 
-    }
-    
-    .produto.carrossel .produto-info h3 {
-        margin-top: 0; 
-    }
-}
-
-#header.hidden-navbar {
-  height: 50px;
-  overflow: hidden;
-  transition: all 0.3s ease;
-}
-
-#header.hidden-navbar .nav-central {
-  display: none;
-}
-
-#header.hidden-navbar .nav-top {
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;           /* ✅ Faz o nav-top ocupar 100% da largura */
-  padding: 0 15px;        /* ✅ Espaçamento lateral opcional */
-  box-sizing: border-box; /* ✅ Garante que o padding não atrapalhe o layout */
-}
-
-#header.hidden-navbar .logo {
-  font-size: 1rem;
-  text-align: left;
-}
-
-#header.hidden-navbar .toggle.icon-menu,
-#header.hidden-navbar .toggle.icon-close {
-  display: block;
-  margin-left: auto;       /* ✅ Empurra o toggle para a direita */
-  font-size: 1.2rem;
-}
-#header.hidden-navbar nav {
-  max-width: 100%;
-  width: 100%;
-  padding: 0;
-}
-#header.hidden-navbar {
-  max-width: 100%;
-  width: 100%;
-}
-
-
-
-/*//////////////////////////////////////////////////////  NAVBAR LATERAL  ////////////////////////////////////////////////////////////////////*/
-.menu-lateral .atalhos li a {
-  position: relative;
-  display: block;
-  font-size: 18px;
-  padding: 12px 20px;
-  color: #ffffff;
-  text-decoration: none;
-  transition: background-color 0.2s ease;
-}
-
-/* Linha branca animada */
-.menu-lateral .atalhos li a::after {
-  content: '';
-  position: absolute;
-  left: 20px;
-  bottom: 8px;
-  width: 0;
-  height: 2px;
-  background-color: #ffffff;
-  transition: width 0.3s ease;
-}
-
-/* Ao passar o mouse */
-.menu-lateral .atalhos li a:hover::after {
-  width: calc(100% - 40px); /* 100% menos os paddings laterais */
-}
-
-/* Link ativo (selecionado) */
-.menu-lateral .atalhos li a.active::after {
-  width: calc(100% - 40px);
-}
-
-
-.menu-lateral {
-    width: 250px; /* Adapte conforme seu design */
-    background: var(--base-color);
-    position: fixed;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    transform: translateX(0); /* Visível por padrão em desktop */
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-    padding-top: 20px; /* Espaço para o cabeçalho/botão se necessário */
-    display: flex; /* Para organizar o conteúdo */
-    flex-direction: column;
-    justify-content: space-between; /* Empurra o rodapé para baixo */
-}
-
-.menu-lateral .atalhos {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu-lateral .atalhos li a {
-    display: block;
-    font-size: 20px;
-    padding: 15px 20px;
-    color: #ffffff;
-    text-decoration: none;
-    transition: background-color 0.2s ease;
-}
-
-
-.menu-lateral .menu-rodape {
-    padding: 20px;
-    display: flex;
-    /* Ajustes para centralizar e espaçar */
-    justify-content: center; /* Centraliza horizontalmente */
-    align-items: center;    /* Centraliza verticalmente */
-    gap: 55px;              /* Adiciona um espaço de 25px entre os itens */
-    border-top: 1px solid #ffffff;
-}
-
-.menu-lateral .menu-rodape img {
-    width: 52px; /* Aumenta o tamanho da imagem para 32px (era 24px) */
-    height: 52px;
-    transition: transform 0.2s ease-in-out; /* Adiciona uma transição para um efeito hover suave */
-}
-
-.menu-lateral .menu-rodape img:hover {
-    transform: scale(1.1); /* Um pequeno zoom ao passar o mouse */
-}
-
-/* Estilos para o overlay */
-.overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 999;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
-}
-
-.overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-/* Estilos para o botão de hambúrguer (criado via JS) */
-.menu-toggle {
-    display: none; /* Ocultar por padrão em desktop */
-    position: fixed; /* Fixar no topo para mobile */
-    top: 15px; /* Ajuste a posição conforme necessário */
-    right: 20px; /* Ajuste a posição conforme necessário */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 25px;
-    z-index: 1001; /* Acima do menu e do overlay */
-}
-
-.menu-toggle .hamburger {
-    display: block;
-    width: 100%;
-    height: 3px;
-    background-color: var(--base-color); /* Cor do hambúrguer */
-    transition: all 0.3s ease-in-out;
-    border-radius: 2px;
-}
-
-/* Animação do hambúrguer para um 'X' */
-.menu-toggle.open .hamburger:nth-child(1) {
-    transform: translateY(11px) rotate(45deg);
-}
-
-.menu-toggle.open .hamburger:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-toggle.open .hamburger:nth-child(3) {
-    transform: translateY(-11px) rotate(-45deg);
-}
-
-/* Regras para mobile */
-@media (max-width: 768px) {
-    .menu-lateral {
-        transform: translateX(-100%); /* Ocultar menu por padrão em mobile */
-        box-shadow: none; /* Remover sombra quando oculto */
-    }
-
-    .menu-lateral.open {
-        transform: translateX(0); /* Mostrar menu quando 'open' */
-        box-shadow: 2px 0 5px rgba(0,0,0,0.2); /* Adicionar sombra quando visível */
-    }
-
-    .menu-toggle {
-        display: flex; /* Mostrar o botão de hambúrguer em mobile */
-    }
-
-    /* Ocultar o scroll do corpo quando o menu está aberto */
-    body.no-scroll {
-        overflow: hidden;
-    }
-}
-
-
-
-#header {
-  height: 50px;
-  transition: all 0.3s ease;
-  /* outros estilos... */
-}
-
-#header.scroll {
-  height: auto;
-  padding-top: 0.5rem; /* antes: var(--header-scrolled-padding-top-desktop); */
-  padding-bottom: 0.5rem; /* antes: var(--header-scrolled-padding-bottom-desktop); */
-  box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.15);
-}
-
-
-.produto.highlight {
-  outline: 3px solid var(--base-color);
-  border-radius: 6px;
-  transition: outline 0.3s ease;
-}
-
-.imagem-final-decorativa {
-  width: 100%;
-  height: 100px; /* padrão desktop */
-  overflow: hidden;
-  position: relative;
-}
-
-.imagem-final-decorativa img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-  opacity: 0.4; /* 🔧 valor entre 0 (invisível) e 1 (totalmente visível) */
-}
-
-@media (max-width: 768px) {
-  .imagem-final-decorativa {
-    height: auto; /* deixa a altura natural no mobile */
-    max-height: 250px;
-  }
-
-  .imagem-final-decorativa img {
-    width: 100%;
-    height: auto;
-    object-fit: contain; /* mostra toda a imagem */
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*========================================================================================
+  15) CONTADOR DO CARRINHO + EFEITOS (FLY DOT / POP)
+========================================================================================*/
 .contador-carrinho {
   position: absolute;
   top: 6px;
   right: 6px;
   background-color: #25D366;
-  color: white;
+  color: #fff;
   font-size: 0.75rem;
   font-weight: bold;
   width: 18px;
@@ -2330,795 +849,10 @@ nav {
   align-items: center;
   justify-content: center;
   z-index: 10000;
-  animation: none;
   transition: transform 0.3s ease;
 }
+.contador-carrinho.animar { transform: scale(1.4); }
 
-.contador-carrinho.animar {
-  transform: scale(1.4);
-}
-
-@keyframes pulsar {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.4); }
-  100% { transform: scale(1); }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /* ======================================== Estilos para Banners (Otimizado e Moderno) ======================================== */
-
-/* Estilos gerais para os banners */
-.whatsapp-banner, .entrega-banner {
-    padding: 1.5rem;
-    margin: 2rem 1.5rem;
-    border-radius: 16px;
-    box-shadow: 0 8px 24px var(--shadow-light); /* Sombra suave */
-    overflow: hidden;
-    position: relative; /* Para a borda animada funcionar corretamente */
-    z-index: 1; /* Para o conteúdo ficar sobre a borda animada */
-    transition: transform 0.3s ease-in-out;
-}
-
-.whatsapp-banner:hover, .entrega-banner:hover {
-    transform: translateY(-5px); /* Efeito sutil de "levantar" */
-}
-
-/* Fundo da borda animada */
-.whatsapp-banner::before, .entrega-banner::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    z-index: -1;
-    border-radius: 18px;
-    background-size: 300% 300%;
-    animation: borderLoop 6s linear infinite;
-}
-
-/* Cor da borda animada do banner de WhatsApp */
-.whatsapp-banner::before {
-    background: linear-gradient(45deg,
-        #25D366, #1DA851, #25D366, #1DA851);
-}
-
-/* Cor da borda animada do banner de entrega */
-.entrega-banner::before {
-    background: linear-gradient(45deg,
-        #FFD700, #FFB800, #FFD700, #FFB800);
-}
-
-.banner-container {
-    display: flex;
-    flex-direction: column; /* Padrão para mobile: texto acima, imagem abaixo */
-    align-items: center;
-    text-align: center;
-    gap: 1.5rem;
-}
-
-/* Para o banner de WhatsApp, a imagem vem primeiro no mobile */
-.whatsapp-banner .banner-container {
-    flex-direction: column-reverse;
-}
-
-.imagem-animada {
-    width: 80%;
-    max-width: 100px;
-    display: flex;
-    justify-content: center;
-}
-
-.imagem-animada img {
-    width: 100%;
-    border-radius: 12px;
-    /* Animação de flutuação */
-    animation: flutuar 3s ease-in-out infinite;
-}
-
-.texto-banner {
-    width: 100%;
-    text-align: center;
-}
-
-/* Título com a logo do WhatsApp */
-.titulo-com-imagem {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.titulo-com-imagem h2 {
-    font-size: 1.6rem;
-    color: var(--title-color);
-    font-weight: 700;
-}
-
-.logo-whatsapp {
-    width: 32px;
-    height: 32px;
-}
-
-.texto-banner p {
-    font-size: 1rem;
-    line-height: 1.4;
-    color: var(--text-color);
-    margin-bottom: 1rem;
-}
-
-.fake-info {
-    background-color: var(--base-color-second);
-    color: var(--title-color);
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    font-weight: 500;
-    display: inline-block;
-}
-
-/* Lista de informações de entrega */
-.info-entrega {
-    list-style: none;
-    padding: 0;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    text-align: center;
-}
-
-.info-entrega li {
-    font-size: 1rem;
-    color: var(--text-color);
-    font-weight: 400;
-}
-
-.info-entrega strong {
-    color: rgba(0, 0, 0, 0.597);
-    font-weight: 700;
-}
-
-/* ======================================== Animações ======================================== */
-
-/* Animação de flutuação */
-@keyframes flutuar {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-}
-
-/* Animação da borda */
-@keyframes borderLoop {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-/* ======================================== Responsividade (Ajustes Adicionais) ======================================== */
-
-@media (min-width: 768px) {
-    .whatsapp-banner .banner-container {
-        flex-direction: row; /* Imagem à esquerda, texto à direita */
-        text-align: left;
-        justify-content: space-between;
-    }
-
-    .entrega-banner .banner-container {
-        flex-direction: row-reverse; /* Imagem à direita, texto à esquerda */
-        text-align: left;
-    }
-
-    .texto-banner, .imagem-animada {
-        width: 48%;
-        max-width: none;
-    }
-
-    .titulo-com-imagem {
-        justify-content: flex-start;
-    }
-
-    .info-entrega {
-        text-align: left;
-    }
-}
-
-/* **NOVO AJUSTE para telas bem pequenas (celulares)** */
-@media (max-width: 576px) {
-    .imagem-animada {
-        max-width: 100px; /* Reduzindo o tamanho da imagem */
-    }
-    .texto-banner h2 {
-        font-size: 1.4rem; /* Reduzindo o título para caber melhor */
-    }
-    .texto-banner p {
-        font-size: 0.9rem; /* Reduzindo o texto para melhor legibilidade */
-    }
-    .banner-container {
-        gap: 1rem; /* Diminuindo o espaço entre os elementos */
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-/* ===== Carrossel Minimalista e Compacto (Mobile First) - Versão VS Code Clean V2 ===== */
-
-/* ====== Carrossel de Destaques (com bordas mais aparentes) ====== */
-.carrossel-container {
-  position: relative;
-  width: 90%;               /* Alinhado aos banners */
-  max-width: 1100px;
-  margin: 1.5rem auto;
-  padding: 1.2rem 0.8rem;
-  border-radius: 18px;      /* 🔹 Bordas mais suaves */
-  background: #fffef9;      /* 🔹 Fundo levemente bege para destacar */
-  border: 2px solid rgba(212, 151, 0, 0.25); /* 🔹 Borda sutil dourada translúcida */
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08); /* 🔹 Sombra mais visível */
-  overflow: hidden;
-  transition: box-shadow 0.3s ease, transform 0.25s ease;
-}
-
-.carrossel-container:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-/* ===== Título ===== */
-.carrossel-titulo {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #d49700; /* Combina com o banner de entrega */
-  text-align: center;
-  margin-bottom: 1.2rem;
-  letter-spacing: 0.3px;
-}
-
-/* ===== Estrutura ===== */
-.carrossel-wrapper {
-  overflow: hidden;
-}
-
-.carrossel {
-  display: flex;
-  gap: 10px;
-  padding: 0 1rem 0.5rem 1rem;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;        /* 🔹 “Travamento” automático por item */
-  scroll-behavior: smooth;              /* 🔹 Rolagem suave */
-  -webkit-overflow-scrolling: touch;    /* 🔹 Suavidade nativa no iOS */
-  scroll-padding: 0 1rem;               /* 🔹 Centraliza melhor o snap */
-  scrollbar-width: none;
-}
-.carrossel::-webkit-scrollbar {
-  display: none;
-}
-
-/* Cada item “trava” no início da viewport */
-.carrossel-item {
-  flex: 0 0 90%;
-  scroll-snap-align: start;             /* 🔹 O segredo do travamento perfeito */
-  scroll-snap-stop: always;             /* 🔹 Evita pular mais de 1 item */
-}
-
-
-.carrossel::-webkit-scrollbar {
-  display: none;
-}
-
-/* ===== Itens ===== */
-.carrossel-item {
-  flex: 0 0 90%;
-  flex-shrink: 0;
-  scroll-snap-align: start;
-  background: #ffffff;
-  border: 1.5px solid rgba(0, 0, 0, 0.07);
-  border-radius: 14px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  padding: 0.8rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.carrossel-item:hover {
-  transform: translateY(-3px);
-  border-color: rgba(212, 151, 0, 0.4);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-}
-
-/* ===== Imagens ===== */
-.item-media {
-  width: 100%;
-  height: 110px;
-  overflow: hidden;
-  border-radius: 10px;
-  margin-bottom: 0.6rem;
-}
-
-.item-imagem {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* ===== Texto ===== */
-.item-info h3 {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #333;
-  margin: 0.3rem 0;
-}
-
-.item-preco {
-  font-size: 1rem;
-  color: #25D366;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-/* ===== Botão WhatsApp ===== */
-.whatsapp-btn {
-  background: #25D366;
-  color: #fff;
-  padding: 0.45rem 0.7rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.whatsapp-btn:hover {
-  background: #1eb15a;
-  transform: scale(1.05);
-}
-
-/* ===== Indicadores (dots) do carrossel ===== */
-.dots-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin-top: 1rem;
-}
-
-/* Pontinhos */
-.dots-container .dot {
-  width: 10px;                 /* 🔹 Levemente maior */
-  height: 10px;
-  border-radius: 50%;
-  background: #ccc;            /* Cor neutra dos dots inativos */
-  opacity: 0.6;
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-/* Quando o dot está ativo */
-.dots-container .dot.active {
-  background: #25D366;         /* 🔹 Verde WhatsApp — forte e visível */
-  opacity: 1;
-  transform: scale(1.4);       /* 🔹 Aumenta um pouco o tamanho */
-  box-shadow: 0 0 6px rgba(37, 211, 102, 0.5); /* 🔹 Efeito de brilho */
-}
-
-
-/* ===== Desktop ===== */
-@media (min-width: 768px) {
-  .carrossel-container {
-    border-radius: 20px;
-    border: 2px solid rgba(212, 151, 0, 0.25);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    padding: 1.4rem 1rem;
-  }
-
-  .carrossel {
-    overflow-x: hidden;
-    padding: 0.5rem 0.3rem;
-    scroll-snap-type: none;
-  }
-
-  .carrossel-item {
-    flex: 0 0 calc(50% - 5px);
-    width: calc(50% - 5px);
-    padding: 1rem;
-  }
-
-  .item-media {
-    height: 160px;
-  }
-
-  /* Oculta completamente as setas de navegação do carrossel */
-.carrossel-navegacao {
-  display: none !important;
-  visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* ===== Remover completamente as setas do carrossel (forçado) ===== */
-.carrossel-navegacao,
-.carrossel-navegacao button,
-.carrossel-navegacao .navegacao-btn,
-#anterior,
-#proximo {
-  display: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-  position: absolute !important;
-  left: -9999px !important;
-  top: -9999px !important;
-  width: 0 !important;
-  height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-}
-
-
-
-
-  .navegacao-btn {
-    background: rgba(34, 34, 34, 0.6);
-    color: #fff;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    transition: background 0.3s ease, transform 0.2s ease;
-  }
-
-  .navegacao-btn:hover {
-    background: rgba(37, 211, 102, 0.9);
-    transform: scale(1.05);
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* Animação para chamar atenção no botão */
-@keyframes pulseButton {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
-.btn-piscar {
-  animation: pulseButton 1s infinite;
-  background-color: #ff9800 !important; /* destaque visual */
-}
-
-
-
-
-
-
-
-
-/* ===== Banner do WhatsApp (verde sólido) ===== */
-.zap-banner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #25D366; /* verde oficial do WhatsApp */
-  border-radius: 16px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  margin: 1.2rem auto;
-  width: 90%;              /* 🔹 Reduz um pouco para igualar às laterais do delivery */
-  max-width: 1100px;       /* 🔹 Mesmo limite do banner-container */
-  padding: 1.2rem 1.3rem;
-  transition: transform 0.22s ease, box-shadow 0.22s ease;
-  overflow: hidden;
-}
-
-.zap-banner:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-}
-
-.zap-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  width: 100%;
-}
-
-/* título centralizado */
-.zap-texto h2 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  text-align: center;
-  margin: 0 0 0.8rem 0;
-  line-height: 1.1;
-}
-
-/* texto + ícone lado a lado */
-.zap-texto p {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.9rem;
-  font-size: 1rem;
-  font-weight: 500;
-  color: #ffffff;
-  line-height: 1.4;
-  text-align: left;
-  max-width: 92%;
-  margin: 0 auto;
-}
-
-/* ícone circular branco para destacar no fundo verde */
-.zap-icon {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: #ffffff;
-  padding: 8px;
-  box-shadow: 0 2px 6px rgba(2, 2, 2, 0.12);
-  animation: zapFloat 2.4s infinite ease-in-out;
-}
-
-@keyframes zapFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* Responsividade */
-@media (max-width: 600px) {
-  .zap-banner {
-    width: 92%;             /* 🔹 Mesmo alinhamento lateral no mobile */
-    padding: 0.8rem 1rem;   /* 🔹 Compacta mais no celular */
-    border-radius: 14px;
-  }
-
-  .zap-texto h2 {
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .zap-texto p {
-    font-size: 0.9rem;
-    gap: 0.6rem;
-    max-width: 100%;
-  }
-
-  .zap-icon {
-    width: 46px;
-    height: 46px;
-    padding: 6px;
-  }
-}
-
-
-
-
-
-@media (max-width: 600px) {
-  /* Reduz o espaço entre o divisor e o banner do WhatsApp */
-  .divider-1 {
-    margin-bottom: 0 !important; /* diminui o espaço logo abaixo do divisor */
-  }
-
-  .zap-banner {
-    margin-top: 0 !important;
-    padding-top: 0.3rem !important; /* mantém um pequeno respiro visual */
-  }
-}
-
-
-
-
-
-/* ===== Banner de Entrega (Delivery) ===== */
-.whatsapp-banner.entrega-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: linear-gradient(135deg, #fffdf6, #fef4d3);
-  border-radius: 18px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
-  padding: 2rem 1.5rem;
-  margin: 1.5rem auto;
-  width: 90%;
-  max-width: 1100px;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  overflow: hidden;
-}
-
-.whatsapp-banner.entrega-banner:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
-.banner-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  width: 100%;
-  gap: 2rem;
-}
-
-/* ===== Título (acima de tudo) ===== */
-.whatsapp-banner.entrega-banner h2 {
-  width: 100%;
-  text-align: center;
-  font-size: 1.9rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-bottom: 1.5rem;
-}
-
-/* ===== Imagem à esquerda ===== */
-.imagem-animada {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.imagem-animada img {
-  width: 240px;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  animation: flutuarMotoboy 2.8s ease-in-out infinite;
-}
-
-@keyframes flutuarMotoboy {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-/* ===== Texto à direita ===== */
-.texto-banner.organizado {
-  flex: 1.2;
-  text-align: left;
-  color: #333;
-}
-
-.texto-banner.organizado p {
-  font-size: 1.1rem;
-  margin-bottom: 1rem;
-  line-height: 1.5;
-}
-
-.info-entrega {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.info-entrega li {
-  margin-bottom: 0.6rem;
-  font-size: 1rem;
-  color: #444;
-}
-
-.info-entrega strong {
-  color: #000000;
-}
-
-/* ===== Versão Mobile ===== */
-@media (max-width: 768px) {
-  .whatsapp-banner.entrega-banner {
-    flex-direction: column;
-    text-align: center;
-    padding: 1.2rem 1rem;
-    gap: 1rem;
-  }
-
-  .banner-container {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .whatsapp-banner.entrega-banner h2 {
-    font-size: 1.4rem;
-    margin-bottom: 0.8rem;
-    color: #ffffff;
-  }
-
-  .imagem-animada img {
-    width: 160px;
-    animation: flutuarMotoboy 3s ease-in-out infinite;
-  }
-
-  .texto-banner.organizado {
-    text-align: center;
-  }
-
-  .texto-banner.organizado p {
-    font-size: 0.95rem;
-    line-height: 1.4;
-  }
-
-  .info-entrega li {
-    font-size: 0.9rem;
-    margin-bottom: 0.4rem;
-  }
-}
-
-
-
-/* Ajuste refinado de espaçamento entre o divisor e o zap-banner no mobile */
-@media (max-width: 600px) {
-  .divider-1 {
-    margin-bottom: 0.8rem !important;
-  }
-
-  #about.section {
-    padding-top: 0.8rem !important;
-    margin-top: 0 !important;
-  }
-
-  .zap-banner {
-    margin-top: 0.6rem !important;
-    padding-top: 0.5rem !important;
-  }
-}
-
-/* bolinha/flechinha que voa */
 .fly-dot{
   position: fixed;
   z-index: 99999;
@@ -3130,12 +864,546 @@ nav {
   pointer-events: none;
 }
 
-/* efeito no carrinho */
-.cart-bounce{
-  animation: cartBounce 420ms ease-out;
+.cart-bounce{ animation: cartBounce 420ms ease-out; }
+.count-pop{ animation: countPop 260ms ease-out; }
+
+/*========================================================================================
+  16) CARROSSEL DO PRODUTO (DETALHES)
+========================================================================================*/
+.produto.carrossel {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  min-height: 220px;
+  margin-bottom: 40px;
+  overflow: visible;
 }
 
-@keyframes cartBounce{
+.produto.carrossel .produto-img-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 160px;
+  position: relative;
+  z-index: 5;
+  overflow: hidden; /* setas estão dentro do wrapper da imagem grande */
+}
+
+.imagem-grande-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  overflow: hidden;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.imagem-grande-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #ffffff;
+  border: none;
+  font-size: 2.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 999;
+  opacity: 1;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s, background 0.3s;
+}
+
+.carousel-btn.carousel-prev { left: 5px; }
+.carousel-btn.carousel-next { right: 5px; }
+
+/* thumbs */
+.carousel-thumbs {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 2px;
+  z-index: 10;
+  min-height: 55px;
+  justify-content: center;
+}
+
+.carousel-thumbs img {
+  flex: 0 0 auto;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.3s, transform 0.2s;
+}
+
+.carousel-thumbs img.active {
+  border-color: var(--base-color);
+  transform: scale(1.05);
+}
+
+.produto.carrossel .produto-info {
+  flex: 1;
+  margin-top: 0;
+  text-align: left;
+}
+
+/*========================================================================================
+  17) BANNERS (WhatsApp/Entrega + Zap Banner Verde)
+========================================================================================*/
+.whatsapp-banner, .entrega-banner {
+  padding: 1.5rem;
+  margin: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px var(--shadow-light);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease-in-out;
+}
+.whatsapp-banner:hover, .entrega-banner:hover {
+  transform: translateY(-5px);
+}
+
+.whatsapp-banner::before, .entrega-banner::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  z-index: -1;
+  border-radius: 18px;
+  background-size: 300% 300%;
+  animation: borderLoop 6s linear infinite;
+}
+.whatsapp-banner::before {
+  background: linear-gradient(45deg, #25D366, #1DA851, #25D366, #1DA851);
+}
+.entrega-banner::before {
+  background: linear-gradient(45deg, #FFD700, #FFB800, #FFD700, #FFB800);
+}
+
+.banner-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+}
+.whatsapp-banner .banner-container { flex-direction: column-reverse; }
+
+.imagem-animada {
+  width: 80%;
+  max-width: 100px;
+  display: flex;
+  justify-content: center;
+}
+.imagem-animada img {
+  width: 100%;
+  border-radius: 12px;
+  animation: flutuar 3s ease-in-out infinite;
+}
+
+.texto-banner { width: 100%; text-align: center; }
+
+.titulo-com-imagem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.titulo-com-imagem h2 {
+  font-size: 1.6rem;
+  color: var(--title-color);
+  font-weight: 700;
+}
+.logo-whatsapp { width: 32px; height: 32px; }
+
+.texto-banner p {
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--text-color);
+  margin-bottom: 1rem;
+}
+
+.fake-info {
+  background-color: var(--base-color-second);
+  color: var(--title-color);
+  padding: 0.8rem 1.5rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.info-entrega {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  text-align: center;
+}
+.info-entrega li { font-size: 1rem; color: var(--text-color); font-weight: 400; }
+.info-entrega strong { color: rgba(0,0,0,0.60); font-weight: 700; }
+
+/* Zap banner verde sólido */
+.zap-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #25D366;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.10);
+  margin: 1.2rem auto;
+  width: 90%;
+  max-width: 1100px;
+  padding: 1.2rem 1.3rem;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  overflow: hidden;
+}
+.zap-banner:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+}
+.zap-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+.zap-texto h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 0.8rem 0;
+  line-height: 1.1;
+}
+.zap-texto p {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  line-height: 1.4;
+  text-align: left;
+  max-width: 92%;
+  margin: 0 auto;
+}
+.zap-icon {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #fff;
+  padding: 8px;
+  box-shadow: 0 2px 6px rgba(2,2,2,0.12);
+  animation: zapFloat 2.4s infinite ease-in-out;
+}
+
+/*========================================================================================
+  18) CARROSSEL DE DESTAQUES (cards com dots)
+========================================================================================*/
+.carrossel-container {
+  position: relative;
+  width: 90%;
+  max-width: 1100px;
+  margin: 1.5rem auto;
+  padding: 1.2rem 0.8rem;
+  border-radius: 18px;
+  background: #fffef9;
+  border: 2px solid rgba(212, 151, 0, 0.25);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease, transform 0.25s ease;
+}
+.carrossel-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.carrossel-titulo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #d49700;
+  text-align: center;
+  margin-bottom: 1.2rem;
+  letter-spacing: 0.3px;
+}
+
+.carrossel-wrapper { overflow: hidden; }
+
+.carrossel {
+  display: flex;
+  gap: 10px;
+  padding: 0 1rem 0.5rem 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scroll-padding: 0 1rem;
+  scrollbar-width: none;
+}
+.carrossel::-webkit-scrollbar { display: none; }
+
+.carrossel-item {
+  flex: 0 0 90%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  background: #fff;
+  border: 1.5px solid rgba(0,0,0,0.07);
+  border-radius: 14px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  padding: 0.8rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.carrossel-item:hover {
+  transform: translateY(-3px);
+  border-color: rgba(212, 151, 0, 0.40);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.10);
+}
+
+.item-media {
+  width: 100%;
+  height: 110px;
+  overflow: hidden;
+  border-radius: 10px;
+  margin-bottom: 0.6rem;
+}
+.item-imagem { width: 100%; height: 100%; object-fit: cover; }
+
+.item-info h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0.3rem 0;
+}
+.item-preco {
+  font-size: 1rem;
+  color: #25D366;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.whatsapp-btn {
+  background: #25D366;
+  color: #fff;
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+.whatsapp-btn:hover { background: #1eb15a; transform: scale(1.05); }
+
+.dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.dots-container .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ccc;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.dots-container .dot.active {
+  background: #25D366;
+  opacity: 1;
+  transform: scale(1.4);
+  box-shadow: 0 0 6px rgba(37, 211, 102, 0.5);
+}
+
+/*========================================================================================
+  19) MENU LATERAL
+========================================================================================*/
+.menu-lateral {
+  width: 250px;
+  background: var(--base-color);
+  position: fixed;
+  height: 100%;
+  top: 0; left: 0;
+  z-index: 1000;
+  transform: translateX(0);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.10);
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.menu-lateral .atalhos { padding: 0; margin: 0; }
+.menu-lateral .atalhos li a {
+  position: relative;
+  display: block;
+  font-size: 18px;
+  padding: 12px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+/* sublinhado animado */
+.menu-lateral .atalhos li a::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  bottom: 8px;
+  width: 0;
+  height: 2px;
+  background-color: #fff;
+  transition: width 0.3s ease;
+}
+.menu-lateral .atalhos li a:hover::after {
+  width: calc(100% - 40px);
+}
+.menu-lateral .atalhos li a.active::after {
+  width: calc(100% - 40px);
+}
+
+.menu-lateral .menu-rodape {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 55px;
+  border-top: 1px solid #fff;
+}
+.menu-lateral .menu-rodape img {
+  width: 52px;
+  height: 52px;
+  transition: transform 0.2s ease-in-out;
+}
+.menu-lateral .menu-rodape img:hover { transform: scale(1.1); }
+
+/* overlay */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+.overlay.active { opacity: 1; visibility: visible; }
+
+/* botão hambúrguer do menu lateral */
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 25px;
+  z-index: 1001;
+}
+.menu-toggle .hamburger {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--base-color);
+  transition: all 0.3s ease-in-out;
+  border-radius: 2px;
+}
+.menu-toggle.open .hamburger:nth-child(1) { transform: translateY(11px) rotate(45deg); }
+.menu-toggle.open .hamburger:nth-child(2) { opacity: 0; }
+.menu-toggle.open .hamburger:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
+
+/*========================================================================================
+  20) IMAGEM FINAL DECORATIVA
+========================================================================================*/
+.imagem-final-decorativa {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+.imagem-final-decorativa img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  opacity: 0.4;
+}
+
+/*========================================================================================
+  21) ANIMAÇÕES (todas juntas)
+========================================================================================*/
+@keyframes slideInLeft {
+  0% { opacity: 0; transform: translateX(-100%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(100%); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes flutuar {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes borderLoop {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes zapFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes destaqueProduto {
+  0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255,165,0,0.6); }
+  50% { transform: scale(1.02); box-shadow: 0 0 10px 5px rgba(255,165,0,0.6); }
+  100% { transform: scale(1); box-shadow: 0 0 0 3px rgba(255,165,0,0.4); }
+}
+
+@keyframes cartBounce {
   0%   { transform: translateY(0) scale(1); }
   25%  { transform: translateY(-6px) scale(1.04); }
   55%  { transform: translateY(0) scale(1); }
@@ -3144,29 +1412,153 @@ nav {
   100% { transform: rotate(0deg); }
 }
 
-/* pop no contador (opcional, fica lindo) */
-.count-pop{
-  animation: countPop 260ms ease-out;
-}
 @keyframes countPop{
   0%   { transform: scale(1); }
   50%  { transform: scale(1.25); }
   100% { transform: scale(1); }
 }
 
+@keyframes pulseButton {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
 
+.btn-piscar {
+  animation: pulseButton 1s infinite;
+  background-color: #ff9800 !important;
+}
 
+/*========================================================================================
+  22) RESPONSIVIDADE (BREAKPOINTS NO FINAL)
+========================================================================================*/
 
+/* <= 600px ajustes de espaçamento (divisor + banners) */
+@media (max-width: 600px) {
+  .divider-1 { margin-bottom: 0.5rem; }
+  #home { padding-bottom: 1.3rem; }
+  #home .button { margin-bottom: 0.5rem; }
 
+  .zap-banner {
+    width: 92%;
+    padding: 0.8rem 1rem;
+    border-radius: 14px;
+  }
+  .zap-texto h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+  .zap-texto p { font-size: 0.9rem; gap: 0.6rem; max-width: 100%; }
+  .zap-icon { width: 46px; height: 46px; padding: 6px; }
+}
 
-
-
-/* 🔹 SOMENTE NO MOBILE */
+/* <= 768px (mobile principal) */
 @media (max-width: 768px) {
+  /* Header antes do scroll (refinado) */
+  #header:not(.scroll) {
+    height: 56px !important;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+  }
+  #header:not(.scroll) .nav-top {
+    height: 56px !important;
+    align-items: center;
+    justify-content: center !important;
+    padding: 0 !important;
+    position: relative;
+  }
+  #header:not(.scroll) .nav-top .logo {
+    font-size: 1rem !important;
+    line-height: 1.1 !important;
+    margin: 0 !important;
+    text-align: center;
+  }
+  #header:not(.scroll) .toggle {
+    position: absolute !important;
+    right: 1rem !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 1.6rem !important;
+  }
 
-  /* HOME ocupa 100% da tela */
-  #home.section{
-    min-height: 100svh;   /* altura real no mobile */
+  /* Produtos e carrinho em coluna */
+  .container.shop { flex-direction: column; }
+
+  /* Produtos no mobile em 2 colunas */
+  .produtos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    align-items: start;
+  }
+
+  .produto {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.12);
+    height: fit-content;
+  }
+
+  .produto-info p {
+    font-weight: bold;
+    color: #e67e22;
+    font-size: 0.98rem;
+  }
+  .produto:hover .produto-info p { color: #d35400; }
+
+  .produto button.adicionar {
+    max-width: 100px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  /* Carrossel de produto no mobile */
+  .produto.carrossel {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    padding: 10px;
+    margin-bottom: 0;
+    min-height: auto;
+    width: 100%;
+    height: fit-content;
+  }
+
+  .produto.carrossel .produto-img-wrapper {
+    width: 100%;
+    max-width: 100px;
+    overflow: visible;
+  }
+
+  .imagem-grande-wrapper {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+  }
+
+  .carousel-btn {
+    top: 33%;
+    font-size: 1.2rem;
+    width: 30px;
+    height: 30px;
+    background: var(--base-color);
+    color: #fff;
+  }
+  .carousel-btn.carousel-prev { left: -30px; }
+  .carousel-btn.carousel-next { right: -30px; }
+
+  .carousel-thumbs {
+    min-height: 40px;
+    gap: 4px;
+  }
+  .carousel-thumbs img {
+    width: 33px;
+    height: 33px;
+    opacity: 0.7;
+  }
+  .carousel-thumbs img.ativo {
+    border-color: var(--base-color);
+    opacity: 1;
+  }
+
+  /* Home ocupa melhor a tela no mobile */
+  #home.section {
+    min-height: 100svh;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -3174,220 +1566,174 @@ nav {
     padding-bottom: 12px;
     overflow: hidden;
   }
+  #home br { display: none; }
+  #home .text p { margin: 6px 0; }
+  #home .text .button { margin-top: 18px; }
 
-  /* Mantém seu layout, só centraliza melhor */
-  #home .container.grid{
-    height: 100%;
+  /* Imagem final decorativa no mobile */
+  .imagem-final-decorativa { height: auto; max-height: 250px; }
+  .imagem-final-decorativa img { height: auto; object-fit: contain; }
+
+  /* Banners responsivos */
+  .whatsapp-banner .banner-container { flex-direction: column-reverse; }
+  .banner-container { gap: 1rem; }
+}
+
+/* >= 768px (banners lado a lado) */
+@media (min-width: 768px) {
+  .whatsapp-banner .banner-container {
+    flex-direction: row;
+    text-align: left;
+    justify-content: space-between;
+  }
+  .entrega-banner .banner-container {
+    flex-direction: row-reverse;
+    text-align: left;
+  }
+  .texto-banner, .imagem-animada { width: 48%; max-width: none; }
+  .titulo-com-imagem { justify-content: flex-start; }
+  .info-entrega { text-align: left; }
+
+  /* Carrossel de destaques desktop */
+  .carrossel {
+    overflow-x: hidden;
+    padding: 0.5rem 0.3rem;
+    scroll-snap-type: none;
+  }
+  .carrossel-item {
+    flex: 0 0 calc(50% - 5px);
+    width: calc(50% - 5px);
+    padding: 1rem;
+  }
+  .item-media { height: 160px; }
+
+  /* Se existirem setas, some no desktop (você já queria) */
+  .carrossel-navegacao,
+  .carrossel-navegacao button,
+  .carrossel-navegacao .navegacao-btn,
+  #anterior,
+  #proximo {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+    top: -9999px !important;
+    width: 0 !important;
+    height: 0 !important;
+  }
+}
+
+/* >= 992px */
+@media (min-width: 992px) {
+  :root {
+    --title-font-size-base: 2.25rem;
+    --subtitle-font-size: 1.125rem;
+  }
+
+  #home .container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
     align-items: center;
   }
 
-  /* Impede a imagem de estourar a tela */
-  #home .image img{
-    max-height: 45svh;
-    width: 100%;
-    object-fit: contain;
-  }
-
-  /* Remove o excesso de espaço criado pelos <br> */
-  #home br{
-    display: none;
-  }
-
-  /* Ajusta espaçamento dos textos */
-  #home .text p{
-    margin: 6px 0;
-  }
+  #home .image { order: 1; max-width: 300px; margin: auto; }
+  #home .text { order: 0; max-width: 600px; }
 }
 
-@media (max-width: 768px) {
-
-  /* remove os <br> apenas no mobile */
-  #home br{
-    display: none;
+/* >= 1200px (desktop grande) */
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1120px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  /* cria espaço elegante antes do botão */
-  #home .text .button{
-    margin-top: 18px;   /* espaço acima do botão */
+  .section { padding: 10rem 0; }
+
+  .section header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
-  /* garante que o texto não fique grudado */
-  #home .text p:last-of-type{
-    margin-bottom: 8px;
-  }
-}
+  .button { height: 3.125rem; }
 
-
-
-
-/* container da busca */
-.barra-pesquisa{
-  position: relative;
-  width: 100%;
-}
-
-/* input estilo pill */
-#pesquisa{
-  width: 100%;
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  border-radius: 999px;
-  border: 2px solid #4a86e8;
-  outline: none;
-  background: #fff;
-}
-
-
-
-/* foco moderno */
-#pesquisa:focus{
-  box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.18);
-}
-
-
-
-/* resultados (mantém funcionamento atual) */
-#resultados-pesquisa{
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 0;
-  width: 100%;
-  list-style: none;
-  margin: 0;
-  padding: 6px;
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 12px 30px rgba(0,0,0,.12);
-  z-index: 999;
-}
-
-/* itens */
-#resultados-pesquisa li{
-  padding: 10px 12px;
-  border-radius: 12px;
-  cursor: pointer;
-  font-size: 0.95rem;
-}
-
-#resultados-pesquisa li:hover{
-  background: rgba(74, 134, 232, 0.08);
-}
-
-/* mobile ajuste fino */
-@media (max-width: 768px){
-  #pesquisa{
-    padding: 14px 16px;
-  }
-}
-
-
-@media (max-width: 768px){
-
-  /* 1) Remove o espaço extra do navbar (funcionou pra você) */
-  header, nav, .navbar{
-    padding-bottom: 0 !important;
-    margin-bottom: 0 !important;
-    min-height: 0 !important;
-    height: auto !important;
-    border-bottom: 0 !important;
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+    position: static;
+    height: auto;
+    width: auto;
+    background: transparent;
   }
 
-  header nav ul,
-  nav ul{
-    margin: 0 !important;
-    padding: 0 !important;
+  nav .menu ul { display: flex; gap: 2rem; }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    -webkit-font-smoothing: antialiased;
   }
 
-  header nav li,
-  nav li{
-    margin: 0 !important;
-    padding: 0 !important;
+  nav .menu ul li a.title.active {
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
   }
 
-  /* 2) ✅ IMPORTANTE: NÃO mexe em "nav a" geral.
-        Ajusta SOMENTE os links que estão dentro do UL (categorias) */
-  header nav ul li a,
-  nav ul li a{
-    padding-top: 8px !important;
-    padding-bottom: 8px !important;
-    line-height: 1.1 !important;
+  nav .icon-menu,
+  nav .icon-close { display: none; }
+
+  main { margin-top: var(--header-height); }
+
+  #home .container {
+    grid-auto-flow: column;
+    width: fit-content;
+    justify-content: space-between;
+    margin: 0 auto;
   }
 
-  /* 3) Remove linhas/pseudo-elementos só do NAV (sem afetar outras áreas) */
-  header nav::after,
-  nav::after{
-    content: none !important;
-    display: none !important;
+  #home .text {
+    max-width: 24rem;
+    text-align: left;
   }
 
-  /* Se algum link de categoria tiver ::after (underline/linha), tira só nele */
-  header nav ul li a::after,
-  nav ul li a::after{
-    content: none !important;
-    display: none !important;
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
   }
 
-  #pesquisa{
-    padding: 7px 14px;        /* barra fina */
-    font-size: 0.9rem;        /* legível no mobile */
-    border-radius: 999px;
-    border: 2px solid #4a86e8;
-  }
-
-  #pesquisa:focus{
-    box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.18);
-  }
-
-  /* 4) ✅ Restaura/garante tamanho das sugestões da busca */
-  #resultados-pesquisa{
-    font-size: 0.95rem !important;
-  }
-
-  #resultados-pesquisa li{
-    padding: 10px 12px !important;
-    font-size: 0.95rem !important;
-  }
-
-  /* 5) ✅ Garante que o "nome/logo" do navbar pequeno não seja afetado
-        (se ele for um link fora do UL, ele já fica intacto) */
-}
-@media (max-width: 768px){
-
-  /* 🔹 RESTAURA o nome/logo do navbar pequeno */
-  .navbar .logo a,
-  .navbar .brand a,
-  .navbar .navbar-brand,
-  .navbar .navbar-brand a{
-    padding: initial !important;
-    line-height: normal !important;
-    font-size: initial !important;
-    display: inline-flex !important;
+  #contact .container {
+    grid-auto-flow: column;
     align-items: center;
   }
 
+  #contact .text { max-width: 25rem; }
+
+  footer.section { padding: 3.75rem 0; }
+
+  footer .container {
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer .logo { font-size: 2.25rem; }
 }
 
-
-@media (max-width: 768px){
-
-  /* ✅ traz de volta o logo/nome do navbar pequeno */
-  .nav-top{
-    display: flex !important;
-    align-items: center !important;
-    padding: 0 !important;
-    margin: 0 !important;
-  }
-
-  .nav-top a.logo{
-    display: inline-flex !important;
-    align-items: center !important;
-    padding: 10px 0 !important;     /* altura boa sem sumir */
-    line-height: 1.2 !important;
-    font-size: 1.05rem !important;  /* garante legibilidade */
-    white-space: nowrap !important; /* evita quebrar feio */
-  }
-
-  .nav-top a.logo span{
-    display: inline !important;
-  }
+/*========================================================================================
+  (Opcional) TESTES TEMPORÁRIOS REMOVIDOS
+  Se você ainda precisar disso para debugar "sumir resultados", descomente:
+========================================================================================*/
+/*
+.nav-central {
+  overflow: visible !important;
+  max-height: none !important;
 }
+#header {
+  overflow: visible !important;
+  height: auto !important;
+}
+*/
