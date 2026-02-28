@@ -3340,16 +3340,23 @@ nav {
     display: none !important;
   }
 
-  #pesquisa{
-    padding: 7px 14px;        /* barra fina */
-    font-size: 0.9rem;        /* legível no mobile */
-    border-radius: 999px;
-    border: 2px solid #4a86e8;
-  }
+#pesquisa{
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  border-radius: 999px;
 
-  #pesquisa:focus{
-    box-shadow: 0 0 0 2px rgba(74, 134, 232, 0.18);
-  }
+  border: 1.5px solid #e5e7eb;
+  background: #fff;
+
+  outline: none;
+  transition: all 0.25s ease;
+}
+
+#pesquisa:focus{
+  border-color: #FF7A00;
+  box-shadow: 0 0 0 3px rgba(255, 122, 0, 0.15);
+  outline: none;
+}
 
   /* 4) ✅ Restaura/garante tamanho das sugestões da busca */
   #resultados-pesquisa{
