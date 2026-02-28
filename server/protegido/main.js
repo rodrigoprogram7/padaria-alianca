@@ -521,16 +521,20 @@ function selecionarProduto(nomeProduto) {
 function alterarQuantidade(botao, delta) {
   const input = botao.parentElement.querySelector('.quantidade');
   const subtotalBox = botao.closest('.produto-info').querySelector('.subtotal-preview');
+
   let valor = parseInt(input.value) || 1;
   valor += delta;
+
   if (valor < 1) valor = 1;
   input.value = valor;
 
   const preco = parseFloat(botao.closest('.produto').getAttribute('data-preco'));
 
   if (valor > 1) {
-    const subtotal = (valor * preco).toFixed(2).replace('.', ',');
-    subtotalBox.textContent = `Subtotal: R$ ${subtotal}`;
+    const total = (valor * preco).toFixed(2).replace('.', ',');
+
+    // ✅ NOVO TEXTO: "2x → R$ 9,00"
+    subtotalBox.textContent = `${valor}x → R$ ${total}`;
     subtotalBox.style.display = 'block';
 
     // 🔥 Ativa animação no botão "Adicionar"
