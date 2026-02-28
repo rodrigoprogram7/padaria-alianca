@@ -3411,3 +3411,112 @@ nav {
     display: inline !important;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ===== HERO MOBILE PREMIUM (SEM BARRA DE PESQUISA) ===== */
+.hero-mobile{
+  padding: 42px 18px 28px;
+  background: linear-gradient(180deg, #fff4e8 0%, #ffffff 55%);
+  text-align: center;
+}
+
+.hero-container{
+  max-width: 420px;
+  margin: 0 auto;
+}
+
+.hero-logo{
+  width: 220px;
+  max-width: 80%;
+  margin: 0 auto 18px;
+  display: block;
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.10));
+}
+
+.hero-title{
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1f2937;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.hero-subtitle{
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0 0 18px;
+}
+
+.hero-features{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 0 auto 18px;
+}
+
+.feature-card{
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.04);
+  font-weight: 700;
+  color: #374151; /* sem preto forte */
+}
+
+.feature-icon{
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #FF7A00; /* laranja */
+  background: #fff7ed; /* laranja bem suave */
+}
+
+.hero-button{
+  display: block;
+  width: 100%;
+  max-width: 310px;
+  margin: 0 auto;
+  padding: 14px 16px;
+  border-radius: 16px;
+  font-size: 1rem;
+  font-weight: 800;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(180deg, #FF8C1A, #FF6A00);
+  box-shadow: 0 12px 26px rgba(255,122,0,0.30);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.hero-button:active{
+  transform: scale(0.98);
+}
+
+@media (max-width: 360px){
+  .hero-title{ font-size: 1.2rem; }
+  .feature-card{ font-size: 0.85rem; }
+}
