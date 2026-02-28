@@ -838,18 +838,19 @@ nav ul li a:hover {
     height: 30px;
 }
 
-#bt {
-  width: 100%;
-  height: 40px;
-  border-radius: 14px;
-  border: none;
-  font-weight: 600;
-  font-size: 15px;
-  color: white;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  background: linear-gradient(180deg, #FF8C1A, #FF6A00);
-  box-shadow: 0 6px 14px rgba(255, 122, 0, 0.3);
+#bt { /* Botão genérico, talvez seja melhor renomear para algo mais específico se for só para o footer */
+    background: linear-gradient(180deg, #FF8C1A, #FF6A00);
+    color: white;
+    border: none;
+    width: 110px; 
+    height: 30px; 
+    padding: 8px 12px;
+    border-radius: 14px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(255, 122, 0, 0.3);
 }
 
 #bt:hover {
