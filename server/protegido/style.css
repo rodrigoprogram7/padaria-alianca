@@ -3552,3 +3552,10 @@ nav {
 }
 
 .hero-cta:active{ transform: scale(0.98); }
+
+
+
+/* Evita o header fixo cobrir o topo */
+#home.home-premium{
+  padding-top: var(--header-height);
+}
