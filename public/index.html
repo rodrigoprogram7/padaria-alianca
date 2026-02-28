@@ -69,9 +69,33 @@
     <nav class="container">
 
       <!-- Linha topo -->
-      <div class="nav-top">
-        <a href="#" class="logo">Mercadinho <span>Aliança</span></a>
-      </div>
+<div class="nav-top" id="navTop">
+
+  <!-- ESQUERDA: localização -->
+  <div class="nav-left" id="navLeft">
+    <span class="nav-pin" aria-hidden="true">📍</span>
+    <span class="nav-city">Poço Branco</span>
+  </div>
+
+  <!-- CENTRO: sua logo -->
+  <a href="#" class="logo">Mercadinho <span>Aliança</span></a>
+
+  <!-- DIREITA: carrinho + menu -->
+  <div class="nav-right" id="navRight">
+
+    <!-- Carrinho com badge -->
+    <button class="nav-cart" id="btnCart" type="button" aria-label="Carrinho">
+      <span class="cart-ico" aria-hidden="true">🛒</span>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
+
+    <!-- Botão menu (use o seu id/classe se já existir) -->
+    <button class="nav-menu" id="btnMenu" type="button" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</div>
 
       <!-- Aparece após scroll -->
       <div class="nav-central">
