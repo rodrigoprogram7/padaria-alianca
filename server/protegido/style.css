@@ -3760,3 +3760,20 @@ nav {
 .nav-central .nav-city{
   display: none !important;
 }
+
+/* quando abrir menu: some localização e carrinho SOMENTE do nav-top */
+.menu-open .nav-top #navLeft,
+.menu-open .nav-top #navRight{
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-6px);
+  transition: .2s ease;
+}
+
+.nav-top #navLeft,
+.nav-top #navRight{
+  transition: .2s ease;
+}
+body{
+  padding-top: var(--header-height);
+}
