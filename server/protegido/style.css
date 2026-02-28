@@ -3559,3 +3559,9 @@ nav {
 #home.home-premium{
   padding-top: var(--header-height);
 }
+
+@media (max-width: 768px){
+  #home.home-premium{
+    padding-top: 72px; /* ajuste: 64px–84px */
+  }
+}
