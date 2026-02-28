@@ -3723,3 +3723,40 @@ nav {
 #navRight{
   transition: 0.2s ease;
 }
+
+
+
+/* ===== GARANTIR NAV-TOP VISÍVEL NO MOBILE ===== */
+.nav-top{
+  display: grid !important; /* força aparecer */
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 10px;
+
+  height: 72px;
+  padding: 10px 14px;
+
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  position: fixed;  /* se o seu nav é fixo */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+/* Se no seu CSS mobile tem algo escondendo a nav-top, isso anula */
+@media (max-width: 768px){
+  .nav-top{ display: grid !important; }
+}
+
+/* ===== NAV-CENTRAL: só o menu (não mostrar infos) ===== */
+.nav-central .nav-left,
+.nav-central .nav-right,
+.nav-central .nav-cart,
+.nav-central .cart-badge,
+.nav-central .nav-pin,
+.nav-central .nav-city{
+  display: none !important;
+}
