@@ -2841,7 +2841,7 @@ nav {
 
 .btn-piscar {
   animation: pulseButton 1s infinite;
-  background-color: #ff9800 !important; /* destaque visual */
+  background-color: #FF7A00 !important; /* destaque visual */
 }
 
 
