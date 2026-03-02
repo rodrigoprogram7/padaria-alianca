@@ -1008,58 +1008,6 @@ const anim = dot.animate(
 
 
 
-function atualizarContadorCarrinho() {
-  const contador = document.getElementById('contador-carrinho');
-  const totalItens = carrinho.reduce((acc, item) => acc + item.quantidade, 0);
-  if (contador) {
-    contador.textContent = totalItens;
-
-    // animação simples ao adicionar
-    contador.classList.add('animar');
-    setTimeout(() => contador.classList.remove('animar'), 200);
-  }
-}
-
-// ===== Badge do carrinho no navbar =====
-const cartBadge = document.getElementById('cartBadge');
-const contadorFixo = document.getElementById('contador-carrinho'); // seu contador flutuante atual
-
-function atualizarBadgeCarrinho(qtd) {
-  const n = Number(qtd) || 0;
-  cartBadge.textContent = n;
-  cartBadge.style.display = n > 0 ? 'grid' : 'none';
-}
-
-if (contadorFixo) {
-  atualizarBadgeCarrinho(contadorFixo.textContent);
-
-  // Observa mudanças no contador fixo e replica no badge
-  const obs = new MutationObserver(() => {
-    atualizarBadgeCarrinho(contadorFixo.textContent);
-  });
-
-  obs.observe(contadorFixo, { childList: true, subtree: true, characterData: true });
-} else {
-  atualizarBadgeCarrinho(0);
-}
-
-// (opcional) clicar no carrinho do navbar rola para o carrinho fixo/área do carrinho
-document.getElementById('btnCart')?.addEventListener('click', () => {
-  const alvo = document.getElementById('carrinho') || document.querySelector('.carrinho');
-  if (alvo) alvo.scrollIntoView({ behavior: 'smooth', block: 'start' });
-});
-
-// ===== Abrir/fechar menu central =====
-// Se você já tem seu menu, adapte aqui para adicionar/remover a classe menu-open no NAV/HEADER
-const btnMenu = document.getElementById('btnMenu');
-const headerOuNav = document.querySelector('header') || document.body; // ajuste se preferir
-
-btnMenu?.addEventListener('click', () => {
-  headerOuNav.classList.toggle('menu-open');
-});
-
-
-
 
 window.addEventListener('scroll', () => {
   toggleHeaderScroll();
