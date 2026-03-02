@@ -584,8 +584,16 @@ nav.show .toggle.icon-close::before {
   position: relative;
 }
 
-:root {
-  --header-initial-height: 56px;
+/* Teste temporário: Forçar overflow visível e altura ilimitada no nav-central */
+.nav-central {
+    overflow: visible !important; /* Força para ser visível */
+    max-height: none !important;   /* Remove qualquer limite de altura */
+}
+
+/* Certifique-se também para o cabeçalho, apenas para o teste */
+#header {
+    overflow: visible !important;
+    height: auto !important; /* Permite que o cabeçalho se expanda */
 }
 
 /* Garante que os resultados da pesquisa fiquem acima de outros elementos */
